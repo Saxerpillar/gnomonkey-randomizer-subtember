@@ -12,10 +12,13 @@ body,
 }
 
 body {
-  background: var(--bg);
-  /* subtle large-scale mottling so the backdrop isn't a flat void */
-  background-image: radial-gradient(ellipse at 30% 0%, rgba(60, 52, 36, 0.25), transparent 60%),
-    radial-gradient(ellipse at 80% 100%, rgba(40, 36, 26, 0.35), transparent 55%);
+  /* PLACEHOLDER page backdrop — swap wholesale for custom streamer art (see ticket).
+     Layered: soft warm key light top-left, cool fill bottom-right, vertical falloff. */
+  background-color: var(--bg);
+  background-image: radial-gradient(1100px 620px at 28% -6%, rgba(96, 82, 52, 0.22), transparent 62%),
+    radial-gradient(950px 700px at 86% 106%, rgba(64, 56, 38, 0.25), transparent 58%),
+    linear-gradient(180deg, #191612 0%, #14120f 45%, #0e0c09 100%);
+  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   font-size: 17px;

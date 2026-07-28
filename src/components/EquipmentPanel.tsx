@@ -52,7 +52,13 @@ const EquipSlot = ({
   <RsTooltip
     content={slotTip(slot, item, locked)}
     className={`${styles.slot} ${locked ? styles.locked : ''} ${item ? styles.lockable : ''}`}
-    style={{ gridArea: slot, backgroundImage: `url(/img/slots/${slot}.png)` }}
+    style={{
+      gridArea: slot,
+      // occupied: dim the slot sprite so the item reads on top of it
+      backgroundImage: item
+        ? `linear-gradient(rgba(8, 7, 5, 0.55), rgba(8, 7, 5, 0.55)), url(/img/slots/${slot}.png)`
+        : `url(/img/slots/${slot}.png)`,
+    }}
     onClick={item || locked ? onToggleLock : undefined}
   >
     {item && <img className={styles.icon} src={`/img/items/${item.icon}`} alt={item.name} />}
