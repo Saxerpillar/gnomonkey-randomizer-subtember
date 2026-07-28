@@ -111,9 +111,10 @@ const main = async () => {
   console.log(`  ${Object.keys(prices).length} priced items`);
 
   // ---- 3. Ammo classification -------------------------------------------
-  const { classRules, weaponAmmoOverrides, categoryAmmoMap, selfAmmoWeapons } = curation.ammo;
+  const { classRules, weaponAmmoOverrides, categoryAmmoMap, selfAmmoWeapons, exclusiveClasses } = curation.ammo;
   const rules = classRules.map((r) => ({ re: new RegExp(r.pattern, 'i'), cls: r.class }));
   const selfAmmo = new Set(selfAmmoWeapons.names);
+  const exclusive = new Set(exclusiveClasses.classes);
 
   const ammoClassOf = (item) => rules.find((r) => r.re.test(item.name))?.cls ?? 'any';
   const requiredAmmoOf = (item) => {
@@ -134,6 +135,7 @@ const main = async () => {
       twoHanded: !!e.isTwoHanded,
       category: e.category || undefined,
       ammoClass: e.slot === 'ammo' ? ammoClassOf(e) : undefined,
+      ammoExclusive: e.slot === 'ammo' && exclusive.has(ammoClassOf(e)) ? true : undefined,
       requiredAmmo: e.slot === 'weapon' ? requiredAmmoOf(e) ?? undefined : undefined,
     }))
     .sort((a, b) => a.name.localeCompare(b.name));

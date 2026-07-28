@@ -56,7 +56,11 @@ export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout =>
     let candidates = bySlot.get(slot)!;
     if (slot === 'ammo') {
       const need = loadout.weapon?.requiredAmmo;
-      if (need) candidates = candidates.filter((a) => a.ammoClass === need);
+      candidates = need
+        ? candidates.filter((a) => a.ammoClass === need)
+        : // no ammo requirement -> cosmetic pool, minus weapon-exclusive ammo
+          // (atlatl darts with a blowpipe was the reported nonsense pairing)
+          candidates.filter((a) => !a.ammoExclusive);
     }
     rollSlot(slot, candidates);
   }

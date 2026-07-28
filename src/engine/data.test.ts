@@ -42,6 +42,14 @@ describe('generated equipment.json', () => {
     }
   });
 
+  it('weapon-exclusive ammo classes are stamped ammoExclusive', () => {
+    const exclusive = new Set(['atlatl', 'tar']);
+    for (const i of items) {
+      if (i.slot !== 'ammo') continue;
+      expect(!!i.ammoExclusive).toBe(exclusive.has(i.ammoClass as string));
+    }
+  });
+
   it('every icon file exists on disk', () => {
     const files = new Set(readdirSync('public/img/items'));
     const missing = items.filter((i) => !files.has(i.icon as string));

@@ -41,6 +41,10 @@
       "Light ballista": "javelin",
       "Eclipse atlatl": "atlatl"
     },
+    "exclusiveClasses": {
+      "//": "Ammo classes only usable with the weapon that requires them (Atlatl dart <-> Eclipse atlatl, tars <-> salamanders). They never roll into the cosmetic any-ammo pool for other weapons.",
+      "classes": ["atlatl", "tar"]
+    },
     "categoryAmmoMap": {
       "//": "Weapon category -> required ammo class. Categories absent here need no specific ammo (their ammo slot rolls 'any').",
       "Bow": "arrow",

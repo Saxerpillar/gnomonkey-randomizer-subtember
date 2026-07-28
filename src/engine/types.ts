@@ -29,6 +29,9 @@ export interface Item {
   category?: string;
   /** Ammo-slot items only: what kind of ammo this is ('any' = blessings/misc). */
   ammoClass?: AmmoClass;
+  /** Ammo only usable with the weapon that requires its class (atlatl darts,
+   *  salamander tars) — never rolls into the cosmetic any-ammo pool. */
+  ammoExclusive?: boolean;
   /** Weapons only: the ammo class this weapon needs to fire, if any. */
   requiredAmmo?: Exclude<AmmoClass, 'any'>;
   /** GE price snapshot (midpoint). Absent for untradeables. */

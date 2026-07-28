@@ -150,6 +150,31 @@ describe('ammo compatibility', () => {
     }
     expect(seen).toEqual(new Set(['blessing', 'arrows']));
   });
+
+  it('exclusive ammo never rolls without its weapon (blowpipe + atlatl dart bug)', () => {
+    const pool = [
+      item('weapon', { name: 'Ironwood blowpipe', category: 'Thrown', twoHanded: true }),
+      item('ammo', { name: 'Atlatl dart', ammoClass: 'atlatl', ammoExclusive: true }),
+      item('ammo', { name: 'Guam tar', ammoClass: 'tar', ammoExclusive: true }),
+      item('ammo', { name: 'blessing', ammoClass: 'any' }),
+    ];
+    for (const seed of seeds) {
+      const out = roll(pool, settings(), mulberry32(seed));
+      expect(out.ammo?.name ?? 'blessing').toBe('blessing');
+    }
+  });
+
+  it('exclusive ammo still rolls for the weapon that requires it', () => {
+    const pool = [
+      item('weapon', { name: 'Eclipse atlatl', category: 'Bow', requiredAmmo: 'atlatl' }),
+      item('ammo', { name: 'Atlatl dart', ammoClass: 'atlatl', ammoExclusive: true }),
+      item('ammo', { name: 'arrows', ammoClass: 'arrow' }),
+    ];
+    for (const seed of seeds.slice(0, 50)) {
+      const out = roll(pool, settings(), mulberry32(seed));
+      expect(out.ammo?.name).toBe('Atlatl dart');
+    }
+  });
 });
 
 describe('determinism', () => {

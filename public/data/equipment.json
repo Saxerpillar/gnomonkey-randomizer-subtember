@@ -2676,7 +2676,8 @@
   "icon": "28991.png",
   "tradeable": true,
   "twoHanded": false,
-  "ammoClass": "atlatl"
+  "ammoClass": "atlatl",
+  "ammoExclusive": true
  },
  {
   "id": 9748,
@@ -15202,7 +15203,8 @@
   "icon": "10142.png",
   "tradeable": true,
   "twoHanded": false,
-  "ammoClass": "tar"
+  "ammoClass": "tar",
+  "ammoExclusive": true
  },
  {
   "id": 21733,
@@ -15716,7 +15718,8 @@
   "icon": "10145.png",
   "tradeable": true,
   "twoHanded": false,
-  "ammoClass": "tar"
+  "ammoClass": "tar",
+  "ammoExclusive": true
  },
  {
   "id": 7141,
@@ -16727,7 +16730,8 @@
   "icon": "28837.png",
   "tradeable": true,
   "twoHanded": false,
-  "ammoClass": "tar"
+  "ammoClass": "tar",
+  "ammoExclusive": true
  },
  {
   "id": 1309,
@@ -18516,7 +18520,8 @@
   "icon": "10143.png",
   "tradeable": true,
   "twoHanded": false,
-  "ammoClass": "tar"
+  "ammoClass": "tar",
+  "ammoExclusive": true
  },
  {
   "id": 13203,
@@ -27646,7 +27651,8 @@
   "icon": "10144.png",
   "tradeable": true,
   "twoHanded": false,
-  "ammoClass": "tar"
+  "ammoClass": "tar",
+  "ammoExclusive": true
  },
  {
   "id": 6912,
