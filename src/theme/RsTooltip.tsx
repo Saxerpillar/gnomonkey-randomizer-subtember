@@ -13,12 +13,14 @@ export const RsTooltip = ({
   className,
   style,
   onClick,
+  onContextMenu,
 }: {
   content: ReactNode;
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
   onClick?: () => void;
+  onContextMenu?: (e: React.MouseEvent) => void;
 }) => {
   const [show, setShow] = useState(false);
   return (
@@ -26,6 +28,7 @@ export const RsTooltip = ({
       className={`${styles.wrap} ${className ?? ''}`}
       style={style}
       onClick={onClick}
+      onContextMenu={onContextMenu}
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
     >

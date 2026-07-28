@@ -43,11 +43,13 @@ const EquipSlot = ({
   item,
   locked,
   onToggleLock,
+  onContextMenu,
 }: {
   slot: Slot;
   item: Item | null;
   locked: boolean;
   onToggleLock: () => void;
+  onContextMenu: (e: React.MouseEvent) => void;
 }) => (
   <RsTooltip
     content={slotTip(slot, item, locked)}
@@ -60,6 +62,7 @@ const EquipSlot = ({
         : `url(/img/slots/${slot}.png)`,
     }}
     onClick={item || locked ? onToggleLock : undefined}
+    onContextMenu={onContextMenu}
   >
     {item && <img className={styles.icon} src={`/img/items/${item.icon}`} alt={item.name} />}
     {locked && <span className={styles.lockBadge}>🔒</span>}
@@ -72,10 +75,12 @@ export const EquipmentPanel = ({
   loadout,
   locks,
   onToggleLock,
+  onSlotContextMenu,
 }: {
   loadout: Loadout;
   locks: Partial<Record<Slot, Item>>;
   onToggleLock: (slot: Slot) => void;
+  onSlotContextMenu: (slot: Slot, e: React.MouseEvent) => void;
 }) => (
   <div className={styles.tab}>
     {SLOTS.map((slot) => (
@@ -85,6 +90,7 @@ export const EquipmentPanel = ({
         item={loadout[slot]}
         locked={locks[slot] !== undefined}
         onToggleLock={() => onToggleLock(slot)}
+        onContextMenu={(e) => onSlotContextMenu(slot, e)}
       />
     ))}
   </div>

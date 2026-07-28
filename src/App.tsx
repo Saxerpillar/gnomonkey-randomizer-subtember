@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import './App.css';
 import { BossPanel, ChallengePanel } from './components/BossPanel';
 import { DataProvider, useGameData, type Boss } from './components/DataProvider';
@@ -10,6 +10,7 @@ import { mulberry32, pick, randomSeed } from './engine/rng';
 import { loadoutValue, roll } from './engine/roll';
 import { rollSpell, type Spell } from './engine/spell';
 import { emptyLoadout, type Item, type Loadout, type Slot } from './engine/types';
+import { RsContextMenu, type MenuEntry } from './theme/RsContextMenu';
 import { RsPanel } from './theme/RsPanel';
 
 interface State {
@@ -25,6 +26,7 @@ type Action =
   | { type: 'SET_LOADOUT'; loadout: Loadout; spell: Spell | null }
   | { type: 'SET_BOSS'; boss: Boss }
   | { type: 'TOGGLE_LOCK'; slot: Slot }
+  | { type: 'REMOVE_ITEM'; slot: Slot }
   | { type: 'SET_BUDGET_TEXT'; text: string }
   | { type: 'TOGGLE_UNTRADEABLES' };
 
@@ -76,17 +78,61 @@ const reducer = (state: State, action: Action): State => {
       }
       return { ...state, locks };
     }
+    case 'REMOVE_ITEM': {
+      const { slot } = action;
+      const loadout = { ...state.loadout, [slot]: null };
+      const locks = { ...state.locks };
+      delete locks[slot];
+      // Removing the weapon removes the spell that went with it.
+      return { ...state, loadout, locks, spell: slot === 'weapon' ? null : state.spell };
+    }
   }
 };
 
 const Main = () => {
   const { items, bosses, spells } = useGameData();
   const [state, dispatch] = useReducer(reducer, undefined, initialState);
+  const [menu, setMenu] = useState<{ x: number; y: number; entries: MenuEntry[] } | null>(null);
 
   useEffect(() => {
     const { locks, budgetText, allowUntradeables } = state;
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ locks, budgetText, allowUntradeables }));
   }, [state]);
+
+  // The browser context menu never shows anywhere in the app: any right-click
+  // a component didn't claim opens the bare OSRS menu (Choose Option + Cancel).
+  useEffect(() => {
+    const onContextMenu = (e: MouseEvent) => {
+      if (!e.defaultPrevented) {
+        e.preventDefault();
+        setMenu({ x: e.clientX, y: e.clientY, entries: [] });
+      }
+    };
+    const close = () => setMenu(null);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close();
+    };
+    document.addEventListener('contextmenu', onContextMenu);
+    window.addEventListener('click', close);
+    window.addEventListener('scroll', close, true);
+    window.addEventListener('resize', close);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('contextmenu', onContextMenu);
+      window.removeEventListener('click', close);
+      window.removeEventListener('scroll', close, true);
+      window.removeEventListener('resize', close);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, []);
+
+  const openSlotMenu = (slot: Slot, e: React.MouseEvent) => {
+    e.preventDefault();
+    const entries: MenuEntry[] = state.loadout[slot]
+      ? [{ label: 'Remove item from slot', onSelect: () => dispatch({ type: 'REMOVE_ITEM', slot }) }]
+      : [];
+    setMenu({ x: e.clientX, y: e.clientY, entries });
+  };
 
   const rollGear = () => {
     const parsed = parseBudget(state.budgetText);
@@ -112,6 +158,7 @@ const Main = () => {
               loadout={state.loadout}
               locks={state.locks}
               onToggleLock={(slot) => dispatch({ type: 'TOGGLE_LOCK', slot })}
+              onSlotContextMenu={openSlotMenu}
             />
             <SpellBadge weapon={state.loadout.weapon} spell={state.spell} />
             <RollControls
@@ -131,6 +178,7 @@ const Main = () => {
           </div>
         </RsPanel>
       </main>
+      {menu && <RsContextMenu x={menu.x} y={menu.y} entries={menu.entries} onClose={() => setMenu(null)} />}
     </div>
   );
 };
