@@ -1,0 +1,38 @@
+.button {
+  font-family: var(--font-bold);
+  font-size: 16px;
+  color: var(--text);
+  background: linear-gradient(var(--panel-raised), var(--tile));
+  border: 2px solid var(--border-light);
+  outline: 1px solid var(--border-dark);
+  border-radius: 3px;
+  padding: 6px 16px;
+  cursor: pointer;
+  text-shadow: 1px 1px 0 var(--border-dark);
+  transition: filter 80ms;
+}
+
+.button:hover:not(:disabled) {
+  filter: brightness(1.15);
+  color: var(--yellow);
+}
+
+.button:active:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.primary {
+  font-size: 20px;
+  padding: 8px 28px;
+  color: var(--gold-bright);
+  border-color: var(--gold);
+}
+
+.primary:hover:not(:disabled) {
+  color: var(--yellow);
+}

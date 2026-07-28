@@ -1,0 +1,57 @@
+/* Gnome Subtember — OSRS UI theme tokens.
+   Palette sampled from the reference bingo-board screenshots: near-black brown
+   panels, olive borders, gold serif headers, green confirm accents. */
+
+@font-face {
+  font-family: 'RuneScape';
+  src: url('/fonts/RuneScape-Plain-12.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'RuneScape Small';
+  src: url('/fonts/RuneScape-Plain-11.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'RuneScape Bold';
+  src: url('/fonts/RuneScape-Bold-12.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'RuneScape Quill Caps';
+  src: url('/fonts/RuneScape-Quill-Caps.ttf') format('truetype');
+  font-display: swap;
+}
+
+:root {
+  /* surfaces */
+  --bg: #14120f;
+  --panel: #1e1b16;
+  --panel-raised: #262218;
+  --tile: #232019;
+  --tile-hover: #2c2820;
+
+  /* borders */
+  --border: #3a3527;
+  --border-light: #4d4636;
+  --border-dark: #0c0b08;
+
+  /* text */
+  --text: #d8cfc0;
+  --text-muted: #8f8672;
+  --gold: #d4b56a;
+  --gold-bright: #f4d03f;
+  --orange: #ff981f;
+  --yellow: #ffff00;
+
+  /* accents */
+  --green: #46c246;
+  --green-glow: rgba(70, 194, 70, 0.55);
+  --red: #d84343;
+
+  /* fonts */
+  --font-body: 'RuneScape', 'Segoe UI', sans-serif;
+  --font-small: 'RuneScape Small', 'Segoe UI', sans-serif;
+  --font-bold: 'RuneScape Bold', 'Segoe UI', sans-serif;
+  --font-title: 'RuneScape Quill Caps', 'Georgia', serif;
+}
