@@ -1,5 +1,7 @@
-import { parseBudget, formatGp } from '../engine/parse';
+import { parseBudget } from '../engine/parse';
+import { GpValue } from '../theme/GpValue';
 import { RsButton } from '../theme/RsButton';
+import { RsTooltip } from '../theme/RsTooltip';
 import styles from './RollControls.module.css';
 
 export const RollControls = ({
@@ -23,22 +25,27 @@ export const RollControls = ({
     <div className={styles.controls}>
       <label className={styles.field}>
         <span>Budget</span>
-        <input
-          className={`${styles.budget} ${parsed.ok ? '' : styles.invalid}`}
-          value={budgetText}
-          placeholder="e.g. 10m — empty = no budget"
-          onChange={(e) => onBudgetChange(e.target.value)}
-        />
+        <span className={styles.budgetWrap}>
+          <img className={styles.coins} src="/img/coins.png" alt="" />
+          <input
+            className={`${styles.budget} ${parsed.ok ? '' : styles.invalid}`}
+            value={budgetText}
+            placeholder="e.g. 10m — empty = no budget"
+            onChange={(e) => onBudgetChange(e.target.value)}
+          />
+        </span>
       </label>
       <label className={styles.toggle}>
         <input type="checkbox" checked={allowUntradeables} onChange={onToggleUntradeables} />
         <span>Allow untradeables (cost 0)</span>
       </label>
-      <RsButton variant="primary" disabled={!parsed.ok} onClick={onRoll} title={parsed.ok ? 'Roll a loadout' : 'Fix the budget first'}>
-        Roll
-      </RsButton>
+      <RsTooltip content={parsed.ok ? null : 'Fix the budget first'} className={styles.rollWrap}>
+        <RsButton variant="primary" disabled={!parsed.ok} onClick={onRoll}>
+          Roll
+        </RsButton>
+      </RsTooltip>
       <div className={styles.value}>
-        Loadout value: <strong>{formatGp(totalValue)}</strong>
+        Loadout value: <GpValue gp={totalValue} />
       </div>
     </div>
   );

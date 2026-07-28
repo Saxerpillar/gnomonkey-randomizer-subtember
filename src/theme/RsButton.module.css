@@ -1,6 +1,6 @@
 .button {
   font-family: var(--font-bold);
-  font-size: 16px;
+  font-size: 18px;
   color: var(--text);
   background: linear-gradient(var(--panel-raised), var(--tile));
   border: 2px solid var(--border-light);
@@ -27,7 +27,7 @@
 }
 
 .primary {
-  font-size: 20px;
+  font-size: 24px;
   padding: 8px 28px;
   color: var(--gold-bright);
   border-color: var(--gold);

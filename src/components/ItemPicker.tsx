@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useGameData } from './DataProvider';
-import { formatGp } from '../engine/parse';
+import { GpValue } from '../theme/GpValue';
 import type { Item, Slot } from '../engine/types';
 import styles from './ItemPicker.module.css';
 
@@ -62,7 +62,7 @@ export const ItemPicker = ({
                 <img src={`/img/items/${item.icon}`} alt="" />
                 <span className={styles.name}>{item.name}</span>
                 <span className={styles.price}>
-                  {item.price != null ? formatGp(item.price) : item.tradeable ? '' : 'untradeable'}
+                  {item.price != null ? <GpValue gp={item.price} className={styles.gp} /> : item.tradeable ? '' : 'untradeable'}
                 </span>
               </button>
             </li>

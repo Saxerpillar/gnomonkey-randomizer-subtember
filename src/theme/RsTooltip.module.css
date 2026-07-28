@@ -1,0 +1,48 @@
+.wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.tip {
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 10px;
+  background: rgba(10, 9, 7, 0.96);
+  border: 1px solid var(--border-light);
+  outline: 1px solid var(--border-dark);
+  border-radius: 3px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+  font-family: var(--font-small);
+  font-size: 15px;
+  color: var(--text);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* little notch */
+.tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--border-light);
+}
+
+.tipTitle {
+  color: var(--orange);
+  font-family: var(--font-body);
+  font-size: 16px;
+}
+
+.tipMuted {
+  color: var(--text-muted);
+}

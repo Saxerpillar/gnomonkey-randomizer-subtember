@@ -18,15 +18,39 @@
   color: var(--gold);
 }
 
+.budgetWrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+}
+
+.coins {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
 .budget {
   flex: 1;
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text);
   background: var(--tile);
   border: 1px solid var(--border-light);
   border-radius: 3px;
-  padding: 6px 8px;
+  padding: 6px 8px 6px 30px;
+}
+
+.rollWrap {
+  justify-content: center;
+}
+
+.rollWrap > button {
+  flex: 1;
 }
 
 .budget:focus {
@@ -43,7 +67,7 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-small);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text);
   cursor: pointer;
   user-select: none;

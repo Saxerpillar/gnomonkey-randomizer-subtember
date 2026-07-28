@@ -20,8 +20,9 @@
   border: 2px solid transparent;
   border-radius: 3px;
   cursor: pointer;
-  display: grid;
-  place-items: center;
+  /* flex centering (not grid) so it can't fight RsTooltip's inline-flex wrap */
+  align-items: center;
+  justify-content: center;
 }
 
 .slot:hover {

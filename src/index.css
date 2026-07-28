@@ -18,7 +18,7 @@ body {
     radial-gradient(ellipse at 80% 100%, rgba(40, 36, 26, 0.35), transparent 55%);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 17px;
   -webkit-font-smoothing: none; /* keep the pixel font crisp */
 }
 

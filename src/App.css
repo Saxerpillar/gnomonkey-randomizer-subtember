@@ -7,7 +7,7 @@
 .title {
   font-family: var(--font-title);
   font-weight: normal;
-  font-size: 44px;
+  font-size: 60px;
   letter-spacing: 2px;
   color: var(--gold);
   text-shadow: 2px 2px 0 var(--border-dark);

@@ -1,0 +1,14 @@
+.gp {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--gold-bright);
+  font-family: var(--font-bold);
+  white-space: nowrap;
+}
+
+.gp img {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}

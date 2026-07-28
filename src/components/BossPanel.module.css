@@ -39,7 +39,7 @@
 
 .name {
   font-family: var(--font-title);
-  font-size: 26px;
+  font-size: 34px;
   color: var(--gold);
   text-shadow: 1px 1px 0 var(--border-dark);
   text-align: center;
@@ -47,7 +47,7 @@
 
 .tags {
   font-family: var(--font-small);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
 }
 

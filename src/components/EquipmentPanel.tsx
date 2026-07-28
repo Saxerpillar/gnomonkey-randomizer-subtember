@@ -1,5 +1,7 @@
 import { SLOTS, type Item, type Loadout, type Slot } from '../engine/types';
-import { formatGp } from '../engine/parse';
+import { GpValue } from '../theme/GpValue';
+import { RsTooltip } from '../theme/RsTooltip';
+import tipStyles from '../theme/RsTooltip.module.css';
 import styles from './EquipmentPanel.module.css';
 
 const SLOT_LABEL: Record<Slot, string> = {
@@ -16,6 +18,24 @@ const SLOT_LABEL: Record<Slot, string> = {
   ring: 'Ring',
 };
 
+const slotTip = (slot: Slot, item: Item | null, locked: boolean) =>
+  item ? (
+    <>
+      <span className={tipStyles.tipTitle}>{item.name}</span>
+      {item.price != null ? (
+        <GpValue gp={item.price} />
+      ) : (
+        !item.tradeable && <span className={tipStyles.tipMuted}>Untradeable</span>
+      )}
+      <span className={tipStyles.tipMuted}>{locked ? 'Locked — 🔓 unlocks' : '🔓 locks it in'}</span>
+    </>
+  ) : (
+    <>
+      <span className={tipStyles.tipTitle}>{SLOT_LABEL[slot]}</span>
+      <span className={tipStyles.tipMuted}>Empty — click to search this slot</span>
+    </>
+  );
+
 const EquipSlot = ({
   slot,
   item,
@@ -30,34 +50,29 @@ const EquipSlot = ({
   selected: boolean;
   onSelect: () => void;
   onToggleLock: () => void;
-}) => {
-  const title = item
-    ? `${item.name}${item.price != null ? ` (${formatGp(item.price)})` : item.tradeable ? '' : ' (untradeable)'}`
-    : `${SLOT_LABEL[slot]} — empty`;
-  return (
-    <div
-      className={`${styles.slot} ${locked ? styles.locked : ''} ${selected ? styles.selected : ''}`}
-      style={{ gridArea: slot, backgroundImage: `url(/img/slots/${slot}.png)` }}
-      title={title}
-      onClick={onSelect}
-    >
-      {item && <img className={styles.icon} src={`/img/items/${item.icon}`} alt={item.name} />}
-      {item && (
-        <button
-          className={styles.lockBtn}
-          title={locked ? 'Unlock slot' : 'Lock this item in'}
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleLock();
-          }}
-        >
-          {locked ? '🔒' : '🔓'}
-        </button>
-      )}
-      {locked && <span className={styles.lockBadge}>🔒</span>}
-    </div>
-  );
-};
+}) => (
+  <RsTooltip
+    content={slotTip(slot, item, locked)}
+    className={`${styles.slot} ${locked ? styles.locked : ''} ${selected ? styles.selected : ''}`}
+    style={{ gridArea: slot, backgroundImage: `url(/img/slots/${slot}.png)` }}
+    onClick={onSelect}
+  >
+    {item && <img className={styles.icon} src={`/img/items/${item.icon}`} alt={item.name} />}
+    {item && (
+      <button
+        className={styles.lockBtn}
+        aria-label={locked ? 'Unlock slot' : 'Lock this item in'}
+        onClick={(e) => {
+          e.stopPropagation();
+          onToggleLock();
+        }}
+      >
+        {locked ? '🔒' : '🔓'}
+      </button>
+    )}
+    {locked && <span className={styles.lockBadge}>🔒</span>}
+  </RsTooltip>
+);
 
 /** The in-game equipment tab, built from the authentic wiki slot sprites. */
 export const EquipmentPanel = ({

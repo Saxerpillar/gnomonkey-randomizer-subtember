@@ -10,7 +10,7 @@
 .input {
   flex: 1;
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text);
   background: var(--tile);
   border: 1px solid var(--border-light);
@@ -24,7 +24,7 @@
 
 .chip {
   font-family: var(--font-small);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--gold);
   background: var(--panel-raised);
   border: 1px solid var(--border-light);
@@ -57,7 +57,7 @@
   width: 100%;
   padding: 4px 8px;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text);
   background: none;
   border: none;
@@ -84,4 +84,8 @@
   font-family: var(--font-small);
   font-size: 12px;
   color: var(--text-muted);
+}
+
+.gp {
+  font-size: 13px;
 }
