@@ -58,7 +58,8 @@
   --font-body: 'RuneScape', 'Segoe UI', sans-serif;
   --font-small: 'RuneScape Small', 'Segoe UI', sans-serif;
   --font-bold: 'RuneScape Bold', 'Segoe UI', sans-serif;
-  --font-title: 'RuneScape Quill Caps', 'Georgia', serif;
+  /* Quill Caps rejected as too hard to read (2026-07-29) — titles use Bold. */
+  --font-title: 'RuneScape Bold', 'Segoe UI', sans-serif;
 
   /* full black outline for display text on the pixel fonts (4-direction) */
   --text-outline: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000,
