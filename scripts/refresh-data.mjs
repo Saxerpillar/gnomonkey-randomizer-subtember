@@ -1,0 +1,198 @@
+// Gnome Subtember data pipeline. Run: npm run refresh-data
+// Vendors everything the app needs into public/ so the app itself makes zero
+// network calls. Curated inputs live in data/; everything this script writes
+// is generated and committed. JSON writes are atomic (tmp -> rename); image
+// downloads skip files that already exist, so re-runs are cheap and resumable.
+// Any fetch failure is fatal (loud) - no partially-written JSON.
+
+import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const DPS_RAW = 'https://raw.githubusercontent.com/weirdgloop/osrs-dps-calc/main';
+const WIKI_IMG = 'https://oldschool.runescape.wiki/images';
+const PRICES_API = 'https://prices.runescape.wiki/api/v1/osrs';
+const UA = 'gnome-subtember/0.1 (local gear-roll prototype data script)';
+
+const SLOTS = ['head', 'cape', 'neck', 'ammo', 'weapon', 'body', 'shield', 'legs', 'hands', 'feet', 'ring'];
+
+const fetchJson = async (url) => {
+  const res = await fetch(url, { headers: { 'User-Agent': UA } });
+  if (!res.ok) throw new Error(`GET ${url} -> ${res.status}`);
+  return res.json();
+};
+
+const fetchBinary = async (url) => {
+  const res = await fetch(url, { headers: { 'User-Agent': UA } });
+  if (!res.ok) throw new Error(`GET ${url} -> ${res.status}`);
+  return Buffer.from(await res.arrayBuffer());
+};
+
+const writeJsonAtomic = async (file, value) => {
+  const tmp = `${file}.tmp`;
+  await writeFile(tmp, JSON.stringify(value, null, 1) + '\n');
+  await rename(tmp, file);
+};
+
+/** Run tasks with bounded concurrency; collect errors, throw at the end. */
+const pooled = async (items, limit, fn) => {
+  const errors = [];
+  let i = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (i < items.length) {
+      const item = items[i++];
+      try {
+        await fn(item);
+      } catch (e) {
+        errors.push(`${e.message}`);
+      }
+    }
+  });
+  await Promise.all(workers);
+  if (errors.length) throw new Error(`${errors.length} download(s) failed:\n${errors.slice(0, 10).join('\n')}`);
+};
+
+const main = async () => {
+  const curation = JSON.parse(await readFile(path.join(ROOT, 'data/curation.json'), 'utf8'));
+  const bosses = JSON.parse(await readFile(path.join(ROOT, 'data/bosses.json'), 'utf8'));
+
+  // ---- 1. Equipment pool -------------------------------------------------
+  console.log('Fetching equipment.json ...');
+  const raw = await fetchJson(`${DPS_RAW}/cdn/json/equipment.json`);
+  console.log(`  ${raw.length} raw entries`);
+
+  const { versionBlocklist, namePatterns, ids } = curation.poolExclusions;
+  const nameRes = namePatterns.map((p) => new RegExp(p, 'i'));
+  const excludedIds = new Set(ids);
+  const versionBlocked = new Set(versionBlocklist);
+
+  const kept = raw.filter(
+    (e) =>
+      SLOTS.includes(e.slot) &&
+      Number.isInteger(e.id) &&
+      e.id > 0 &&
+      e.image &&
+      !versionBlocked.has(e.version) &&
+      !excludedIds.has(e.id) &&
+      !nameRes.some((re) => re.test(e.name)),
+  );
+
+  // Collapse to one canonical entry per item name.
+  const prio = curation.canonicalization.versionPriority;
+  const rank = (v) => {
+    const i = prio.indexOf(v ?? '');
+    return i === -1 ? prio.length : i;
+  };
+  const byName = new Map();
+  for (const e of kept) {
+    const cur = byName.get(e.name);
+    if (!cur || rank(e.version) < rank(cur.version)) byName.set(e.name, e);
+  }
+  const pool = [...byName.values()];
+  console.log(`  ${kept.length} after exclusions, ${pool.length} canonical items`);
+
+  // ---- 2. Prices ---------------------------------------------------------
+  console.log('Fetching GE mapping + latest prices ...');
+  const mapping = await fetchJson(`${PRICES_API}/mapping`);
+  const latest = (await fetchJson(`${PRICES_API}/latest`)).data;
+  const tradeableIds = new Set(mapping.map((m) => m.id));
+
+  const prices = {};
+  for (const item of pool) {
+    if (!tradeableIds.has(item.id)) continue;
+    const p = latest[item.id];
+    if (!p) continue;
+    const { high, low } = p;
+    const mid = high != null && low != null ? Math.round((high + low) / 2) : (high ?? low);
+    if (mid != null) prices[item.id] = mid;
+  }
+  console.log(`  ${Object.keys(prices).length} priced items`);
+
+  // ---- 3. Ammo classification -------------------------------------------
+  const { classRules, weaponAmmoOverrides, categoryAmmoMap, selfAmmoWeapons } = curation.ammo;
+  const rules = classRules.map((r) => ({ re: new RegExp(r.pattern, 'i'), cls: r.class }));
+  const selfAmmo = new Set(selfAmmoWeapons.names);
+
+  const ammoClassOf = (item) => rules.find((r) => r.re.test(item.name))?.cls ?? 'any';
+  const requiredAmmoOf = (item) => {
+    if (weaponAmmoOverrides[item.name]) return weaponAmmoOverrides[item.name];
+    if (selfAmmo.has(item.name)) return null;
+    return categoryAmmoMap[item.category] ?? null;
+  };
+
+  // ---- 4. App-facing equipment schema -----------------------------------
+  const appItems = pool
+    .map((e) => ({
+      id: e.id,
+      name: e.name,
+      version: e.version || undefined,
+      slot: e.slot,
+      icon: `${e.id}.png`,
+      tradeable: tradeableIds.has(e.id),
+      twoHanded: !!e.isTwoHanded,
+      category: e.category || undefined,
+      ammoClass: e.slot === 'ammo' ? ammoClassOf(e) : undefined,
+      requiredAmmo: e.slot === 'weapon' ? requiredAmmoOf(e) ?? undefined : undefined,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  // ---- 5. Downloads ------------------------------------------------------
+  for (const dir of ['public/data', 'public/img/items', 'public/img/bosses', 'public/img/slots']) {
+    await mkdir(path.join(ROOT, dir), { recursive: true });
+  }
+
+  const iconJobs = pool
+    .map((e) => ({
+      url: `${DPS_RAW}/cdn/equipment/${encodeURIComponent(e.image)}`,
+      dest: path.join(ROOT, 'public/img/items', `${e.id}.png`),
+      label: e.name,
+    }))
+    .filter((j) => !existsSync(j.dest));
+  console.log(`Downloading ${iconJobs.length} item icons (rest already present) ...`);
+  await pooled(iconJobs, 12, async (j) => writeFile(j.dest, await fetchBinary(j.url)));
+
+  const bossJobs = bosses
+    .map((b) => ({
+      url: `${DPS_RAW}/cdn/monsters/${encodeURIComponent(b.image)}`,
+      dest: path.join(ROOT, 'public/img/bosses', b.image),
+    }))
+    .filter((j) => !existsSync(j.dest));
+  console.log(`Downloading ${bossJobs.length} boss images ...`);
+  await pooled(bossJobs, 8, async (j) => writeFile(j.dest, await fetchBinary(j.url)));
+
+  // Slot sprites: authentic wiki interface tiles, dps-calc ghost icons as fallback.
+  const slotJobs = SLOTS.map((slot) => ({ slot, dest: path.join(ROOT, 'public/img/slots', `${slot}.png`) })).filter(
+    (j) => !existsSync(j.dest),
+  );
+  console.log(`Downloading ${slotJobs.length} slot sprites ...`);
+  await pooled(slotJobs, 6, async ({ slot, dest }) => {
+    const wikiName = `${slot[0].toUpperCase()}${slot.slice(1)}_slot.png`;
+    try {
+      await writeFile(dest, await fetchBinary(`${WIKI_IMG}/${wikiName}`));
+    } catch {
+      await writeFile(dest, await fetchBinary(`${DPS_RAW}/src/public/img/slots/${slot}.png`));
+      console.log(`  ${slot}: wiki sprite unavailable, used dps-calc ghost icon`);
+    }
+  });
+
+  // ---- 6. Atomic JSON writes --------------------------------------------
+  await writeJsonAtomic(path.join(ROOT, 'public/data/equipment.json'), appItems);
+  await writeJsonAtomic(path.join(ROOT, 'public/data/prices.json'), prices);
+  await writeJsonAtomic(
+    path.join(ROOT, 'public/data/bosses.json'),
+    bosses.map((b) => ({ name: b.name, image: b.image, tags: b.tags })),
+  );
+
+  const weapons = appItems.filter((i) => i.slot === 'weapon');
+  console.log(
+    `Done. ${appItems.length} items (${appItems.filter((i) => i.tradeable).length} tradeable), ` +
+      `${weapons.length} weapons (${weapons.filter((w) => w.requiredAmmo).length} need ammo), ${bosses.length} bosses.`,
+  );
+};
+
+main().catch((e) => {
+  console.error(`refresh-data FAILED: ${e.message}`);
+  process.exit(1);
+});

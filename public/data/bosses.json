@@ -1,0 +1,373 @@
+[
+ {
+  "name": "Abyssal Sire",
+  "image": "Abyssal Sire.png",
+  "tags": [
+   "slayer"
+  ]
+ },
+ {
+  "name": "Alchemical Hydra",
+  "image": "Alchemical Hydra (fire).png",
+  "tags": [
+   "slayer"
+  ]
+ },
+ {
+  "name": "Amoxliatl",
+  "image": "Amoxliatl.png",
+  "tags": []
+ },
+ {
+  "name": "Araxxor",
+  "image": "Araxxor.png",
+  "tags": [
+   "slayer"
+  ]
+ },
+ {
+  "name": "Artio",
+  "image": "Artio.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "Bryophyta",
+  "image": "Bryophyta.png",
+  "tags": []
+ },
+ {
+  "name": "Callisto",
+  "image": "Callisto.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "Calvar'ion",
+  "image": "Calvar'ion.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "Cerberus",
+  "image": "Cerberus.png",
+  "tags": [
+   "slayer"
+  ]
+ },
+ {
+  "name": "Chaos Elemental",
+  "image": "Chaos Elemental.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "Chaos Fanatic",
+  "image": "Chaos Fanatic.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "Commander Zilyana",
+  "image": "Commander Zilyana.png",
+  "tags": [
+   "gwd"
+  ]
+ },
+ {
+  "name": "Corporeal Beast",
+  "image": "Corporeal Beast.png",
+  "tags": []
+ },
+ {
+  "name": "Corrupted Hunllef",
+  "image": "Corrupted Hunllef.png",
+  "tags": [
+   "gauntlet"
+  ]
+ },
+ {
+  "name": "Crazy Archaeologist",
+  "image": "Crazy archaeologist.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "Crystalline Hunllef",
+  "image": "Crystalline Hunllef.png",
+  "tags": [
+   "gauntlet"
+  ]
+ },
+ {
+  "name": "Dagannoth Prime",
+  "image": "Dagannoth Prime.png",
+  "tags": []
+ },
+ {
+  "name": "Dagannoth Rex",
+  "image": "Dagannoth Rex.png",
+  "tags": []
+ },
+ {
+  "name": "Dagannoth Supreme",
+  "image": "Dagannoth Supreme.png",
+  "tags": []
+ },
+ {
+  "name": "Deranged Archaeologist",
+  "image": "Deranged archaeologist.png",
+  "tags": []
+ },
+ {
+  "name": "Doom of Mokhaiotl",
+  "image": "Doom of Mokhaiotl.png",
+  "tags": []
+ },
+ {
+  "name": "Duke Sucellus",
+  "image": "Duke Sucellus.png",
+  "tags": [
+   "dt2"
+  ]
+ },
+ {
+  "name": "General Graardor",
+  "image": "General Graardor.png",
+  "tags": [
+   "gwd"
+  ]
+ },
+ {
+  "name": "Giant Mole",
+  "image": "Giant Mole.png",
+  "tags": []
+ },
+ {
+  "name": "Great Olm",
+  "image": "Great Olm.png",
+  "tags": [
+   "raid"
+  ]
+ },
+ {
+  "name": "Grotesque Guardians",
+  "image": "Dusk.png",
+  "tags": [
+   "slayer"
+  ]
+ },
+ {
+  "name": "Hespori",
+  "image": "Hespori.png",
+  "tags": []
+ },
+ {
+  "name": "K'ril Tsutsaroth",
+  "image": "K'ril Tsutsaroth.png",
+  "tags": [
+   "gwd"
+  ]
+ },
+ {
+  "name": "Kalphite Queen",
+  "image": "Kalphite Queen.png",
+  "tags": []
+ },
+ {
+  "name": "King Black Dragon",
+  "image": "King Black Dragon.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "Kraken",
+  "image": "Kraken.png",
+  "tags": [
+   "slayer"
+  ]
+ },
+ {
+  "name": "Kree'arra",
+  "image": "Kree'arra.png",
+  "tags": [
+   "gwd"
+  ]
+ },
+ {
+  "name": "Mimic",
+  "image": "The Mimic.png",
+  "tags": []
+ },
+ {
+  "name": "Nex",
+  "image": "Nex.png",
+  "tags": [
+   "gwd"
+  ]
+ },
+ {
+  "name": "Obor",
+  "image": "Obor.png",
+  "tags": []
+ },
+ {
+  "name": "Phantom Muspah",
+  "image": "Phantom Muspah (melee).png",
+  "tags": []
+ },
+ {
+  "name": "Royal Titans",
+  "image": "Branda the Fire Queen.png",
+  "tags": [
+   "group"
+  ]
+ },
+ {
+  "name": "Sarachnis",
+  "image": "Sarachnis.png",
+  "tags": []
+ },
+ {
+  "name": "Scorpia",
+  "image": "Scorpia.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "Scurrius",
+  "image": "Scurrius.png",
+  "tags": []
+ },
+ {
+  "name": "Skotizo",
+  "image": "Skotizo.png",
+  "tags": []
+ },
+ {
+  "name": "Sol Heredit",
+  "image": "Sol Heredit.png",
+  "tags": [
+   "minigame"
+  ]
+ },
+ {
+  "name": "Spindel",
+  "image": "Spindel.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "The Hueycoatl",
+  "image": "The Hueycoatl.png",
+  "tags": [
+   "group"
+  ]
+ },
+ {
+  "name": "The Leviathan",
+  "image": "The Leviathan.png",
+  "tags": [
+   "dt2"
+  ]
+ },
+ {
+  "name": "The Nightmare",
+  "image": "The Nightmare.png",
+  "tags": []
+ },
+ {
+  "name": "The Whisperer",
+  "image": "The Whisperer.png",
+  "tags": [
+   "dt2"
+  ]
+ },
+ {
+  "name": "Thermonuclear smoke devil",
+  "image": "Thermonuclear smoke devil.png",
+  "tags": [
+   "slayer"
+  ]
+ },
+ {
+  "name": "Tumeken's Warden",
+  "image": "Tumeken's Warden (level-489).png",
+  "tags": [
+   "raid"
+  ]
+ },
+ {
+  "name": "TzKal-Zuk",
+  "image": "TzKal-Zuk.png",
+  "tags": [
+   "minigame"
+  ]
+ },
+ {
+  "name": "TzTok-Jad",
+  "image": "TzTok-Jad.png",
+  "tags": [
+   "minigame"
+  ]
+ },
+ {
+  "name": "Vardorvis",
+  "image": "Vardorvis.png",
+  "tags": [
+   "dt2"
+  ]
+ },
+ {
+  "name": "Venenatis",
+  "image": "Venenatis.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "Verzik Vitur",
+  "image": "Verzik Vitur.png",
+  "tags": [
+   "raid"
+  ]
+ },
+ {
+  "name": "Vet'ion",
+  "image": "Vet'ion.png",
+  "tags": [
+   "wildy"
+  ]
+ },
+ {
+  "name": "Vorkath",
+  "image": "Vorkath.png",
+  "tags": []
+ },
+ {
+  "name": "Yama",
+  "image": "Yama.png",
+  "tags": []
+ },
+ {
+  "name": "Zalcano",
+  "image": "Zalcano.png",
+  "tags": [
+   "group"
+  ]
+ },
+ {
+  "name": "Zulrah",
+  "image": "Zulrah (magma).png",
+  "tags": []
+ }
+]
