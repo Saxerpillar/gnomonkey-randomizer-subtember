@@ -68,7 +68,8 @@
 .challengeTitle {
   font-family: var(--font-bold);
   font-size: 18px;
-  color: var(--gold);
+  color: var(--orange);
+  text-shadow: var(--text-outline);
 }
 
 .challengeSoon {

@@ -184,6 +184,23 @@ const main = async () => {
     await writeFile(coinsDest, await fetchBinary(`${WIKI_IMG}/Coins_10000.png`));
   }
 
+  // Small UI icons (header anchors). Missing one is a warning — the UI hides it.
+  await mkdir(path.join(ROOT, 'public/img/ui'), { recursive: true });
+  const UI_ICONS = [
+    ['multicombat.png', 'Multicombat.png'], // crossed swords — "Your gear"
+    ['skull.png', 'Skull_(status)_icon.png'], // "Your fate"
+  ];
+  for (const [local, wiki] of UI_ICONS) {
+    const dest = path.join(ROOT, 'public/img/ui', local);
+    if (existsSync(dest)) continue;
+    try {
+      await writeFile(dest, await fetchBinary(`${WIKI_IMG}/${wiki}`));
+      console.log(`Downloaded ui/${local}`);
+    } catch {
+      console.log(`  WARN no wiki icon "${wiki}" — UI will render text-only`);
+    }
+  }
+
   // ---- 5b. Spells ------------------------------------------------------
   // Damaging combat spells for the castable-staff spell roll. Icons come from
   // the wiki; a missing icon is a warning, not a failure (UI falls back to text).

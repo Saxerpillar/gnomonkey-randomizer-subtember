@@ -10,12 +10,12 @@
 
 .header {
   padding: 3px 8px 2px;
-  background: #695f4e;
+  background: #1c1813;
   border-bottom: 1px solid #0c0b08;
   font-family: var(--font-bold);
   font-size: 17px;
-  color: #100e0b;
-  text-shadow: none;
+  color: var(--gold-bright);
+  text-shadow: var(--text-outline);
 }
 
 .list {

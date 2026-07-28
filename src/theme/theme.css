@@ -59,4 +59,13 @@
   --font-small: 'RuneScape Small', 'Segoe UI', sans-serif;
   --font-bold: 'RuneScape Bold', 'Segoe UI', sans-serif;
   --font-title: 'RuneScape Quill Caps', 'Georgia', serif;
+
+  /* full black outline for display text on the pixel fonts (4-direction) */
+  --text-outline: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000,
+    1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+
+  /* CTA crimson (OSRS "click here to play") */
+  --crimson: #7e1710;
+  --crimson-dark: #4f0d08;
+  --crimson-light: #a3271c;
 }

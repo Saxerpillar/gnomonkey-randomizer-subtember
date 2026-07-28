@@ -15,7 +15,9 @@
 
 .field > span {
   font-family: var(--font-bold);
-  color: var(--gold);
+  font-size: 18px;
+  color: var(--orange);
+  text-shadow: var(--text-outline);
 }
 
 .budgetWrap {

@@ -152,7 +152,7 @@ const Main = () => {
     <div className="app">
       <h1 className="title">Gnome Subtember</h1>
       <main className="columns">
-        <RsPanel title="Your gear">
+        <RsPanel title="Your gear" icon="/img/ui/multicombat.png">
           <div className="gearStack">
             <EquipmentPanel
               loadout={state.loadout}
@@ -171,7 +171,7 @@ const Main = () => {
             />
           </div>
         </RsPanel>
-        <RsPanel title="Your fate">
+        <RsPanel title="Your fate" icon="/img/ui/skull.png">
           <div className="fate">
             <BossPanel boss={state.boss} onRoll={rollBoss} />
             <ChallengePanel />

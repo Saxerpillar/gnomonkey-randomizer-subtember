@@ -7,10 +7,17 @@
 .title {
   font-family: var(--font-title);
   font-weight: normal;
-  font-size: 60px;
+  font-size: 72px;
   letter-spacing: 2px;
-  color: var(--gold);
-  text-shadow: 2px 2px 0 var(--border-dark);
+  /* bright yellow -> orange gradient fill with a thick black outline:
+     background-clip keeps the gradient in the glyphs, drop-shadow filters
+     follow glyph alpha so the outline works where text-shadow can't. */
+  background: linear-gradient(180deg, #f8df6a 0%, var(--gold-bright) 45%, var(--orange) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(2px 0 0 #000) drop-shadow(-2px 0 0 #000) drop-shadow(0 2px 0 #000)
+    drop-shadow(0 -2px 0 #000) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6));
   text-align: center;
   margin: 8px 0 24px;
 }
