@@ -1,0 +1,310 @@
+[
+ {
+  "name": "Blood Barrage",
+  "icon": "Blood_Barrage.png",
+  "book": "ancient",
+  "maxHit": 29
+ },
+ {
+  "name": "Blood Blitz",
+  "icon": "Blood_Blitz.png",
+  "book": "ancient",
+  "maxHit": 25
+ },
+ {
+  "name": "Blood Burst",
+  "icon": "Blood_Burst.png",
+  "book": "ancient",
+  "maxHit": 21
+ },
+ {
+  "name": "Blood Rush",
+  "icon": "Blood_Rush.png",
+  "book": "ancient",
+  "maxHit": 15
+ },
+ {
+  "name": "Claws of Guthix",
+  "icon": "Claws_of_Guthix.png",
+  "book": "standard",
+  "maxHit": 20,
+  "requiresWeapon": [
+   "Guthix staff",
+   "Staff of balance"
+  ]
+ },
+ {
+  "name": "Crumble Undead",
+  "icon": "Crumble_Undead.png",
+  "book": "standard",
+  "maxHit": 15
+ },
+ {
+  "name": "Earth Blast",
+  "icon": "Earth_Blast.png",
+  "book": "standard",
+  "maxHit": 15
+ },
+ {
+  "name": "Earth Bolt",
+  "icon": "Earth_Bolt.png",
+  "book": "standard",
+  "maxHit": 11
+ },
+ {
+  "name": "Earth Strike",
+  "icon": "Earth_Strike.png",
+  "book": "standard",
+  "maxHit": 6
+ },
+ {
+  "name": "Earth Surge",
+  "icon": "Earth_Surge.png",
+  "book": "standard",
+  "maxHit": 23
+ },
+ {
+  "name": "Earth Wave",
+  "icon": "Earth_Wave.png",
+  "book": "standard",
+  "maxHit": 19
+ },
+ {
+  "name": "Entangle",
+  "icon": "Entangle.png",
+  "book": "standard",
+  "maxHit": 5
+ },
+ {
+  "name": "Fire Blast",
+  "icon": "Fire_Blast.png",
+  "book": "standard",
+  "maxHit": 16
+ },
+ {
+  "name": "Fire Bolt",
+  "icon": "Fire_Bolt.png",
+  "book": "standard",
+  "maxHit": 12
+ },
+ {
+  "name": "Fire Strike",
+  "icon": "Fire_Strike.png",
+  "book": "standard",
+  "maxHit": 8
+ },
+ {
+  "name": "Fire Surge",
+  "icon": "Fire_Surge.png",
+  "book": "standard",
+  "maxHit": 24
+ },
+ {
+  "name": "Fire Wave",
+  "icon": "Fire_Wave.png",
+  "book": "standard",
+  "maxHit": 20
+ },
+ {
+  "name": "Flames of Zamorak",
+  "icon": "Flames_of_Zamorak.png",
+  "book": "standard",
+  "maxHit": 20,
+  "requiresWeapon": [
+   "Zamorak staff",
+   "Staff of the dead",
+   "Toxic staff of the dead",
+   "Accursed sceptre"
+  ]
+ },
+ {
+  "name": "Ghostly Grasp",
+  "icon": "Ghostly_Grasp.png",
+  "book": "arceuus",
+  "maxHit": 12
+ },
+ {
+  "name": "Iban Blast",
+  "icon": "Iban_Blast.png",
+  "book": "standard",
+  "maxHit": 25,
+  "requiresWeapon": [
+   "Iban's staff",
+   "Iban's staff (u)"
+  ]
+ },
+ {
+  "name": "Ice Barrage",
+  "icon": "Ice_Barrage.png",
+  "book": "ancient",
+  "maxHit": 30
+ },
+ {
+  "name": "Ice Blitz",
+  "icon": "Ice_Blitz.png",
+  "book": "ancient",
+  "maxHit": 26
+ },
+ {
+  "name": "Ice Burst",
+  "icon": "Ice_Burst.png",
+  "book": "ancient",
+  "maxHit": 22
+ },
+ {
+  "name": "Ice Rush",
+  "icon": "Ice_Rush.png",
+  "book": "ancient",
+  "maxHit": 16
+ },
+ {
+  "name": "Magic Dart",
+  "icon": "Magic_Dart.png",
+  "book": "standard",
+  "maxHit": 0,
+  "requiresWeapon": [
+   "Slayer's staff",
+   "Slayer's staff (e)",
+   "Staff of the dead",
+   "Toxic staff of the dead",
+   "Staff of light",
+   "Staff of balance"
+  ]
+ },
+ {
+  "name": "Saradomin Strike",
+  "icon": "Saradomin_Strike.png",
+  "book": "standard",
+  "maxHit": 20,
+  "requiresWeapon": [
+   "Saradomin staff",
+   "Staff of light"
+  ]
+ },
+ {
+  "name": "Shadow Barrage",
+  "icon": "Shadow_Barrage.png",
+  "book": "ancient",
+  "maxHit": 28
+ },
+ {
+  "name": "Shadow Blitz",
+  "icon": "Shadow_Blitz.png",
+  "book": "ancient",
+  "maxHit": 24
+ },
+ {
+  "name": "Shadow Burst",
+  "icon": "Shadow_Burst.png",
+  "book": "ancient",
+  "maxHit": 18
+ },
+ {
+  "name": "Shadow Rush",
+  "icon": "Shadow_Rush.png",
+  "book": "ancient",
+  "maxHit": 14
+ },
+ {
+  "name": "Skeletal Grasp",
+  "icon": "Skeletal_Grasp.png",
+  "book": "arceuus",
+  "maxHit": 17
+ },
+ {
+  "name": "Smoke Barrage",
+  "icon": "Smoke_Barrage.png",
+  "book": "ancient",
+  "maxHit": 27
+ },
+ {
+  "name": "Smoke Blitz",
+  "icon": "Smoke_Blitz.png",
+  "book": "ancient",
+  "maxHit": 23
+ },
+ {
+  "name": "Smoke Burst",
+  "icon": "Smoke_Burst.png",
+  "book": "ancient",
+  "maxHit": 17
+ },
+ {
+  "name": "Smoke Rush",
+  "icon": "Smoke_Rush.png",
+  "book": "ancient",
+  "maxHit": 13
+ },
+ {
+  "name": "Snare",
+  "icon": "Snare.png",
+  "book": "standard",
+  "maxHit": 3
+ },
+ {
+  "name": "Undead Grasp",
+  "icon": "Undead_Grasp.png",
+  "book": "arceuus",
+  "maxHit": 24
+ },
+ {
+  "name": "Water Blast",
+  "icon": "Water_Blast.png",
+  "book": "standard",
+  "maxHit": 14
+ },
+ {
+  "name": "Water Bolt",
+  "icon": "Water_Bolt.png",
+  "book": "standard",
+  "maxHit": 10
+ },
+ {
+  "name": "Water Strike",
+  "icon": "Water_Strike.png",
+  "book": "standard",
+  "maxHit": 4
+ },
+ {
+  "name": "Water Surge",
+  "icon": "Water_Surge.png",
+  "book": "standard",
+  "maxHit": 22
+ },
+ {
+  "name": "Water Wave",
+  "icon": "Water_Wave.png",
+  "book": "standard",
+  "maxHit": 18
+ },
+ {
+  "name": "Wind Blast",
+  "icon": "Wind_Blast.png",
+  "book": "standard",
+  "maxHit": 13
+ },
+ {
+  "name": "Wind Bolt",
+  "icon": "Wind_Bolt.png",
+  "book": "standard",
+  "maxHit": 9
+ },
+ {
+  "name": "Wind Strike",
+  "icon": "Wind_Strike.png",
+  "book": "standard",
+  "maxHit": 2
+ },
+ {
+  "name": "Wind Surge",
+  "icon": "Wind_Surge.png",
+  "book": "standard",
+  "maxHit": 21
+ },
+ {
+  "name": "Wind Wave",
+  "icon": "Wind_Wave.png",
+  "book": "standard",
+  "maxHit": 17
+ }
+]

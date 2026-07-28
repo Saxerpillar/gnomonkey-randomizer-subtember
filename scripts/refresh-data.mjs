@@ -177,9 +177,52 @@ const main = async () => {
     }
   });
 
+  // Coins sprite (gp value readouts).
+  const coinsDest = path.join(ROOT, 'public/img/coins.png');
+  if (!existsSync(coinsDest)) {
+    console.log('Downloading coins sprite ...');
+    await writeFile(coinsDest, await fetchBinary(`${WIKI_IMG}/Coins_10000.png`));
+  }
+
+  // ---- 5b. Spells ------------------------------------------------------
+  // Damaging combat spells for the castable-staff spell roll. Icons come from
+  // the wiki; a missing icon is a warning, not a failure (UI falls back to text).
+  console.log('Fetching spells.json ...');
+  const spellsRaw = await fetchJson(`${DPS_RAW}/cdn/json/spells.json`);
+  const spellCfg = curation.spells;
+  const excludedSpell = spellCfg.excludedNamePatterns.map((p) => new RegExp(p, 'i'));
+  const forceInclude = new Set(spellCfg.forceInclude.names);
+  const appSpells = spellsRaw
+    .filter((s) => (s.max_hit > 0 || forceInclude.has(s.name)) && !excludedSpell.some((re) => re.test(s.name)))
+    .map((s) => ({
+      name: s.name,
+      icon: `${s.name.replace(/[^a-z0-9]+/gi, '_')}.png`,
+      image: s.image,
+      book: s.spellbook,
+      maxHit: s.max_hit,
+      requiresWeapon: spellCfg.weaponLocked[s.name],
+    }));
+  await mkdir(path.join(ROOT, 'public/img/spells'), { recursive: true });
+  const spellIconJobs = appSpells
+    .map((s) => ({ s, dest: path.join(ROOT, 'public/img/spells', s.icon) }))
+    .filter((j) => !existsSync(j.dest));
+  console.log(`Downloading ${spellIconJobs.length} spell icons ...`);
+  let missingSpellIcons = 0;
+  for (const { s, dest } of spellIconJobs) {
+    try {
+      await writeFile(dest, await fetchBinary(`${WIKI_IMG}/${s.image.replace(/ /g, '_')}`));
+    } catch {
+      missingSpellIcons++;
+      console.log(`  WARN no wiki icon for "${s.name}" — UI will show text only`);
+    }
+  }
+  if (missingSpellIcons) console.log(`  ${missingSpellIcons} spell icon(s) missing`);
+  for (const s of appSpells) delete s.image; // app uses the local icon name only
+
   // ---- 6. Atomic JSON writes --------------------------------------------
   await writeJsonAtomic(path.join(ROOT, 'public/data/equipment.json'), appItems);
   await writeJsonAtomic(path.join(ROOT, 'public/data/prices.json'), prices);
+  await writeJsonAtomic(path.join(ROOT, 'public/data/spells.json'), appSpells);
   await writeJsonAtomic(
     path.join(ROOT, 'public/data/bosses.json'),
     bosses.map((b) => ({ name: b.name, image: b.image, tags: b.tags })),

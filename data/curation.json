@@ -51,5 +51,23 @@
       "//": "Weapons whose category implies ammo but that need none (crystal-type bows; blowpipe is already Thrown). Their ammo slot rolls 'any'.",
       "names": ["Crystal bow", "Bow of faerdhinen", "Craw's bow", "Webweaver bow"]
     }
+  },
+
+  "spells": {
+    "//": "Castable-staff spell rolling. Source: dps-calc cdn/json/spells.json, filtered to damaging spells (max_hit > 0). Excluded: demonbane line (only casts on demons -> dead roll vs most bosses).",
+    "excludedNamePatterns": ["Demonbane"],
+    "forceInclude": {
+      "//": "Damaging spells whose max_hit is 0 in the source because it scales dynamically (level-scaled), so the max_hit > 0 filter would wrongly drop them.",
+      "names": ["Magic Dart"]
+    },
+    "weaponLocked": {
+      "//": "Spells only castable with specific staves; they roll ONLY when that weapon rolled. Everything else rolls freely on any castable staff.",
+      "Iban Blast": ["Iban's staff", "Iban's staff (u)"],
+      "Magic Dart": ["Slayer's staff", "Slayer's staff (e)", "Staff of the dead", "Toxic staff of the dead", "Staff of light", "Staff of balance"],
+      "Saradomin Strike": ["Saradomin staff", "Staff of light"],
+      "Claws of Guthix": ["Guthix staff", "Staff of balance"],
+      "Flames of Zamorak": ["Zamorak staff", "Staff of the dead", "Toxic staff of the dead", "Accursed sceptre"]
+    },
+    "castableCategories": ["Staff", "Bladed Staff", "Polestaff"]
   }
 }
