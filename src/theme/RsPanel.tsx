@@ -2,9 +2,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import styles from './RsPanel.module.css';
 
 /** Themed OSRS panel: dark parchment-brown surface, olive border, optional
- *  title bar with an icon anchor. Two header treatments exist in the CSS —
- *  `title` (outlined bright gold, active) and `titleRibbon` (inverted tan
- *  bar, the A/B alternate) — swap the class below to compare. The stage-2
+ *  title bar with an icon anchor. The stage-2
  *  casino restyle happens here, not in feature components. */
 export const RsPanel = ({
   title,

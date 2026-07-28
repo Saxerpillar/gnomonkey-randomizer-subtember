@@ -9,7 +9,7 @@
   min-width: 0;
 }
 
-/* ===== header treatment A (ACTIVE): outlined bright gold ===== */
+/* header: outlined bright gold (chosen in the A/B pass) */
 .title {
   padding: 8px 14px 6px;
   border-bottom: 1px solid var(--border);
@@ -34,34 +34,6 @@
   height: 26px;
   object-fit: contain;
   filter: drop-shadow(1px 1px 0 #000);
-}
-
-/* ===== header treatment B (ALTERNATE, for the A/B pass): inverted tan ribbon.
-   To compare: in RsPanel.tsx change styles.title -> styles.titleRibbon. ===== */
-.titleRibbon {
-  padding: 6px 14px 5px;
-  background: linear-gradient(180deg, #756a56, #695f4e 60%, #57503f);
-  border-bottom: 1px solid var(--border-dark);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
-.titleRibbon h2 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0;
-  font-family: var(--font-title);
-  font-size: 32px;
-  font-weight: normal;
-  letter-spacing: 1px;
-  color: #16130e;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-
-.titleRibbon h2 img {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
 }
 
 .body {
