@@ -1,122 +1,170 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useEffect, useReducer } from 'react';
+import './App.css';
+import { BossPanel, ChallengePanel } from './components/BossPanel';
+import { DataProvider, useGameData, type Boss } from './components/DataProvider';
+import { EquipmentPanel } from './components/EquipmentPanel';
+import { ItemPicker } from './components/ItemPicker';
+import { RollControls } from './components/RollControls';
+import { parseBudget } from './engine/parse';
+import { mulberry32, pick, randomSeed } from './engine/rng';
+import { loadoutValue, roll } from './engine/roll';
+import { emptyLoadout, type Item, type Loadout, type Slot } from './engine/types';
+import { RsPanel } from './theme/RsPanel';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+interface State {
+  loadout: Loadout;
+  locks: Partial<Record<Slot, Item>>;
+  budgetText: string;
+  allowUntradeables: boolean;
+  boss: Boss | null;
+  selectedSlot: Slot | null;
 }
 
-export default App
+type Action =
+  | { type: 'SET_LOADOUT'; loadout: Loadout }
+  | { type: 'SET_BOSS'; boss: Boss }
+  | { type: 'TOGGLE_LOCK'; slot: Slot }
+  | { type: 'PICK_ITEM'; item: Item }
+  | { type: 'SET_BUDGET_TEXT'; text: string }
+  | { type: 'TOGGLE_UNTRADEABLES' }
+  | { type: 'SELECT_SLOT'; slot: Slot | null };
+
+const STORAGE_KEY = 'gnome-subtember-v1';
+
+const initialState = (): State => {
+  const base: State = {
+    loadout: emptyLoadout(),
+    locks: {},
+    budgetText: '',
+    allowUntradeables: false,
+    boss: null,
+    selectedSlot: null,
+  };
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+    const locks = (saved.locks ?? {}) as State['locks'];
+    const loadout = { ...base.loadout };
+    for (const [slot, item] of Object.entries(locks)) loadout[slot as Slot] = item as Item;
+    return {
+      ...base,
+      loadout,
+      locks,
+      budgetText: typeof saved.budgetText === 'string' ? saved.budgetText : '',
+      allowUntradeables: !!saved.allowUntradeables,
+    };
+  } catch {
+    return base;
+  }
+};
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'SET_LOADOUT':
+      return { ...state, loadout: action.loadout };
+    case 'SET_BOSS':
+      return { ...state, boss: action.boss };
+    case 'SET_BUDGET_TEXT':
+      return { ...state, budgetText: action.text };
+    case 'TOGGLE_UNTRADEABLES':
+      return { ...state, allowUntradeables: !state.allowUntradeables };
+    case 'SELECT_SLOT':
+      return { ...state, selectedSlot: action.slot };
+    case 'TOGGLE_LOCK': {
+      const { slot } = action;
+      const locks = { ...state.locks };
+      if (locks[slot]) {
+        delete locks[slot];
+      } else if (state.loadout[slot]) {
+        locks[slot] = state.loadout[slot];
+      }
+      return { ...state, locks };
+    }
+    case 'PICK_ITEM': {
+      // Hand-picking sets AND locks the item, resolving 2h/shield conflicts
+      // immediately so the roller never sees a contradictory lock set.
+      const { item } = action;
+      const loadout = { ...state.loadout, [item.slot]: item };
+      const locks = { ...state.locks, [item.slot]: item };
+      if (item.slot === 'weapon' && item.twoHanded) {
+        loadout.shield = null;
+        delete locks.shield;
+      }
+      if (item.slot === 'shield' && loadout.weapon?.twoHanded) {
+        loadout.weapon = null;
+        delete locks.weapon;
+      }
+      return { ...state, loadout, locks, selectedSlot: null };
+    }
+  }
+};
+
+const Main = () => {
+  const { items, bosses } = useGameData();
+  const [state, dispatch] = useReducer(reducer, undefined, initialState);
+
+  useEffect(() => {
+    const { locks, budgetText, allowUntradeables } = state;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ locks, budgetText, allowUntradeables }));
+  }, [state]);
+
+  const rollGear = () => {
+    const parsed = parseBudget(state.budgetText);
+    if (!parsed.ok) return;
+    const loadout = roll(
+      items,
+      { budget: parsed.gp, allowUntradeables: state.allowUntradeables, locks: state.locks },
+      mulberry32(randomSeed()),
+    );
+    dispatch({ type: 'SET_LOADOUT', loadout });
+  };
+
+  const rollBoss = () => dispatch({ type: 'SET_BOSS', boss: pick(mulberry32(randomSeed()), bosses) });
+
+  return (
+    <div className="app">
+      <h1 className="title">Gnome Subtember</h1>
+      <main className="columns">
+        <RsPanel title="Your gear">
+          <div className="gearStack">
+            <EquipmentPanel
+              loadout={state.loadout}
+              locks={state.locks}
+              selectedSlot={state.selectedSlot}
+              onSelectSlot={(slot) =>
+                dispatch({ type: 'SELECT_SLOT', slot: state.selectedSlot === slot ? null : slot })
+              }
+              onToggleLock={(slot) => dispatch({ type: 'TOGGLE_LOCK', slot })}
+            />
+            <ItemPicker
+              slotFilter={state.selectedSlot}
+              onPick={(item) => dispatch({ type: 'PICK_ITEM', item })}
+              onClearSlotFilter={() => dispatch({ type: 'SELECT_SLOT', slot: null })}
+            />
+            <RollControls
+              budgetText={state.budgetText}
+              allowUntradeables={state.allowUntradeables}
+              totalValue={loadoutValue(state.loadout)}
+              onBudgetChange={(text) => dispatch({ type: 'SET_BUDGET_TEXT', text })}
+              onToggleUntradeables={() => dispatch({ type: 'TOGGLE_UNTRADEABLES' })}
+              onRoll={rollGear}
+            />
+          </div>
+        </RsPanel>
+        <RsPanel title="Your fate">
+          <div className="fate">
+            <BossPanel boss={state.boss} onRoll={rollBoss} />
+            <ChallengePanel />
+          </div>
+        </RsPanel>
+      </main>
+    </div>
+  );
+};
+
+const App = () => (
+  <DataProvider>
+    <Main />
+  </DataProvider>
+);
+
+export default App;
