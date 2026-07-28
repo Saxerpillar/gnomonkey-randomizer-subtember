@@ -45,12 +45,6 @@
   text-align: center;
 }
 
-.tags {
-  font-family: var(--font-small);
-  font-size: 16px;
-  color: var(--text-muted);
-}
-
 .hint {
   font-family: var(--font-body);
   color: var(--text-muted);

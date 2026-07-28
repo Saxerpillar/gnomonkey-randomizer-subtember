@@ -14,7 +14,6 @@ export const BossPanel = ({ boss, onRoll }: { boss: Boss | null; onRoll: () => v
             alt={boss.name}
           />
           <div className={styles.name}>{boss.name}</div>
-          {boss.tags.length > 0 && <div className={styles.tags}>{boss.tags.join(' · ')}</div>}
         </>
       ) : (
         <div className={styles.hint}>Roll a boss to slay…</div>

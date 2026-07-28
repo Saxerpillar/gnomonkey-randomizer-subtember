@@ -1,4 +1,5 @@
-import { gpTier, parseBudget } from '../engine/parse';
+import { useState } from 'react';
+import { formatGp, gpTier, parseBudget } from '../engine/parse';
 import { GpValue } from '../theme/GpValue';
 import { RsButton } from '../theme/RsButton';
 import { RsTooltip } from '../theme/RsTooltip';
@@ -20,6 +21,11 @@ export const RollControls = ({
   onRoll: () => void;
 }) => {
   const parsed = parseBudget(budgetText);
+  // While the input is focused you edit the raw text; on blur it previews the
+  // in-game formatted amount (100000 -> 100k). Focus again to see the raw value.
+  const [editing, setEditing] = useState(false);
+  const display =
+    !editing && parsed.ok && parsed.gp != null ? formatGp(parsed.gp) : budgetText;
 
   return (
     <div className={styles.controls}>
@@ -29,9 +35,11 @@ export const RollControls = ({
           <img className={styles.coins} src="/img/coins.png" alt="" />
           <input
             className={`${styles.budget} ${parsed.ok ? (parsed.gp != null ? styles[gpTier(parsed.gp)] : '') : styles.invalid}`}
-            value={budgetText}
+            value={display}
             placeholder="e.g. 10m — empty = no budget"
             onChange={(e) => onBudgetChange(e.target.value)}
+            onFocus={() => setEditing(true)}
+            onBlur={() => setEditing(false)}
           />
         </span>
       </label>
