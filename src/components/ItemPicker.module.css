@@ -1,0 +1,87 @@
+.picker {
+  position: relative;
+}
+
+.inputRow {
+  display: flex;
+  gap: 6px;
+}
+
+.input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--tile);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 6px 8px;
+}
+
+.input:focus {
+  outline: 1px solid var(--gold);
+}
+
+.chip {
+  font-family: var(--font-small);
+  font-size: 13px;
+  color: var(--gold);
+  background: var(--panel-raised);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.results {
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--panel-raised);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.result:hover {
+  background: var(--tile-hover);
+  color: var(--yellow);
+}
+
+.result img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.name {
+  flex: 1;
+}
+
+.price {
+  font-family: var(--font-small);
+  font-size: 12px;
+  color: var(--text-muted);
+}

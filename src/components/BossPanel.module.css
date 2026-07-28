@@ -1,0 +1,80 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 260px;
+  width: 100%;
+  background: var(--tile);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.render {
+  max-width: 220px;
+  max-height: 180px;
+  object-fit: contain;
+  animation: appear 220ms ease-out;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.name {
+  font-family: var(--font-title);
+  font-size: 26px;
+  color: var(--gold);
+  text-shadow: 1px 1px 0 var(--border-dark);
+  text-align: center;
+}
+
+.tags {
+  font-family: var(--font-small);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.hint {
+  font-family: var(--font-body);
+  color: var(--text-muted);
+}
+
+.challenge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px;
+  border: 1px dashed var(--border-light);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.challengeTitle {
+  font-family: var(--font-bold);
+  color: var(--gold);
+}
+
+.challengeSoon {
+  font-family: var(--font-small);
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+}

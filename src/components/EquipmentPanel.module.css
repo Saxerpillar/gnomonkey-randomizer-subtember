@@ -1,0 +1,75 @@
+.tab {
+  display: grid;
+  grid-template-areas:
+    '.      head   .'
+    'cape   neck   ammo'
+    'weapon body   shield'
+    '.      legs   .'
+    'hands  feet   ring';
+  gap: 6px;
+  justify-content: center;
+  padding: 10px;
+}
+
+.slot {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  background-color: var(--tile);
+  background-size: cover;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.slot:hover {
+  filter: brightness(1.2);
+}
+
+.icon {
+  max-width: 60px;
+  max-height: 60px;
+  /* icons are ~36px sprites; scale up crisp */
+  width: auto;
+  height: auto;
+  transform: scale(1.5);
+  pointer-events: none;
+}
+
+.locked {
+  border-color: var(--green);
+  box-shadow: 0 0 8px var(--green-glow);
+}
+
+.selected {
+  border-color: var(--gold);
+}
+
+.lockBtn {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  font-size: 11px;
+  line-height: 1;
+  padding: 1px 2px;
+  background: rgba(0, 0, 0, 0.55);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.slot:hover .lockBtn {
+  opacity: 1;
+}
+
+.lockBadge {
+  position: absolute;
+  bottom: 1px;
+  right: 2px;
+  font-size: 11px;
+  pointer-events: none;
+  filter: drop-shadow(0 0 2px black);
+}
