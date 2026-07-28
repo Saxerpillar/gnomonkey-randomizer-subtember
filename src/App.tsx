@@ -3,7 +3,6 @@ import './App.css';
 import { BossPanel, ChallengePanel } from './components/BossPanel';
 import { DataProvider, useGameData, type Boss } from './components/DataProvider';
 import { EquipmentPanel } from './components/EquipmentPanel';
-import { ItemPicker } from './components/ItemPicker';
 import { RollControls } from './components/RollControls';
 import { SpellBadge } from './components/SpellBadge';
 import { parseBudget } from './engine/parse';
@@ -19,7 +18,6 @@ interface State {
   budgetText: string;
   allowUntradeables: boolean;
   boss: Boss | null;
-  selectedSlot: Slot | null;
   spell: Spell | null;
 }
 
@@ -27,10 +25,8 @@ type Action =
   | { type: 'SET_LOADOUT'; loadout: Loadout; spell: Spell | null }
   | { type: 'SET_BOSS'; boss: Boss }
   | { type: 'TOGGLE_LOCK'; slot: Slot }
-  | { type: 'PICK_ITEM'; item: Item; spell: Spell | null }
   | { type: 'SET_BUDGET_TEXT'; text: string }
-  | { type: 'TOGGLE_UNTRADEABLES' }
-  | { type: 'SELECT_SLOT'; slot: Slot | null };
+  | { type: 'TOGGLE_UNTRADEABLES' };
 
 const STORAGE_KEY = 'gnome-subtember-v1';
 
@@ -41,7 +37,6 @@ const initialState = (): State => {
     budgetText: '',
     allowUntradeables: false,
     boss: null,
-    selectedSlot: null,
     spell: null,
   };
   try {
@@ -71,8 +66,6 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, budgetText: action.text };
     case 'TOGGLE_UNTRADEABLES':
       return { ...state, allowUntradeables: !state.allowUntradeables };
-    case 'SELECT_SLOT':
-      return { ...state, selectedSlot: action.slot };
     case 'TOGGLE_LOCK': {
       const { slot } = action;
       const locks = { ...state.locks };
@@ -82,22 +75,6 @@ const reducer = (state: State, action: Action): State => {
         locks[slot] = state.loadout[slot];
       }
       return { ...state, locks };
-    }
-    case 'PICK_ITEM': {
-      // Hand-picking sets AND locks the item, resolving 2h/shield conflicts
-      // immediately so the roller never sees a contradictory lock set.
-      const { item } = action;
-      const loadout = { ...state.loadout, [item.slot]: item };
-      const locks = { ...state.locks, [item.slot]: item };
-      if (item.slot === 'weapon' && item.twoHanded) {
-        loadout.shield = null;
-        delete locks.shield;
-      }
-      if (item.slot === 'shield' && loadout.weapon?.twoHanded) {
-        loadout.weapon = null;
-        delete locks.weapon;
-      }
-      return { ...state, loadout, locks, selectedSlot: null, spell: action.spell };
     }
   }
 };
@@ -123,18 +100,6 @@ const Main = () => {
     dispatch({ type: 'SET_LOADOUT', loadout, spell: rollSpell(loadout.weapon, spells, rng) });
   };
 
-  const pickItem = (item: Item) => {
-    // The spell follows the weapon: a picked staff rolls its spell; a picked
-    // shield that will clear a locked 2h clears the spell with it.
-    const spell =
-      item.slot === 'weapon'
-        ? rollSpell(item, spells, mulberry32(randomSeed()))
-        : item.slot === 'shield' && state.loadout.weapon?.twoHanded
-          ? null
-          : state.spell;
-    dispatch({ type: 'PICK_ITEM', item, spell });
-  };
-
   const rollBoss = () => dispatch({ type: 'SET_BOSS', boss: pick(mulberry32(randomSeed()), bosses) });
 
   return (
@@ -146,18 +111,9 @@ const Main = () => {
             <EquipmentPanel
               loadout={state.loadout}
               locks={state.locks}
-              selectedSlot={state.selectedSlot}
-              onSelectSlot={(slot) =>
-                dispatch({ type: 'SELECT_SLOT', slot: state.selectedSlot === slot ? null : slot })
-              }
               onToggleLock={(slot) => dispatch({ type: 'TOGGLE_LOCK', slot })}
             />
             <SpellBadge weapon={state.loadout.weapon} spell={state.spell} />
-            <ItemPicker
-              slotFilter={state.selectedSlot}
-              onPick={pickItem}
-              onClearSlotFilter={() => dispatch({ type: 'SELECT_SLOT', slot: null })}
-            />
             <RollControls
               budgetText={state.budgetText}
               allowUntradeables={state.allowUntradeables}

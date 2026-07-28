@@ -44,26 +44,14 @@
   box-shadow: 0 0 8px var(--green-glow);
 }
 
-.selected {
-  border-color: var(--gold);
+/* only filled slots are clickable (lock toggles) */
+.slot {
+  cursor: default;
 }
 
-.lockBtn {
-  position: absolute;
-  top: 1px;
-  right: 1px;
-  font-size: 11px;
-  line-height: 1;
-  padding: 1px 2px;
-  background: rgba(0, 0, 0, 0.55);
-  border: none;
-  border-radius: 2px;
+.lockable,
+.locked {
   cursor: pointer;
-  opacity: 0;
-}
-
-.slot:hover .lockBtn {
-  opacity: 1;
 }
 
 .lockBadge {

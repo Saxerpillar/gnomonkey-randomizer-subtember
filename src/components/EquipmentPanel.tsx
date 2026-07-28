@@ -27,12 +27,14 @@ const slotTip = (slot: Slot, item: Item | null, locked: boolean) =>
       ) : (
         !item.tradeable && <span className={tipStyles.tipMuted}>Untradeable</span>
       )}
-      <span className={tipStyles.tipMuted}>{locked ? 'Locked — 🔓 unlocks' : '🔓 locks it in'}</span>
+      <span className={tipStyles.tipMuted}>
+        {locked ? 'Locked — click to unlock' : 'Click to lock it in'}
+      </span>
     </>
   ) : (
     <>
       <span className={tipStyles.tipTitle}>{SLOT_LABEL[slot]}</span>
-      <span className={tipStyles.tipMuted}>Empty — click to search this slot</span>
+      <span className={tipStyles.tipMuted}>Empty</span>
     </>
   );
 
@@ -40,52 +42,33 @@ const EquipSlot = ({
   slot,
   item,
   locked,
-  selected,
-  onSelect,
   onToggleLock,
 }: {
   slot: Slot;
   item: Item | null;
   locked: boolean;
-  selected: boolean;
-  onSelect: () => void;
   onToggleLock: () => void;
 }) => (
   <RsTooltip
     content={slotTip(slot, item, locked)}
-    className={`${styles.slot} ${locked ? styles.locked : ''} ${selected ? styles.selected : ''}`}
+    className={`${styles.slot} ${locked ? styles.locked : ''} ${item ? styles.lockable : ''}`}
     style={{ gridArea: slot, backgroundImage: `url(/img/slots/${slot}.png)` }}
-    onClick={onSelect}
+    onClick={item || locked ? onToggleLock : undefined}
   >
     {item && <img className={styles.icon} src={`/img/items/${item.icon}`} alt={item.name} />}
-    {item && (
-      <button
-        className={styles.lockBtn}
-        aria-label={locked ? 'Unlock slot' : 'Lock this item in'}
-        onClick={(e) => {
-          e.stopPropagation();
-          onToggleLock();
-        }}
-      >
-        {locked ? '🔒' : '🔓'}
-      </button>
-    )}
     {locked && <span className={styles.lockBadge}>🔒</span>}
   </RsTooltip>
 );
 
-/** The in-game equipment tab, built from the authentic wiki slot sprites. */
+/** The in-game equipment tab, built from the authentic wiki slot sprites.
+ *  Clicking a filled slot toggles its lock — locked gear survives rerolls. */
 export const EquipmentPanel = ({
   loadout,
   locks,
-  selectedSlot,
-  onSelectSlot,
   onToggleLock,
 }: {
   loadout: Loadout;
   locks: Partial<Record<Slot, Item>>;
-  selectedSlot: Slot | null;
-  onSelectSlot: (slot: Slot) => void;
   onToggleLock: (slot: Slot) => void;
 }) => (
   <div className={styles.tab}>
@@ -95,8 +78,6 @@ export const EquipmentPanel = ({
         slot={slot}
         item={loadout[slot]}
         locked={locks[slot] !== undefined}
-        selected={selectedSlot === slot}
-        onSelect={() => onSelectSlot(slot)}
         onToggleLock={() => onToggleLock(slot)}
       />
     ))}

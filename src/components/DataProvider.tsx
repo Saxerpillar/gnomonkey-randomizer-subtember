@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import { SLOTS, type Item, type Slot } from '../engine/types';
+import type { Item } from '../engine/types';
 import type { Spell } from '../engine/spell';
 import { RsButton } from '../theme/RsButton';
 import { RsPanel } from '../theme/RsPanel';
@@ -12,7 +12,6 @@ export interface Boss {
 
 export interface GameData {
   items: Item[];
-  bySlot: Record<Slot, Item[]>;
   bosses: Boss[];
   spells: Spell[];
 }
@@ -39,10 +38,7 @@ const loadAll = async (): Promise<GameData> => {
     ...i,
     price: (prices as Record<string, number>)[i.id],
   }));
-  const bySlot = Object.fromEntries(SLOTS.map((s) => [s, [] as Item[]])) as Record<Slot, Item[]>;
-  for (const item of items) bySlot[item.slot].push(item);
-
-  return { items, bySlot, bosses: bosses as Boss[], spells: spells as Spell[] };
+  return { items, bosses: bosses as Boss[], spells: spells as Spell[] };
 };
 
 export const DataProvider = ({ children }: { children: ReactNode }) => {

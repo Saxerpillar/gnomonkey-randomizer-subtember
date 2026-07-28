@@ -5,8 +5,8 @@ budget, a **random boss** to slay with it, and (soon) an extra challenge on top.
 
 - **Roll** fills the equipment tab with random valid gear: no 2h + shield, ammo always matches
   the weapon, total cost stays within your budget (`10m`, `250k`, `1.5b`…).
-- **Lock** any slot (hover → padlock) or hand-pick an item with the search box — locked gear
-  survives rerolls and costs nothing against the budget.
+- **Lock** any rolled item by clicking its slot (click again to unlock) — locked gear survives
+  rerolls and costs nothing against the budget.
 - **Allow untradeables** lets fire capes & friends roll at 0 gp.
 - Boss panel rolls one of 59 bosses. Locks and settings persist across refreshes.
 
