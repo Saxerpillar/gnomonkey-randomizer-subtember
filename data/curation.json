@@ -1,0 +1,55 @@
+{
+  "//": "Curated rules consumed by scripts/refresh-data.mjs. Hand-edited only.",
+
+  "poolExclusions": {
+    "//": "Entries matching any of these are dropped from the rollable pool.",
+    "versionBlocklist": [
+      "Locked", "Broken", "Worn", "Uncharged", "Inactive", "Empty",
+      "0", "25", "50", "75",
+      "Emir's Arena", "Soul Wars", "Deadman Mode", "Deadman",
+      "Port Sarim", "Port Piscarilius", "Port Khazard", "Port Roberts",
+      "Brimhaven", "Civitas illa Fortis",
+      "Last Man Standing", "Trailblazer", "Shattered Relics", "Twisted"
+    ],
+    "namePatterns": [
+      "\\(Last Man Standing\\)",
+      "\\(Deadman",
+      "\\(beta\\)",
+      "\\(broken\\)",
+      "\\(locked\\)"
+    ],
+    "ids": []
+  },
+
+  "canonicalization": {
+    "//": "After exclusions, collapse to ONE entry per item name. Highest-priority version wins; '' (no version) beats everything.",
+    "versionPriority": ["", "Normal", "Charged", "Activated", "Active", "Undamaged", "100", "New", "Poison", "Unpoisoned"]
+  },
+
+  "ammo": {
+    "//": "Ammo-slot classification. Name rules run in order, first match wins; unmatched -> 'any' (blessings, misc). Weapon overrides beat category mapping (Bow->arrow, Crossbow->bolt).",
+    "classRules": [
+      { "pattern": "atlatl dart", "class": "atlatl" },
+      { "pattern": "arrow", "class": "arrow" },
+      { "pattern": "brutal", "class": "arrow" },
+      { "pattern": "bolt", "class": "bolt" },
+      { "pattern": "javelin", "class": "javelin" },
+      { "pattern": "tar", "class": "tar" }
+    ],
+    "weaponAmmoOverrides": {
+      "Heavy ballista": "javelin",
+      "Light ballista": "javelin",
+      "Eclipse atlatl": "atlatl"
+    },
+    "categoryAmmoMap": {
+      "//": "Weapon category -> required ammo class. Categories absent here need no specific ammo (their ammo slot rolls 'any').",
+      "Bow": "arrow",
+      "Crossbow": "bolt",
+      "Salamander": "tar"
+    },
+    "selfAmmoWeapons": {
+      "//": "Weapons whose category implies ammo but that need none (crystal-type bows; blowpipe is already Thrown). Their ammo slot rolls 'any'.",
+      "names": ["Crystal bow", "Bow of faerdhinen", "Craw's bow", "Webweaver bow"]
+    }
+  }
+}
