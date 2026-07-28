@@ -65,9 +65,13 @@ gnome-subtember/
 ```
 
 **`npm run refresh-data`:**
-1. Pull `cdn/json/equipment.json` from weirdgloop/osrs-dps-calc; filter to the rollable pool.
-2. Pull wiki prices API (`mapping` + `latest`); write `prices.json`; stamp each item
-   `tradeable = id ∈ mapping`.
+1. Pull `cdn/json/equipment.json` from weirdgloop/osrs-dps-calc; filter to the rollable
+   pool: keep entries with a valid equipment slot, drop non-obtainable context variants
+   (LMS-only, Deadman, beta, `(broken)`/`(locked)` states) via name-pattern rules + a
+   curated exclusion list. Legitimate version variants (e.g. `#Poison`) stay — they are
+   real distinct items.
+2. Pull wiki prices API (`mapping` + `latest`); write `prices.json` — price = midpoint of
+   `high`/`low` (whichever exists if only one); stamp each item `tradeable = id ∈ mapping`.
 3. Download item icons for pooled items from the dps-calc CDN.
 4. Download boss images named in `data/bosses.json` from `cdn/monsters/`.
 5. Download the 11 equipment-slot interface sprites (stone tiles + ghost slot icons).
@@ -98,7 +102,10 @@ Per roll:
 
 **Locks:** locked slots are untouched by rolls and **exempt from budget** (cost 0 — they
 model gear you already own, consistent with the untradeables rule). Roll always respects
-current locks.
+current locks. **Lock conflicts:** hand-picking/locking a 2h weapon clears any shield lock
+and empties the slot (and vice versa: locking a shield while a 2h is locked replaces the
+weapon lock) — the UI resolves the conflict immediately with visual feedback, so the roller
+never receives a contradictory lock set.
 
 **Boss roll:** uniform pick from `bosses.json`; independent button.
 
@@ -116,7 +123,9 @@ Two panels side-by-side (stacking on narrow windows): gear left, boss right.
 - **Item picking** — dps-calc pattern: **one global search combobox** that auto-slots and
   locks the picked item; clicking a slot focuses the search pre-filtered to that slot.
 - **`RollControls`** — budget input (freeform, `k/m/b` suffixes, e.g. `10m`), untradeables
-  toggle, big Roll button, **total loadout value** readout (sum of rolled tradeable prices).
+  toggle, big Roll button, **total loadout value** readout — the GE value of **all**
+  tradeable items currently equipped, locked or rolled (informational "what this costs",
+  independent of the budget accounting, which exempts locks).
 - **`BossPanel`** — large boss render + name in RuneScape font, own Roll button.
 - **`ChallengePanel`** — styled "Extra challenge — coming soon" placeholder.
 - **Theming** — `theme.css` tokens sampled from the reference bingo-app screenshots
