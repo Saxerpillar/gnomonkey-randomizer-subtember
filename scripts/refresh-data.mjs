@@ -124,6 +124,39 @@ const main = async () => {
   };
 
   // ---- 4. App-facing equipment schema -----------------------------------
+  // Crude combat-power composite: best attack bonus + best damage bonus +
+  // scaled defence + prayer. Only used RELATIVELY, per slot, to bucket items
+  // into rarity tiers — percentiles absorb the formula's crudeness.
+  const powerOf = (e) =>
+    Math.max(...Object.values(e.offensive), 0) +
+    Math.max(e.bonuses.str, e.bonuses.ranged_str, e.bonuses.magic_str, 0) +
+    Object.values(e.defensive).reduce((a, b) => a + b, 0) / 5 +
+    Math.max(e.bonuses.prayer, 0);
+
+  // Tier assignment: zero power = junk; the rest bucket by percentile WITHIN
+  // their slot (common 45% / decent 30% / strong 17% / elite top 8%).
+  const tiers = new Map(); // id -> tier
+  for (const slot of SLOTS) {
+    const slotItems = pool.filter((e) => e.slot === slot);
+    const scored = slotItems
+      .map((e) => ({ e, p: powerOf(e) }))
+      .sort((a, b) => a.p - b.p);
+    const nonJunk = scored.filter((s) => s.p > 0);
+    for (const s of scored) {
+      if (s.p <= 0) {
+        tiers.set(s.e.id, 'junk');
+        continue;
+      }
+      const pct = nonJunk.findIndex((x) => x === s) / nonJunk.length;
+      tiers.set(s.e.id, pct < 0.45 ? 'common' : pct < 0.75 ? 'decent' : pct < 0.92 ? 'strong' : 'elite');
+    }
+  }
+  // Manual fixes for passive-power items the stat formula can't see.
+  for (const e of pool) {
+    const override = curation.tierOverrides[e.name];
+    if (override && typeof override === 'string' && !override.startsWith('//')) tiers.set(e.id, override);
+  }
+
   const appItems = pool
     .map((e) => ({
       id: e.id,
@@ -137,6 +170,11 @@ const main = async () => {
       ammoClass: e.slot === 'ammo' ? ammoClassOf(e) : undefined,
       ammoExclusive: e.slot === 'ammo' && exclusive.has(ammoClassOf(e)) ? true : undefined,
       requiredAmmo: e.slot === 'weapon' ? requiredAmmoOf(e) ?? undefined : undefined,
+      tier: tiers.get(e.id),
+      speed: e.slot === 'weapon' && e.speed > 0 ? e.speed : undefined,
+      offensive: e.offensive,
+      defensive: e.defensive,
+      bonuses: e.bonuses,
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 

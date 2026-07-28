@@ -42,6 +42,16 @@ describe('generated equipment.json', () => {
     }
   });
 
+  it('every item carries a valid tier and full stat blocks', () => {
+    const tiers = new Set(['junk', 'common', 'decent', 'strong', 'elite']);
+    for (const i of items) {
+      expect(tiers.has(i.tier as string)).toBe(true);
+      for (const block of ['offensive', 'defensive', 'bonuses']) {
+        expect(typeof i[block]).toBe('object');
+      }
+    }
+  });
+
   it('weapon-exclusive ammo classes are stamped ammoExclusive', () => {
     const exclusive = new Set(['atlatl', 'tar']);
     for (const i of items) {

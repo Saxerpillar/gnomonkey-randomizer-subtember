@@ -3,6 +3,7 @@ import { mulberry32 } from './rng';
 import { isPoweredStaff, rollSpell, type Spell } from './spell';
 import type { Item, Slot } from './types';
 
+const zeroOff = () => ({ stab: 0, slash: 0, crush: 0, magic: 0, ranged: 0 });
 const weapon = (name: string, category?: string): Item => ({
   id: 1,
   name,
@@ -11,6 +12,10 @@ const weapon = (name: string, category?: string): Item => ({
   tradeable: true,
   twoHanded: false,
   category,
+  tier: 'common',
+  offensive: zeroOff(),
+  defensive: zeroOff(),
+  bonuses: { str: 0, ranged_str: 0, magic_str: 0, prayer: 0 },
 });
 
 const SPELLS: Spell[] = [

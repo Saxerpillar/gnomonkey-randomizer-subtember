@@ -17,6 +17,25 @@ export type Slot = (typeof SLOTS)[number];
 
 export type AmmoClass = 'arrow' | 'bolt' | 'javelin' | 'tar' | 'atlatl' | 'any';
 
+/** Rarity tier, assigned per slot by combat-power percentile at refresh time. */
+export type Tier = 'junk' | 'common' | 'decent' | 'strong' | 'elite';
+export const TIERS: Tier[] = ['junk', 'common', 'decent', 'strong', 'elite'];
+
+export interface OffensiveBonuses {
+  stab: number;
+  slash: number;
+  crush: number;
+  magic: number;
+  ranged: number;
+}
+export interface OtherBonuses {
+  str: number;
+  ranged_str: number;
+  /** Magic damage, percent x10 (50 = +5.0%). */
+  magic_str: number;
+  prayer: number;
+}
+
 /** One rollable item (public/data/equipment.json entry, price joined on at load). */
 export interface Item {
   id: number;
@@ -36,6 +55,13 @@ export interface Item {
   requiredAmmo?: Exclude<AmmoClass, 'any'>;
   /** GE price snapshot (midpoint). Absent for untradeables. */
   price?: number;
+  /** Rarity tier (per-slot power percentile). */
+  tier: Tier;
+  /** Weapons only: attack interval in game ticks. */
+  speed?: number;
+  offensive: OffensiveBonuses;
+  defensive: OffensiveBonuses;
+  bonuses: OtherBonuses;
 }
 
 export type Loadout = Record<Slot, Item | null>;

@@ -57,6 +57,32 @@
     }
   },
 
+  "tierOverrides": {
+    "//": "Manual rarity-tier fixes for items whose power is invisible to the stat-sum formula (passive effects, built-in damage). name -> tier. Extend freely.",
+    "Twisted bow": "elite",
+    "Tumeken's shadow": "elite",
+    "Sanguinesti staff": "elite",
+    "Holy sanguinesti staff": "elite",
+    "Toxic blowpipe": "elite",
+    "Blazing blowpipe": "strong",
+    "Trident of the swamp": "strong",
+    "Trident of the seas": "decent",
+    "Accursed sceptre": "strong",
+    "Thammaron's sceptre": "decent",
+    "Warped sceptre": "decent",
+    "Bone staff": "decent",
+    "Swamp lizard": "common",
+    "Orange salamander": "common",
+    "Red salamander": "common",
+    "Black salamander": "decent",
+    "Tecu salamander": "decent",
+    "Craw's bow": "strong",
+    "Webweaver bow": "strong",
+    "Eclipse atlatl": "strong",
+    "Dawnbringer": "decent",
+    "Starter staff": "common"
+  },
+
   "spells": {
     "//": "Castable-staff spell rolling. Source: dps-calc cdn/json/spells.json, filtered to damaging spells (max_hit > 0). Excluded: demonbane line (only casts on demons -> dead roll vs most bosses).",
     "excludedNamePatterns": ["Demonbane"],

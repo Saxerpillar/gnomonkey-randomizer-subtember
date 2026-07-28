@@ -4,6 +4,7 @@ import { mulberry32 } from './rng';
 import { costOf, SLOTS, type Item, type Loadout, type RollSettings, type Slot } from './types';
 
 let nextId = 1;
+const zeroOff = () => ({ stab: 0, slash: 0, crush: 0, magic: 0, ranged: 0 });
 const item = (slot: Slot, over: Partial<Item> = {}): Item => ({
   id: nextId++,
   name: over.name ?? `${slot}-${nextId}`,
@@ -12,6 +13,10 @@ const item = (slot: Slot, over: Partial<Item> = {}): Item => ({
   tradeable: true,
   twoHanded: false,
   price: 1000,
+  tier: 'common',
+  offensive: zeroOff(),
+  defensive: zeroOff(),
+  bonuses: { str: 0, ranged_str: 0, magic_str: 0, prayer: 0 },
   ...over,
 });
 
@@ -173,6 +178,37 @@ describe('ammo compatibility', () => {
     for (const seed of seeds.slice(0, 50)) {
       const out = roll(pool, settings(), mulberry32(seed));
       expect(out.ammo?.name).toBe('Atlatl dart');
+    }
+  });
+});
+
+describe('rarity tiers', () => {
+  const tieredWeapons = () => [
+    ...Array.from({ length: 20 }, (_, i) => item('weapon', { name: `junk-${i}`, tier: 'junk' as const })),
+    ...Array.from({ length: 20 }, (_, i) => item('weapon', { name: `elite-${i}`, tier: 'elite' as const })),
+  ];
+
+  it('junk weapons become rare, not ~50%, despite equal pool share', () => {
+    const pool = tieredWeapons();
+    let junk = 0;
+    const n = 800;
+    for (let seed = 1; seed <= n; seed++) {
+      const out = roll(pool, settings(), mulberry32(seed));
+      if (out.weapon?.tier === 'junk') junk++;
+    }
+    // weapon table: junk 2 vs elite 10 -> expect ~17% junk; assert well under uniform 50%
+    expect(junk / n).toBeLessThan(0.3);
+    expect(junk).toBeGreaterThan(0); // chaos survives as a punchline
+  });
+
+  it('falls back to whatever tier is affordable under a tight budget', () => {
+    const pool = [
+      item('weapon', { name: 'cheap junk', tier: 'junk', price: 100 }),
+      item('weapon', { name: 'pricey elite', tier: 'elite', price: 1_000_000 }),
+    ];
+    for (let seed = 1; seed <= 50; seed++) {
+      const out = roll(pool, settings({ budget: 500 }), mulberry32(seed));
+      expect(out.weapon?.name).toBe('cheap junk');
     }
   });
 });

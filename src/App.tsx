@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useState } from 'react';
 import './App.css';
+import { BonusesPanel } from './components/BonusesPanel';
 import { BossPanel, ChallengePanel } from './components/BossPanel';
 import { DataProvider, useGameData, type Boss } from './components/DataProvider';
 import { EquipmentPanel } from './components/EquipmentPanel';
@@ -154,12 +155,15 @@ const Main = () => {
       <main className="columns">
         <RsPanel title="Your gear" icon="/img/ui/multicombat.png">
           <div className="gearStack">
-            <EquipmentPanel
-              loadout={state.loadout}
-              locks={state.locks}
-              onToggleLock={(slot) => dispatch({ type: 'TOGGLE_LOCK', slot })}
-              onSlotContextMenu={openSlotMenu}
-            />
+            <div className="gearRow">
+              <EquipmentPanel
+                loadout={state.loadout}
+                locks={state.locks}
+                onToggleLock={(slot) => dispatch({ type: 'TOGGLE_LOCK', slot })}
+                onSlotContextMenu={openSlotMenu}
+              />
+              <BonusesPanel loadout={state.loadout} />
+            </div>
             <SpellBadge weapon={state.loadout.weapon} spell={state.spell} />
             <RollControls
               budgetText={state.budgetText}

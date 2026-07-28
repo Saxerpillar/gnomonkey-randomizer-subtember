@@ -41,6 +41,15 @@
   gap: 14px;
 }
 
+/* equipment tab + bonuses summary side by side, like the in-game equip screen */
+.gearRow {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
 .fate {
   display: flex;
   flex-direction: column;

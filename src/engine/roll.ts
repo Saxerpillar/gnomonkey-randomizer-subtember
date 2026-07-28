@@ -1,5 +1,37 @@
-import { costOf, emptyLoadout, SLOTS, type Item, type Loadout, type RollSettings, type Slot } from './types';
+import {
+  costOf,
+  emptyLoadout,
+  SLOTS,
+  TIERS,
+  type Item,
+  type Loadout,
+  type RollSettings,
+  type Slot,
+  type Tier,
+} from './types';
 import { pick, shuffled, type Rng } from './rng';
+
+/**
+ * Tier weights: chaotic but not bullshit. The weapon decides the run (OSRS is
+ * weapon-heavy), so its table is strict — junk weapons are a rare punchline.
+ * Armour matters far less, so its table stays looser and chaos survives there.
+ * Sampling picks a tier (renormalized over tiers that actually have affordable
+ * candidates), then uniform within the tier.
+ */
+export const WEAPON_TIER_WEIGHTS: Record<Tier, number> = {
+  junk: 2,
+  common: 18,
+  decent: 40,
+  strong: 30,
+  elite: 10,
+};
+export const DEFAULT_TIER_WEIGHTS: Record<Tier, number> = {
+  junk: 10,
+  common: 30,
+  decent: 35,
+  strong: 20,
+  elite: 5,
+};
 
 /**
  * Pure gear roller (design doc: docs/plans/2026-07-28-gnome-subtember-design.md).
@@ -32,7 +64,26 @@ export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout =>
   const rollSlot = (slot: Slot, candidates: Item[]): void => {
     const affordable = candidates.filter((i) => costOf(i) <= remaining);
     if (affordable.length === 0) return; // stays empty by design
-    const item = pick(rng, affordable);
+
+    // Tier-then-item: weighted tier pick over tiers with candidates, uniform within.
+    const weights = slot === 'weapon' ? WEAPON_TIER_WEIGHTS : DEFAULT_TIER_WEIGHTS;
+    const byTier = new Map<Tier, Item[]>();
+    for (const i of affordable) {
+      const t = i.tier ?? 'common';
+      byTier.set(t, [...(byTier.get(t) ?? []), i]);
+    }
+    const present = TIERS.filter((t) => byTier.has(t));
+    const total = present.reduce((s, t) => s + weights[t], 0);
+    let r = rng() * total;
+    let chosen = present[present.length - 1];
+    for (const t of present) {
+      r -= weights[t];
+      if (r < 0) {
+        chosen = t;
+        break;
+      }
+    }
+    const item = pick(rng, byTier.get(chosen)!);
     loadout[slot] = item;
     remaining -= costOf(item);
   };
