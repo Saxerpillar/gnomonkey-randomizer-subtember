@@ -1,0 +1,173 @@
+import { describe, expect, it } from 'vitest';
+import { loadoutValue, roll } from './roll';
+import { mulberry32 } from './rng';
+import { costOf, SLOTS, type Item, type Loadout, type RollSettings, type Slot } from './types';
+
+let nextId = 1;
+const item = (slot: Slot, over: Partial<Item> = {}): Item => ({
+  id: nextId++,
+  name: over.name ?? `${slot}-${nextId}`,
+  slot,
+  icon: 'x.png',
+  tradeable: true,
+  twoHanded: false,
+  price: 1000,
+  ...over,
+});
+
+/** A small pool with a few of everything. */
+const basicPool = (): Item[] => [
+  ...SLOTS.filter((s) => s !== 'weapon' && s !== 'ammo').flatMap((s) => [
+    item(s, { price: 100 }),
+    item(s, { price: 10_000 }),
+    item(s, { price: 2_000_000 }),
+  ]),
+  item('weapon', { name: 'cheap sword', price: 500 }),
+  item('weapon', { name: 'mid bow', price: 50_000, category: 'Bow', requiredAmmo: 'arrow' }),
+  item('weapon', { name: 'big 2h', price: 5_000_000, twoHanded: true }),
+  item('ammo', { name: 'arrows', price: 50, ammoClass: 'arrow' }),
+  item('ammo', { name: 'bolts', price: 50, ammoClass: 'bolt' }),
+  item('ammo', { name: 'blessing', price: 80_000, ammoClass: 'any' }),
+];
+
+const settings = (over: Partial<RollSettings> = {}): RollSettings => ({
+  budget: null,
+  allowUntradeables: false,
+  locks: {},
+  ...over,
+});
+
+const rolledCost = (loadout: Loadout, locks: RollSettings['locks']): number =>
+  SLOTS.reduce((sum, s) => {
+    const it = loadout[s];
+    return sum + (it && locks[s]?.id !== it.id ? costOf(it) : 0);
+  }, 0);
+
+const seeds = Array.from({ length: 200 }, (_, i) => i * 7919 + 1);
+
+describe('budget', () => {
+  it('never exceeds the budget across many seeds', () => {
+    const pool = basicPool();
+    for (const budget of [0, 500, 100_000, 10_000_000]) {
+      for (const seed of seeds) {
+        const out = roll(pool, settings({ budget }), mulberry32(seed));
+        expect(rolledCost(out, {})).toBeLessThanOrEqual(budget);
+      }
+    }
+  });
+
+  it('budget 0 with tradeables-only rolls nothing', () => {
+    const out = roll(basicPool(), settings({ budget: 0 }), mulberry32(1));
+    expect(SLOTS.every((s) => out[s] === null)).toBe(true);
+  });
+
+  it('huge budget fills every slot', () => {
+    const out = roll(basicPool(), settings({ budget: 1_000_000_000 }), mulberry32(1));
+    // 2h may legitimately empty the shield; every other slot must fill.
+    const mustFill = SLOTS.filter((s) => s !== 'shield');
+    expect(mustFill.every((s) => out[s] !== null)).toBe(true);
+  });
+});
+
+describe('untradeables', () => {
+  const poolWithUntradeable = () => [
+    ...basicPool(),
+    item('cape', { name: 'fire cape', tradeable: false, price: undefined }),
+  ];
+
+  it('never rolls untradeables when toggle is off', () => {
+    for (const seed of seeds) {
+      const out = roll(poolWithUntradeable(), settings(), mulberry32(seed));
+      expect(SLOTS.every((s) => out[s]?.tradeable !== false)).toBe(true);
+    }
+  });
+
+  it('rolls untradeables at cost 0 when allowed', () => {
+    const pool = [item('cape', { name: 'fire cape', tradeable: false, price: undefined })];
+    const out = roll(pool, settings({ budget: 0, allowUntradeables: true }), mulberry32(1));
+    expect(out.cape?.name).toBe('fire cape');
+    expect(rolledCost(out, {})).toBe(0);
+  });
+});
+
+describe('locks', () => {
+  it('locked items survive every roll and are budget-exempt', () => {
+    const expensive = item('body', { name: 'locked bis', price: 900_000_000 });
+    const locks = { body: expensive };
+    for (const seed of seeds.slice(0, 50)) {
+      const out = roll(basicPool(), settings({ budget: 1000, locks }), mulberry32(seed));
+      expect(out.body?.id).toBe(expensive.id);
+      expect(rolledCost(out, locks)).toBeLessThanOrEqual(1000);
+    }
+  });
+});
+
+describe('2h vs shield', () => {
+  it('a rolled 2h always empties the shield', () => {
+    const pool = [item('weapon', { name: 'only 2h', twoHanded: true }), item('shield')];
+    for (const seed of seeds.slice(0, 50)) {
+      const out = roll(pool, settings(), mulberry32(seed));
+      expect(out.weapon?.twoHanded).toBe(true);
+      expect(out.shield).toBeNull();
+    }
+  });
+
+  it('a locked shield excludes 2h weapons entirely', () => {
+    const shield = item('shield', { name: 'locked shield' });
+    const pool = [item('weapon', { name: 'only 2h', twoHanded: true }), shield];
+    for (const seed of seeds.slice(0, 50)) {
+      const out = roll(pool, settings({ locks: { shield } }), mulberry32(seed));
+      expect(out.weapon).toBeNull(); // only weapon available was 2h
+      expect(out.shield?.id).toBe(shield.id);
+    }
+  });
+});
+
+describe('ammo compatibility', () => {
+  it('launcher weapons only roll their ammo class (ballista override case)', () => {
+    const pool = [
+      item('weapon', { name: 'ballista', category: 'Crossbow', requiredAmmo: 'javelin' }),
+      item('ammo', { name: 'javelins', ammoClass: 'javelin' }),
+      item('ammo', { name: 'bolts', ammoClass: 'bolt' }),
+      item('ammo', { name: 'blessing', ammoClass: 'any' }),
+    ];
+    for (const seed of seeds.slice(0, 50)) {
+      const out = roll(pool, settings(), mulberry32(seed));
+      expect(out.ammo?.name).toBe('javelins');
+    }
+  });
+
+  it('non-launcher weapons roll any ammo-slot item', () => {
+    const pool = [
+      item('weapon', { name: 'melee sword' }),
+      item('ammo', { name: 'blessing', ammoClass: 'any' }),
+      item('ammo', { name: 'arrows', ammoClass: 'arrow' }),
+    ];
+    const seen = new Set<string>();
+    for (const seed of seeds) {
+      const out = roll(pool, settings(), mulberry32(seed));
+      if (out.ammo) seen.add(out.ammo.name);
+    }
+    expect(seen).toEqual(new Set(['blessing', 'arrows']));
+  });
+});
+
+describe('determinism', () => {
+  it('same seed -> identical loadout; different seeds vary', () => {
+    const pool = basicPool();
+    const s = settings({ budget: 10_000_000 });
+    const a = roll(pool, s, mulberry32(42));
+    const b = roll(pool, s, mulberry32(42));
+    expect(a).toEqual(b);
+    const outputs = new Set(seeds.map((seed) => JSON.stringify(roll(pool, s, mulberry32(seed)))));
+    expect(outputs.size).toBeGreaterThan(1);
+  });
+});
+
+describe('loadoutValue', () => {
+  it('counts all equipped tradeables, locked included', () => {
+    const locked = item('body', { price: 5000 });
+    const out = roll([item('head', { price: 300 })], settings({ locks: { body: locked } }), mulberry32(1));
+    expect(loadoutValue(out)).toBe(5300);
+  });
+});
