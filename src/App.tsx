@@ -5,9 +5,11 @@ import { DataProvider, useGameData, type Boss } from './components/DataProvider'
 import { EquipmentPanel } from './components/EquipmentPanel';
 import { ItemPicker } from './components/ItemPicker';
 import { RollControls } from './components/RollControls';
+import { SpellBadge } from './components/SpellBadge';
 import { parseBudget } from './engine/parse';
 import { mulberry32, pick, randomSeed } from './engine/rng';
 import { loadoutValue, roll } from './engine/roll';
+import { rollSpell, type Spell } from './engine/spell';
 import { emptyLoadout, type Item, type Loadout, type Slot } from './engine/types';
 import { RsPanel } from './theme/RsPanel';
 
@@ -18,13 +20,14 @@ interface State {
   allowUntradeables: boolean;
   boss: Boss | null;
   selectedSlot: Slot | null;
+  spell: Spell | null;
 }
 
 type Action =
-  | { type: 'SET_LOADOUT'; loadout: Loadout }
+  | { type: 'SET_LOADOUT'; loadout: Loadout; spell: Spell | null }
   | { type: 'SET_BOSS'; boss: Boss }
   | { type: 'TOGGLE_LOCK'; slot: Slot }
-  | { type: 'PICK_ITEM'; item: Item }
+  | { type: 'PICK_ITEM'; item: Item; spell: Spell | null }
   | { type: 'SET_BUDGET_TEXT'; text: string }
   | { type: 'TOGGLE_UNTRADEABLES' }
   | { type: 'SELECT_SLOT'; slot: Slot | null };
@@ -39,6 +42,7 @@ const initialState = (): State => {
     allowUntradeables: false,
     boss: null,
     selectedSlot: null,
+    spell: null,
   };
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
@@ -60,7 +64,7 @@ const initialState = (): State => {
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'SET_LOADOUT':
-      return { ...state, loadout: action.loadout };
+      return { ...state, loadout: action.loadout, spell: action.spell };
     case 'SET_BOSS':
       return { ...state, boss: action.boss };
     case 'SET_BUDGET_TEXT':
@@ -93,13 +97,13 @@ const reducer = (state: State, action: Action): State => {
         loadout.weapon = null;
         delete locks.weapon;
       }
-      return { ...state, loadout, locks, selectedSlot: null };
+      return { ...state, loadout, locks, selectedSlot: null, spell: action.spell };
     }
   }
 };
 
 const Main = () => {
-  const { items, bosses } = useGameData();
+  const { items, bosses, spells } = useGameData();
   const [state, dispatch] = useReducer(reducer, undefined, initialState);
 
   useEffect(() => {
@@ -110,12 +114,25 @@ const Main = () => {
   const rollGear = () => {
     const parsed = parseBudget(state.budgetText);
     if (!parsed.ok) return;
+    const rng = mulberry32(randomSeed());
     const loadout = roll(
       items,
       { budget: parsed.gp, allowUntradeables: state.allowUntradeables, locks: state.locks },
-      mulberry32(randomSeed()),
+      rng,
     );
-    dispatch({ type: 'SET_LOADOUT', loadout });
+    dispatch({ type: 'SET_LOADOUT', loadout, spell: rollSpell(loadout.weapon, spells, rng) });
+  };
+
+  const pickItem = (item: Item) => {
+    // The spell follows the weapon: a picked staff rolls its spell; a picked
+    // shield that will clear a locked 2h clears the spell with it.
+    const spell =
+      item.slot === 'weapon'
+        ? rollSpell(item, spells, mulberry32(randomSeed()))
+        : item.slot === 'shield' && state.loadout.weapon?.twoHanded
+          ? null
+          : state.spell;
+    dispatch({ type: 'PICK_ITEM', item, spell });
   };
 
   const rollBoss = () => dispatch({ type: 'SET_BOSS', boss: pick(mulberry32(randomSeed()), bosses) });
@@ -135,9 +152,10 @@ const Main = () => {
               }
               onToggleLock={(slot) => dispatch({ type: 'TOGGLE_LOCK', slot })}
             />
+            <SpellBadge weapon={state.loadout.weapon} spell={state.spell} />
             <ItemPicker
               slotFilter={state.selectedSlot}
-              onPick={(item) => dispatch({ type: 'PICK_ITEM', item })}
+              onPick={pickItem}
               onClearSlotFilter={() => dispatch({ type: 'SELECT_SLOT', slot: null })}
             />
             <RollControls

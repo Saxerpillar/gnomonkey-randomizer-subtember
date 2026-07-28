@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { SLOTS, type Item, type Slot } from '../engine/types';
+import type { Spell } from '../engine/spell';
 import { RsButton } from '../theme/RsButton';
 import { RsPanel } from '../theme/RsPanel';
 
@@ -13,6 +14,7 @@ export interface GameData {
   items: Item[];
   bySlot: Record<Slot, Item[]>;
   bosses: Boss[];
+  spells: Spell[];
 }
 
 const DataContext = createContext<GameData | null>(null);
@@ -24,8 +26,8 @@ export const useGameData = (): GameData => {
 };
 
 const loadAll = async (): Promise<GameData> => {
-  const [itemsRaw, prices, bosses] = await Promise.all(
-    ['equipment.json', 'prices.json', 'bosses.json'].map(async (f) => {
+  const [itemsRaw, prices, bosses, spells] = await Promise.all(
+    ['equipment.json', 'prices.json', 'bosses.json', 'spells.json'].map(async (f) => {
       const res = await fetch(`/data/${f}`);
       if (!res.ok) throw new Error(`${f}: HTTP ${res.status}`);
       return res.json();
@@ -40,7 +42,7 @@ const loadAll = async (): Promise<GameData> => {
   const bySlot = Object.fromEntries(SLOTS.map((s) => [s, [] as Item[]])) as Record<Slot, Item[]>;
   for (const item of items) bySlot[item.slot].push(item);
 
-  return { items, bySlot, bosses: bosses as Boss[] };
+  return { items, bySlot, bosses: bosses as Boss[], spells: spells as Spell[] };
 };
 
 export const DataProvider = ({ children }: { children: ReactNode }) => {
