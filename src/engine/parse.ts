@@ -18,12 +18,14 @@ export const parseBudget = (text: string): BudgetParse => {
   return { ok: true, gp };
 };
 
-/** Compact gp formatter for readouts: 12_345_678 -> "12.3m". Display caps at 10b. */
+/**
+ * In-game coin display: truncated integer units, 5 characters max.
+ * 0-99,999 raw digits · 100k-9999k · 10m-9999m · capped at "10b".
+ */
 export const formatGp = (gp: number): string => {
   if (gp >= 1e10) return '10b';
-  if (gp >= 1e9) return `${(gp / 1e9).toFixed(gp % 1e9 === 0 ? 0 : 1)}b`;
-  if (gp >= 1e6) return `${(gp / 1e6).toFixed(gp % 1e6 === 0 ? 0 : 1)}m`;
-  if (gp >= 1e3) return `${(gp / 1e3).toFixed(gp % 1e3 === 0 ? 0 : 1)}k`;
+  if (gp >= 1e7) return `${Math.floor(gp / 1e6)}m`;
+  if (gp >= 1e5) return `${Math.floor(gp / 1e3)}k`;
   return `${gp}`;
 };
 
