@@ -29,6 +29,17 @@ export const formatGp = (gp: number): string => {
   return `${gp}`;
 };
 
+/**
+ * Live input formatting: plain digit runs get "," thousands separators as you
+ * type (100000 -> "100,000"). Anything with a suffix/decimal passes through
+ * untouched. parseBudget strips commas, so the grouped text stays parseable.
+ */
+export const groupDigits = (text: string): string => {
+  const bare = text.replace(/,/g, '');
+  if (!/^\d+$/.test(bare)) return text;
+  return bare.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
 /** In-game coin text colour tier: yellow < 100k, white < 10m, green from 10m. */
 export type GpTier = 'yellow' | 'white' | 'green';
 export const gpTier = (gp: number): GpTier =>

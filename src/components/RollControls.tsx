@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { formatGp, gpTier, parseBudget } from '../engine/parse';
+import { formatGp, gpTier, groupDigits, parseBudget } from '../engine/parse';
 import { GpValue } from '../theme/GpValue';
 import { RsButton } from '../theme/RsButton';
 import { RsTooltip } from '../theme/RsTooltip';
@@ -37,7 +37,7 @@ export const RollControls = ({
             className={`${styles.budget} ${parsed.ok ? (parsed.gp != null ? styles[gpTier(parsed.gp)] : '') : styles.invalid}`}
             value={display}
             placeholder="e.g. 10m — empty = no budget"
-            onChange={(e) => onBudgetChange(e.target.value)}
+            onChange={(e) => onBudgetChange(groupDigits(e.target.value))}
             onFocus={() => setEditing(true)}
             onBlur={() => setEditing(false)}
           />

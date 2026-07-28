@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatGp, gpTier, parseBudget } from './parse';
+import { formatGp, gpTier, groupDigits, parseBudget } from './parse';
 
 describe('parseBudget', () => {
   it.each([
@@ -45,6 +45,29 @@ describe('formatGp (in-game display: truncated, 5 chars max)', () => {
   ])('formats %d -> %s', (gp, text) => {
     expect(formatGp(gp)).toBe(text);
     expect(formatGp(gp).length).toBeLessThanOrEqual(5);
+  });
+});
+
+describe('groupDigits (live input separators)', () => {
+  it.each([
+    ['100000', '100,000'],
+    ['1234567', '1,234,567'],
+    ['999', '999'],
+    ['1000', '1,000'],
+    ['1,0000', '10,000'], // typing a digit after an existing group regroups
+    ['', ''],
+  ])('groups %s -> %s', (text, out) => {
+    expect(groupDigits(text)).toBe(out);
+  });
+
+  it('leaves suffixed/decimal/invalid input untouched', () => {
+    for (const t of ['10m', '1.5b', '250k', 'abc', '1.5']) {
+      expect(groupDigits(t)).toBe(t);
+    }
+  });
+
+  it('grouped output still parses to the same gp', () => {
+    expect(parseBudget(groupDigits('1234567'))).toEqual({ ok: true, gp: 1_234_567 });
   });
 });
 
