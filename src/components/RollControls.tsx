@@ -45,6 +45,7 @@ export const RollControls = ({
       </label>
       <label className={styles.toggle}>
         <input type="checkbox" checked={allowUntradeables} onChange={onToggleUntradeables} />
+        <span className={styles.checkbox} aria-hidden="true" />
         <span>Allow untradeables (cost 0)</span>
       </label>
       <RsTooltip content={parsed.ok ? null : 'Fix the budget first'} className={styles.rollWrap}>

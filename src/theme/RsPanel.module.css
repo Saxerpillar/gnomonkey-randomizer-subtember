@@ -22,7 +22,7 @@
   gap: 10px;
   margin: 0;
   font-family: var(--font-title);
-  font-size: 32px;
+  font-size: 42px;
   font-weight: normal;
   letter-spacing: 1px;
   color: var(--gold-bright);
@@ -30,8 +30,8 @@
 }
 
 .title h2 img {
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
   filter: drop-shadow(1px 1px 0 #000);
 }

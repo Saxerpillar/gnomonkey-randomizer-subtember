@@ -3,14 +3,14 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-body); /* in-game coin text is the plain RS font */
-  font-size: 17px;
+  font-size: 20px;
   white-space: nowrap;
   text-shadow: 1px 1px 0 var(--border-dark);
 }
 
 .gp img {
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
 }
 
