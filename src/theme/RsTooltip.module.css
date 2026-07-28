@@ -20,7 +20,7 @@
   border-radius: 3px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
   font-family: var(--font-small);
-  font-size: 15px;
+  font-size: 17px;
   color: var(--text);
   white-space: nowrap;
   pointer-events: none;
@@ -40,7 +40,7 @@
 .tipTitle {
   color: var(--orange);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .tipMuted {

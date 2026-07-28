@@ -2,13 +2,27 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: var(--gold-bright);
-  font-family: var(--font-bold);
+  font-family: var(--font-body); /* in-game coin text is the plain RS font */
+  font-size: 17px;
   white-space: nowrap;
+  text-shadow: 1px 1px 0 var(--border-dark);
 }
 
 .gp img {
   width: 15px;
   height: 15px;
   object-fit: contain;
+}
+
+/* in-game coin text tiers */
+.yellow {
+  color: var(--gp-yellow);
+}
+
+.white {
+  color: var(--gp-white);
+}
+
+.green {
+  color: var(--gp-green);
 }

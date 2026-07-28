@@ -37,7 +37,7 @@
 .budget {
   flex: 1;
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 17px;
   color: var(--text);
   background: var(--tile);
   border: 1px solid var(--border-light);
@@ -67,7 +67,7 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-small);
-  font-size: 15px;
+  font-size: 17px;
   color: var(--text);
   cursor: pointer;
   user-select: none;
@@ -87,4 +87,17 @@
 .value strong {
   color: var(--gold-bright);
   font-family: var(--font-bold);
+}
+
+/* budget text takes the in-game coin tier colour of the parsed amount */
+.yellow {
+  color: var(--gp-yellow);
+}
+
+.white {
+  color: var(--gp-white);
+}
+
+.green {
+  color: var(--gp-green);
 }

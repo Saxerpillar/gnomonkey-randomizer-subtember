@@ -49,6 +49,11 @@
   --green-glow: rgba(70, 194, 70, 0.55);
   --red: #d84343;
 
+  /* in-game coin text tiers (yellow < 100k, white < 10m, green >= 10m) */
+  --gp-yellow: #ffff00;
+  --gp-white: #ffffff;
+  --gp-green: #00ff80;
+
   /* fonts */
   --font-body: 'RuneScape', 'Segoe UI', sans-serif;
   --font-small: 'RuneScape Small', 'Segoe UI', sans-serif;

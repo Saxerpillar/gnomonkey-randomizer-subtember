@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatGp, parseBudget } from './parse';
+import { formatGp, gpTier, parseBudget } from './parse';
 
 describe('parseBudget', () => {
   it.each([
@@ -36,7 +36,22 @@ describe('formatGp', () => {
     [10_000_000, '10m'],
     [12_345_678, '12.3m'],
     [1_500_000_000, '1.5b'],
+    [10_000_000_000, '10b'],
+    [123_000_000_000, '10b'],
   ])('formats %d -> %s', (gp, text) => {
     expect(formatGp(gp)).toBe(text);
+  });
+});
+
+describe('gpTier', () => {
+  it.each([
+    [0, 'yellow'],
+    [99_999, 'yellow'],
+    [100_000, 'white'],
+    [9_999_999, 'white'],
+    [10_000_000, 'green'],
+    [10_000_000_000, 'green'],
+  ] as const)('%d gp -> %s', (gp, tier) => {
+    expect(gpTier(gp)).toBe(tier);
   });
 });

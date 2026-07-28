@@ -1,4 +1,4 @@
-import { parseBudget } from '../engine/parse';
+import { gpTier, parseBudget } from '../engine/parse';
 import { GpValue } from '../theme/GpValue';
 import { RsButton } from '../theme/RsButton';
 import { RsTooltip } from '../theme/RsTooltip';
@@ -28,7 +28,7 @@ export const RollControls = ({
         <span className={styles.budgetWrap}>
           <img className={styles.coins} src="/img/coins.png" alt="" />
           <input
-            className={`${styles.budget} ${parsed.ok ? '' : styles.invalid}`}
+            className={`${styles.budget} ${parsed.ok ? (parsed.gp != null ? styles[gpTier(parsed.gp)] : '') : styles.invalid}`}
             value={budgetText}
             placeholder="e.g. 10m — empty = no budget"
             onChange={(e) => onBudgetChange(e.target.value)}

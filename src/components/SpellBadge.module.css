@@ -11,7 +11,7 @@
 
 .label {
   font-family: var(--font-bold);
-  font-size: 16px;
+  font-size: 18px;
   color: var(--gold);
 }
 
@@ -20,7 +20,7 @@
   align-items: center;
   gap: 7px;
   font-family: var(--font-body);
-  font-size: 17px;
+  font-size: 18px;
   color: var(--text);
   cursor: default;
 }
@@ -33,7 +33,7 @@
 
 .builtin {
   font-family: var(--font-small);
-  font-size: 15px;
+  font-size: 17px;
   color: var(--text-muted);
   font-style: italic;
 }
