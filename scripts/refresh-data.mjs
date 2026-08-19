@@ -63,10 +63,11 @@ const main = async () => {
   const raw = await fetchJson(`${DPS_RAW}/cdn/json/equipment.json`);
   console.log(`  ${raw.length} raw entries`);
 
-  const { versionBlocklist, namePatterns, ids } = curation.poolExclusions;
+  const { versionBlocklist, namePatterns, ids, questOnlyNames } = curation.poolExclusions;
   const nameRes = namePatterns.map((p) => new RegExp(p, 'i'));
   const excludedIds = new Set(ids);
   const versionBlocked = new Set(versionBlocklist);
+  const questOnly = new Set(questOnlyNames ?? []);
 
   const kept = raw.filter(
     (e) =>
@@ -76,6 +77,7 @@ const main = async () => {
       e.image &&
       !versionBlocked.has(e.version) &&
       !excludedIds.has(e.id) &&
+      !questOnly.has(e.name) &&
       !nameRes.some((re) => re.test(e.name)),
   );
 

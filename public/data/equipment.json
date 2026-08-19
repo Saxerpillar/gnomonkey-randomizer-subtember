@@ -31,64 +31,6 @@
   }
  },
  {
-  "id": 774,
-  "name": "'perfect' necklace",
-  "slot": "neck",
-  "icon": "774.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 773,
-  "name": "'perfect' ring",
-  "slot": "ring",
-  "icon": "773.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 27820,
   "name": "10th birthday balloons",
   "slot": "weapon",
@@ -124,35 +66,6 @@
   "name": "10th birthday cape",
   "slot": "cape",
   "icon": "27812.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 4035,
-  "name": "10th squad sigil",
-  "slot": "neck",
-  "icon": "4035.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -6050,7 +5963,7 @@
   "icon": "29804.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "elite",
+  "tier": "strong",
   "offensive": {
    "stab": 25,
    "slash": 25,
@@ -9139,35 +9052,6 @@
   }
  },
  {
-  "id": 87,
-  "name": "Armadyl pendant",
-  "slot": "neck",
-  "icon": "87.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 12470,
   "name": "Armadyl platebody",
   "slot": "body",
@@ -10697,7 +10581,7 @@
   "icon": "12269.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -11872,36 +11756,6 @@
   }
  },
  {
-  "id": 4285,
-  "name": "Bedsheet",
-  "version": "Ectoplasm",
-  "slot": "head",
-  "icon": "4285.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 25137,
   "name": "Beekeeper's boots",
   "slot": "feet",
@@ -12405,35 +12259,6 @@
   "slot": "neck",
   "icon": "5521.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 29931,
-  "name": "Bird mask",
-  "slot": "head",
-  "icon": "29931.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
   "offensive": {
@@ -13295,64 +13120,6 @@
   }
  },
  {
-  "id": 6752,
-  "name": "Black desert robe",
-  "slot": "legs",
-  "icon": "6752.png",
-  "tradeable": true,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6750,
-  "name": "Black desert shirt",
-  "slot": "body",
-  "icon": "6750.png",
-  "tradeable": true,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 12524,
   "name": "Black dragon mask",
   "slot": "head",
@@ -13612,35 +13379,6 @@
   },
   "bonuses": {
    "str": 5,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 9055,
-  "name": "Black goblin mail",
-  "slot": "body",
-  "icon": "9055.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -15604,7 +15342,7 @@
   "speed": 4,
   "offensive": {
    "stab": 55,
-   "slash": 94,
+   "slash": 100,
    "crush": 0,
    "magic": 0,
    "ranged": 0
@@ -15617,7 +15355,7 @@
    "ranged": 0
   },
   "bonuses": {
-   "str": 89,
+   "str": 93,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -15635,7 +15373,7 @@
   "speed": 4,
   "offensive": {
    "stab": 55,
-   "slash": 94,
+   "slash": 100,
    "crush": 0,
    "magic": 0,
    "ranged": 0
@@ -15648,7 +15386,7 @@
    "ranged": 0
   },
   "bonuses": {
-   "str": 89,
+   "str": 93,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -15666,7 +15404,7 @@
   "speed": 4,
   "offensive": {
    "stab": 55,
-   "slash": 94,
+   "slash": 100,
    "crush": 0,
    "magic": 0,
    "ranged": 0
@@ -15679,7 +15417,7 @@
    "ranged": 0
   },
   "bonuses": {
-   "str": 89,
+   "str": 93,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -15697,7 +15435,7 @@
   "speed": 4,
   "offensive": {
    "stab": 55,
-   "slash": 94,
+   "slash": 100,
    "crush": 0,
    "magic": 0,
    "ranged": 0
@@ -15710,7 +15448,7 @@
    "ranged": 0
   },
   "bonuses": {
-   "str": 89,
+   "str": 93,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -15728,7 +15466,7 @@
   "speed": 4,
   "offensive": {
    "stab": 55,
-   "slash": 94,
+   "slash": 100,
    "crush": 0,
    "magic": 0,
    "ranged": 0
@@ -15741,7 +15479,7 @@
    "ranged": 0
   },
   "bonuses": {
-   "str": 89,
+   "str": 93,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -15759,7 +15497,7 @@
   "speed": 4,
   "offensive": {
    "stab": 55,
-   "slash": 94,
+   "slash": 100,
    "crush": 0,
    "magic": 0,
    "ranged": 0
@@ -15772,7 +15510,7 @@
    "ranged": 0
   },
   "bonuses": {
-   "str": 89,
+   "str": 93,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -16964,35 +16702,6 @@
   }
  },
  {
-  "id": 287,
-  "name": "Blue goblin mail",
-  "slot": "body",
-  "icon": "287.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 1055,
   "name": "Blue halloween mask",
   "slot": "head",
@@ -18080,64 +17789,6 @@
   }
  },
  {
-  "id": 9945,
-  "name": "Bomber cap",
-  "slot": "head",
-  "icon": "9945.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 9944,
-  "name": "Bomber jacket",
-  "slot": "body",
-  "icon": "9944.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 8882,
   "name": "Bone bolts",
   "slot": "ammo",
@@ -18362,7 +18013,7 @@
   "icon": "22986.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "decent",
   "offensive": {
    "stab": 10,
    "slash": 10,
@@ -22133,93 +21784,6 @@
   }
  },
  {
-  "id": 10865,
-  "name": "Builder's boots",
-  "slot": "feet",
-  "icon": "10865.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 10863,
-  "name": "Builder's shirt",
-  "slot": "body",
-  "icon": "10863.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 10864,
-  "name": "Builder's trousers",
-  "slot": "legs",
-  "icon": "10864.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 22227,
   "name": "Bullet arrow",
   "slot": "ammo",
@@ -22485,70 +22049,10 @@
   }
  },
  {
-  "id": 29912,
-  "name": "Butler's tray",
-  "slot": "weapon",
-  "icon": "29912.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Unarmed",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 29915,
   "name": "Butler's uniform (bottom)",
   "slot": "legs",
   "icon": "29915.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 29914,
-  "name": "Butler's uniform (top)",
-  "slot": "body",
-  "icon": "29914.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -22752,35 +22256,6 @@
   }
  },
  {
-  "id": 7003,
-  "name": "Camel mask",
-  "slot": "head",
-  "icon": "7003.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 6655,
   "name": "Camo bottoms",
   "slot": "legs",
@@ -22895,35 +22370,6 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 2,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6707,
-  "name": "Camulet",
-  "slot": "neck",
-  "icon": "6707.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
   }
@@ -23662,64 +23108,6 @@
   }
  },
  {
-  "id": 4677,
-  "name": "Catspeak amulet",
-  "slot": "neck",
-  "icon": "4677.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6544,
-  "name": "Catspeak amulet(e)",
-  "slot": "neck",
-  "icon": "6544.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 278,
   "name": "Cattleprod",
   "slot": "weapon",
@@ -23963,35 +23351,6 @@
   "slot": "head",
   "icon": "1949.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 5609,
-  "name": "Chicken (Recruitment Drive)",
-  "slot": "shield",
-  "icon": "5609.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
   "offensive": {
@@ -24773,36 +24132,6 @@
   }
  },
  {
-  "id": 26969,
-  "name": "Circlet of water",
-  "version": "Charged",
-  "slot": "head",
-  "icon": "26969.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 9644,
   "name": "Citizen shoes",
   "slot": "feet",
@@ -25132,36 +24461,6 @@
   "name": "Cloak of ruin",
   "slot": "cape",
   "icon": "27438.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 10595,
-  "name": "Clockwork suit",
-  "version": "Unwound",
-  "slot": "cape",
-  "icon": "10595.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -26383,7 +25682,7 @@
   "tradeable": false,
   "twoHanded": true,
   "category": "Polearm",
-  "tier": "elite",
+  "tier": "strong",
   "speed": 4,
   "offensive": {
    "stab": 114,
@@ -27484,36 +26783,6 @@
   "name": "Cow trousers",
   "slot": "legs",
   "icon": "12957.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 33104,
-  "name": "Cowbell amulet",
-  "version": "Charged",
-  "slot": "neck",
-  "icon": "33104.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -29921,37 +29190,6 @@
   }
  },
  {
-  "id": 32808,
-  "name": "Crate of looty",
-  "slot": "weapon",
-  "icon": "32808.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Unarmed",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 32761,
   "name": "Crate of maces",
   "version": "Sunset Coast",
@@ -31184,37 +30422,6 @@
   }
  },
  {
-  "id": 32807,
-  "name": "Crate of ship parts (Pandemonium)",
-  "slot": "weapon",
-  "icon": "32807.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Unarmed",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 32462,
   "name": "Crate of silk",
   "version": "Ardougne",
@@ -31907,36 +31114,6 @@
   }
  },
  {
-  "id": 8871,
-  "name": "Crate with zanik",
-  "slot": "weapon",
-  "icon": "8871.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Unarmed",
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 22550,
   "name": "Craw's bow",
   "version": "Charged",
@@ -32199,35 +31376,6 @@
   },
   "bonuses": {
    "str": 56,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 10500,
-  "name": "Crone-made amulet",
-  "slot": "neck",
-  "icon": "10500.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -34190,35 +33338,6 @@
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 2
-  }
- },
- {
-  "id": 3208,
-  "name": "Crystal pendant",
-  "slot": "neck",
-  "icon": "3208.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
   }
  },
  {
@@ -36577,93 +35696,6 @@
   }
  },
  {
-  "id": 31403,
-  "name": "Deep sea apparatus (The Red Reef)",
-  "slot": "cape",
-  "icon": "31403.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 31298,
-  "name": "Deep sea helmet",
-  "slot": "head",
-  "icon": "31298.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 31401,
-  "name": "Deep sea helmet (The Red Reef)",
-  "slot": "head",
-  "icon": "31401.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 12540,
   "name": "Deerstalker",
   "slot": "head",
@@ -37573,35 +36605,6 @@
   }
  },
  {
-  "id": 4611,
-  "name": "Desert disguise",
-  "slot": "head",
-  "icon": "4611.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 6390,
   "name": "Desert legs",
   "slot": "legs",
@@ -38346,35 +37349,6 @@
   }
  },
  {
-  "id": 7535,
-  "name": "Diving apparatus",
-  "slot": "cape",
-  "icon": "7535.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 21723,
   "name": "Diving apparatus (2017 Halloween event)",
   "slot": "cape",
@@ -38517,35 +37491,6 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 3,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6547,
-  "name": "Doctor's hat",
-  "slot": "head",
-  "icon": "6547.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
   }
@@ -39938,7 +38883,7 @@
   "twoHanded": false,
   "category": "Staff",
   "tier": "decent",
-  "speed": 5,
+  "speed": 4,
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -41583,35 +40528,6 @@
   }
  },
  {
-  "id": 22400,
-  "name": "Drakan's medallion",
-  "slot": "neck",
-  "icon": "22400.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 772,
   "name": "Dramen staff",
   "slot": "weapon",
@@ -41906,35 +40822,6 @@
    "crush": 31,
    "magic": 5,
    "ranged": 24
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 10171,
-  "name": "Eagle cape",
-  "slot": "cape",
-  "icon": "10171.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
   },
   "bonuses": {
    "str": 0,
@@ -44289,122 +43176,6 @@
   }
  },
  {
-  "id": 29868,
-  "name": "Emissary hood",
-  "slot": "head",
-  "icon": "29868.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 29872,
-  "name": "Emissary robe bottom",
-  "slot": "legs",
-  "icon": "29872.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 29870,
-  "name": "Emissary robe top",
-  "slot": "body",
-  "icon": "29870.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 29874,
-  "name": "Emissary sandals",
-  "slot": "feet",
-  "icon": "29874.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 13183,
   "name": "Empty blaster",
   "slot": "weapon",
@@ -44516,38 +43287,6 @@
    "slash": 0,
    "crush": 0,
    "magic": 4,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 3691,
-  "name": "Enchanted lyre",
-  "version": "(1)",
-  "slot": "weapon",
-  "icon": "3691.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Unarmed",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
    "ranged": 0
   },
   "bonuses": {
@@ -45181,35 +43920,6 @@
   "name": "Fairy mushroom",
   "slot": "shield",
   "icon": "25102.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 10172,
-  "name": "Fake beak",
-  "slot": "head",
-  "icon": "10172.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -46387,35 +45097,6 @@
   }
  },
  {
-  "id": 7534,
-  "name": "Fishbowl helmet",
-  "slot": "head",
-  "icon": "7534.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 9799,
   "name": "Fishing cape",
   "version": "Trimmed",
@@ -46511,37 +45192,6 @@
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6082,
-  "name": "Fixed device",
-  "slot": "weapon",
-  "icon": "6082.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Gun",
-  "tier": "junk",
-  "speed": 4,
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -46980,37 +45630,6 @@
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 5608,
-  "name": "Fox (Recruitment Drive)",
-  "slot": "weapon",
-  "icon": "5608.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Unarmed",
-  "tier": "junk",
-  "speed": 4,
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -48173,35 +46792,6 @@
   }
  },
  {
-  "id": 1506,
-  "name": "Gas mask",
-  "slot": "head",
-  "icon": "1506.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 23859,
   "name": "Gauntlet cape",
   "slot": "cape",
@@ -48689,36 +47279,6 @@
    "slash": 0,
    "crush": 0,
    "magic": 5,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 552,
-  "name": "Ghostspeak amulet",
-  "version": "Normal",
-  "slot": "neck",
-  "icon": "552.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
    "ranged": 0
   },
   "bonuses": {
@@ -49687,35 +48247,6 @@
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 2
-  }
- },
- {
-  "id": 295,
-  "name": "Glarial's amulet",
-  "slot": "neck",
-  "icon": "295.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
   }
  },
  {
@@ -50939,35 +49470,6 @@
    "crush": 19,
    "magic": 0,
    "ranged": 12
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 5607,
-  "name": "Grain (Recruitment Drive)",
-  "slot": "cape",
-  "icon": "5607.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
   },
   "bonuses": {
    "str": 0,
@@ -54383,6 +52885,37 @@
   }
  },
  {
+  "id": 34027,
+  "name": "Hallowfell",
+  "slot": "weapon",
+  "icon": "34027.png",
+  "tradeable": true,
+  "twoHanded": true,
+  "category": "2h Sword",
+  "tier": "elite",
+  "speed": 6,
+  "offensive": {
+   "stab": 0,
+   "slash": 117,
+   "crush": 25,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 110,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 4
+  }
+ },
+ {
   "id": 4310,
   "name": "Ham boots",
   "slot": "feet",
@@ -54642,35 +53175,6 @@
   },
   "bonuses": {
    "str": -10,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 10862,
-  "name": "Hard hat",
-  "slot": "head",
-  "icon": "10862.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -55145,35 +53649,6 @@
   },
   "bonuses": {
    "str": -10,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 2406,
-  "name": "Hazeel's mark",
-  "slot": "neck",
-  "icon": "2406.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -56456,37 +54931,6 @@
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 1
-  }
- },
- {
-  "id": 30970,
-  "name": "Humphrey Dumphrey",
-  "slot": "weapon",
-  "icon": "30970.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "blunt",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
   }
  },
  {
@@ -60550,35 +58994,6 @@
   }
  },
  {
-  "id": 29932,
-  "name": "Jaguar mask",
-  "slot": "head",
-  "icon": "29932.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 23297,
   "name": "Jester cape",
   "slot": "cape",
@@ -61073,36 +59488,6 @@
   }
  },
  {
-  "id": 4031,
-  "name": "Karamjan monkey greegree",
-  "slot": "weapon",
-  "icon": "4031.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Unarmed",
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 4732,
   "name": "Karil's coif",
   "version": "Undamaged",
@@ -61561,38 +59946,6 @@
   }
  },
  {
-  "id": 20781,
-  "name": "Killer's knife",
-  "version": "Halloween",
-  "slot": "weapon",
-  "icon": "20781.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Stab Sword",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 33251,
   "name": "King's barrage",
   "slot": "weapon",
@@ -61812,36 +60165,6 @@
   "icon": "24866.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 19525,
-  "name": "Kruk monkey greegree",
-  "slot": "weapon",
-  "icon": "19525.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Unarmed",
   "tier": "junk",
   "offensive": {
    "stab": 0,
@@ -63820,66 +62143,6 @@
   }
  },
  {
-  "id": 3689,
-  "name": "Lyre",
-  "slot": "weapon",
-  "icon": "3689.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Unarmed",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 4021,
-  "name": "M'speak amulet",
-  "slot": "neck",
-  "icon": "4021.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 975,
   "name": "Machete",
   "slot": "weapon",
@@ -64037,35 +62300,6 @@
   "name": "Magic hood",
   "slot": "head",
   "icon": "9764.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28426,
-  "name": "Magic lantern",
-  "slot": "shield",
-  "icon": "28426.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -65207,35 +63441,6 @@
   "name": "Medallion of the deep",
   "slot": "neck",
   "icon": "32386.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 430,
-  "name": "Medical gown",
-  "slot": "body",
-  "icon": "430.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -67793,66 +65998,6 @@
   }
  },
  {
-  "id": 19556,
-  "name": "Monkey (Monkey Madness II)",
-  "slot": "cape",
-  "icon": "19556.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 4023,
-  "name": "Monkey talisman",
-  "slot": "weapon",
-  "icon": "4023.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Unarmed",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 12353,
   "name": "Monocle",
   "slot": "head",
@@ -68443,35 +66588,6 @@
   }
  },
  {
-  "id": 6070,
-  "name": "Mourner cloak",
-  "slot": "cape",
-  "icon": "6070.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 6068,
   "name": "Mourner gloves",
   "slot": "hands",
@@ -68495,96 +66611,6 @@
   },
   "bonuses": {
    "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6065,
-  "name": "Mourner top",
-  "slot": "body",
-  "icon": "6065.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6067,
-  "name": "Mourner trousers",
-  "version": "Repaired",
-  "slot": "legs",
-  "icon": "6067.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6541,
-  "name": "Mouse toy",
-  "slot": "weapon",
-  "icon": "6541.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Blunt",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": -100,
-   "slash": -100,
-   "crush": -50,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": -10,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -70632,6 +68658,37 @@
   }
  },
  {
+  "id": 33851,
+  "name": "Noble robe top",
+  "version": "Black",
+  "slot": "body",
+  "icon": "33851.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "category": "Unarmed",
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 10150,
   "name": "Noose wand",
   "slot": "weapon",
@@ -70748,35 +68805,6 @@
   },
   "bonuses": {
    "str": 14,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6548,
-  "name": "Nurse hat",
-  "slot": "head",
-  "icon": "6548.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -71489,35 +69517,6 @@
    "crush": 6,
    "magic": -1,
    "ranged": 7
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 26963,
-  "name": "Odd spectacles",
-  "slot": "head",
-  "icon": "26963.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
   },
   "bonuses": {
    "str": 0,
@@ -72416,35 +70415,6 @@
   }
  },
  {
-  "id": 286,
-  "name": "Orange goblin mail",
-  "slot": "body",
-  "icon": "286.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 30269,
   "name": "Orange pumpkin",
   "version": "Angry",
@@ -73164,35 +71134,6 @@
   }
  },
  {
-  "id": 86,
-  "name": "Pendant of lucien",
-  "slot": "neck",
-  "icon": "86.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 12428,
   "name": "Penguin mask",
   "slot": "head",
@@ -73200,37 +71141,6 @@
   "tradeable": true,
   "twoHanded": false,
   "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 3695,
-  "name": "Pet rock",
-  "slot": "weapon",
-  "icon": "3695.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Unarmed",
-  "tier": "junk",
-  "speed": 4,
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -74452,64 +72362,6 @@
   }
  },
  {
-  "id": 284,
-  "name": "Plague jacket",
-  "slot": "body",
-  "icon": "284.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 285,
-  "name": "Plague trousers",
-  "slot": "legs",
-  "icon": "285.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 10877,
   "name": "Plain satchel",
   "slot": "shield",
@@ -74744,35 +72596,6 @@
   }
  },
  {
-  "id": 30947,
-  "name": "Potato sack",
-  "slot": "head",
-  "icon": "30947.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": -1,
-   "slash": -1,
-   "crush": -1,
-   "magic": -1,
-   "ranged": -1
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 30296,
   "name": "Powder grey pumpkin",
   "version": "Angry",
@@ -74869,37 +72692,6 @@
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 27010,
-  "name": "Preform",
-  "slot": "weapon",
-  "icon": "27010.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Unarmed",
-  "tier": "junk",
-  "speed": 4,
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -75217,37 +73009,6 @@
   }
  },
  {
-  "id": 29911,
-  "name": "Prop sword (Death on the Isle)",
-  "slot": "weapon",
-  "icon": "29911.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Blunt",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 25606,
   "name": "Propeller hat",
   "slot": "head",
@@ -75491,37 +73252,6 @@
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 25822,
-  "name": "Protest banner",
-  "slot": "weapon",
-  "icon": "25822.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Banner",
-  "tier": "junk",
-  "speed": 4,
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -75887,35 +73617,6 @@
    "stab": 0,
    "slash": 1,
    "crush": 2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 9058,
-  "name": "Purple goblin mail",
-  "slot": "body",
-  "icon": "9058.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
    "magic": 0,
    "ranged": 0
   },
@@ -77403,35 +75104,6 @@
   "version": "Asexual",
   "slot": "neck",
   "icon": "28109.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 29929,
-  "name": "Ram mask",
-  "slot": "head",
-  "icon": "29929.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -79042,35 +76714,6 @@
   }
  },
  {
-  "id": 24942,
-  "name": "Reinforced goggles",
-  "slot": "head",
-  "icon": "24942.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 1025,
   "name": "Right eye patch",
   "slot": "head",
@@ -79105,36 +76748,6 @@
   "slot": "ring",
   "icon": "23185.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 4202,
-  "name": "Ring of charos",
-  "version": "Normal",
-  "slot": "ring",
-  "icon": "4202.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
   "offensive": {
@@ -79630,35 +77243,6 @@
   }
  },
  {
-  "id": 4657,
-  "name": "Ring of visibility",
-  "slot": "ring",
-  "icon": "4657.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 11988,
   "name": "Ring of wealth",
   "version": "(1)",
@@ -79782,64 +77366,6 @@
   "version": "Blue",
   "slot": "legs",
   "icon": "26874.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6787,
-  "name": "Robe of elidinis (bottom)",
-  "slot": "legs",
-  "icon": "6787.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 6786,
-  "name": "Robe of elidinis (top)",
-  "slot": "body",
-  "icon": "6786.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -86441,35 +83967,6 @@
   }
  },
  {
-  "id": 9083,
-  "name": "Seal of passage",
-  "slot": "neck",
-  "icon": "9083.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 28771,
   "name": "Searing boots",
   "slot": "feet",
@@ -88685,35 +86182,6 @@
   }
  },
  {
-  "id": 6790,
-  "name": "Shoes",
-  "slot": "feet",
-  "icon": "6790.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 841,
   "name": "Shortbow",
   "slot": "weapon",
@@ -88894,122 +86362,6 @@
   }
  },
  {
-  "id": 10839,
-  "name": "Silly jester boots",
-  "slot": "feet",
-  "icon": "10839.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 5,
-   "ranged": -5
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 10836,
-  "name": "Silly jester hat",
-  "slot": "head",
-  "icon": "10836.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 5,
-   "ranged": -5
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 10838,
-  "name": "Silly jester tights",
-  "slot": "legs",
-  "icon": "10838.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 5,
-   "ranged": -5
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 10837,
-  "name": "Silly jester top",
-  "slot": "body",
-  "icon": "10837.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 5,
-   "ranged": -5
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 9292,
   "name": "Silver bolts",
   "version": "Poison",
@@ -89046,36 +86398,6 @@
   "version": "Closed",
   "slot": "cape",
   "icon": "25465.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 1796,
-  "name": "Silver necklace",
-  "version": "Normal",
-  "slot": "neck",
-  "icon": "1796.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -90053,93 +87375,6 @@
   }
  },
  {
-  "id": 1846,
-  "name": "Slave boots",
-  "slot": "feet",
-  "icon": "1846.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 1845,
-  "name": "Slave robe",
-  "slot": "legs",
-  "icon": "1845.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 1844,
-  "name": "Slave shirt",
-  "slot": "body",
-  "icon": "1844.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 9787,
   "name": "Slayer cape",
   "version": "Trimmed",
@@ -90401,38 +87636,6 @@
   },
   "bonuses": {
    "str": 35,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 4083,
-  "name": "Sled",
-  "version": "Unwaxed",
-  "slot": "weapon",
-  "icon": "4083.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Unarmed",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -90770,35 +87973,6 @@
   "name": "Snail shell",
   "slot": "feet",
   "icon": "7800.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 29933,
-  "name": "Snake mask",
-  "slot": "head",
-  "icon": "29933.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -91441,7 +88615,7 @@
    "ranged": 0
   },
   "bonuses": {
-   "str": 121,
+   "str": 125,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -95551,7 +92725,7 @@
    "ranged": 0
   },
   "bonuses": {
-   "str": 16,
+   "str": 18,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -101850,7 +99024,7 @@
    "stab": 0,
    "slash": 0,
    "crush": 0,
-   "magic": 25,
+   "magic": 15,
    "ranged": 0
   },
   "defensive": {
@@ -101882,7 +99056,7 @@
    "stab": 0,
    "slash": 0,
    "crush": 0,
-   "magic": 25,
+   "magic": 15,
    "ranged": 0
   },
   "defensive": {
@@ -102022,37 +99196,6 @@
   },
   "bonuses": {
    "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 4086,
-  "name": "Trollweiss",
-  "slot": "weapon",
-  "icon": "4086.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Blunt",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": -100,
-   "slash": -100,
-   "crush": -50,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": -10,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -106259,35 +103402,6 @@
   }
  },
  {
-  "id": 24678,
-  "name": "Vyre noble legs",
-  "slot": "legs",
-  "icon": "24678.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 24832,
   "name": "Vyre noble pants (grey)",
   "slot": "legs",
@@ -106375,35 +103489,6 @@
   }
  },
  {
-  "id": 24680,
-  "name": "Vyre noble shoes",
-  "slot": "feet",
-  "icon": "24680.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 24836,
   "name": "Vyre noble skirt (grey)",
   "slot": "legs",
@@ -106466,35 +103551,6 @@
   "name": "Vyre noble skirt (red)",
   "slot": "legs",
   "icon": "24804.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 24676,
-  "name": "Vyre noble top",
-  "slot": "body",
-  "icon": "24676.png",
   "tradeable": false,
   "twoHanded": false,
   "tier": "junk",
@@ -107563,35 +104619,6 @@
   }
  },
  {
-  "id": 26567,
-  "name": "White goblin mail",
-  "slot": "body",
-  "icon": "26567.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 6599,
   "name": "White halberd",
   "slot": "weapon",
@@ -108166,26 +105193,26 @@
   "icon": "21433.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "elite",
   "offensive": {
-   "stab": null,
-   "slash": null,
-   "crush": null,
-   "magic": null,
-   "ranged": null
+   "stab": 100,
+   "slash": 100,
+   "crush": 100,
+   "magic": 100,
+   "ranged": 100
   },
   "defensive": {
-   "stab": null,
-   "slash": null,
-   "crush": null,
-   "magic": null,
-   "ranged": null
+   "stab": 100,
+   "slash": 100,
+   "crush": 100,
+   "magic": 100,
+   "ranged": 100
   },
   "bonuses": {
-   "str": null,
-   "ranged_str": null,
+   "str": 50,
+   "ranged_str": 0,
    "magic_str": 0,
-   "prayer": null
+   "prayer": 50
   }
  },
  {
@@ -108850,35 +105877,6 @@
   }
  },
  {
-  "id": 29930,
-  "name": "Wolf mask (Death on the Isle)",
-  "slot": "head",
-  "icon": "29930.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 2952,
   "name": "Wolfbane",
   "slot": "weapon",
@@ -109269,6 +106267,283 @@
   "icon": "22121.png",
   "tradeable": true,
   "twoHanded": false,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33881,
+  "name": "Wyrmscraig boots",
+  "slot": "feet",
+  "icon": "33881.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "category": "Unarmed",
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33872,
+  "name": "Wyrmscraig noble skirt",
+  "version": "Black",
+  "slot": "legs",
+  "icon": "33872.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "category": "Unarmed",
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33878,
+  "name": "Wyrmscraig shoes",
+  "slot": "feet",
+  "icon": "33878.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "category": "Unarmed",
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33923,
+  "name": "Wyrmscraig villager robe bottom (A)",
+  "version": "Black",
+  "slot": "body",
+  "icon": "33923.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "category": "Unarmed",
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33944,
+  "name": "Wyrmscraig villager robe bottom (B)",
+  "version": "Black",
+  "slot": "body",
+  "icon": "33944.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "category": "Unarmed",
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33905,
+  "name": "Wyrmscraig villager robe top (A)",
+  "version": "Beige",
+  "slot": "body",
+  "icon": "33905.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "category": "Unarmed",
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33965,
+  "name": "Wyrmscraig villager robe top (B)",
+  "version": "Black",
+  "slot": "body",
+  "icon": "33965.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "category": "Unarmed",
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33986,
+  "name": "Wyrmscraig villager skirt",
+  "version": "Black",
+  "slot": "legs",
+  "icon": "33986.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "category": "Unarmed",
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 34013,
+  "name": "Wyrmscraig villager work skirt",
+  "version": "Beige",
+  "slot": "legs",
+  "icon": "34013.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "category": "Unarmed",
   "tier": "junk",
   "offensive": {
    "stab": 0,
@@ -109719,35 +106994,6 @@
    "stab": 0,
    "slash": 1,
    "crush": 2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 9056,
-  "name": "Yellow goblin mail",
-  "slot": "body",
-  "icon": "9056.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
    "magic": 0,
    "ranged": 0
   },

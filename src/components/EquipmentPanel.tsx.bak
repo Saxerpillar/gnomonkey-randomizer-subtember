@@ -1,4 +1,4 @@
-import { SLOTS, type Item, type Loadout, type Slot, type Tier } from '../engine/types';
+import { SLOTS, type Item, type Loadout, type Slot } from '../engine/types';
 import { GpValue } from '../theme/GpValue';
 import { RsTooltip } from '../theme/RsTooltip';
 import tipStyles from '../theme/RsTooltip.module.css';
@@ -30,7 +30,7 @@ const slotTip = (slot: Slot, item: Item | null, locked: boolean) =>
   item ? (
     <>
       <span className={tipStyles.tipTitle}>{item.name}</span>
-      <span className={styles.tierLine} style={{ color: `var(--tier-${item.tier})` }}>
+      <span className={styles.tierLine} style={{ color:  }}>
         {TIER_LABEL[item.tier]}
       </span>
       {item.price != null ? (
@@ -64,7 +64,7 @@ const EquipSlot = ({
 }) => (
   <RsTooltip
     content={slotTip(slot, item, locked)}
-    className={`${styles.slot} ${item ? styles[item.tier] : ""} ${locked ? styles.locked : ""} ${item ? styles.lockable : ""}`}
+    className={`${styles.slot} ${locked ? styles.locked : ''} ${item ? styles.lockable : ''}`}
     style={{
       gridArea: slot,
       // occupied: dim the slot sprite so the item reads on top of it

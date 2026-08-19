@@ -1,15 +1,32 @@
 {
   "//": "Curated rules consumed by scripts/refresh-data.mjs. Hand-edited only.",
-
   "poolExclusions": {
     "//": "Entries matching any of these are dropped from the rollable pool.",
     "versionBlocklist": [
-      "Locked", "Broken", "Worn", "Uncharged", "Inactive", "Empty",
-      "0", "25", "50", "75",
-      "Emir's Arena", "Soul Wars", "Deadman Mode", "Deadman",
-      "Port Sarim", "Port Piscarilius", "Port Khazard", "Port Roberts",
-      "Brimhaven", "Civitas illa Fortis",
-      "Last Man Standing", "Trailblazer", "Shattered Relics", "Twisted"
+      "Locked",
+      "Broken",
+      "Worn",
+      "Uncharged",
+      "Inactive",
+      "Empty",
+      "0",
+      "25",
+      "50",
+      "75",
+      "Emir's Arena",
+      "Soul Wars",
+      "Deadman Mode",
+      "Deadman",
+      "Port Sarim",
+      "Port Piscarilius",
+      "Port Khazard",
+      "Port Roberts",
+      "Brimhaven",
+      "Civitas illa Fortis",
+      "Last Man Standing",
+      "Trailblazer",
+      "Shattered Relics",
+      "Twisted"
     ],
     "namePatterns": [
       "\\(Last Man Standing\\)",
@@ -18,23 +35,158 @@
       "\\(broken\\)",
       "\\(locked\\)"
     ],
-    "ids": []
+    "ids": [],
+    "questOnlyNames": [
+      "'perfect' necklace",
+      "'perfect' ring",
+      "10th squad sigil",
+      "Armadyl pendant",
+      "Bedsheet",
+      "Bird mask",
+      "Black desert robe",
+      "Black desert shirt",
+      "Black goblin mail",
+      "Blue goblin mail",
+      "Bomber cap",
+      "Bomber jacket",
+      "Builder's boots",
+      "Builder's shirt",
+      "Builder's trousers",
+      "Butler's tray",
+      "Butler's uniform (top)",
+      "Camel mask",
+      "Camulet",
+      "Catspeak amulet",
+      "Catspeak amulet(e)",
+      "Chicken (Recruitment Drive)",
+      "Circlet of water",
+      "Clockwork suit",
+      "Cowbell amulet",
+      "Crate of looty",
+      "Crate of ship parts (Pandemonium)",
+      "Crate with zanik",
+      "Crone-made amulet",
+      "Crystal pendant",
+      "Deep sea apparatus (The Red Reef)",
+      "Deep sea helmet",
+      "Deep sea helmet (The Red Reef)",
+      "Desert disguise",
+      "Diving apparatus",
+      "Doctor's hat",
+      "Drakan's medallion",
+      "Eagle cape",
+      "Emissary hood",
+      "Emissary robe bottom",
+      "Emissary robe top",
+      "Emissary sandals",
+      "Enchanted lyre",
+      "Fake beak",
+      "Fishbowl helmet",
+      "Fixed device",
+      "Fox (Recruitment Drive)",
+      "Gas mask",
+      "Ghostspeak amulet",
+      "Glarial's amulet",
+      "Grain (Recruitment Drive)",
+      "Hard hat",
+      "Hazeel's mark",
+      "Humphrey Dumphrey",
+      "Jaguar mask",
+      "Karamjan monkey greegree",
+      "Killer's knife",
+      "Kruk monkey greegree",
+      "Lyre",
+      "M'speak amulet",
+      "Magic lantern",
+      "Medical gown",
+      "Monkey (Monkey Madness II)",
+      "Monkey talisman",
+      "Mourner cloak",
+      "Mourner top",
+      "Mourner trousers",
+      "Mouse toy",
+      "Nurse hat",
+      "Odd spectacles",
+      "Orange goblin mail",
+      "Pendant of lucien",
+      "Pet rock",
+      "Plague jacket",
+      "Plague trousers",
+      "Potato sack",
+      "Preform",
+      "Prop sword (Death on the Isle)",
+      "Protest banner",
+      "Purple goblin mail",
+      "Ram mask",
+      "Reinforced goggles",
+      "Ring of charos",
+      "Ring of visibility",
+      "Robe of elidinis (bottom)",
+      "Robe of elidinis (top)",
+      "Seal of passage",
+      "Shoes",
+      "Silly jester boots",
+      "Silly jester hat",
+      "Silly jester tights",
+      "Silly jester top",
+      "Silver necklace",
+      "Slave boots",
+      "Slave robe",
+      "Slave shirt",
+      "Sled",
+      "Snake mask",
+      "Trollweiss",
+      "Vyre noble legs",
+      "Vyre noble shoes",
+      "Vyre noble top",
+      "White goblin mail",
+      "Wolf mask (Death on the Isle)",
+      "Yellow goblin mail"
+    ],
+    "//questOnlyNames": "Quest-only props: items in the wiki Category:Quest items that ALSO have zero combat stats. Derived once, hand-editable — add/remove freely. Real quest-obtained GEAR (Salve amulet, Proselyte, Iban staff, Climbing boots...) is deliberately NOT here."
   },
-
   "canonicalization": {
     "//": "After exclusions, collapse to ONE entry per item name. Highest-priority version wins; '' (no version) beats everything.",
-    "versionPriority": ["", "Normal", "Charged", "Activated", "Active", "Undamaged", "100", "New", "Poison", "Unpoisoned"]
+    "versionPriority": [
+      "",
+      "Normal",
+      "Charged",
+      "Activated",
+      "Active",
+      "Undamaged",
+      "100",
+      "New",
+      "Poison",
+      "Unpoisoned"
+    ]
   },
-
   "ammo": {
     "//": "Ammo-slot classification. Name rules run in order, first match wins; unmatched -> 'any' (blessings, misc). Weapon overrides beat category mapping (Bow->arrow, Crossbow->bolt).",
     "classRules": [
-      { "pattern": "atlatl dart", "class": "atlatl" },
-      { "pattern": "arrow", "class": "arrow" },
-      { "pattern": "brutal", "class": "arrow" },
-      { "pattern": "bolt", "class": "bolt" },
-      { "pattern": "javelin", "class": "javelin" },
-      { "pattern": "tar", "class": "tar" }
+      {
+        "pattern": "atlatl dart",
+        "class": "atlatl"
+      },
+      {
+        "pattern": "arrow",
+        "class": "arrow"
+      },
+      {
+        "pattern": "brutal",
+        "class": "arrow"
+      },
+      {
+        "pattern": "bolt",
+        "class": "bolt"
+      },
+      {
+        "pattern": "javelin",
+        "class": "javelin"
+      },
+      {
+        "pattern": "tar",
+        "class": "tar"
+      }
     ],
     "weaponAmmoOverrides": {
       "Heavy ballista": "javelin",
@@ -43,7 +195,10 @@
     },
     "exclusiveClasses": {
       "//": "Ammo classes only usable with the weapon that requires them (Atlatl dart <-> Eclipse atlatl, tars <-> salamanders). They never roll into the cosmetic any-ammo pool for other weapons.",
-      "classes": ["atlatl", "tar"]
+      "classes": [
+        "atlatl",
+        "tar"
+      ]
     },
     "categoryAmmoMap": {
       "//": "Weapon category -> required ammo class. Categories absent here need no specific ammo (their ammo slot rolls 'any').",
@@ -53,10 +208,14 @@
     },
     "selfAmmoWeapons": {
       "//": "Weapons whose category implies ammo but that need none (crystal-type bows; blowpipe is already Thrown). Their ammo slot rolls 'any'.",
-      "names": ["Crystal bow", "Bow of faerdhinen", "Craw's bow", "Webweaver bow"]
+      "names": [
+        "Crystal bow",
+        "Bow of faerdhinen",
+        "Craw's bow",
+        "Webweaver bow"
+      ]
     }
   },
-
   "tierOverrides": {
     "//": "Manual rarity-tier fixes for items whose power is invisible to the stat-sum formula (passive effects, built-in damage). name -> tier. Extend freely.",
     "Twisted bow": "elite",
@@ -82,22 +241,50 @@
     "Dawnbringer": "decent",
     "Starter staff": "common"
   },
-
   "spells": {
     "//": "Castable-staff spell rolling. Source: dps-calc cdn/json/spells.json, filtered to damaging spells (max_hit > 0). Excluded: demonbane line (only casts on demons -> dead roll vs most bosses).",
-    "excludedNamePatterns": ["Demonbane"],
+    "excludedNamePatterns": [
+      "Demonbane"
+    ],
     "forceInclude": {
       "//": "Damaging spells whose max_hit is 0 in the source because it scales dynamically (level-scaled), so the max_hit > 0 filter would wrongly drop them.",
-      "names": ["Magic Dart"]
+      "names": [
+        "Magic Dart"
+      ]
     },
     "weaponLocked": {
       "//": "Spells only castable with specific staves; they roll ONLY when that weapon rolled. Everything else rolls freely on any castable staff.",
-      "Iban Blast": ["Iban's staff", "Iban's staff (u)"],
-      "Magic Dart": ["Slayer's staff", "Slayer's staff (e)", "Staff of the dead", "Toxic staff of the dead", "Staff of light", "Staff of balance"],
-      "Saradomin Strike": ["Saradomin staff", "Staff of light"],
-      "Claws of Guthix": ["Guthix staff", "Staff of balance"],
-      "Flames of Zamorak": ["Zamorak staff", "Staff of the dead", "Toxic staff of the dead", "Accursed sceptre"]
+      "Iban Blast": [
+        "Iban's staff",
+        "Iban's staff (u)"
+      ],
+      "Magic Dart": [
+        "Slayer's staff",
+        "Slayer's staff (e)",
+        "Staff of the dead",
+        "Toxic staff of the dead",
+        "Staff of light",
+        "Staff of balance"
+      ],
+      "Saradomin Strike": [
+        "Saradomin staff",
+        "Staff of light"
+      ],
+      "Claws of Guthix": [
+        "Guthix staff",
+        "Staff of balance"
+      ],
+      "Flames of Zamorak": [
+        "Zamorak staff",
+        "Staff of the dead",
+        "Toxic staff of the dead",
+        "Accursed sceptre"
+      ]
     },
-    "castableCategories": ["Staff", "Bladed Staff", "Polestaff"]
+    "castableCategories": [
+      "Staff",
+      "Bladed Staff",
+      "Polestaff"
+    ]
   }
 }

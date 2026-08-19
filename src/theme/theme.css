@@ -54,6 +54,13 @@
   --gp-white: #ffffff;
   --gp-green: #00ff80;
 
+  /* item rarity tiers (loot-game convention, OSRS-toned) */
+  --tier-junk: #6e695c;
+  --tier-common: #d8d0c0;
+  --tier-decent: #4cc24c;
+  --tier-strong: #4c9be0;
+  --tier-elite: #f4d03f;
+
   /* fonts */
   --font-body: 'RuneScape', 'Segoe UI', sans-serif;
   --font-small: 'RuneScape Small', 'Segoe UI', sans-serif;
