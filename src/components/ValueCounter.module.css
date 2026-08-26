@@ -1,22 +1,38 @@
+/* Centre-stage under the title: the value is the running score of the run, so
+   it stays readable DURING the roll — above the reveal overlay (z 60), not
+   behind it, and not tucked into a corner. */
 .counter {
   position: fixed;
-  top: 18px;
-  right: 18px;
-  z-index: 55;
+  /* below the app title, not on top of it */
+  top: 104px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 70;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  background: rgba(10, 9, 7, 0.9);
-  border: 1px solid var(--border-light);
+  gap: 12px;
+  padding: 10px 26px;
+  background: rgba(10, 9, 7, 0.92);
+  border: 2px solid var(--gold);
   outline: 1px solid var(--border-dark);
-  border-radius: 4px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  font-size: 28px;
 }
 
 .label {
   font-family: var(--font-bold);
-  font-size: 16px;
-  color: var(--text-muted);
-  text-shadow: 1px 1px 0 #000;
+  font-size: 22px;
+  color: var(--orange);
+  text-shadow: var(--text-outline);
+}
+
+/* the gp value itself scales with the counter's font-size */
+.counter :global(span) {
+  font-size: inherit;
+}
+
+.counter :global(img) {
+  width: 26px;
+  height: 26px;
 }

@@ -158,3 +158,50 @@
   flex-direction: column;
   gap: 16px;
 }
+
+/* raid result: the boss up top, then the three style-forced setups side by side */
+.raidBoss {
+  max-width: 520px;
+  margin: 0 auto 20px;
+}
+
+.squad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .squad {
+    grid-template-columns: 1fr;
+  }
+}
+
+.squadPanel .gearStack {
+  gap: 10px;
+}
+
+/* raid ceremony: three style-forced skeletons assembling concurrently */
+.squadStage {
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.squadStageLane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.squadStageLabel {
+  font-family: var(--font-bold);
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: var(--gold-bright);
+  text-shadow: var(--text-outline);
+}

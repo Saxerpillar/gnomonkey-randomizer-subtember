@@ -11,12 +11,16 @@ import type { RevealData } from './useCeremony';
 import styles from './RevealCard.module.css';
 
 const ROW = 64;
+/** The boss finale reels in ~5x the area a gear slot gets. */
+const BOSS_ROW = 96;
 const FILLERS = 26;
 const DECOYS = 2;
 const ROLL_MS = 3900; // the tape ticks for the full sound
 const TOOLTIP_MS = 900;
 const MINIMIZE_MS = 600;
 const BOSS_SUSPENSE_MS = 800;
+/** Beat between the boss landing and the HARD MODE stamp. */
+const HARD_MODE_MS = 1100;
 
 export type LandingImpact = 'normal' | 'elite' | 'boss';
 
@@ -31,28 +35,63 @@ export type LandingImpact = 'normal' | 'elite' | 'boss';
 export const RevealCard = ({
   data,
   muted,
+  speed = 1,
   onDone,
   onLand,
 }: {
   data: RevealData;
   muted: boolean;
+  /** Debug ceremony speed multiplier: 2 = twice as fast. */
+  speed?: number;
   onDone: () => void;
   onLand?: (impact: LandingImpact) => void;
 }) => {
   const [phase, setPhase] = useState<'roll' | 'tooltip' | 'reveal' | 'minimize'>('roll');
   const [row, setRow] = useState(0);
+  const [motion, setMotion] = useState({ ms: 0, ease: "linear" });
   const [minimize, setMinimize] = useState<string>();
   const [landed, setLanded] = useState(false);
   const [landedTier, setLandedTier] = useState<Tier | null>(null);
+  const [stamped, setStamped] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const onDoneRef = useRef(onDone);
   const onLandRef = useRef(onLand);
   onDoneRef.current = onDone;
   onLandRef.current = onLand;
+  // Progressive skip: the running phase's own timers, plus the two jumps a
+  // click can take (land the reel now / drop the card into its slot now).
+  const timersRef = useRef<number[]>([]);
+  const skipToLandRef = useRef<(() => void) | null>(null);
+  const skipToMinimizeRef = useRef<(() => void) | null>(null);
+  const finishRef = useRef<(() => void) | null>(null);
 
+  // Both slots and the boss reel on a tape — the boss is just a tape of faces.
   const tape = useMemo(() => {
-    if (data.kind !== 'slot' || data.candidates.length === 0) return null;
-    return buildTape(data.candidates, data.item, mulberry32(randomSeed()), FILLERS, DECOYS);
+    if (data.kind === 'slot') {
+      if (data.candidates.length === 0) return null;
+      return buildTape(data.candidates, data.item, mulberry32(randomSeed()), FILLERS, DECOYS);
+    }
+    if (data.kind === 'squad') {
+      const first = data.reels[0];
+      if (!first || first.candidates.length === 0) return null;
+      return buildTape(first.candidates, first.item, mulberry32(randomSeed()), FILLERS, DECOYS);
+    }
+    if (data.candidates.length < 2) return null;
+    return buildTape(data.candidates, data.boss, mulberry32(randomSeed()), FILLERS, DECOYS);
+  }, [data]);
+
+  /**
+   * Raid lanes: one tape each, all built with the SAME filler count so every
+   * winner sits at the same index — that lets all three share one row offset
+   * and land on the same beat.
+   */
+  const squadTapes = useMemo(() => {
+    if (data.kind !== 'squad') return null;
+    return data.reels.map((r) =>
+      r.candidates.length === 0
+        ? { items: [r.item], winnerIndex: 0 }
+        : buildTape(r.candidates, r.item, mulberry32(randomSeed()), FILLERS, DECOYS),
+    );
   }, [data]);
 
   useEffect(() => {
@@ -63,16 +102,35 @@ export const RevealCard = ({
   useEffect(() => {
     if (!landed) return;
     const tier = data.kind === 'slot' ? data.tier : null;
+    const squadBest =
+      data.kind === 'squad'
+        ? data.reels.some((r) => r.tier === 'elite')
+          ? 'elite'
+          : null
+        : null;
     if (tier) setLandedTier(tier);
     if (!muted) playThud();
     if ((tier === 'elite' || data.kind === 'boss') && !muted) playFanfare();
-    onLandRef.current?.(data.kind === 'boss' ? 'boss' : tier === 'elite' ? 'elite' : 'normal');
+    onLandRef.current?.(
+      data.kind === 'boss' ? 'boss' : tier === 'elite' || squadBest === 'elite' ? 'elite' : 'normal',
+    );
   }, [landed, data, muted]);
 
   useEffect(() => {
+    const s = Math.max(1, speed);
+    const ROLL = ROLL_MS / s;
+    const TOOLTIP = TOOLTIP_MS / s;
+    const MINIMIZE = MINIMIZE_MS / s;
+    const HARD_MODE = HARD_MODE_MS / s;
+    const BOSS_SUSPENSE = BOSS_SUSPENSE_MS / s;
     const target = data.target;
     const minimize = () => {
       if (data.kind === 'boss') setLanded(true);
+      if (data.kind === 'squad') {
+        // Three destinations — fade in place instead of flying to one slot.
+        setPhase('minimize');
+        return;
+      }
       const el = document.querySelector(target);
       const card = cardRef.current;
       if (el && card) {
@@ -87,11 +145,11 @@ export const RevealCard = ({
     };
     const finish = () => onDoneRef.current();
 
-    if (data.kind === 'boss') {
-      // suspense "?" → reveal name → minimize
-      const t1 = setTimeout(() => setPhase('reveal'), BOSS_SUSPENSE_MS);
-      const t2 = setTimeout(minimize, ROLL_MS);
-      const t3 = setTimeout(finish, ROLL_MS + MINIMIZE_MS);
+    // Boss with too small a pool to reel: fall back to suspense "?" → name.
+    if (data.kind === 'boss' && !tape) {
+      const t1 = setTimeout(() => setPhase('reveal'), BOSS_SUSPENSE);
+      const t2 = setTimeout(minimize, ROLL);
+      const t3 = setTimeout(finish, ROLL + MINIMIZE);
       return () => {
         clearTimeout(t1);
         clearTimeout(t2);
@@ -120,32 +178,89 @@ export const RevealCard = ({
       };
     }
     const deltas: number[] = [...Array(targetRow).fill(1), 1, -1];
-    const delays = tapeTickDelays(deltas.length, ROLL_MS);
-    const timers: number[] = [];
+    const delays = tapeTickDelays(deltas.length, ROLL);
+    const timers = timersRef.current;
     let i = 0;
     let r = 0;
+
+    // Land now, but keep the bounce: a fast overshoot then a springy settle.
+    const land = () => {
+      timers.forEach(clearTimeout);
+      timers.length = 0;
+      i = deltas.length;
+      setMotion({ ms: 90, ease: 'linear' });
+      setRow(targetRow + 1);
+      timers.push(
+        window.setTimeout(() => {
+          setMotion({ ms: 200, ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)' });
+          setRow(targetRow);
+          timers.push(window.setTimeout(settle, 200));
+        }, 90),
+      );
+    };
+    const settle = () => {
+      setLanded(true);
+      setPhase(data.kind === 'boss' || data.kind === 'squad' ? 'reveal' : 'tooltip');
+      // A hard-mode fight shows the normal boss first, then stamps HARD MODE
+      // after a beat — so the card lingers long enough to read both.
+      const stampWait = data.kind === 'boss' && data.hardMode ? HARD_MODE : 0;
+      if (stampWait) timers.push(window.setTimeout(() => setStamped(true), stampWait));
+      timers.push(window.setTimeout(minimize, TOOLTIP + stampWait));
+      timers.push(window.setTimeout(finish, TOOLTIP + stampWait + MINIMIZE));
+    };
+    skipToLandRef.current = land;
+    skipToMinimizeRef.current = () => {
+      timers.forEach(clearTimeout);
+      timers.length = 0;
+      minimize();
+      timers.push(window.setTimeout(finish, MINIMIZE));
+    };
+    finishRef.current = () => {
+      timers.forEach(clearTimeout);
+      timers.length = 0;
+      finish();
+    };
     const tick = () => {
       if (i < deltas.length) {
         r += deltas[i];
+        // Glide to the next row over that tick's whole duration instead of
+        // teleporting: linear while the reel is spinning, then a springy
+        // overshoot + settle for the final two beats (the bounce-back).
+        const dur = delays[i] ?? 0;
+        const isSettle = i === deltas.length - 1;
+        const isOvershoot = i === deltas.length - 2;
+        setMotion(
+          isSettle
+            ? { ms: Math.max(260, dur), ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }
+            : isOvershoot
+              ? { ms: Math.max(200, dur), ease: 'cubic-bezier(0.22, 0.61, 0.36, 1)' }
+              : { ms: dur, ease: 'linear' },
+        );
         setRow(r);
         i += 1;
         timers.push(window.setTimeout(tick, delays[Math.min(i, delays.length - 1)] ?? 0));
         return;
       }
-      setLanded(true);
-      setPhase('tooltip');
-      timers.push(window.setTimeout(minimize, TOOLTIP_MS));
-      timers.push(window.setTimeout(finish, TOOLTIP_MS + MINIMIZE_MS));
+      // The boss gets its full-size announcement; slots get the tooltip card.
+      settle();
     };
     timers.push(window.setTimeout(tick, delays[0] ?? 0));
-    return () => timers.forEach(clearTimeout);
-  }, [data, tape]);
+    return () => {
+      timers.forEach(clearTimeout);
+      timers.length = 0;
+      skipToLandRef.current = null;
+      skipToMinimizeRef.current = null;
+      finishRef.current = null;
+    };
+  }, [data, tape, speed]);
 
   const isSlot = data.kind === 'slot';
-  const title = isSlot ? data.item.name : data.boss.name;
-  const icon = isSlot ? asset(`img/items/${data.item.icon}`) : asset(`img/bosses/${encodeURIComponent(data.boss.image)}`);
+  const isSquad = data.kind === 'squad';
+  const isBoss = data.kind === 'boss';
+  const title = isSlot ? data.item.name : isBoss ? data.boss.name : SLOT_LABEL[data.slot];
+  const icon = isBoss ? asset(`img/bosses/${encodeURIComponent(data.boss.image)}`) : '';
   const burstClass =
-    data.kind === 'boss'
+    isBoss
       ? landed
         ? styles.burstBoss
         : null
@@ -165,40 +280,112 @@ export const RevealCard = ({
     </span>
   ) : null;
 
+  /**
+   * Progressive skip: first click lands the reel (keeping the bounce), the
+   * next drops the card into its slot, the next ends the beat outright.
+   */
+  const skip = () => {
+    if (phase === 'roll') skipToLandRef.current?.();
+    else if (phase === 'minimize') finishRef.current?.();
+    else skipToMinimizeRef.current?.();
+  };
+
   return (
-    <div className={styles.overlay}>
+    <div className={styles.overlay} onClick={skip}>
       <div className={styles.backdrop} />
       <div
         ref={cardRef}
-        className={`${styles.card} ${phase === 'minimize' ? styles.minimize : ''}`}
+        className={`${styles.card} ${landedTier ? styles[`card${capitalize(landedTier)}`] : ""} ${phase === "minimize" ? styles.minimize : ""}`}
         style={phase === 'minimize' && minimize ? { transform: minimize } : undefined}
       >
         {burstClass && <span className={`${styles.burst} ${burstClass}`} />}
-        {isSlot && phase === 'roll' && tape && (
-          <div className={styles.tapeWrap}>
+        {isSquad && phase === 'roll' && squadTapes && (
+          <div className={styles.squadWrap}>
             <span className={styles.slotLabel}>{SLOT_LABEL[data.slot]}</span>
-            <div className={styles.tapeWindow}>
+            <div className={styles.squadRow}>
+              {data.reels.map((reel, i) => (
+                <div key={reel.lane} className={styles.squadLane}>
+                  <span className={styles.laneLabel}>{reel.label}</span>
+                  <div className={styles.tapeWindow}>
+                    <span className={styles.tapeHighlight} />
+                    <span
+                      className={styles.tapeColumn}
+                      style={{
+                        transform: `translateY(${-row * ROW}px)`,
+                        transition: `transform ${motion.ms}ms ${motion.ease}`,
+                      }}
+                    >
+                      {squadTapes[i].items.map((it, j) => (
+                        <img
+                          key={`${it.id}-${j}`}
+                          className={styles.tapeRow}
+                          src={asset(`img/items/${it.icon}`)}
+                          alt=""
+                        />
+                      ))}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {isSquad && phase !== 'roll' && (
+          <div className={styles.squadWrap}>
+            <span className={styles.slotLabel}>{SLOT_LABEL[data.slot]}</span>
+            <div className={styles.squadRow}>
+              {data.reels.map((reel) => (
+                <div key={reel.lane} className={`${styles.squadResult} ${styles[`card${capitalize(reel.tier)}`]}`}>
+                  <span className={styles.laneLabel}>{reel.label}</span>
+                  <img className={styles.squadIcon} src={asset(`img/items/${reel.item.icon}`)} alt="" />
+                  <span className={styles.squadName}>{reel.item.name}</span>
+                  {reel.item.price != null && <GpValue gp={reel.item.price} />}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {!isSquad && phase === 'roll' && tape && (
+          <div className={styles.tapeWrap}>
+            <span className={styles.slotLabel}>{isSlot ? SLOT_LABEL[data.slot] : 'Your fate'}</span>
+            <div className={`${styles.tapeWindow} ${isSlot ? "" : styles.tapeWindowBoss}`}>
               <span className={styles.tapeHighlight} />
-              <span className={styles.tapeColumn} style={{ transform: `translateY(${-row * ROW}px)` }}>
+              <span
+                className={styles.tapeColumn}
+                style={{
+                  transform: `translateY(${-row * (isSlot ? ROW : BOSS_ROW)}px)`,
+                  transition: `transform ${motion.ms}ms ${motion.ease}`,
+                }}
+              >
                 {tape.items.map((it, i) => (
-                  <img key={`${it.id}-${i}`} className={styles.tapeRow} src={asset(`img/items/${it.icon}`)} alt="" />
+                  <img
+                    key={`${'id' in it ? it.id : it.name}-${i}`}
+                    className={`${styles.tapeRow} ${isSlot ? "" : styles.tapeRowBoss}`}
+                    src={
+                      'id' in it
+                        ? asset(`img/items/${it.icon}`)
+                        : asset(`img/bosses/${encodeURIComponent(it.image)}`)
+                    }
+                    alt=""
+                  />
                 ))}
               </span>
             </div>
           </div>
         )}
-        {isSlot && (phase !== 'roll' || !tape) && revealContent}
-        {!isSlot && phase === 'roll' && (
+        {isSlot && (phase !== "roll" || !tape) && revealContent}
+        {isBoss && phase === "roll" && !tape && (
           <>
             <span className={styles.bossSuspense}>?</span>
             <span className={styles.bossSubtitle}>{BOSS_SUSPENSE_LINE}</span>
           </>
         )}
-        {!isSlot && phase !== 'roll' && (
+        {isBoss && phase !== 'roll' && (
           <>
             <img className={styles.bossIcon} src={icon} alt="" />
             <span className={styles.bossTitle}>{title}</span>
             <span className={styles.bossSubtitle}>{CHALLENGER_SUBTITLE}</span>
+            {!isSlot && data.hardMode && stamped && <span className={styles.hardModeStamp}>HARD MODE</span>}
           </>
         )}
       </div>

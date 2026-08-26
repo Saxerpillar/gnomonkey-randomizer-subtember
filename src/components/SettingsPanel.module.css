@@ -130,3 +130,33 @@
 .toggle:hover .checkbox {
   filter: brightness(1.2);
 }
+
+/* debug block: visually fenced off from the real settings */
+.debug {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px dashed var(--red);
+  border-radius: 4px;
+  background: rgba(126, 23, 16, 0.1);
+}
+
+.debugTitle {
+  font-family: var(--font-bold);
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--red);
+  text-shadow: var(--text-outline);
+}
+
+.select {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--text);
+  background: var(--tile);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 5px 8px;
+}

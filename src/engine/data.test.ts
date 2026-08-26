@@ -32,7 +32,7 @@ describe('generated equipment.json', () => {
   });
 
   it('every ammo item is classified; launchers require a real class', () => {
-    const classes = new Set(['arrow', 'bolt', 'javelin', 'tar', 'atlatl', 'any']);
+    const classes = new Set(['arrow', 'bolt', 'javelin', 'tar', 'atlatl', 'kebbit', 'antler', 'boltrack', 'any']);
     for (const i of items) {
       if (i.slot === 'ammo') expect(classes.has(i.ammoClass as string)).toBe(true);
       if (i.requiredAmmo !== undefined) {
@@ -53,7 +53,7 @@ describe('generated equipment.json', () => {
   });
 
   it('weapon-exclusive ammo classes are stamped ammoExclusive', () => {
-    const exclusive = new Set(['atlatl', 'tar']);
+    const exclusive = new Set(['atlatl', 'tar', 'kebbit', 'antler', 'boltrack']);
     for (const i of items) {
       if (i.slot !== 'ammo') continue;
       expect(!!i.ammoExclusive).toBe(exclusive.has(i.ammoClass as string));

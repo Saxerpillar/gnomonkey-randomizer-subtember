@@ -73,6 +73,7 @@ export const EquipmentPanel = ({
   visibleSlots,
   onToggleLock,
   onSlotContextMenu,
+  deactivated,
 }: {
   loadout: Loadout;
   locks: Partial<Record<Slot, Item>>;
@@ -80,8 +81,10 @@ export const EquipmentPanel = ({
   visibleSlots?: Slot[];
   onToggleLock: (slot: Slot) => void;
   onSlotContextMenu: (slot: Slot, e: React.MouseEvent) => void;
+  /** Gauntlet: no gear allowed, so the whole tab reads as powered down. */
+  deactivated?: boolean;
 }) => (
-  <div className={styles.tab}>
+  <div className={`${styles.tab} ${deactivated ? styles.deactivated : ""}`}>
     {SLOTS.map((slot) => {
       if (visibleSlots && !visibleSlots.includes(slot)) {
         // not yet revealed — a faint ghost marks where the tile will land

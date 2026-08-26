@@ -15,7 +15,17 @@ export const SLOTS = [
 
 export type Slot = (typeof SLOTS)[number];
 
-export type AmmoClass = 'arrow' | 'bolt' | 'javelin' | 'tar' | 'atlatl' | 'any';
+export type AmmoClass =
+  | 'arrow'
+  | 'bolt'
+  | 'javelin'
+  | 'tar'
+  | 'atlatl'
+  // specialty bolts only their own crossbow can fire
+  | 'kebbit'
+  | 'antler'
+  | 'boltrack'
+  | 'any';
 
 /** Rarity tier, assigned per slot by combat-power percentile at refresh time. */
 export type Tier = 'junk' | 'common' | 'decent' | 'strong' | 'elite';

@@ -35,19 +35,24 @@ export const revealBeats = (locked: ReadonlySet<Slot>): Slot[][] => {
  * items, then the winner, then a couple of decoy tails so the reel can wobble
  * past the winner before snapping back. `winnerIndex` marks the winner's slot.
  */
-export interface Tape {
-  items: Item[];
+export interface Tape<T = Item> {
+  items: T[];
   winnerIndex: number;
 }
 
-export const buildTape = (
-  candidates: readonly Item[],
-  final: Item,
+/**
+ * Generic over the reel's payload so the boss finale reels on a tape of boss
+ * faces with the same machinery the gear slots use. Entries are compared by
+ * reference (both pools hand out the same objects the winner came from).
+ */
+export const buildTape = <T,>(
+  candidates: readonly T[],
+  final: T,
   rng: Rng,
   fillers: number,
   decoys = 2,
-): Tape => {
-  const others = shuffled(rng, candidates.filter((c) => c.id !== final.id));
+): Tape<T> => {
+  const others = shuffled(rng, candidates.filter((c) => c !== final));
   const fill = others.slice(0, fillers);
   const tail = others.slice(fillers, fillers + decoys);
   return { items: [...fill, final, ...tail], winnerIndex: fill.length };

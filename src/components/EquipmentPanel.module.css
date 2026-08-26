@@ -43,6 +43,10 @@
 
 .slot:hover {
   filter: brightness(1.2);
+  /* filter creates a stacking context, which would trap the tooltip inside
+     this slot and let later sibling slots paint over it — lift the whole
+     hovered slot above its neighbours instead. */
+  z-index: 200;
 }
 
 .icon {
@@ -136,4 +140,139 @@
 .elite {
   border-color: var(--tier-elite);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55), 0 0 9px rgba(244, 208, 63, 0.45);
+}
+
+/* Gauntlet: nothing may be brought in, so the tab powers down — desaturated,
+   dimmed, with a red "no entry" wash sweeping across it once. */
+.deactivated {
+  position: relative;
+  filter: grayscale(1) brightness(0.5);
+  animation: powerDown 700ms ease-out both;
+}
+
+.deactivated::after {
+  content: 'NO GEAR ALLOWED';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-bold);
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: var(--red);
+  text-shadow: var(--text-outline);
+  background: rgba(126, 23, 16, 0.16);
+  border: 2px dashed var(--red);
+  border-radius: 6px;
+  animation: powerStamp 600ms 350ms cubic-bezier(0.2, 1.6, 0.4, 1) both;
+  pointer-events: none;
+}
+
+@keyframes powerDown {
+  0% {
+    filter: grayscale(0) brightness(1);
+  }
+  35% {
+    filter: grayscale(0.2) brightness(1.5);
+  }
+  100% {
+    filter: grayscale(1) brightness(0.5);
+  }
+}
+
+@keyframes powerStamp {
+  from {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== rarity "card treatments" (Balatro-ish) =====================
+   Each tier gets a distinct backing behind the item icon, escalating from
+   nothing (junk/common) to an animated polychrome sheen (elite). The layer
+   sits under the icon (z-index 0 vs the icon's own stacking) and never eats
+   pointer events. */
+.slot::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* decent — a soft green pool of light */
+.decent::before {
+  background: radial-gradient(ellipse at 50% 55%, rgba(76, 194, 76, 0.35), transparent 70%);
+}
+
+/* strong — blue pool plus a slow "foil" band sweeping across */
+.strong::before {
+  background:
+    linear-gradient(115deg, transparent 35%, rgba(180, 220, 255, 0.5) 50%, transparent 65%),
+    radial-gradient(ellipse at 50% 55%, rgba(76, 155, 224, 0.4), transparent 70%);
+  background-size: 260% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  animation: foilSweep 3.4s ease-in-out infinite;
+}
+
+/* elite — gold pool plus a faster polychrome sheen and a breathing glow */
+.elite::before {
+  background:
+    linear-gradient(
+      115deg,
+      transparent 30%,
+      rgba(255, 120, 200, 0.45) 42%,
+      rgba(255, 240, 130, 0.6) 50%,
+      rgba(120, 230, 255, 0.45) 58%,
+      transparent 70%
+    ),
+    radial-gradient(ellipse at 50% 55%, rgba(244, 208, 63, 0.45), transparent 72%);
+  background-size: 240% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  animation: polySweep 2.6s ease-in-out infinite, eliteBreathe 2.6s ease-in-out infinite;
+}
+
+@keyframes foilSweep {
+  0% {
+    background-position: 130% 0, 0 0;
+  }
+  100% {
+    background-position: -130% 0, 0 0;
+  }
+}
+
+@keyframes polySweep {
+  0% {
+    background-position: 120% 0, 0 0;
+  }
+  100% {
+    background-position: -120% 0, 0 0;
+  }
+}
+
+@keyframes eliteBreathe {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.35);
+  }
+}
+
+/* the icon must ride above its treatment */
+.icon {
+  position: relative;
+  z-index: 1;
+}
+
+/* a powered-down tab shows no rarity shimmer */
+.deactivated .slot::before {
+  animation: none;
+  background: none;
 }

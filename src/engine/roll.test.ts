@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { loadoutValue, roll } from './roll';
+import { loadoutValue, roll, rerollSlot } from './roll';
 import { mulberry32 } from './rng';
 import { costOf, SLOTS, type Item, type Loadout, type RollSettings, type Slot } from './types';
 
@@ -179,6 +179,107 @@ describe('ammo compatibility', () => {
       const out = roll(pool, settings(), mulberry32(seed));
       expect(out.ammo?.name).toBe('Atlatl dart');
     }
+  });
+});
+
+describe('rerollSlot', () => {
+  const base = (): Loadout => {
+    const l = roll(basicPool(), settings(), mulberry32(5));
+    return l;
+  };
+
+  it('changes only the target slot', () => {
+    const pool = basicPool();
+    const before = base();
+    const after = rerollSlot(pool, before, 'head', settings(), mulberry32(9));
+    for (const s of SLOTS) {
+      if (s === 'head') continue;
+      expect(after[s]).toBe(before[s]);
+    }
+  });
+
+  it('respects the budget left by the other slots', () => {
+    const pool = [
+      item('head', { name: 'cheap hat', price: 100 }),
+      item('head', { name: 'lavish hat', price: 5_000_000 }),
+      item('body', { name: 'body', price: 900 }),
+    ];
+    const start = roll(pool, settings({ budget: 1000 }), mulberry32(3));
+    for (const seed of seeds.slice(0, 50)) {
+      const after = rerollSlot(pool, start, 'head', settings({ budget: 1000 }), mulberry32(seed));
+      const spentElsewhere = SLOTS.reduce(
+        (sum, s) => sum + (s === 'head' ? 0 : costOf(after[s] ?? ({ tradeable: false } as Item))),
+        0,
+      );
+      expect(costOf(after.head!) + spentElsewhere).toBeLessThanOrEqual(1000);
+    }
+  });
+
+  it('a rerolled 2h weapon clears the shield (cosmetic ammo survives)', () => {
+    const pool = [item('weapon', { name: 'only 2h', twoHanded: true })];
+    const start: Loadout = {
+      ...roll([], settings(), mulberry32(1)),
+      weapon: item('weapon', { name: 'old 1h' }),
+      shield: item('shield', { name: 'kite' }),
+      ammo: item('ammo', { name: 'arrows', ammoClass: 'arrow' }),
+    };
+    const after = rerollSlot(pool, start, 'weapon', settings(), mulberry32(2));
+    expect(after.weapon?.twoHanded).toBe(true);
+    expect(after.shield).toBeNull();
+    // A melee weapon does not constrain the ammo slot, same as a full roll.
+    expect(after.ammo?.name).toBe('arrows');
+  });
+
+  it('a rerolled launcher drops ammo it cannot fire', () => {
+    const pool = [item('weapon', { name: 'crossbow', category: 'Crossbow', requiredAmmo: 'bolt' })];
+    const start: Loadout = {
+      ...roll([], settings(), mulberry32(1)),
+      weapon: item('weapon', { name: 'old bow', category: 'Bow', requiredAmmo: 'arrow' }),
+      ammo: item('ammo', { name: 'arrows', ammoClass: 'arrow' }),
+    };
+    const after = rerollSlot(pool, start, 'weapon', settings(), mulberry32(2));
+    expect(after.weapon?.name).toBe('crossbow');
+    expect(after.ammo).toBeNull(); // arrows cannot go in a crossbow
+  });
+
+  it('rerolling the shield under a 2h weapon is a no-op', () => {
+    const start: Loadout = {
+      ...roll([], settings(), mulberry32(1)),
+      weapon: item('weapon', { name: 'big 2h', twoHanded: true }),
+    };
+    const after = rerollSlot([item('shield', { name: 'kite' })], start, 'shield', settings(), mulberry32(4));
+    expect(after).toBe(start);
+    expect(after.shield).toBeNull();
+  });
+
+  it('keeps ammo compatible with the equipped weapon', () => {
+    const pool = [
+      item('ammo', { name: 'arrows', ammoClass: 'arrow' }),
+      item('ammo', { name: 'bolts', ammoClass: 'bolt' }),
+    ];
+    const start: Loadout = {
+      ...roll([], settings(), mulberry32(1)),
+      weapon: item('weapon', { name: 'bow', category: 'Bow', requiredAmmo: 'arrow' }),
+    };
+    for (const seed of seeds.slice(0, 40)) {
+      const after = rerollSlot(pool, start, 'ammo', settings(), mulberry32(seed));
+      expect(after.ammo?.name).toBe('arrows');
+    }
+  });
+
+  it('leaves the slot untouched when nothing is affordable', () => {
+    const pool = [item('head', { name: 'pricey', price: 9_000_000 })];
+    const start: Loadout = { ...roll([], settings(), mulberry32(1)), head: item('head', { name: 'kept' }) };
+    const after = rerollSlot(pool, start, 'head', settings({ budget: 10 }), mulberry32(6));
+    expect(after.head?.name).toBe('kept');
+  });
+
+  it('is deterministic for a given seed', () => {
+    const pool = basicPool();
+    const start = base();
+    const a = rerollSlot(pool, start, 'legs', settings(), mulberry32(77));
+    const b = rerollSlot(pool, start, 'legs', settings(), mulberry32(77));
+    expect(a.legs).toEqual(b.legs);
   });
 });
 

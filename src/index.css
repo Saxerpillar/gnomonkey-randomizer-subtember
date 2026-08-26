@@ -4,6 +4,19 @@
   box-sizing: border-box;
 }
 
+/* This is a game UI, not a document: spam-clicking to skip a reveal should
+   never start highlighting text. Inputs keep normal selection behaviour. */
+body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+input,
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
 html,
 body,
 #root {

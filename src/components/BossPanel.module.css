@@ -102,8 +102,74 @@
 
 .challengeValue {
   font-family: var(--font-bold);
-  font-size: 20px;
-  color: var(--gold);
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--gold-bright);
+  text-shadow: var(--text-outline), 0 0 14px rgba(244, 208, 63, 0.45);
+  text-align: center;
+  animation: challengePop 420ms cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+@keyframes challengePop {
+  from {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* timed challenge: a red mm:ss countdown, ticking from the moment it shows */
+.timer {
+  font-family: var(--font-bold);
+  font-size: 34px;
+  color: var(--red);
+  text-shadow: var(--text-outline);
+  letter-spacing: 2px;
+}
+
+.timerDone {
+  animation: timerFlash 900ms steps(1) infinite;
+}
+
+@keyframes timerFlash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* hard-mode stamp under the boss name */
+.hardMode {
+  font-family: var(--font-bold);
+  font-size: 26px;
+  letter-spacing: 3px;
+  color: var(--red);
+  text-shadow: var(--text-outline);
+  animation: stampIn 420ms cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+@keyframes stampIn {
+  from {
+    opacity: 0;
+    transform: scale(2.2) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* scaled depth objective (delve/wave bosses) */
+.objective {
+  font-family: var(--font-bold);
+  font-size: 24px;
+  color: var(--gold-bright);
   text-shadow: var(--text-outline);
   text-align: center;
 }

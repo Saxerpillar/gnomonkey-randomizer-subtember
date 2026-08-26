@@ -5,7 +5,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
+  /* clickable: a click progressively skips the reveal (land -> minimize -> end) */
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 /* dims the edges so the card owns the screen */
@@ -235,4 +237,121 @@
   letter-spacing: 2px;
   color: var(--orange);
   text-shadow: var(--text-outline);
+}
+
+/* the boss reel shows full renders — same 64px row height, wider window */
+.tapeWindowBoss {
+  width: 320px;
+  height: 288px;
+}
+
+.tapeRowBoss {
+  width: 320px;
+  height: 96px;
+}
+
+/* HARD MODE lands after the boss name, as a slammed-in red stamp */
+.hardModeStamp {
+  font-family: var(--font-bold);
+  font-size: 34px;
+  letter-spacing: 4px;
+  color: var(--red);
+  text-shadow: var(--text-outline);
+  animation: stampSlam 420ms cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+@keyframes stampSlam {
+  from {
+    opacity: 0;
+    transform: scale(2.6) rotate(-9deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Once an item lands, the card frame takes its rarity colour — the same
+   language the equipment slots use, so the tier reads instantly on reveal. */
+.cardJunk {
+  border-color: var(--tier-junk);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(110, 105, 92, 0.35);
+}
+
+.cardCommon {
+  border-color: var(--tier-common);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(216, 208, 192, 0.3);
+}
+
+.cardDecent {
+  border-color: var(--tier-decent);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 26px rgba(76, 194, 76, 0.4);
+}
+
+.cardStrong {
+  border-color: var(--tier-strong);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 28px rgba(76, 155, 224, 0.45);
+}
+
+.cardElite {
+  border-color: var(--tier-elite);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 34px rgba(244, 208, 63, 0.6);
+}
+
+/* ===== raid squad: three lanes rolling side by side ===== */
+.squadWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.squadRow {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.squadLane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.laneLabel {
+  font-family: var(--font-bold);
+  font-size: 17px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  text-shadow: var(--text-outline);
+}
+
+.squadResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 150px;
+  padding: 10px 8px;
+  border: 2px solid var(--border-light);
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.35);
+  animation: popIn 260ms cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+.squadIcon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 4px 7px rgba(0, 0, 0, 0.8));
+}
+
+.squadName {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.1;
+  color: var(--text);
+  text-align: center;
 }

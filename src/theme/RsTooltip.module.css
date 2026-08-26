@@ -8,7 +8,7 @@
   bottom: calc(100% + 7px);
   left: 50%;
   transform: translateX(-50%);
-  z-index: 50;
+  z-index: 300;
   display: flex;
   flex-direction: column;
   align-items: center;

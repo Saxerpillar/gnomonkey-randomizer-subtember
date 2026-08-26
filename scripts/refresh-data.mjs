@@ -129,11 +129,27 @@ const main = async () => {
   // Crude combat-power composite: best attack bonus + best damage bonus +
   // scaled defence + prayer. Only used RELATIVELY, per slot, to bucket items
   // into rarity tiers — percentiles absorb the formula's crudeness.
-  const powerOf = (e) =>
-    Math.max(...Object.values(e.offensive), 0) +
-    Math.max(e.bonuses.str, e.bonuses.ranged_str, e.bonuses.magic_str, 0) +
-    Object.values(e.defensive).reduce((a, b) => a + b, 0) / 5 +
-    Math.max(e.bonuses.prayer, 0);
+  // Weights: damage wins fights, so it carries the most; accuracy matters but
+  // less; defence is heavily discounted (its raw sums dwarf everything —
+  // Bandos chestplate totals 423 where the best damage bonus in the game is
+  // 75); prayer is slightly discounted. magic_str is stored as percent x10,
+  // so it is rescaled into melee-strength units (Occult 50 -> 10, level with
+  // Amulet of torture's +10 str) before being weighed as damage.
+  const MAGIC_SCALE = 5;
+  const powerOf = (e) => {
+    const damage = Math.max(
+      e.bonuses.str,
+      e.bonuses.ranged_str,
+      e.bonuses.magic_str / MAGIC_SCALE,
+      0,
+    );
+    return (
+      Math.max(...Object.values(e.offensive), 0) * 1.0 +
+      damage * 2.5 +
+      Object.values(e.defensive).reduce((a, b) => a + b, 0) * 0.08 +
+      Math.max(e.bonuses.prayer, 0) * 0.5
+    );
+  };
 
   // Tier assignment: zero power = junk; the rest bucket by percentile WITHIN
   // their slot (common 45% / decent 30% / strong 17% / elite top 8%).
@@ -157,6 +173,13 @@ const main = async () => {
   for (const e of pool) {
     const override = curation.tierOverrides[e.name];
     if (override && typeof override === 'string' && !override.startsWith('//')) tiers.set(e.id, override);
+  }
+  // Cape and ammo never reach elite: nothing in those slots swings a fight the
+  // way a weapon or a BIS ring does, and their raw stats mislead (ogre arrows
+  // carry huge ranged_str). Their ceiling is 'strong'.
+  const NO_ELITE_SLOTS = new Set(['cape', 'ammo']);
+  for (const e of pool) {
+    if (NO_ELITE_SLOTS.has(e.slot) && tiers.get(e.id) === 'elite') tiers.set(e.id, 'strong');
   }
 
   const appItems = pool

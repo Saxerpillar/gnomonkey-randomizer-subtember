@@ -96,14 +96,6 @@
   ]
  },
  {
-  "name": "Corporeal Beast",
-  "image": "Corporeal Beast.png",
-  "tags": [
-   "solo/group",
-   "hard"
-  ]
- },
- {
   "name": "Corrupted Hunllef",
   "image": "Corrupted Hunllef.png",
   "tags": [
@@ -304,6 +296,7 @@
   "name": "Scurrius",
   "image": "Scurrius.png",
   "tags": [
+   "solo/group",
    "easy"
   ]
  },
@@ -391,7 +384,7 @@
   ]
  },
  {
-  "name": "Tombs of Amascut",
+  "name": "Tombs of Amascut: Expert Mode",
   "image": "Tumeken's Warden (level-489).png",
   "tags": [
    "raid",
