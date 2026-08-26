@@ -18,4 +18,3 @@ export const SLOT_LABEL: Record<Slot, string> = {
 export const BOSS_SUSPENSE_LINE = 'Your fate is sealed…';
 export const CHALLENGER_SUBTITLE = 'Your Challenger';
 
-export const summaryLine = (boss: string): string => `Slay ${boss} with this loadout.`;

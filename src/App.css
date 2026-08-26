@@ -65,14 +65,6 @@
   }
 }
 
-.summary {
-  font-family: var(--font-bold);
-  font-size: 20px;
-  color: var(--gold);
-  text-shadow: var(--text-outline);
-  text-align: center;
-  padding-top: 8px;
-}
 
 /* screen shake on elite/boss landings */
 .shake {

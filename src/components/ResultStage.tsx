@@ -9,7 +9,6 @@ import { RsPanel } from '../theme/RsPanel';
 import { BonusesPanel } from './BonusesPanel';
 import { BossPanel, ChallengePanel } from './BossPanel';
 import type { Challenge } from './challenges';
-import { summaryLine } from './copy';
 import type { Boss } from './DataProvider';
 import { EquipmentPanel } from './EquipmentPanel';
 import { bossObjective } from './objectives';
@@ -82,7 +81,6 @@ export const ResultStage = ({
           <div className="value">
             Loadout value: <GpValue gp={value} />
           </div>
-          {boss && <div className="summary">{summaryLine(boss.name)}</div>}
         </div>
       </RsPanel>
       <RsPanel

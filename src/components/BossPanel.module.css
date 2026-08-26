@@ -93,12 +93,6 @@
   text-shadow: var(--text-outline);
 }
 
-.challengeSoon {
-  font-family: var(--font-small);
-  font-size: 13px;
-  color: var(--text-muted);
-  font-style: italic;
-}
 
 /* Keeps the AHHHH gnome on the text's baseline row rather than above it. */
 .challengeRow {
