@@ -1,11 +1,10 @@
 import { asset } from '../asset';
 import type { Boss } from './DataProvider';
-import { RsButton } from '../theme/RsButton';
 import styles from './BossPanel.module.css';
 
-export const BossPanel = ({ boss, onRoll }: { boss: Boss | null; onRoll: () => void }) => (
+export const BossPanel = ({ boss, revealing }: { boss: Boss | null; revealing?: boolean }) => (
   <div className={styles.panel}>
-    <div className={styles.stage}>
+    <div className={styles.stage} data-boss="true">
       {boss ? (
         <>
           <img
@@ -16,20 +15,23 @@ export const BossPanel = ({ boss, onRoll }: { boss: Boss | null; onRoll: () => v
           />
           <div className={styles.name}>{boss.name}</div>
         </>
+      ) : revealing ? (
+        <div className={styles.question}>?</div>
       ) : (
         <div className={styles.hint}>Roll a boss to slay…</div>
       )}
     </div>
-    <RsButton variant="primary" onClick={onRoll}>
-      Roll boss
-    </RsButton>
   </div>
 );
 
-/** Placeholder per design — the challenge system is a later stage. */
-export const ChallengePanel = () => (
+/** The rolled extra challenge, or the v1 placeholder. */
+export const ChallengePanel = ({ challenge }: { challenge: string | null }) => (
   <div className={styles.challenge}>
     <span className={styles.challengeTitle}>Extra challenge</span>
-    <span className={styles.challengeSoon}>coming soon…</span>
+    {challenge ? (
+      <span className={styles.challengeValue}>{challenge}</span>
+    ) : (
+      <span className={styles.challengeSoon}>coming soon…</span>
+    )}
   </div>
 );

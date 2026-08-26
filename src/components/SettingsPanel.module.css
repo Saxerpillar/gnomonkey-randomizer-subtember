@@ -1,10 +1,22 @@
-.controls {
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: rgba(8, 6, 4, 0.72);
+  padding: 24px;
+}
+
+.panel {
+  width: 100%;
+  max-width: 420px;
+}
+
+.body {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  align-items: stretch;
-  padding-top: 8px;
-  border-top: 1px solid var(--border);
+  gap: 14px;
 }
 
 .field {
@@ -13,11 +25,13 @@
   gap: 8px;
 }
 
-.field > span {
+.field > span:first-child {
   font-family: var(--font-bold);
-  font-size: 24px;
+  font-size: 20px;
   color: var(--orange);
   text-shadow: var(--text-outline);
+  flex: none;
+  min-width: 112px;
 }
 
 .budgetWrap {
@@ -47,14 +61,6 @@
   padding: 8px 10px 8px 36px;
 }
 
-.rollWrap {
-  justify-content: center;
-}
-
-.rollWrap > button {
-  flex: 1;
-}
-
 .budget:focus {
   outline: 1px solid var(--gold);
 }
@@ -62,6 +68,18 @@
 .invalid {
   border-color: var(--red);
   outline: 1px solid var(--red);
+}
+
+.yellow {
+  color: var(--gp-yellow);
+}
+
+.white {
+  color: var(--gp-white);
+}
+
+.green {
+  color: var(--gp-green);
 }
 
 .toggle {
@@ -75,8 +93,7 @@
   user-select: none;
 }
 
-/* OSRS settings-style checkbox: stone box, red cross off / green check on.
-   The native input stays for a11y/behaviour but renders invisibly. */
+/* OSRS settings-style checkbox: stone box, red cross off / green check on. */
 .toggle input {
   position: absolute;
   opacity: 0;
@@ -112,28 +129,4 @@
 
 .toggle:hover .checkbox {
   filter: brightness(1.2);
-}
-
-.value {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: var(--font-bold);
-  font-size: 21px;
-  color: var(--orange);
-  text-shadow: var(--text-outline);
-}
-
-/* budget text takes the in-game coin tier colour of the parsed amount */
-.yellow {
-  color: var(--gp-yellow);
-}
-
-.white {
-  color: var(--gp-white);
-}
-
-.green {
-  color: var(--gp-green);
 }

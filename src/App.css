@@ -4,6 +4,109 @@
   padding: 24px 16px 48px;
 }
 
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+/* ceremony skeleton assembly: title/panels fade + settle in as they mount */
+.reveal {
+  animation: revealIn 320ms ease-out;
+}
+
+@keyframes revealIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* bare ceremony stage: the gear skeleton builds centered, boss stage below */
+.ceremony {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  min-height: 70vh;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+/* the result resolves in with a short payoff flash */
+.resultIn {
+  animation: resultIn 300ms ease-out;
+}
+
+@keyframes resultIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.summary {
+  font-family: var(--font-bold);
+  font-size: 20px;
+  color: var(--gold);
+  text-shadow: var(--text-outline);
+  text-align: center;
+  padding-top: 8px;
+}
+
+/* screen shake on elite/boss landings */
+.shake {
+  animation: shake 230ms ease-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-6px, 2px);
+  }
+  40% {
+    transform: translate(6px, -2px);
+  }
+  60% {
+    transform: translate(-4px, -1px);
+  }
+  80% {
+    transform: translate(4px, 1px);
+  }
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-bold);
+  font-size: 21px;
+  color: var(--orange);
+  text-shadow: var(--text-outline);
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
 .title {
   font-family: var(--font-title);
   font-weight: normal;

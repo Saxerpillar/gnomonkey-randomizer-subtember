@@ -14,6 +14,7 @@ export const RsTooltip = ({
   style,
   onClick,
   onContextMenu,
+  dataSlot,
 }: {
   content: ReactNode;
   children: ReactNode;
@@ -21,12 +22,15 @@ export const RsTooltip = ({
   style?: CSSProperties;
   onClick?: () => void;
   onContextMenu?: (e: React.MouseEvent) => void;
+  /** Optional `data-slot` for reveal animations to target this element. */
+  dataSlot?: string;
 }) => {
   const [show, setShow] = useState(false);
   return (
     <span
       className={`${styles.wrap} ${className ?? ''}`}
       style={style}
+      data-slot={dataSlot}
       onClick={onClick}
       onContextMenu={onContextMenu}
       onMouseEnter={() => setShow(true)}

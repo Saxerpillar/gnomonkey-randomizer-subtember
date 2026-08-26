@@ -12,6 +12,7 @@
   justify-content: center;
   gap: 8px;
   min-height: 260px;
+  min-width: 280px;
   width: 100%;
   /* spotlight: warm centre glow falling into vignette edges */
   background: radial-gradient(ellipse at 50% 42%, rgba(140, 90, 45, 0.16), transparent 60%),
@@ -54,6 +55,26 @@
   color: var(--text-muted);
 }
 
+.question {
+  font-family: var(--font-title);
+  font-size: 64px;
+  color: var(--gold);
+  text-shadow: var(--text-outline);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
 .challenge {
   display: flex;
   flex-direction: column;
@@ -77,4 +98,12 @@
   font-size: 13px;
   color: var(--text-muted);
   font-style: italic;
+}
+
+.challengeValue {
+  font-family: var(--font-bold);
+  font-size: 20px;
+  color: var(--gold);
+  text-shadow: var(--text-outline);
+  text-align: center;
 }

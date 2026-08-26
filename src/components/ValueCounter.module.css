@@ -1,0 +1,22 @@
+.counter {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(10, 9, 7, 0.9);
+  border: 1px solid var(--border-light);
+  outline: 1px solid var(--border-dark);
+  border-radius: 4px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+}
+
+.label {
+  font-family: var(--font-bold);
+  font-size: 16px;
+  color: var(--text-muted);
+  text-shadow: 1px 1px 0 #000;
+}
