@@ -1,3 +1,4 @@
+import { asset } from '../asset';
 import { SLOTS, type Item, type Loadout, type Slot, type Tier } from '../engine/types';
 import { GpValue } from '../theme/GpValue';
 import { RsTooltip } from '../theme/RsTooltip';
@@ -69,13 +70,13 @@ const EquipSlot = ({
       gridArea: slot,
       // occupied: dim the slot sprite so the item reads on top of it
       backgroundImage: item
-        ? `linear-gradient(rgba(8, 7, 5, 0.55), rgba(8, 7, 5, 0.55)), url(/img/slots/${slot}.png)`
-        : `url(/img/slots/${slot}.png)`,
+        ? `linear-gradient(rgba(8, 7, 5, 0.55), rgba(8, 7, 5, 0.55)), url(${asset(`img/slots/${slot}.png`)})`
+        : `url(${asset(`img/slots/${slot}.png`)})`,
     }}
     onClick={item || locked ? onToggleLock : undefined}
     onContextMenu={onContextMenu}
   >
-    {item && <img className={styles.icon} src={`/img/items/${item.icon}`} alt={item.name} />}
+    {item && <img className={styles.icon} src={asset(`img/items/${item.icon}`)} alt={item.name} />}
     {locked && <span className={styles.lockBadge}>🔒</span>}
   </RsTooltip>
 );

@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
+import { asset } from './asset';
 import './App.css';
 import { BonusesPanel } from './components/BonusesPanel';
 import { BossPanel, ChallengePanel } from './components/BossPanel';
@@ -153,7 +154,7 @@ const Main = () => {
     <div className="app">
       <h1 className="title">Gnome Subtember</h1>
       <main className="columns">
-        <RsPanel title="Your gear" icon="/img/ui/multicombat.png">
+        <RsPanel title="Your gear" icon={asset("img/ui/multicombat.png")}>
           <div className="gearStack">
             <div className="gearRow">
               <EquipmentPanel
@@ -175,7 +176,7 @@ const Main = () => {
             />
           </div>
         </RsPanel>
-        <RsPanel title="Your fate" icon="/img/ui/skull.png">
+        <RsPanel title="Your fate" icon={asset("img/ui/skull.png")}>
           <div className="fate">
             <BossPanel boss={state.boss} onRoll={rollBoss} />
             <ChallengePanel />

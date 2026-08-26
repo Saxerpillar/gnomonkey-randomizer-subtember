@@ -29,3 +29,15 @@ npm run dev
 
 Fonts are the game-extracted [RuneStar fonts](https://github.com/RuneStar/fonts); item icons,
 boss renders and slot sprites come from the OSRS Wiki / dps-calc CDN.
+
+## Deploy (GitHub Pages)
+
+Pushing to `master` runs `.github/workflows/deploy.yml`: install, test, build, publish
+`dist/` to Pages. Live at https://saxerpillar.github.io/gnomonkey-randomizer-subtember/
+
+One-time setup: repo **Settings -> Pages -> Build and deployment -> Source: GitHub Actions**.
+
+The production build needs a base path of `/<repo>/` or every asset 404s, so `vite.config.ts`
+sets it automatically under CI. Anything resolved at runtime from `public/` must go through
+`asset()` in `src/asset.ts` — Vite cannot rewrite paths it does not see at build time.
+Override with `VITE_BASE` if the repo is renamed or moves to a custom domain (`VITE_BASE=/`).

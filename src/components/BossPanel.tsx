@@ -1,3 +1,4 @@
+import { asset } from '../asset';
 import type { Boss } from './DataProvider';
 import { RsButton } from '../theme/RsButton';
 import styles from './BossPanel.module.css';
@@ -10,7 +11,7 @@ export const BossPanel = ({ boss, onRoll }: { boss: Boss | null; onRoll: () => v
           <img
             key={boss.name /* retrigger fade on reroll */}
             className={styles.render}
-            src={`/img/bosses/${encodeURIComponent(boss.image)}`}
+            src={asset(`img/bosses/${encodeURIComponent(boss.image)}`)}
             alt={boss.name}
           />
           <div className={styles.name}>{boss.name}</div>

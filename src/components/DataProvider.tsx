@@ -1,3 +1,4 @@
+import { asset } from '../asset';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Item } from '../engine/types';
 import type { Spell } from '../engine/spell';
@@ -27,7 +28,7 @@ export const useGameData = (): GameData => {
 const loadAll = async (): Promise<GameData> => {
   const [itemsRaw, prices, bosses, spells] = await Promise.all(
     ['equipment.json', 'prices.json', 'bosses.json', 'spells.json'].map(async (f) => {
-      const res = await fetch(`/data/${f}`);
+      const res = await fetch(asset(`data/${f}`));
       if (!res.ok) throw new Error(`${f}: HTTP ${res.status}`);
       return res.json();
     }),

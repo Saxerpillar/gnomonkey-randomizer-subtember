@@ -1,3 +1,4 @@
+import { asset } from '../asset';
 import { useState } from 'react';
 import { formatGp, gpTier, groupDigits, parseBudget } from '../engine/parse';
 import { GpValue } from '../theme/GpValue';
@@ -32,7 +33,7 @@ export const RollControls = ({
       <label className={styles.field}>
         <span>Budget</span>
         <span className={styles.budgetWrap}>
-          <img className={styles.coins} src="/img/coins.png" alt="" />
+          <img className={styles.coins} src={asset("img/coins.png")} alt="" />
           <input
             className={`${styles.budget} ${parsed.ok ? (parsed.gp != null ? styles[gpTier(parsed.gp)] : '') : styles.invalid}`}
             value={display}

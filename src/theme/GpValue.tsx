@@ -1,3 +1,4 @@
+import { asset } from '../asset';
 import { formatGp, gpTier } from '../engine/parse';
 import styles from './GpValue.module.css';
 
@@ -8,7 +9,7 @@ import styles from './GpValue.module.css';
  */
 export const GpValue = ({ gp, className }: { gp: number; className?: string }) => (
   <span className={`${styles.gp} ${styles[gpTier(gp)]} ${className ?? ''}`}>
-    <img src="/img/coins.png" alt="gp" />
+    <img src={asset("img/coins.png")} alt="gp" />
     {formatGp(gp)}
   </span>
 );

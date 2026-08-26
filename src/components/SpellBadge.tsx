@@ -1,3 +1,4 @@
+import { asset } from '../asset';
 import { isPoweredStaff, type Spell } from '../engine/spell';
 import type { Item } from '../engine/types';
 import { RsTooltip } from '../theme/RsTooltip';
@@ -29,7 +30,7 @@ export const SpellBadge = ({ weapon, spell }: { weapon: Item | null; spell: Spel
           }
           className={styles.spell}
         >
-          <img src={`/img/spells/${spell.icon}`} alt="" onError={(e) => (e.currentTarget.style.display = 'none')} />
+          <img src={asset(`img/spells/${spell.icon}`)} alt="" onError={(e) => (e.currentTarget.style.display = 'none')} />
           <span>{spell.name}</span>
         </RsTooltip>
       </div>
