@@ -21,6 +21,7 @@ import { PreRollScreen } from './components/PreRollScreen';
 import { ResultStage } from './components/ResultStage';
 import { RevealCard, type LandingImpact } from './components/RevealCard';
 import { SettingsPanel } from './components/SettingsPanel';
+import { slotMenuEntries } from './components/slotMenu';
 import {
   DEFAULT_SETTINGS,
   filterBossPool,
@@ -33,7 +34,14 @@ import { useCeremony, type RevealData } from './components/useCeremony';
 import { ValueCounter } from './components/ValueCounter';
 import { parseBudget } from './engine/parse';
 import { mulberry32, pick, randomSeed } from './engine/rng';
-import { loadoutValue, roll, rerollSlot, rollForStyle, type Style } from './engine/roll';
+import {
+  loadoutValue,
+  roll,
+  rerollSlot,
+  rollForStyle,
+  styleOf,
+  type Style,
+} from './engine/roll';
 import { rollSpell, type Spell } from './engine/spell';
 import { emptyLoadout, SLOTS, type Item, type Loadout, type Slot } from './engine/types';
 import { GpValue } from './theme/GpValue';
@@ -64,6 +72,8 @@ type Action =
   | { type: 'TOGGLE_LOCK'; slot: Slot }
   | { type: 'REMOVE_ITEM'; slot: Slot }
   | { type: 'REROLL_SLOT'; slot: Slot; loadout: Loadout; spell: Spell | null }
+  | { type: 'REROLL_SQUAD_SLOT'; lane: number; loadout: Loadout }
+  | { type: 'REMOVE_SQUAD_ITEM'; lane: number; slot: Slot }
   | { type: 'SET_SETTINGS'; patch: Partial<Settings> };
 
 const STORAGE_KEY = 'gnome-subtember-v2';
@@ -112,6 +122,26 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, challenge: action.challenge };
     case 'SET_SQUAD':
       return { ...state, squad: action.squad };
+    // Raid lanes are independent setups, so they carry no locks and no spell —
+    // only the lane's own loadout changes.
+    case 'REROLL_SQUAD_SLOT':
+      return {
+        ...state,
+        squad:
+          state.squad?.map((lane, i) =>
+            i === action.lane ? { ...lane, loadout: action.loadout } : lane,
+          ) ?? null,
+      };
+    case 'REMOVE_SQUAD_ITEM':
+      return {
+        ...state,
+        squad:
+          state.squad?.map((lane, i) =>
+            i === action.lane
+              ? { ...lane, loadout: { ...lane.loadout, [action.slot]: null } }
+              : lane,
+          ) ?? null,
+      };
     case 'SET_SETTINGS':
       return { ...state, settings: { ...state.settings, ...action.patch } };
     case 'TOGGLE_LOCK': {
@@ -185,6 +215,8 @@ const Main = () => {
     loadout: Loadout;
     spell: Spell | null;
     slot: Slot;
+    /** Set when the reroll belongs to a raid lane rather than the main loadout. */
+    lane?: number;
   } | null>(null);
   const { view, reveal, start: startCeremony, onRevealDone } = useCeremony(items);
 
@@ -282,23 +314,72 @@ const Main = () => {
     });
   };
 
+  /**
+   * Reroll one slot of one raid lane. Mirrors `rerollOneSlot`, with two
+   * differences: the weapon pool is filtered to the lane's style (the same
+   * filter `rollForStyle` uses, so a Magic setup cannot reroll into a scimitar),
+   * and the reveal targets that lane specifically — all three lanes carry the
+   * same `data-slot` names, so an unscoped selector would fly the card into the
+   * leftmost panel every time.
+   */
+  const rerollSquadSlot = (lane: number, slot: Slot) => {
+    const entry = state.squad?.[lane];
+    if (!entry) return;
+    const { settings } = state;
+    const isWildy = state.boss?.tags.includes('wildy') ?? false;
+    const parsed = budgetFor(isWildy);
+    if (!parsed.ok) return;
+    const allowUntradeables = isWildy ? false : settings.allowUntradeables;
+    const rng = mulberry32(randomSeed());
+    const styled = items.filter((i) => i.slot !== 'weapon' || styleOf(i) === entry.style);
+    const loadout = rerollSlot(
+      styled,
+      entry.loadout,
+      slot,
+      { budget: parsed.gp, allowUntradeables, locks: {} },
+      rng,
+    );
+    const rolled = loadout[slot];
+    if (!rolled || settings.skipAnimations) {
+      dispatch({ type: 'REROLL_SQUAD_SLOT', lane, loadout });
+      return;
+    }
+    new Image().src = asset(`img/items/${rolled.icon}`);
+    unlockAudio();
+    setRerolling({
+      lane,
+      slot,
+      loadout,
+      spell: null,
+      reveal: {
+        key: `reroll-${lane}-${slot}-${rolled.id}-${Date.now()}`,
+        kind: 'slot',
+        slot,
+        item: rolled,
+        tier: rolled.tier,
+        candidates: styled.filter((i) => i.slot === slot),
+        target: `[data-lane="${lane}"] [data-slot="${slot}"]`,
+      },
+    });
+  };
+
+  const openSquadSlotMenu = (lane: number, slot: Slot, e: React.MouseEvent) => {
+    e.preventDefault();
+    const laneLoadout = state.squad?.[lane]?.loadout;
+    if (!laneLoadout) return;
+    const entries = slotMenuEntries(laneLoadout, slot, {
+      reroll: () => rerollSquadSlot(lane, slot),
+      remove: () => dispatch({ type: 'REMOVE_SQUAD_ITEM', lane, slot }),
+    });
+    setMenu({ x: e.clientX, y: e.clientY, entries });
+  };
+
   const openSlotMenu = (slot: Slot, e: React.MouseEvent) => {
     e.preventDefault();
-    const entries: MenuEntry[] = [];
-    // The shield slot is genuinely unusable under a two-handed weapon.
-    const shieldBlocked = slot === 'shield' && (state.loadout.weapon?.twoHanded ?? false);
-    if (!shieldBlocked) {
-      entries.push({
-        label: `Reroll ${slot}`,
-        onSelect: () => rerollOneSlot(slot),
-      });
-    }
-    if (state.loadout[slot]) {
-      entries.push({
-        label: 'Remove item from slot',
-        onSelect: () => dispatch({ type: 'REMOVE_ITEM', slot }),
-      });
-    }
+    const entries = slotMenuEntries(state.loadout, slot, {
+      reroll: () => rerollOneSlot(slot),
+      remove: () => dispatch({ type: 'REMOVE_ITEM', slot }),
+    });
     setMenu({ x: e.clientX, y: e.clientY, entries });
   };
 
@@ -474,6 +555,34 @@ const Main = () => {
   // Ceremony: a bare screen that assembles the gear skeleton tile-by-tile
   // (helmet first), each item rolling at centre before flying into its slot,
   // then the boss stage + boss roll as the finale. No panel frames yet.
+  // One reroll overlay for both layouts; the lane decides which state it lands in.
+  const rerollOverlay = rerolling ? (
+    <RevealCard
+      key={rerolling.reveal.key}
+      data={rerolling.reveal}
+      muted={state.settings.muteSounds}
+      speed={state.settings.ceremonySpeed}
+      onLand={triggerLand}
+      onDone={() => {
+        if (rerolling.lane != null) {
+          dispatch({
+            type: 'REROLL_SQUAD_SLOT',
+            lane: rerolling.lane,
+            loadout: rerolling.loadout,
+          });
+        } else {
+          dispatch({
+            type: 'REROLL_SLOT',
+            slot: rerolling.slot,
+            loadout: rerolling.loadout,
+            spell: rerolling.spell,
+          });
+        }
+        setRerolling(null);
+      }}
+    />
+  ) : null;
+
   if (inCeremony) {
     const displayLoadout: Loadout = (() => {
       const d = emptyLoadout();
@@ -603,15 +712,19 @@ const Main = () => {
               </div>
             </RsPanel>
             <div className="squad">
-              {state.squad.map(({ style, loadout }) => (
+              {state.squad.map(({ style, loadout }, lane) => (
                 <RsPanel key={style} title={STYLE_LABEL[style]} className="squadPanel">
                   <div className="gearStack">
-                    <EquipmentPanel
-                      loadout={loadout}
-                      locks={{}}
-                      onToggleLock={() => {}}
-                      onSlotContextMenu={() => {}}
-                    />
+                    {/* data-lane scopes the reroll card's flight target to this
+                        panel; the three lanes share every data-slot name. */}
+                    <div data-lane={lane}>
+                      <EquipmentPanel
+                        loadout={loadout}
+                        locks={{}}
+                        onToggleLock={() => {}}
+                        onSlotContextMenu={(slot, e) => openSquadSlotMenu(lane, slot, e)}
+                      />
+                    </div>
                     <div className="value">
                       <GpValue gp={loadoutValue(loadout)} />
                     </div>
@@ -634,6 +747,7 @@ const Main = () => {
             onClose={() => setMenu(null)}
           />
         )}
+        {rerollOverlay}
       </>
     );
   }
@@ -665,24 +779,7 @@ const Main = () => {
       {menu && (
         <RsContextMenu x={menu.x} y={menu.y} entries={menu.entries} onClose={() => setMenu(null)} />
       )}
-      {rerolling && (
-        <RevealCard
-          key={rerolling.reveal.key}
-          data={rerolling.reveal}
-          muted={state.settings.muteSounds}
-          speed={state.settings.ceremonySpeed}
-          onLand={triggerLand}
-          onDone={() => {
-            dispatch({
-              type: 'REROLL_SLOT',
-              slot: rerolling.slot,
-              loadout: rerolling.loadout,
-              spell: rerolling.spell,
-            });
-            setRerolling(null);
-          }}
-        />
-      )}
+      {rerollOverlay}
     </>
   );
 };
