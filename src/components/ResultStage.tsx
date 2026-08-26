@@ -1,0 +1,105 @@
+import type { CSSProperties } from 'react';
+import { asset } from '../asset';
+import { loadoutValue } from '../engine/roll';
+import type { Spell } from '../engine/spell';
+import type { Item, Loadout, Slot } from '../engine/types';
+import { GpValue } from '../theme/GpValue';
+import { GnomePeek } from '../theme/GnomePeek';
+import { RsPanel } from '../theme/RsPanel';
+import { BonusesPanel } from './BonusesPanel';
+import { BossPanel, ChallengePanel } from './BossPanel';
+import type { Challenge } from './challenges';
+import { summaryLine } from './copy';
+import type { Boss } from './DataProvider';
+import { EquipmentPanel } from './EquipmentPanel';
+import { bossObjective } from './objectives';
+import { SpellBadge } from './SpellBadge';
+
+/**
+ * The two-panel "final info" layout: your gear on the left, your challenger on
+ * the right.
+ *
+ * Shared deliberately. The ceremony switches to this the moment the gear is
+ * assembled, so the boss reveal card has a Challenger panel to fly into and the
+ * handover to the committed result view is invisible — the frames, the gear and
+ * the boss are already exactly where they will stay. Rendering a second, nearly
+ * identical layout here would put a visible jump in the middle of the reveal.
+ *
+ * During the ceremony `boss` is null until it lands (`revealing` draws the "?"
+ * suspense) and the challenge is withheld, so the only thing that appears on
+ * commit is the challenge box.
+ */
+export const ResultStage = ({
+  loadout,
+  locks,
+  spell,
+  boss,
+  hardMode = false,
+  revealing = false,
+  challenge = null,
+  showChallenge = true,
+  deactivated = false,
+  onToggleLock,
+  onSlotContextMenu,
+  style,
+}: {
+  loadout: Loadout;
+  locks: Partial<Record<Slot, Item>>;
+  spell: Spell | null;
+  boss: Boss | null;
+  hardMode?: boolean;
+  /** Draw the boss stage's "?" placeholder — the reveal has not landed yet. */
+  revealing?: boolean;
+  challenge?: Challenge | null;
+  /** Withheld mid-ceremony: the challenge is the one thing commit adds. */
+  showChallenge?: boolean;
+  /** Gauntlet runs take no gear in, so the skeleton stays powered down. */
+  deactivated?: boolean;
+  onToggleLock?: (slot: Slot) => void;
+  onSlotContextMenu?: (slot: Slot, e: React.MouseEvent) => void;
+  style?: CSSProperties;
+}) => {
+  const value = loadoutValue(loadout);
+  return (
+    <main className="columns" style={style}>
+      <RsPanel
+        title="Your gear"
+        icon={asset('img/ui/multicombat.png')}
+        decoration={<GnomePeek at="panelTopLeft" />}
+      >
+        <div className="gearStack">
+          <div className="gearRow">
+            <EquipmentPanel
+              loadout={loadout}
+              locks={locks}
+              onToggleLock={onToggleLock ?? (() => {})}
+              onSlotContextMenu={onSlotContextMenu ?? (() => {})}
+              deactivated={deactivated}
+            />
+            <BonusesPanel loadout={loadout} />
+          </div>
+          <SpellBadge weapon={loadout.weapon} spell={spell} />
+          <div className="value">
+            Loadout value: <GpValue gp={value} />
+          </div>
+          {boss && <div className="summary">{summaryLine(boss.name)}</div>}
+        </div>
+      </RsPanel>
+      <RsPanel
+        title="Your Challenger"
+        icon={asset('img/ui/skull.png')}
+        decoration={<GnomePeek at="panelBottomRight" />}
+      >
+        <div className="fate">
+          <BossPanel
+            boss={boss}
+            revealing={revealing}
+            hardMode={hardMode}
+            objective={boss ? bossObjective(boss.name, value) : null}
+          />
+          {showChallenge && <ChallengePanel challenge={challenge} />}
+        </div>
+      </RsPanel>
+    </main>
+  );
+};

@@ -41,6 +41,8 @@ export const BossPanel = ({
 );
 
 /** The rolled extra challenge — a line, plus a live countdown when it's timed. */
+/** The rolled extra challenge, or a note that this run drew none. The AHHHH
+ *  gnome that used to sit beside the text is a full-screen stinger now. */
 export const ChallengePanel = ({ challenge }: { challenge: Challenge | null }) => (
   <div className={styles.challenge}>
     <span className={styles.challengeTitle}>Extra challenge</span>

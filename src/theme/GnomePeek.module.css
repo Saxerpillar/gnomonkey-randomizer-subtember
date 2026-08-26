@@ -1,0 +1,62 @@
+.gnome {
+  position: absolute;
+  /* Decoration only: never intercept a click meant for the button underneath. */
+  pointer-events: none;
+  user-select: none;
+  image-rendering: pixelated;
+  /* Hard pixel shadow, no blur — matches the OSRS sprite look. */
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.5));
+  /* `translate`/`rotate` stay separate from `transform` so the idle bob below
+     can animate one without clobbering the other's tilt. */
+  animation: peekBob 3.4s ease-in-out infinite;
+}
+
+/* Popping up from behind the top edge of DECIDE YOUR FATE. The negative
+   `bottom` sinks his chin into the button, which layers over him. */
+.buttonTop {
+  width: 66px;
+  bottom: calc(100% - 26px);
+  left: 42px;
+  /* Tilts away from the near edge, so he leans over the button rather than
+     off the side of it. */
+  rotate: 6deg;
+  z-index: 0;
+}
+
+/* Hooked over the top-left corner of a panel frame, leaning inward. */
+.panelTopLeft {
+  width: 56px;
+  top: -30px;
+  left: -18px;
+  rotate: -14deg;
+  z-index: 3;
+  animation-duration: 4.6s;
+}
+
+/* Mirrored so the pair reads as two gnomes, not one sprite pasted twice. */
+.panelBottomRight {
+  width: 52px;
+  bottom: -24px;
+  right: -16px;
+  rotate: 12deg;
+  scale: -1 1;
+  z-index: 3;
+  animation-duration: 5.2s;
+  animation-delay: -1.7s;
+}
+
+@keyframes peekBob {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gnome {
+    animation: none;
+  }
+}

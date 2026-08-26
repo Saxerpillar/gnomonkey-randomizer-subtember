@@ -15,6 +15,7 @@ export const RsTooltip = ({
   onClick,
   onContextMenu,
   dataSlot,
+  dataSolid,
 }: {
   content: ReactNode;
   children: ReactNode;
@@ -24,6 +25,8 @@ export const RsTooltip = ({
   onContextMenu?: (e: React.MouseEvent) => void;
   /** Optional `data-slot` for reveal animations to target this element. */
   dataSlot?: string;
+  /** Marks this block as one the emote scatter must not sit on top of. */
+  dataSolid?: boolean;
 }) => {
   const [show, setShow] = useState(false);
   return (
@@ -31,6 +34,7 @@ export const RsTooltip = ({
       className={`${styles.wrap} ${className ?? ''}`}
       style={style}
       data-slot={dataSlot}
+      data-solid={dataSolid ? '' : undefined}
       onClick={onClick}
       onContextMenu={onContextMenu}
       onMouseEnter={() => setShow(true)}

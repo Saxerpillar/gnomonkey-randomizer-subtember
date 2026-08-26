@@ -1,0 +1,42 @@
+.mark {
+  position: fixed;
+  right: 18px;
+  bottom: 14px;
+  /* Above the reveal overlay (60) so it survives a roll, below the stingers
+     (400), which get the screen to themselves. */
+  z-index: 350;
+  /* Pure decoration: never intercept a click meant for the UI underneath. */
+  pointer-events: none;
+  user-select: none;
+  display: flex;
+  /* Stacked: the phrase, then the gif centred beneath it, so the pair reads as
+     one signature rather than a caption with an icon bolted on the end. */
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.78;
+}
+
+.text {
+  /* The small face is built for 12-14px and falls apart blown up; the body
+     face is the one that holds together at this size. */
+  font-family: var(--font-body);
+  font-size: 42px;
+  line-height: 1;
+  color: var(--text-muted);
+  /* The outline keeps it legible over both the dark backdrop and the white
+     blowout of a flash. */
+  text-shadow: var(--text-outline);
+  white-space: nowrap;
+}
+
+.sprite {
+  /* 150x72 source; 64px tall renders ~133px wide, sitting comfortably under the
+     42px line above it. */
+  height: 64px;
+  width: auto;
+  display: block;
+  /* Not an OSRS sprite, so the global pixelated rule would only make it crunchy. */
+  image-rendering: auto;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+}

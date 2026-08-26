@@ -1,12 +1,15 @@
-/* Centre-stage under the title: the value is the running score of the run, so
-   it stays readable DURING the roll — above the reveal overlay (z 60), not
-   behind it, and not tucked into a corner. */
+/* Rides just above the gear skeleton: the value is the running score of the
+   run, so it stays readable DURING the roll — above the reveal overlay (z 60),
+   not behind it, and not tucked into a corner. `top`/`left` are set inline
+   from the skeleton's measured position; the values here are the fallback for
+   the frame before that measurement lands. */
 .counter {
   position: fixed;
-  /* below the app title, not on top of it */
   top: 104px;
   left: 50%;
-  transform: translateX(-50%);
+  /* -100% makes `top` the counter's bottom edge, so it sits ON the gap above
+     the skeleton without needing to know its own height. */
+  transform: translate(-50%, -100%);
   z-index: 70;
   display: flex;
   align-items: center;

@@ -1,5 +1,6 @@
 import type { Rng } from '../engine/rng';
 import { pick } from '../engine/rng';
+import type { ForceChallenge } from './settings';
 
 export type Difficulty = 'easy' | 'mid' | 'hard';
 
@@ -84,22 +85,30 @@ export const formatClock = (totalSeconds: number): string => {
   return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 };
 
+/** The timed challenge for a difficulty — 5/10/20 minutes on the clock. */
+export const timedChallenge = (difficulty: Difficulty): Challenge => {
+  const limit = TIME_LIMIT_SECONDS[difficulty];
+  return { text: `Defeat your foe within ${limit / 60} mins`, timerSeconds: limit };
+};
+
 /**
  * Roll an extra challenge for a boss of this difficulty, or null. The timed
  * challenge sits in the same pool as the rest; its allowance scales with
  * difficulty (5/10/20 minutes).
+ *
+ * `force`: 'any' skips the chance roll, 'timed' pins the countdown outright so
+ * the clock can be tested without fishing for it.
  */
 export const rollChallenge = (
   rng: Rng,
   difficulty: Difficulty,
-  /** Debug: skip the chance roll and always return one. */
-  force = false,
+  force: ForceChallenge = 'off',
 ): Challenge | null => {
-  if (!force && rng() >= CHALLENGE_CHANCE[difficulty]) return null;
-  const limit = TIME_LIMIT_SECONDS[difficulty];
+  if (force === 'timed') return timedChallenge(difficulty);
+  if (force === 'off' && rng() >= CHALLENGE_CHANCE[difficulty]) return null;
   const options: Challenge[] = [
     ...CHALLENGES.map((text) => ({ text })),
-    { text: `Defeat your foe within ${limit / 60} mins`, timerSeconds: limit },
+    timedChallenge(difficulty),
   ];
   return pick(rng, options);
 };

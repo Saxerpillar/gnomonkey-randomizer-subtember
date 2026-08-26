@@ -1,4 +1,7 @@
 .panel {
+  /* Anchor for the `decoration` slot; overflow stays visible so trim can
+     hang over the border. */
+  position: relative;
   background: linear-gradient(180deg, var(--panel-raised) 0%, var(--panel) 35%, #181510 100%);
   border: 2px solid var(--border);
   outline: 1px solid var(--border-dark);

@@ -1,11 +1,11 @@
 .app {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 24px 16px 48px;
+  padding: 24px 16px 32px;
 }
 
 .hero {
-  min-height: 100vh;
+  min-height: calc(100dvh - 56px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,6 +40,10 @@
 }
 
 .actions {
+  /* The scatter layer is fixed at z-index 0, which would otherwise paint over
+     this static content. Positioning it lifts the button clear. */
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
   margin-top: 28px;
@@ -110,8 +114,9 @@
 .title {
   font-family: var(--font-title);
   font-weight: normal;
-  font-size: 72px;
-  letter-spacing: 2px;
+  /* Clamped so the wordmark still fits a narrow window at this size. */
+  font-size: clamp(56px, 8.5vw, 104px);
+  letter-spacing: var(--title-kerning);
   /* bright yellow -> orange gradient fill with a thick black outline:
      background-clip keeps the gradient in the glyphs, drop-shadow filters
      follow glyph alpha so the outline works where text-shadow can't. */

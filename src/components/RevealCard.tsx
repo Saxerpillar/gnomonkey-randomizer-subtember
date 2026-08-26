@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { asset } from '../asset';
+import { EMOTES } from './emotes';
 import { buildTape, tapeTickDelays } from '../engine/reel';
 import { mulberry32, randomSeed } from '../engine/rng';
 import type { Tier } from '../engine/types';
@@ -15,7 +16,17 @@ const ROW = 64;
 const BOSS_ROW = 96;
 const FILLERS = 26;
 const DECOYS = 2;
-const ROLL_MS = 3900; // the tape ticks for the full sound
+/**
+ * Length of `public/audio/tick.wav`, whose tail IS the concluding ding. The
+ * tape has to finish settling exactly here or the ding lands before the item
+ * does — at 3900 the reel kept moving for 65ms after the sound had stopped.
+ */
+const TICK_SOUND_MS = 3835;
+const ROLL_MS = TICK_SOUND_MS; // the tape ticks for exactly the sound's length
+
+/** Floors for the last two beats, so the bounce stays readable at any speed. */
+const OVERSHOOT_MIN_MS = 200;
+const SETTLE_MIN_MS = 260;
 const TOOLTIP_MS = 900;
 const MINIMIZE_MS = 600;
 const BOSS_SUSPENSE_MS = 800;
@@ -48,7 +59,7 @@ export const RevealCard = ({
 }) => {
   const [phase, setPhase] = useState<'roll' | 'tooltip' | 'reveal' | 'minimize'>('roll');
   const [row, setRow] = useState(0);
-  const [motion, setMotion] = useState({ ms: 0, ease: "linear" });
+  const [motion, setMotion] = useState({ ms: 0, ease: 'linear' });
   const [minimize, setMinimize] = useState<string>();
   const [landed, setLanded] = useState(false);
   const [landedTier, setLandedTier] = useState<Tier | null>(null);
@@ -103,16 +114,16 @@ export const RevealCard = ({
     if (!landed) return;
     const tier = data.kind === 'slot' ? data.tier : null;
     const squadBest =
-      data.kind === 'squad'
-        ? data.reels.some((r) => r.tier === 'elite')
-          ? 'elite'
-          : null
-        : null;
+      data.kind === 'squad' ? (data.reels.some((r) => r.tier === 'elite') ? 'elite' : null) : null;
     if (tier) setLandedTier(tier);
     if (!muted) playThud();
     if ((tier === 'elite' || data.kind === 'boss') && !muted) playFanfare();
     onLandRef.current?.(
-      data.kind === 'boss' ? 'boss' : tier === 'elite' || squadBest === 'elite' ? 'elite' : 'normal',
+      data.kind === 'boss'
+        ? 'boss'
+        : tier === 'elite' || squadBest === 'elite'
+          ? 'elite'
+          : 'normal',
     );
   }, [landed, data, muted]);
 
@@ -229,16 +240,29 @@ export const RevealCard = ({
         const dur = delays[i] ?? 0;
         const isSettle = i === deltas.length - 1;
         const isOvershoot = i === deltas.length - 2;
-        setMotion(
-          isSettle
-            ? { ms: Math.max(260, dur), ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }
+        // The floors can outrun a beat's slot in the schedule once the speed
+        // multiplier shrinks the slots: at 4x the settle slot is ~83ms while the
+        // motion still takes 260ms. Wait on the motion, not the slot, or the
+        // landing thud fires while the reel is visibly still moving.
+        const ms = isSettle
+          ? Math.max(SETTLE_MIN_MS, dur)
+          : isOvershoot
+            ? Math.max(OVERSHOOT_MIN_MS, dur)
+            : dur;
+        setMotion({
+          ms,
+          ease: isSettle
+            ? 'cubic-bezier(0.34, 1.56, 0.64, 1)'
             : isOvershoot
-              ? { ms: Math.max(200, dur), ease: 'cubic-bezier(0.22, 0.61, 0.36, 1)' }
-              : { ms: dur, ease: 'linear' },
-        );
+              ? 'cubic-bezier(0.22, 0.61, 0.36, 1)'
+              : 'linear',
+        });
         setRow(r);
         i += 1;
-        timers.push(window.setTimeout(tick, delays[Math.min(i, delays.length - 1)] ?? 0));
+        // Mid-reel the cadence is the next beat's slot; on the last beat there
+        // is no next slot, so it is the settle motion we are waiting out.
+        const wait = i < deltas.length ? (delays[i] ?? 0) : ms;
+        timers.push(window.setTimeout(tick, wait));
         return;
       }
       // The boss gets its full-size announcement; slots get the tooltip card.
@@ -259,14 +283,13 @@ export const RevealCard = ({
   const isBoss = data.kind === 'boss';
   const title = isSlot ? data.item.name : isBoss ? data.boss.name : SLOT_LABEL[data.slot];
   const icon = isBoss ? asset(`img/bosses/${encodeURIComponent(data.boss.image)}`) : '';
-  const burstClass =
-    isBoss
-      ? landed
-        ? styles.burstBoss
-        : null
-      : landedTier
-        ? styles[`burst${capitalize(landedTier)}`]
-        : null;
+  const burstClass = isBoss
+    ? landed
+      ? styles.burstBoss
+      : null
+    : landedTier
+      ? styles[`burst${capitalize(landedTier)}`]
+      : null;
 
   const revealContent = isSlot ? (
     <span className={styles.reveal}>
@@ -295,9 +318,18 @@ export const RevealCard = ({
       <div className={styles.backdrop} />
       <div
         ref={cardRef}
-        className={`${styles.card} ${landedTier ? styles[`card${capitalize(landedTier)}`] : ""} ${phase === "minimize" ? styles.minimize : ""}`}
+        className={`${styles.card} ${landedTier ? styles[`card${capitalize(landedTier)}`] : ''} ${phase === 'minimize' ? styles.minimize : ''}`}
         style={phase === 'minimize' && minimize ? { transform: minimize } : undefined}
       >
+        {/* Perched on top of the roulette for the length of an item roll. */}
+        {isSlot && phase === 'roll' && (
+          <img
+            className={styles.roulettePet}
+            src={asset(`img/emotes/${EMOTES.roulette.file}`)}
+            alt=""
+            aria-hidden="true"
+          />
+        )}
         {burstClass && <span className={`${styles.burst} ${burstClass}`} />}
         {isSquad && phase === 'roll' && squadTapes && (
           <div className={styles.squadWrap}>
@@ -335,9 +367,16 @@ export const RevealCard = ({
             <span className={styles.slotLabel}>{SLOT_LABEL[data.slot]}</span>
             <div className={styles.squadRow}>
               {data.reels.map((reel) => (
-                <div key={reel.lane} className={`${styles.squadResult} ${styles[`card${capitalize(reel.tier)}`]}`}>
+                <div
+                  key={reel.lane}
+                  className={`${styles.squadResult} ${styles[`card${capitalize(reel.tier)}`]}`}
+                >
                   <span className={styles.laneLabel}>{reel.label}</span>
-                  <img className={styles.squadIcon} src={asset(`img/items/${reel.item.icon}`)} alt="" />
+                  <img
+                    className={styles.squadIcon}
+                    src={asset(`img/items/${reel.item.icon}`)}
+                    alt=""
+                  />
                   <span className={styles.squadName}>{reel.item.name}</span>
                   {reel.item.price != null && <GpValue gp={reel.item.price} />}
                 </div>
@@ -348,7 +387,7 @@ export const RevealCard = ({
         {!isSquad && phase === 'roll' && tape && (
           <div className={styles.tapeWrap}>
             <span className={styles.slotLabel}>{isSlot ? SLOT_LABEL[data.slot] : 'Your fate'}</span>
-            <div className={`${styles.tapeWindow} ${isSlot ? "" : styles.tapeWindowBoss}`}>
+            <div className={`${styles.tapeWindow} ${isSlot ? '' : styles.tapeWindowBoss}`}>
               <span className={styles.tapeHighlight} />
               <span
                 className={styles.tapeColumn}
@@ -360,7 +399,7 @@ export const RevealCard = ({
                 {tape.items.map((it, i) => (
                   <img
                     key={`${'id' in it ? it.id : it.name}-${i}`}
-                    className={`${styles.tapeRow} ${isSlot ? "" : styles.tapeRowBoss}`}
+                    className={`${styles.tapeRow} ${isSlot ? '' : styles.tapeRowBoss}`}
                     src={
                       'id' in it
                         ? asset(`img/items/${it.icon}`)
@@ -373,8 +412,8 @@ export const RevealCard = ({
             </div>
           </div>
         )}
-        {isSlot && (phase !== "roll" || !tape) && revealContent}
-        {isBoss && phase === "roll" && !tape && (
+        {isSlot && (phase !== 'roll' || !tape) && revealContent}
+        {isBoss && phase === 'roll' && !tape && (
           <>
             <span className={styles.bossSuspense}>?</span>
             <span className={styles.bossSubtitle}>{BOSS_SUSPENSE_LINE}</span>
@@ -385,7 +424,9 @@ export const RevealCard = ({
             <img className={styles.bossIcon} src={icon} alt="" />
             <span className={styles.bossTitle}>{title}</span>
             <span className={styles.bossSubtitle}>{CHALLENGER_SUBTITLE}</span>
-            {!isSlot && data.hardMode && stamped && <span className={styles.hardModeStamp}>HARD MODE</span>}
+            {!isSlot && data.hardMode && stamped && (
+              <span className={styles.hardModeStamp}>HARD MODE</span>
+            )}
           </>
         )}
       </div>

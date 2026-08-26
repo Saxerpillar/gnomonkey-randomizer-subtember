@@ -1,3 +1,4 @@
+import { GnomePeek } from '../theme/GnomePeek';
 import { RsButton } from '../theme/RsButton';
 import { RsTooltip } from '../theme/RsTooltip';
 import styles from './PreRollScreen.module.css';
@@ -13,7 +14,13 @@ export const PreRollScreen = ({
   onOpenSettings: () => void;
 }) => (
   <div className={styles.screen}>
-    <RsTooltip content={decideReady ? null : 'Fix your Settings first'} className={styles.fateWrap}>
+    <RsTooltip
+      content={decideReady ? null : 'Fix your Settings first'}
+      className={styles.fateWrap}
+      dataSolid
+    >
+      {/* Before the button in the DOM on purpose: he layers behind it. */}
+      <GnomePeek at="buttonTop" />
       <RsButton
         variant="primary"
         className={styles.fate}

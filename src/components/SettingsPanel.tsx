@@ -6,14 +6,20 @@ import { RsPanel } from '../theme/RsPanel';
 import {
   FORCE_BOSS_LABEL,
   FORCE_BOSS_OPTIONS,
+  FORCE_CHALLENGE_LABEL,
+  FORCE_CHALLENGE_OPTIONS,
   FORCE_TIER_OPTIONS,
   POOL_LABEL,
   POOL_TAGS,
   type ForceBoss,
+  type ForceChallenge,
   type Settings,
 } from './settings';
 import type { Tier } from '../engine/types';
 import styles from './SettingsPanel.module.css';
+
+/** Sentinel for the "as fast as possible" end of the animation-speed scale. */
+const SKIP = 'skip';
 
 const BudgetField = ({
   label,
@@ -30,8 +36,7 @@ const BudgetField = ({
   // While the input is focused you edit the raw text; on blur it previews the
   // in-game formatted amount (100000 -> 100k). Focus again to see the raw value.
   const [editing, setEditing] = useState(false);
-  const display =
-    !editing && parsed.ok && parsed.gp != null ? formatGp(parsed.gp) : value;
+  const display = !editing && parsed.ok && parsed.gp != null ? formatGp(parsed.gp) : value;
   return (
     <label className={styles.field}>
       <span>{label}</span>
@@ -103,7 +108,7 @@ export const SettingsPanel = ({
   onClose: () => void;
 }) => (
   <div className={styles.backdrop} onClick={(e) => e.target === e.currentTarget && onClose()}>
-    <RsPanel title="Settings" className={styles.panel}>
+    <RsPanel title="Settings" className={styles.panel} bodyClassName={styles.panelBody}>
       <div className={styles.body}>
         <BudgetField
           label="Budget"
@@ -127,19 +132,19 @@ export const SettingsPanel = ({
           onChange={(v) => onChange({ excludeWildy: v })}
         />
         <Toggle
-          label="Slayer bosses (off by default)"
+          label="Slayer bosses"
           checked={settings.slayerBosses}
           onChange={(v) => onChange({ slayerBosses: v })}
         />
         <Toggle
-          label="Sporadic bosses (off by default)"
+          label="Sporadic bosses"
           checked={settings.sporadicBosses}
           onChange={(v) => onChange({ sporadicBosses: v })}
         />
         {POOL_TAGS.map((tag) => (
           <Toggle
             key={tag}
-            label={`${POOL_LABEL[tag]} bosses`}
+            label={POOL_LABEL[tag]}
             checked={!settings.excludedPools.includes(tag)}
             onChange={(v) => {
               const excluded = settings.excludedPools.filter((p) => p !== tag);
@@ -149,21 +154,28 @@ export const SettingsPanel = ({
           />
         ))}
         <Toggle
-          label="Skip animations"
-          checked={settings.skipAnimations}
-          onChange={(v) => onChange({ skipAnimations: v })}
-        />
-        <Toggle
           label="Mute sounds"
           checked={settings.muteSounds}
           onChange={(v) => onChange({ muteSounds: v })}
         />
+        <Toggle
+          label="Remove flashbangs"
+          checked={settings.removeFlashbangs}
+          onChange={(v) => onChange({ removeFlashbangs: v })}
+        />
         <Choice
           label="Animation speed"
-          value={String(settings.ceremonySpeed)}
-          options={['1', '2', '4']}
-          labelOf={(o) => `${o}x`}
-          onChange={(v) => onChange({ ceremonySpeed: Number(v) })}
+          value={settings.skipAnimations ? SKIP : String(settings.ceremonySpeed)}
+          options={['1', '2', '4', SKIP]}
+          labelOf={(o) => (o === SKIP ? 'Skip animations' : `${o}x`)}
+          onChange={(v) =>
+            onChange(
+              v === SKIP
+                ? { skipAnimations: true }
+                : // Leaving skip keeps whatever speed was picked alongside it.
+                  { skipAnimations: false, ceremonySpeed: Number(v) },
+            )
+          }
         />
         <Toggle
           label="Debug mode"
@@ -181,10 +193,18 @@ export const SettingsPanel = ({
               onChange={(v) => onChange({ forceBoss: v })}
             />
             <Choice
-              label="Force tier"
+              label="Force item tier"
               value={settings.forceTier}
               options={FORCE_TIER_OPTIONS}
+              labelOf={(o) => o.charAt(0).toUpperCase() + o.slice(1)}
               onChange={(v) => onChange({ forceTier: v as Tier | 'off' })}
+            />
+            <Choice
+              label="Force challenge"
+              value={settings.forceChallenge}
+              options={FORCE_CHALLENGE_OPTIONS}
+              labelOf={(o) => FORCE_CHALLENGE_LABEL[o as ForceChallenge]}
+              onChange={(v) => onChange({ forceChallenge: v as ForceChallenge })}
             />
             <Toggle
               label="Always hard mode"
@@ -192,14 +212,24 @@ export const SettingsPanel = ({
               onChange={(v) => onChange({ forceHardMode: v })}
             />
             <Toggle
-              label="Always roll a challenge"
-              checked={settings.forceChallenge}
-              onChange={(v) => onChange({ forceChallenge: v })}
-            />
-            <Toggle
               label="Ignore budget"
               checked={settings.ignoreBudget}
               onChange={(v) => onChange({ ignoreBudget: v })}
+            />
+            <Toggle
+              label="Always flashbang (elite)"
+              checked={settings.forceFlashbang}
+              onChange={(v) => onChange({ forceFlashbang: v })}
+            />
+            <Toggle
+              label="Always GAMBA"
+              checked={settings.forceGamba}
+              onChange={(v) => onChange({ forceGamba: v })}
+            />
+            <Toggle
+              label="Always AHHHH emote"
+              checked={settings.forceHardModeEmote}
+              onChange={(v) => onChange({ forceHardModeEmote: v })}
             />
           </div>
         )}

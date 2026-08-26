@@ -1,21 +1,31 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import { asset } from './asset';
 import './App.css';
-import { BonusesPanel } from './components/BonusesPanel';
 import { BossPanel, ChallengePanel } from './components/BossPanel';
-import { difficultyOf, rollChallenge, rollGauntletChallenge, type Challenge } from './components/challenges';
+import { EmoteScatter } from './components/EmoteScatter';
+import { FitScreen } from './components/FitScreen';
+import { TitleBanner } from './components/TitleBanner';
+import { StingerProvider, useStinger } from './components/StingerHost';
+import { usePreloadAssets } from './components/usePreloadAssets';
+import { Watermark } from './components/Watermark';
+import {
+  difficultyOf,
+  rollChallenge,
+  rollGauntletChallenge,
+  type Challenge,
+} from './components/challenges';
 import { DataProvider, useGameData, type Boss } from './components/DataProvider';
 import { EquipmentPanel } from './components/EquipmentPanel';
-import { summaryLine } from './components/copy';
 import { bossObjective } from './components/objectives';
 import { PreRollScreen } from './components/PreRollScreen';
+import { ResultStage } from './components/ResultStage';
 import { RevealCard, type LandingImpact } from './components/RevealCard';
 import { SettingsPanel } from './components/SettingsPanel';
-import { SpellBadge } from './components/SpellBadge';
 import {
   DEFAULT_SETTINGS,
   filterBossPool,
-  WILDY_DEFAULT_GP,
+  mergeSettings,
+  effectiveBudget,
   type Settings,
 } from './components/settings';
 import { unlockAudio } from './components/sound';
@@ -85,7 +95,7 @@ const initialState = (): State => {
       ...base,
       loadout,
       locks,
-      settings: { ...DEFAULT_SETTINGS, ...(saved.settings ?? {}) },
+      settings: mergeSettings(saved.settings),
     };
   } catch {
     return base;
@@ -120,7 +130,12 @@ const reducer = (state: State, action: Action): State => {
       const locks = { ...state.locks };
       delete locks[slot];
       // Removing the weapon removes the spell that went with it.
-      return { ...state, loadout, locks, spell: slot === 'weapon' ? null : state.spell };
+      return {
+        ...state,
+        loadout,
+        locks,
+        spell: slot === 'weapon' ? null : state.spell,
+      };
     }
     case 'REROLL_SLOT': {
       const { slot, loadout, spell } = action;
@@ -145,7 +160,25 @@ const Main = () => {
   const [phase, setPhase] = useState<Phase>('pre-roll');
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [shaking, setShaking] = useState(false);
-  const [menu, setMenu] = useState<{ x: number; y: number; entries: MenuEntry[] } | null>(null);
+  // Warm every reel asset while the pre-roll screen is idle, so nothing pops
+  // in mid-reveal.
+  usePreloadAssets(items, bosses);
+
+  /** GAMBA is capped at one per DECIDE; reset when a new run is rolled. */
+  const gambaFired = useRef(false);
+  // Queued on the host above every screen, so a stinger is never cut short by
+  // the ceremony handing over to the result view.
+  const queueStinger = useStinger();
+  const pushStinger = (kind: Parameters<typeof queueStinger>[0]) =>
+    queueStinger(kind, {
+      muted: state.settings.muteSounds,
+      noFlash: state.settings.removeFlashbangs,
+    });
+  const [menu, setMenu] = useState<{
+    x: number;
+    y: number;
+    entries: MenuEntry[];
+  } | null>(null);
   /** A single-slot reroll that is currently rolling on screen. */
   const [rerolling, setRerolling] = useState<{
     reveal: RevealData;
@@ -200,8 +233,7 @@ const Main = () => {
     if (!isWildy) return { ok: true, gp: normal.gp };
     const wildy = parseBudget(state.settings.wildyBudgetText);
     if (!wildy.ok) return { ok: false, gp: null };
-    const cap = wildy.gp ?? WILDY_DEFAULT_GP;
-    return { ok: true, gp: normal.gp == null ? null : Math.max(cap, normal.gp) };
+    return { ok: true, gp: effectiveBudget(normal.gp, wildy.gp, true) };
   };
 
   /** Reroll a single slot, leaving the rest of the loadout alone. */
@@ -256,10 +288,16 @@ const Main = () => {
     // The shield slot is genuinely unusable under a two-handed weapon.
     const shieldBlocked = slot === 'shield' && (state.loadout.weapon?.twoHanded ?? false);
     if (!shieldBlocked) {
-      entries.push({ label: `Reroll ${slot}`, onSelect: () => rerollOneSlot(slot) });
+      entries.push({
+        label: `Reroll ${slot}`,
+        onSelect: () => rerollOneSlot(slot),
+      });
     }
     if (state.loadout[slot]) {
-      entries.push({ label: 'Remove item from slot', onSelect: () => dispatch({ type: 'REMOVE_ITEM', slot }) });
+      entries.push({
+        label: 'Remove item from slot',
+        onSelect: () => dispatch({ type: 'REMOVE_ITEM', slot }),
+      });
     }
     setMenu({ x: e.clientX, y: e.clientY, entries });
   };
@@ -268,11 +306,12 @@ const Main = () => {
     const { settings } = state;
     const pool = filterBossPool(bosses, settings);
     if (pool.length === 0) return;
+    gambaFired.current = false;
     const boss = pick(mulberry32(randomSeed()), pool);
     // Gauntlet runs take no gear in at all: no gear roll, and a guaranteed
     // challenge drawn from that boss's own pool.
     const isGauntlet = boss.tags.includes('gauntlet');
-    const forceChallenge = settings.debugMode && settings.forceChallenge;
+    const forceChallenge = settings.debugMode ? settings.forceChallenge : 'off';
     const challenge = isGauntlet
       ? rollGauntletChallenge(mulberry32(randomSeed()), boss.name)
       : rollChallenge(mulberry32(randomSeed()), difficultyOf(boss.tags), forceChallenge);
@@ -300,18 +339,23 @@ const Main = () => {
     // A boss with a hard-mode variant is upgraded on a coin flip; the ceremony
     // reveals the normal fight first, then stamps HARD MODE after a beat.
     const debug = settings.debugMode;
+    // Cosmetic coin flip, so plain Math.random rather than the seeded roller
+    // the actual outcomes use.
+    const challengeEmote =
+      challenge != null && (debug && settings.forceHardModeEmote ? true : Math.random() < 0.5);
     const hardMode =
       boss.tags.includes('hard mode') &&
       (debug && settings.forceHardMode ? true : mulberry32(randomSeed())() < 0.5);
 
     // Raids send a team: one style-forced setup each for melee, ranged, magic.
-    const isRaid = boss.tags.includes("raid");
-    const squad = isRaid && !isGauntlet
-      ? (['melee', 'ranged', 'magic'] as const).map((style) => ({
-          style,
-          loadout: rollForStyle(rollPool, style, rollSettings, mulberry32(randomSeed())),
-        }))
-      : null;
+    const isRaid = boss.tags.includes('raid');
+    const squad =
+      isRaid && !isGauntlet
+        ? (['melee', 'ranged', 'magic'] as const).map((style) => ({
+            style,
+            loadout: rollForStyle(rollPool, style, rollSettings, mulberry32(randomSeed())),
+          }))
+        : null;
 
     // Preload the winners so the reveal isn't gated on image load latency.
     const preload = (l: Loadout) => {
@@ -329,6 +373,12 @@ const Main = () => {
       dispatch({ type: 'SET_CHALLENGE', challenge });
       dispatch({ type: 'SET_SQUAD', squad });
       setPhase('result');
+      if (!settings.skipAnimations) {
+        if (challenge) pushStinger('challenge');
+        // The AHHHH gnome only applies to a hard-mode fight that drew a
+        // challenge, and only on the winning side of its coin flip.
+        if (challenge && hardMode && challengeEmote) pushStinger('hardmode');
+      }
     };
 
     if (settings.skipAnimations) {
@@ -346,7 +396,12 @@ const Main = () => {
       pool,
       hardMode,
       isGauntlet,
-      squad ? squad.map((s) => ({ label: STYLE_LABEL[s.style], loadout: s.loadout })) : null,
+      squad
+        ? squad.map((s) => ({
+            label: STYLE_LABEL[s.style],
+            loadout: s.loadout,
+          }))
+        : null,
     );
   };
 
@@ -357,15 +412,22 @@ const Main = () => {
 
   if (phase === 'pre-roll') {
     return (
-      <div className="app">
-        <div className="hero">
-          <h1 className="title">Gnome Subtember</h1>
-          <PreRollScreen
-            decideReady={decideReady}
-            onDecide={decide}
-            onOpenSettings={() => setSettingsOpen(true)}
-          />
-        </div>
+      <>
+        <EmoteScatter />
+        <FitScreen>
+          <div className="app">
+            <div className="hero">
+              <TitleBanner />
+              <PreRollScreen
+                decideReady={decideReady}
+                onDecide={decide}
+                onOpenSettings={() => setSettingsOpen(true)}
+              />
+            </div>
+          </div>
+        </FitScreen>
+        {/* Fixed overlays live outside FitScreen: inside a scaled element they
+            would anchor to it rather than to the viewport. */}
         {settingsOpen && (
           <SettingsPanel
             settings={state.settings}
@@ -373,11 +435,13 @@ const Main = () => {
             onClose={() => setSettingsOpen(false)}
           />
         )}
-      </div>
+      </>
     );
   }
 
   const inCeremony = phase === 'ceremony';
+  /** Gauntlet fights take no gear in, so the skeleton stays powered down. */
+  const isGauntletRun = state.boss?.tags.includes('gauntlet') ?? false;
 
   // Screen shake on elite/boss landings (T6/T8).
   const triggerShake = () => {
@@ -387,6 +451,24 @@ const Main = () => {
   };
   const triggerLand: (impact: LandingImpact) => void = (impact) => {
     if (impact === 'elite' || impact === 'boss') triggerShake();
+    const debug = state.settings.debugMode;
+
+    // GAMBA rides any reveal at all, but only once per DECIDE — a jackpot that
+    // can fire twice in a run stops feeling like one.
+    if (!gambaFired.current) {
+      if ((debug && state.settings.forceGamba) || Math.random() < 0.02) {
+        gambaFired.current = true;
+        pushStinger('gamba');
+      }
+    }
+
+    // The flashbang now belongs to elite items rather than the boss: it is the
+    // loudest thing on screen, so it marks the loudest thing in the loadout.
+    if (impact === 'elite') {
+      if ((debug && state.settings.forceFlashbang) || Math.random() < 0.5) {
+        pushStinger('flashbang');
+      }
+    }
   };
 
   // Ceremony: a bare screen that assembles the gear skeleton tile-by-tile
@@ -403,9 +485,76 @@ const Main = () => {
       ...(view?.pending ?? []),
     ];
     return (
-      <div className={shaking ? 'app shake' : 'app'}>
-        <h1 className="title reveal">Gnome Subtember</h1>
-        <main className="ceremony">
+      <>
+        <FitScreen>
+          <div className={shaking ? 'app shake' : 'app'}>
+            <TitleBanner className="reveal" />
+            {/* Once the gear is assembled the ceremony BECOMES the final
+                layout, so the boss card has a Challenger panel to fly into and
+                the handover to the committed view is invisible. The squad
+                ceremony keeps its own stage — its result view is a different
+                shape. */}
+            {view?.bossStage && !view?.squad ? (
+              <ResultStage
+                loadout={displayLoadout}
+                locks={state.locks}
+                spell={null}
+                boss={view?.boss ?? null}
+                revealing={view?.boss == null}
+                showChallenge={false}
+                deactivated={view?.gearless}
+                style={{ width: '100%' }}
+              />
+            ) : (
+              <main className="ceremony">
+                {view?.squad ? (
+                  // Raids: the three style-forced skeletons assemble side by side.
+                  <div className="squadStage" data-gear-anchor="">
+                    {view.squad.map((lane) => {
+                      const laneLoadout = emptyLoadout();
+                      for (const s of SLOTS) laneLoadout[s] = lane.settled[s] ?? null;
+                      const laneVisible = [
+                        ...(Object.keys(lane.settled) as Slot[]),
+                        ...(view.pending ?? []),
+                      ];
+                      return (
+                        <div key={lane.label} className="squadStageLane">
+                          <span className="squadStageLabel">{lane.label}</span>
+                          <EquipmentPanel
+                            loadout={laneLoadout}
+                            locks={{}}
+                            pendingSlots={view.pending}
+                            visibleSlots={laneVisible}
+                            onToggleLock={() => {}}
+                            onSlotContextMenu={() => {}}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div data-gear-anchor="">
+                    <EquipmentPanel
+                      loadout={displayLoadout}
+                      locks={state.locks}
+                      pendingSlots={view?.pending}
+                      visibleSlots={view?.gearless ? undefined : visibleSlots}
+                      onToggleLock={() => {}}
+                      onSlotContextMenu={() => {}}
+                      deactivated={view?.gearless}
+                    />
+                  </div>
+                )}
+                {view?.bossStage && (
+                  <BossPanel boss={view?.boss ?? null} revealing={view?.boss == null} />
+                )}
+              </main>
+            )}
+          </div>
+        </FitScreen>
+        {/* The panel carries the value from here on, so the floating counter
+            would just be a second copy of it. */}
+        {!(view?.bossStage && !view?.squad) && (
           <ValueCounter
             value={
               view?.squad
@@ -418,44 +567,7 @@ const Main = () => {
             }
             muted={state.settings.muteSounds}
           />
-          {view?.squad ? (
-            // Raids: the three style-forced skeletons assemble side by side.
-            <div className="squadStage">
-              {view.squad.map((lane) => {
-                const laneLoadout = emptyLoadout();
-                for (const s of SLOTS) laneLoadout[s] = lane.settled[s] ?? null;
-                const laneVisible = [
-                  ...(Object.keys(lane.settled) as Slot[]),
-                  ...(view.pending ?? []),
-                ];
-                return (
-                  <div key={lane.label} className="squadStageLane">
-                    <span className="squadStageLabel">{lane.label}</span>
-                    <EquipmentPanel
-                      loadout={laneLoadout}
-                      locks={{}}
-                      pendingSlots={view.pending}
-                      visibleSlots={laneVisible}
-                      onToggleLock={() => {}}
-                      onSlotContextMenu={() => {}}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <EquipmentPanel
-              loadout={displayLoadout}
-              locks={state.locks}
-              pendingSlots={view?.pending}
-              visibleSlots={view?.gearless ? undefined : visibleSlots}
-              onToggleLock={() => {}}
-              onSlotContextMenu={() => {}}
-              deactivated={view?.gearless}
-            />
-          )}
-          {view?.bossStage && <BossPanel boss={view?.boss ?? null} revealing={view?.boss == null} />}
-        </main>
+        )}
         {reveal && (
           <RevealCard
             key={reveal.key}
@@ -466,91 +578,93 @@ const Main = () => {
             onLand={triggerLand}
           />
         )}
-      </div>
+      </>
     );
   }
 
   // Raids: the team gets one style-forced setup each, side by side.
   if (state.squad) {
     return (
-      <div className="app resultIn">
-        <h1 className="title">Gnome Subtember</h1>
-        <RsPanel title="Your Challenger" icon={asset('img/ui/skull.png')} className="raidBoss">
-          <div className="fate">
-            <BossPanel
-              boss={state.boss}
-              hardMode={state.hardMode}
-              objective={state.boss ? bossObjective(state.boss.name, loadoutValue(state.loadout)) : null}
-            />
-            <ChallengePanel challenge={state.challenge} />
-          </div>
-        </RsPanel>
-        <div className="squad">
-          {state.squad.map(({ style, loadout }) => (
-            <RsPanel key={style} title={STYLE_LABEL[style]} className="squadPanel">
-              <div className="gearStack">
-                <EquipmentPanel
-                  loadout={loadout}
-                  locks={{}}
-                  onToggleLock={() => {}}
-                  onSlotContextMenu={() => {}}
+      <>
+        <EmoteScatter />
+        <FitScreen>
+          <div className="app resultIn">
+            <TitleBanner />
+            <RsPanel title="Your Challenger" icon={asset('img/ui/skull.png')} className="raidBoss">
+              <div className="fate">
+                <BossPanel
+                  boss={state.boss}
+                  hardMode={state.hardMode}
+                  objective={
+                    state.boss ? bossObjective(state.boss.name, loadoutValue(state.loadout)) : null
+                  }
                 />
-                <div className="value">
-                  <GpValue gp={loadoutValue(loadout)} />
-                </div>
+                <ChallengePanel challenge={state.challenge} />
               </div>
             </RsPanel>
-          ))}
-        </div>
-        <div className="actions">
-          <RsButton variant="primary" onClick={() => setPhase('pre-roll')}>
-            NEW CHALLENGE
-          </RsButton>
-        </div>
-        {menu && <RsContextMenu x={menu.x} y={menu.y} entries={menu.entries} onClose={() => setMenu(null)} />}
-      </div>
+            <div className="squad">
+              {state.squad.map(({ style, loadout }) => (
+                <RsPanel key={style} title={STYLE_LABEL[style]} className="squadPanel">
+                  <div className="gearStack">
+                    <EquipmentPanel
+                      loadout={loadout}
+                      locks={{}}
+                      onToggleLock={() => {}}
+                      onSlotContextMenu={() => {}}
+                    />
+                    <div className="value">
+                      <GpValue gp={loadoutValue(loadout)} />
+                    </div>
+                  </div>
+                </RsPanel>
+              ))}
+            </div>
+            <div className="actions" data-solid="">
+              <RsButton variant="primary" onClick={() => setPhase('pre-roll')}>
+                NEW CHALLENGE
+              </RsButton>
+            </div>
+          </div>
+        </FitScreen>
+        {menu && (
+          <RsContextMenu
+            x={menu.x}
+            y={menu.y}
+            entries={menu.entries}
+            onClose={() => setMenu(null)}
+          />
+        )}
+      </>
     );
   }
 
   return (
-    <div className="app resultIn">
-      <h1 className="title">Gnome Subtember</h1>
-      <main className="columns">
-        <RsPanel title="Your gear" icon={asset("img/ui/multicombat.png")}>
-          <div className="gearStack">
-            <div className="gearRow">
-              <EquipmentPanel
-                loadout={state.loadout}
-                locks={state.locks}
-                onToggleLock={(slot) => dispatch({ type: 'TOGGLE_LOCK', slot })}
-                onSlotContextMenu={(slot, e) => openSlotMenu(slot, e)}
-              />
-              <BonusesPanel loadout={state.loadout} />
-            </div>
-            <SpellBadge weapon={state.loadout.weapon} spell={state.spell} />
-            <div className="value">
-              Loadout value: <GpValue gp={loadoutValue(state.loadout)} />
-            </div>
-            {state.boss && <div className="summary">{summaryLine(state.boss.name)}</div>}
+    <>
+      <EmoteScatter />
+      <FitScreen>
+        <div className="app resultIn">
+          <TitleBanner />
+          <ResultStage
+            loadout={state.loadout}
+            locks={state.locks}
+            spell={state.spell}
+            boss={state.boss}
+            hardMode={state.hardMode}
+            challenge={state.challenge}
+            deactivated={isGauntletRun}
+            onToggleLock={(slot) => dispatch({ type: 'TOGGLE_LOCK', slot })}
+            onSlotContextMenu={(slot, e) => openSlotMenu(slot, e)}
+          />
+          <div className="actions" data-solid="">
+            <RsButton variant="primary" onClick={() => setPhase('pre-roll')}>
+              NEW CHALLENGE
+            </RsButton>
           </div>
-        </RsPanel>
-        <RsPanel title="Your Challenger" icon={asset("img/ui/skull.png")}>
-          <div className="fate">
-            <BossPanel
-              boss={state.boss}
-              hardMode={state.hardMode}
-              objective={state.boss ? bossObjective(state.boss.name, loadoutValue(state.loadout)) : null}
-            />
-            <ChallengePanel challenge={state.challenge} />
-          </div>
-        </RsPanel>
-      </main>
-      <div className="actions">
-        <RsButton variant="primary" onClick={() => setPhase('pre-roll')}>
-          NEW CHALLENGE
-        </RsButton>
-      </div>
-      {menu && <RsContextMenu x={menu.x} y={menu.y} entries={menu.entries} onClose={() => setMenu(null)} />}
+        </div>
+      </FitScreen>
+      {menu && (
+        <RsContextMenu x={menu.x} y={menu.y} entries={menu.entries} onClose={() => setMenu(null)} />
+      )}
       {rerolling && (
         <RevealCard
           key={rerolling.reveal.key}
@@ -569,13 +683,18 @@ const Main = () => {
           }}
         />
       )}
-    </div>
+    </>
   );
 };
 
 const App = () => (
   <DataProvider>
-    <Main />
+    <StingerProvider>
+      <Main />
+    </StingerProvider>
+    {/* Outside every screen and outside FitScreen, so it is pinned to the
+        window on all pages and never scales with the layout. */}
+    <Watermark />
   </DataProvider>
 );
 

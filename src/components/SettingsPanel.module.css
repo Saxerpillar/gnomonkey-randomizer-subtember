@@ -11,12 +11,63 @@
 .panel {
   width: 100%;
   max-width: 420px;
+  /* The one place in the app allowed to scroll. Everything else scales to fit
+     (see FitScreen), but the settings list grows with the debug section and a
+     dialog that runs off the bottom of the screen is worse than a scrollbar.
+     Capped to the window minus the backdrop's 24px padding either side. */
+  max-height: calc(100dvh - 48px);
+  min-height: 0;
+}
+
+/* Makes RsPanel's padded body a flex column, so the list below can be a flex
+   item that shrinks — a percentage max-height would not resolve here, because a
+   flex item's grown height is not a definite height to measure against. */
+.panelBody {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .body {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  /* Fills the capped panel and scrolls whatever does not fit. */
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  /* Reserve the gutter so opening the debug section does not shift the layout
+     sideways as the scrollbar appears. */
+  scrollbar-gutter: stable;
+  /* The page behind cannot scroll, but keep the chain from trying. */
+  overscroll-behavior: contain;
+}
+
+/* Themed to match the panel rather than the OS default. */
+.body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) transparent;
+}
+
+.body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 5px;
+}
+
+.body::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+  background-clip: padding-box;
 }
 
 .field {

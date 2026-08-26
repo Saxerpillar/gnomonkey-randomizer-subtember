@@ -1,0 +1,10 @@
+.banner {
+  display: flex;
+  justify-content: center;
+}
+
+.text {
+  /* Trailing letter-spacing hangs off the last glyph and drags the optical
+     centre left; the matching pad puts it back. */
+  padding-left: var(--title-kerning);
+}

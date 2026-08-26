@@ -17,6 +17,32 @@
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.55) 100%);
 }
 
+/* Rides the top edge of the roulette card, overlapping it slightly so it reads
+   as sitting ON the machine rather than floating above it. */
+.roulettePet {
+  position: absolute;
+  bottom: calc(100% - 14px);
+  left: 50%;
+  translate: -50% 0;
+  width: 96px;
+  height: 96px;
+  image-rendering: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7));
+  animation: petPop 320ms cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+@keyframes petPop {
+  from {
+    opacity: 0;
+    translate: -50% 18px;
+  }
+  to {
+    opacity: 1;
+    translate: -50% 0;
+  }
+}
+
 .card {
   position: relative;
   display: flex;

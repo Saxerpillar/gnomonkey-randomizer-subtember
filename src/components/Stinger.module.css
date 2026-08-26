@@ -1,0 +1,86 @@
+.stinger {
+  position: fixed;
+  inset: 0;
+  /* Above every panel, tooltip and reveal card — a stinger owns the screen. */
+  z-index: 400;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  animation: stingerFade both ease-out;
+}
+
+/* Every stinger fills the window, letterboxed rather than cropped or stretched,
+   so a portrait emote and a landscape one both read as full-screen. */
+.art {
+  width: 100vw;
+  height: 100dvh;
+  object-fit: contain;
+  /* Full opacity from the first frame; only the overlay's fade takes it away. */
+  animation: stingerPunch both cubic-bezier(0.15, 1.7, 0.3, 1);
+}
+
+/* No fade IN: it starts solid and falls away from there. */
+@keyframes stingerFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* A scale punch only — deliberately no opacity ramp, or the art would fade in
+   while the overlay is already fading out and never reach full strength. */
+@keyframes stingerPunch {
+  0% {
+    scale: 1.12;
+  }
+  10% {
+    scale: 1;
+  }
+  100% {
+    scale: 1.03;
+  }
+}
+
+/* Deep-fried: saturation and contrast cranked, warmed slightly. */
+.hardmode .art {
+  filter: saturate(3.4) contrast(2) brightness(1.12) hue-rotate(-8deg);
+  image-rendering: pixelated;
+}
+
+/* The blowout itself: a white screen that peaks almost instantly. */
+.flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  animation: flashBlowout both ease-out;
+}
+
+@keyframes flashBlowout {
+  0% {
+    opacity: 0;
+  }
+  4% {
+    opacity: 0.95;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* A full-screen white blowout is exactly what this setting exists to prevent:
+   drop the flash entirely and hold the art still instead. */
+@media (prefers-reduced-motion: reduce) {
+  .flash {
+    display: none;
+  }
+
+  .art {
+    animation: none;
+  }
+}
+

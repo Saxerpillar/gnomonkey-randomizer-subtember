@@ -100,12 +100,34 @@
   font-style: italic;
 }
 
+/* Keeps the AHHHH gnome on the text's baseline row rather than above it. */
+.challengeRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.challengeEmote {
+  width: 84px;
+  height: 84px;
+  flex: none;
+  /* Deep-fried: saturation and contrast cranked, warmed slightly, then pushed
+     back through a hard shadow. Order matters — the colour blowout has to
+     happen before the drop-shadow or the shadow gets fried too. */
+  filter: saturate(3.4) contrast(2) brightness(1.12) hue-rotate(-8deg)
+    drop-shadow(0 0 2px rgba(255, 60, 0, 0.75)) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.7));
+  /* Crunchy edges to match the fried look rather than a smooth resample. */
+  image-rendering: pixelated;
+  animation: challengePop 420ms cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
 .challengeValue {
   font-family: var(--font-bold);
   font-size: 28px;
   line-height: 1.15;
-  color: var(--gold-bright);
-  text-shadow: var(--text-outline), 0 0 14px rgba(244, 208, 63, 0.45);
+  color: var(--challenge);
+  text-shadow: var(--text-outline), 0 0 14px var(--challenge-glow);
   text-align: center;
   animation: challengePop 420ms cubic-bezier(0.2, 1.6, 0.4, 1);
 }

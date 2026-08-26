@@ -1,0 +1,16 @@
+.box {
+  /* Fills the window exactly; nothing inside it may spill out as a scrollbar. */
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.content {
+  /* Shrinking toward the top keeps the wordmark pinned where it started rather
+     than drifting up the screen as the layout gets denser. */
+  transform-origin: top center;
+  flex: none;
+}

@@ -5,11 +5,11 @@ export const POOL_TAGS = ['gwd', 'dt2', 'raid', 'minigame', 'delve'] as const;
 export type PoolTag = (typeof POOL_TAGS)[number];
 
 export const POOL_LABEL: Record<PoolTag, string> = {
-  gwd: 'GWD',
-  dt2: 'DT2',
-  raid: 'Raids',
-  minigame: 'Minigames',
-  delve: 'Delve',
+  gwd: 'GWD bosses',
+  dt2: 'DT2 bosses',
+  raid: 'Include Raids',
+  minigame: 'Wave-based encounters',
+  delve: 'Doom of Mokhaiotl',
 };
 
 /** Persisted challenge settings, editable from the pre-roll Settings button. */
@@ -26,6 +26,9 @@ export interface Settings {
   sporadicBosses: boolean;
   /** Pool tags excluded from the boss pool (gwd/dt2/raid/minigame/delve). */
   excludedPools: PoolTag[];
+  /** Drop the white screen blowout from every stinger. The art and the boom
+   *  still play — this only removes the part that hurts to look at. */
+  removeFlashbangs: boolean;
 
   // ---- debug (all inert by default; hidden unless debugMode is on) ----
   /** Master switch: reveals the debug controls in Settings. */
@@ -36,10 +39,16 @@ export interface Settings {
   forceTier: Tier | 'off';
   /** Always take the hard-mode variant when the boss has one (normally 50%). */
   forceHardMode: boolean;
-  /** Always roll an extra challenge (normally 15-35% by difficulty). */
-  forceChallenge: boolean;
+  /** Force the extra challenge: any one, or specifically the timed one. */
+  forceChallenge: ForceChallenge;
   /** Ignore the gp budget entirely. */
   ignoreBudget: boolean;
+  /** Always flashbang on an elite item landing (normally 50%). */
+  forceFlashbang: boolean;
+  /** Always fire the GAMBA stinger on the first reveal (normally 2%, once per run). */
+  forceGamba: boolean;
+  /** Always show the AHHHH emote beside a hard-mode challenge (normally 50%). */
+  forceHardModeEmote: boolean;
   /** Animation speed multiplier for the ceremony (1x / 2x / 4x). Not debug. */
   ceremonySpeed: number;
 }
@@ -58,8 +67,39 @@ export const FORCE_BOSS_LABEL: Record<ForceBoss, string> = {
 
 export const FORCE_TIER_OPTIONS = ['off', 'junk', 'common', 'decent', 'strong', 'elite'] as const;
 
+export const FORCE_CHALLENGE_OPTIONS = ['off', 'any', 'timed'] as const;
+export type ForceChallenge = (typeof FORCE_CHALLENGE_OPTIONS)[number];
+
+export const FORCE_CHALLENGE_LABEL: Record<ForceChallenge, string> = {
+  off: 'Off',
+  any: 'Always roll one',
+  timed: 'Always the timer',
+};
+
 /** Wilderness fights cap the budget here when the field is left empty. */
 export const WILDY_DEFAULT_GP = 1_000_000;
+
+/**
+ * The gp ceiling for a run, in gp, or null for unlimited.
+ *
+ * A wilderness fight CAPS the loadout — you should not be taking 384m into the
+ * wild — so the lower of the two budgets always wins. The wildy allowance is
+ * itself floored at {@link WILDY_DEFAULT_GP} so an empty or tiny field can
+ * never make a wildy run unrollable.
+ *
+ * The cap direction is the whole point of this function: reading it as "take
+ * the larger" silently disables the wilderness rule for anyone whose normal
+ * budget is over 1m, which is nearly everyone.
+ */
+export const effectiveBudget = (
+  normalGp: number | null,
+  wildyGp: number | null,
+  isWildy: boolean,
+): number | null => {
+  if (!isWildy) return normalGp;
+  const cap = Math.max(wildyGp ?? WILDY_DEFAULT_GP, WILDY_DEFAULT_GP);
+  return normalGp == null ? cap : Math.min(cap, normalGp);
+};
 
 export const DEFAULT_SETTINGS: Settings = {
   budgetText: '',
@@ -71,13 +111,29 @@ export const DEFAULT_SETTINGS: Settings = {
   slayerBosses: false,
   sporadicBosses: false,
   excludedPools: [],
+  removeFlashbangs: false,
   debugMode: false,
   forceBoss: 'off',
   forceTier: 'off',
   forceHardMode: false,
-  forceChallenge: false,
+  forceChallenge: 'off',
   ignoreBudget: false,
+  forceFlashbang: false,
+  forceGamba: false,
+  forceHardModeEmote: false,
   ceremonySpeed: 1,
+};
+
+/**
+ * Settings as loaded from storage, healed against the current shape. Only
+ * `forceChallenge` needs it so far: it used to be a boolean, and an old save
+ * would otherwise hand the Choice control a value it cannot show.
+ */
+export const mergeSettings = (saved: unknown): Settings => {
+  const s: Settings = { ...DEFAULT_SETTINGS, ...((saved as Partial<Settings>) ?? {}) };
+  const legacy = s.forceChallenge as unknown;
+  if (typeof legacy === 'boolean') s.forceChallenge = legacy ? 'any' : 'off';
+  return s;
 };
 
 /** Narrows the pool to whatever the debug "force boss" option asks for. */

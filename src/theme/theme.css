@@ -48,6 +48,11 @@
   --green: #46c246;
   --green-glow: rgba(70, 194, 70, 0.55);
   --red: #d84343;
+  /* Extra-challenge text. Its own colour rather than a borrowed tier or gold:
+     the tier colours carry meaning elsewhere, and gold is already the wordmark
+     and the elite tier, so a cool tone is what actually reads as separate. */
+  --challenge: #62d5ff;
+  --challenge-glow: rgba(98, 213, 255, 0.45);
 
   /* in-game coin text tiers (yellow < 100k, white < 10m, green >= 10m) */
   --gp-yellow: #ffff00;

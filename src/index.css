@@ -21,16 +21,32 @@ html,
 body,
 #root {
   margin: 0;
-  min-height: 100vh;
+  /* Fixed to the window, never taller: every screen scales itself to fit (see
+     FitScreen), so a scrollbar would only ever mean a layout bug. */
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
   /* PLACEHOLDER page backdrop — swap wholesale for custom streamer art (see ticket).
-     Layered: soft warm key light top-left, cool fill bottom-right, vertical falloff. */
+     Layered top to bottom: broad cloudy mottling, a looser speckle, soft warm
+     key light top-left, cool fill bottom-right, vertical falloff.
+
+     Both texture layers are inline SVG turbulence rather than image files —
+     nothing to ship, and they tile seamlessly. Their tile sizes (701 and 419)
+     share no common factor on purpose: the combined pattern only repeats after
+     several thousand pixels, so the backdrop never reads as a grid. Blended
+     with soft-light so they texture the gradients underneath; at normal
+     blending a grey noise tile just washes the whole page flat. */
   background-color: var(--bg);
-  background-image: radial-gradient(1100px 620px at 28% -6%, rgba(96, 82, 52, 0.22), transparent 62%),
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='701' height='701'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='701' height='701' filter='url(%23t)' opacity='0.55'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='419' height='419'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='419' height='419' filter='url(%23t)' opacity='0.22'/%3E%3C/svg%3E"),
+    radial-gradient(1100px 620px at 28% -6%, rgba(96, 82, 52, 0.22), transparent 62%),
     radial-gradient(950px 700px at 86% 106%, rgba(64, 56, 38, 0.25), transparent 58%),
     linear-gradient(180deg, #191612 0%, #14120f 45%, #0e0c09 100%);
+  background-size: 701px 701px, 419px 419px, auto, auto, auto;
+  background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
+  background-blend-mode: soft-light, soft-light, normal, normal, normal;
   background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
@@ -40,4 +56,10 @@ body {
 
 img {
   image-rendering: pixelated; /* OSRS sprites stay sharp when scaled */
+}
+
+:root {
+  /* Wordmark letter-spacing. Lives here because TitleBanner pads by the same
+     amount to cancel the trailing gap it leaves after the last glyph. */
+  --title-kerning: 10px;
 }

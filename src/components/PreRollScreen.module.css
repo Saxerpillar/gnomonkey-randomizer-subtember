@@ -7,9 +7,13 @@
 
 .fateWrap {
   display: flex;
+  position: relative;
 }
 
 .fate {
+  /* Stacks above the gnome peeking out from behind the top edge. */
+  position: relative;
+  z-index: 1;
   animation: fatePulse 2.6s ease-in-out infinite;
 }
 

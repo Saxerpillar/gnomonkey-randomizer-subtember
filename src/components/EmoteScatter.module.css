@@ -1,0 +1,42 @@
+.layer {
+  position: fixed;
+  inset: 0;
+  /* Behind everything the user actually interacts with, and never clickable. */
+  z-index: 0;
+  pointer-events: none;
+  /* Trim that overhangs the window clips instead of forcing a scrollbar. */
+  overflow: hidden;
+}
+
+.sprite {
+  position: absolute;
+  /* left/top are the solver's CENTRE for the piece, so nothing half-hangs off
+     an edge the way a top-left anchor would. */
+  translate: -50% -50%;
+  display: block;
+  /* Photographic emotes: the global pixelated rule would wreck them upscaled. */
+  image-rendering: auto;
+  height: auto;
+  opacity: 0.9;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.55));
+  animation-name: emoteDrift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes emoteDrift {
+  0%,
+  100% {
+    translate: -50% -50%;
+  }
+  50% {
+    /* Amplitude comes from DRIFT_PX so the solver reserves exactly this room. */
+    translate: -50% calc(-50% - var(--emote-drift, 9px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sprite {
+    animation: none;
+  }
+}
