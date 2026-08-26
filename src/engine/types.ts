@@ -15,16 +15,22 @@ export const SLOTS = [
 
 export type Slot = (typeof SLOTS)[number];
 
+/**
+ * Ammo family. A weapon fires its own family only, and (for the tiered
+ * families) only up to its own tier — the wiki's "up to mithril arrows" rule.
+ */
 export type AmmoClass =
   | 'arrow'
   | 'bolt'
   | 'javelin'
   | 'tar'
   | 'atlatl'
-  // specialty bolts only their own crossbow can fire
+  // families only their own weapon can fire
   | 'kebbit'
   | 'antler'
   | 'boltrack'
+  | 'bone'
+  | 'ogre'
   | 'any';
 
 /** Rarity tier, assigned per slot by combat-power percentile at refresh time. */
@@ -61,6 +67,10 @@ export interface Item {
   /** Ammo only usable with the weapon that requires its class (atlatl darts,
    *  salamander tars) — never rolls into the cosmetic any-ammo pool. */
   ammoExclusive?: boolean;
+  /** Ammo-slot items: metal tier (bronze 1 ... dragon 8). */
+  ammoTier?: number;
+  /** Weapons: the highest ammo tier this weapon can fire (undefined = any). */
+  ammoMaxTier?: number;
   /** Weapons only: the ammo class this weapon needs to fire, if any. */
   requiredAmmo?: Exclude<AmmoClass, 'any'>;
   /** GE price snapshot (midpoint). Absent for untradeables. */

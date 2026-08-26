@@ -142,7 +142,10 @@
       "Vyre noble top",
       "White goblin mail",
       "Wolf mask (Death on the Isle)",
-      "Yellow goblin mail"
+      "Yellow goblin mail",
+      "Castle wars arrow",
+      "Castle wars bolts",
+      "Ice arrows"
     ],
     "//questOnlyNames": "Quest-only props: items in the wiki Category:Quest items that ALSO have zero combat stats. Derived once, hand-editable — add/remove freely. Real quest-obtained GEAR (Salve amulet, Proselyte, Iban staff, Climbing boots...) is deliberately NOT here."
   },
@@ -162,77 +165,374 @@
     ]
   },
   "ammo": {
-    "//": "Ammo-slot classification. Name rules run in order, first match wins; unmatched -> 'any' (blessings, misc). Weapon overrides beat category mapping (Bow->arrow, Crossbow->bolt).",
-    "classRules": [
+    "//": "Ranged compatibility, grounded in the wiki Bow / Crossbow (weapon) / Ammunition tables. A weapon fires ammo of its FAMILY whose TIER is <= its maxTier (null maxTier = the family is exclusive, tier ignored).",
+    "familyRules": [
       {
         "pattern": "atlatl dart",
-        "class": "atlatl"
+        "family": "atlatl"
       },
       {
         "pattern": "kebbit bolt",
-        "class": "kebbit"
+        "family": "kebbit"
       },
       {
         "pattern": "antler bolt",
-        "class": "antler"
+        "family": "antler"
       },
       {
         "pattern": "bolt rack",
-        "class": "boltrack"
+        "family": "boltrack"
       },
       {
-        "pattern": "arrow",
-        "class": "arrow"
+        "pattern": "bone bolt",
+        "family": "bone"
+      },
+      {
+        "pattern": "ogre arrow",
+        "family": "ogre"
       },
       {
         "pattern": "brutal",
-        "class": "arrow"
+        "family": "ogre"
       },
       {
-        "pattern": "bolt",
-        "class": "bolt"
+        "pattern": "(barbed|blunt|bullet|field) arrow",
+        "family": "ogre"
+      },
+      {
+        "pattern": "tar$|\\btar\\b",
+        "family": "tar"
       },
       {
         "pattern": "javelin",
-        "class": "javelin"
+        "family": "javelin"
       },
       {
-        "pattern": "tar",
-        "class": "tar"
+        "pattern": "arrow",
+        "family": "arrow"
+      },
+      {
+        "pattern": "bolt",
+        "family": "bolt"
       }
     ],
-    "weaponAmmoOverrides": {
-      "Heavy ballista": "javelin",
-      "Light ballista": "javelin",
-      "Eclipse atlatl": "atlatl",
-      "Hunters' crossbow": "kebbit",
-      "Hunters' sunlight crossbow": "antler",
-      "Karil's crossbow": "boltrack",
-      "Karil's crossbow (deg)": "boltrack"
+    "tierTables": {
+      "//": "Metal ladders from the Ammunition page; gem bolts inherit their metal tier, and \"<gem> dragon bolts\" are dragon tier.",
+      "arrow": {
+        "training": 0,
+        "bronze": 1,
+        "iron": 2,
+        "steel": 3,
+        "mithril": 4,
+        "adamant": 5,
+        "rune": 6,
+        "runite": 6,
+        "amethyst": 7,
+        "dragon": 8
+      },
+      "bolt": {
+        "bronze": 1,
+        "opal": 1,
+        "blurite": 2,
+        "iron": 3,
+        "silver": 3,
+        "jade": 3,
+        "pearl": 3,
+        "steel": 4,
+        "topaz": 4,
+        "mithril": 5,
+        "sapphire": 5,
+        "emerald": 5,
+        "adamant": 6,
+        "ruby": 6,
+        "diamond": 6,
+        "broad": 6,
+        "runite": 7,
+        "rune": 7,
+        "dragonstone": 7,
+        "onyx": 7,
+        "dragon": 8
+      }
     },
-    "exclusiveClasses": {
-      "//": "Ammo classes only usable with the weapon that requires them (Atlatl dart <-> Eclipse atlatl, tars <-> salamanders). They never roll into the cosmetic any-ammo pool for other weapons.",
-      "classes": [
+    "ammoOverrides": {
+      "//": "Items the metal ladder cannot read: chompy arrows, broad ammo, and specials.",
+      "Broad arrows": {
+        "family": "arrow",
+        "tier": 6
+      },
+      "Seeking broad arrows": {
+        "family": "arrow",
+        "tier": 6
+      },
+      "Broad bolts": {
+        "family": "bolt",
+        "tier": 6
+      },
+      "Amethyst broad bolts": {
+        "family": "bolt",
+        "tier": 7
+      },
+      "Barbed bolts": {
+        "family": "bolt",
+        "tier": 1
+      },
+      "Silvthrill javelin": {
+        "family": "javelin",
+        "tier": 1
+      }
+    },
+    "weaponAmmo": {
+      "Cursed goblin bow": {
+        "family": "arrow",
+        "maxTier": 2
+      },
+      "Rain bow": {
+        "family": "arrow",
+        "maxTier": 2
+      },
+      "Training bow": {
+        "family": "arrow",
+        "maxTier": 0
+      },
+      "Shortbow": {
+        "family": "arrow",
+        "maxTier": 2
+      },
+      "Longbow": {
+        "family": "arrow",
+        "maxTier": 2
+      },
+      "Starter bow": {
+        "family": null,
+        "maxTier": null
+      },
+      "Oak shortbow": {
+        "family": "arrow",
+        "maxTier": 3
+      },
+      "Oak longbow": {
+        "family": "arrow",
+        "maxTier": 3
+      },
+      "Signed oak bow": {
+        "family": "arrow",
+        "maxTier": 3
+      },
+      "Willow shortbow": {
+        "family": "arrow",
+        "maxTier": 4
+      },
+      "Willow longbow": {
+        "family": "arrow",
+        "maxTier": 4
+      },
+      "Willow comp bow": {
+        "family": "arrow",
+        "maxTier": 4
+      },
+      "Maple shortbow": {
+        "family": "arrow",
+        "maxTier": 5
+      },
+      "Maple longbow": {
+        "family": "arrow",
+        "maxTier": 5
+      },
+      "Yew shortbow": {
+        "family": "arrow",
+        "maxTier": 6
+      },
+      "Yew longbow": {
+        "family": "arrow",
+        "maxTier": 6
+      },
+      "Yew comp bow": {
+        "family": "arrow",
+        "maxTier": 6
+      },
+      "Bone shortbow": {
+        "family": "arrow",
+        "maxTier": 7
+      },
+      "Seercull": {
+        "family": "arrow",
+        "maxTier": 7
+      },
+      "Magic shortbow": {
+        "family": "arrow",
+        "maxTier": 7
+      },
+      "Magic shortbow (i)": {
+        "family": "arrow",
+        "maxTier": 7
+      },
+      "Magic longbow": {
+        "family": "arrow",
+        "maxTier": 7
+      },
+      "Magic comp bow": {
+        "family": "arrow",
+        "maxTier": 7
+      },
+      "Craw's bow": {
+        "family": null,
+        "maxTier": null
+      },
+      "Dark bow": {
+        "family": "arrow",
+        "maxTier": 8
+      },
+      "Dark bow (bh)": {
+        "family": "arrow",
+        "maxTier": 8
+      },
+      "3rd Age bow": {
+        "family": "arrow",
+        "maxTier": 8
+      },
+      "Crystal bow": {
+        "family": null,
+        "maxTier": null
+      },
+      "Webweaver bow": {
+        "family": null,
+        "maxTier": null
+      },
+      "Scorching bow": {
+        "family": "arrow",
+        "maxTier": 8
+      },
+      "Bow of Faerdhinen": {
+        "family": null,
+        "maxTier": null
+      },
+      "Bow of Faerdhinen (c)": {
+        "family": null,
+        "maxTier": null
+      },
+      "Venator bow": {
+        "family": "arrow",
+        "maxTier": 8
+      },
+      "Twisted bow": {
+        "family": "arrow",
+        "maxTier": 8
+      },
+      "Crossbow": {
+        "family": "bolt",
+        "maxTier": 1
+      },
+      "Phoenix crossbow": {
+        "family": "bolt",
+        "maxTier": 1
+      },
+      "Bronze crossbow": {
+        "family": "bolt",
+        "maxTier": 1
+      },
+      "Blurite crossbow": {
+        "family": "bolt",
+        "maxTier": 2
+      },
+      "Iron crossbow": {
+        "family": "bolt",
+        "maxTier": 3
+      },
+      "Dorgeshuun crossbow": {
+        "family": "bone",
+        "maxTier": null
+      },
+      "Steel crossbow": {
+        "family": "bolt",
+        "maxTier": 4
+      },
+      "Mithril crossbow": {
+        "family": "bolt",
+        "maxTier": 5
+      },
+      "Adamant crossbow": {
+        "family": "bolt",
+        "maxTier": 6
+      },
+      "Rune crossbow": {
+        "family": "bolt",
+        "maxTier": 7
+      },
+      "Dragon crossbow": {
+        "family": "bolt",
+        "maxTier": 8
+      },
+      "Dragon hunter crossbow": {
+        "family": "bolt",
+        "maxTier": 8
+      },
+      "Armadyl crossbow": {
+        "family": "bolt",
+        "maxTier": 8
+      },
+      "Zaryte crossbow": {
+        "family": "bolt",
+        "maxTier": 8
+      },
+      "Ogre bow": {
+        "family": "ogre",
+        "maxTier": 4
+      },
+      "Comp ogre bow": {
+        "family": "ogre",
+        "maxTier": 6
+      },
+      "Eclipse atlatl": {
+        "family": "atlatl",
+        "maxTier": null
+      },
+      "Hunters' crossbow": {
+        "family": "kebbit",
+        "maxTier": null
+      },
+      "Hunters' sunlight crossbow": {
+        "family": "antler",
+        "maxTier": null
+      },
+      "Karil's crossbow": {
+        "family": "boltrack",
+        "maxTier": null
+      },
+      "Light ballista": {
+        "family": "javelin",
+        "maxTier": 8
+      },
+      "Heavy ballista": {
+        "family": "javelin",
+        "maxTier": 8
+      }
+    },
+    "categoryDefaults": {
+      "//": "Fallback when a weapon is not named in the wiki tables. Thrown/chinchompa weapons carry their own ammo, so they take none.",
+      "Bow": {
+        "family": "arrow",
+        "maxTier": 8
+      },
+      "Crossbow": {
+        "family": "bolt",
+        "maxTier": 8
+      },
+      "Salamander": {
+        "family": "tar",
+        "maxTier": 0
+      }
+    },
+    "exclusiveFamilies": {
+      "//": "Families a weapon must explicitly require — they never roll as cosmetic ammo.",
+      "families": [
         "atlatl",
-        "tar",
         "kebbit",
         "antler",
-        "boltrack"
-      ]
-    },
-    "categoryAmmoMap": {
-      "//": "Weapon category -> required ammo class. Categories absent here need no specific ammo (their ammo slot rolls 'any').",
-      "Bow": "arrow",
-      "Crossbow": "bolt",
-      "Salamander": "tar"
-    },
-    "selfAmmoWeapons": {
-      "//": "Weapons whose category implies ammo but that need none (crystal-type bows; blowpipe is already Thrown). Their ammo slot rolls 'any'.",
-      "names": [
-        "Crystal bow",
-        "Bow of faerdhinen",
-        "Craw's bow",
-        "Webweaver bow"
+        "boltrack",
+        "bone",
+        "ogre",
+        "tar",
+        "javelin"
       ]
     }
   },

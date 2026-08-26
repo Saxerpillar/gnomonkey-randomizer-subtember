@@ -62,14 +62,19 @@ const pickForSlot = (slot: Slot, candidates: Item[], remaining: number, rng: Rng
   return pick(rng, byTier.get(chosen)!);
 };
 
-/** Ammo the given weapon can actually use (cosmetic pool minus exclusives when free). */
-const ammoCandidatesFor = (weapon: Item | null, ammo: Item[]): Item[] => {
+/**
+ * Ammo the given weapon can actually fire. Matching the family is not enough:
+ * a bronze crossbow cannot load runite bolts, so the ammo's tier must also be
+ * within the weapon's ceiling (the wiki's "up to X" rule). Weapons that need
+ * no ammo get the cosmetic pool, minus anything weapon-exclusive.
+ */
+export const ammoCandidatesFor = (weapon: Item | null, ammo: Item[]): Item[] => {
+  // Only a ranged weapon that actually consumes ammo gets any: no more
+  // decorative arrows tucked behind a whip.
   const need = weapon?.requiredAmmo;
-  return need
-    ? ammo.filter((a) => a.ammoClass === need)
-    : // no ammo requirement -> cosmetic pool, minus weapon-exclusive ammo
-      // (atlatl darts with a blowpipe was the reported nonsense pairing)
-      ammo.filter((a) => !a.ammoExclusive);
+  if (!need) return [];
+  const max = weapon?.ammoMaxTier;
+  return ammo.filter((a) => a.ammoClass === need && (max == null || (a.ammoTier ?? 0) <= max));
 };
 
 const poolBySlot = (pool: Item[], allowUntradeables: boolean): Map<Slot, Item[]> => {
@@ -83,11 +88,12 @@ const poolBySlot = (pool: Item[], allowUntradeables: boolean): Map<Slot, Item[]>
  * Pure gear roller (design doc: docs/plans/2026-07-28-gnome-subtember-design.md).
  *
  * Order: weapon first (first claim on the budget), then the remaining unlocked
- * slots in random order. Each slot picks uniformly among candidates costing no
- * more than the remaining budget (untradeables and locks cost 0); no affordable
- * candidate leaves the slot empty. A two-handed weapon empties the shield slot;
- * a locked shield excludes two-handed weapons; ammo is constrained by the
- * weapon's required ammo class.
+ * slots in random order, and finally ammo — which only rolls when the weapon
+ * consumes it. Each slot picks uniformly among candidates costing no more than
+ * the remaining budget (untradeables and locks cost 0); no affordable candidate
+ * leaves the slot empty. A two-handed weapon empties the shield slot; a locked
+ * shield excludes two-handed weapons; ammo must match the weapon's family and
+ * sit within its tier ceiling.
  *
  * Locks are assumed non-contradictory (the UI resolves 2h-vs-shield conflicts
  * before rolling ever happens).
@@ -123,15 +129,16 @@ export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout =>
   if (twoHanded && !locks.shield) loadout.shield = null;
 
   const rest = SLOTS.filter(
-    (s) => s !== 'weapon' && !locks[s] && !(s === 'shield' && twoHanded),
+    (s) => s !== 'weapon' && s !== 'ammo' && !locks[s] && !(s === 'shield' && twoHanded),
   );
 
-  for (const slot of shuffled(rng, rest)) {
-    const candidates =
-      slot === 'ammo'
-        ? ammoCandidatesFor(loadout.weapon, bySlot.get('ammo')!)
-        : bySlot.get(slot)!;
-    rollSlot(slot, candidates);
+  for (const slot of shuffled(rng, rest)) rollSlot(slot, bySlot.get(slot)!);
+
+  // Ammo goes last and only exists at all when the rolled weapon needs it, so
+  // it never competes with armour for the budget on a melee run.
+  if (!locks.ammo) {
+    const candidates = ammoCandidatesFor(loadout.weapon, bySlot.get('ammo')!);
+    if (candidates.length) rollSlot('ammo', candidates);
   }
 
   return loadout;
@@ -179,12 +186,8 @@ export const rerollSlot = (
   if (slot === 'weapon') {
     // A new 2h claims the shield slot; ammo the new weapon cannot fire is dropped.
     if (item.twoHanded && !locks.shield) next.shield = null;
-    const need = item.requiredAmmo;
     const ammo = next.ammo;
-    if (ammo && !locks.ammo) {
-      const compatible = need ? ammo.ammoClass === need : !ammo.ammoExclusive;
-      if (!compatible) next.ammo = null;
-    }
+    if (ammo && !locks.ammo && !ammoCandidatesFor(item, [ammo]).length) next.ammo = null;
   }
 
   return next;

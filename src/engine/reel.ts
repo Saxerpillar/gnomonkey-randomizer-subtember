@@ -19,13 +19,15 @@ export const revealBeats = (locked: ReadonlySet<Slot>): Slot[][] => {
     ['head'],
     ['cape'],
     ['neck'],
-    ['ammo'],
     ['body'],
     ['legs'],
     ['hands'],
     ['feet'],
     ['ring'],
     ['weapon', 'shield'],
+    // Ammo last: it only exists for a ranged weapon, so revealing it earlier
+    // would give the weapon away before the jackpot beat.
+    ['ammo'],
   ];
   return sequence.map((beat) => beat.filter((s) => !locked.has(s))).filter((beat) => beat.length > 0);
 };

@@ -112,17 +112,47 @@ const main = async () => {
   }
   console.log(`  ${Object.keys(prices).length} priced items`);
 
-  // ---- 3. Ammo classification -------------------------------------------
-  const { classRules, weaponAmmoOverrides, categoryAmmoMap, selfAmmoWeapons, exclusiveClasses } = curation.ammo;
-  const rules = classRules.map((r) => ({ re: new RegExp(r.pattern, 'i'), cls: r.class }));
-  const selfAmmo = new Set(selfAmmoWeapons.names);
-  const exclusive = new Set(exclusiveClasses.classes);
+  // ---- 3. Ammo compatibility (family + tier) -----------------------------
+  // A weapon fires ammo of its FAMILY whose TIER is at most its maxTier —
+  // exactly the wiki's "up to mithril arrows" rule. Families with a null
+  // maxTier are exclusive (kebbit bolts, atlatl darts, bolt racks...).
+  const { familyRules, tierTables, ammoOverrides, weaponAmmo, categoryDefaults, exclusiveFamilies } =
+    curation.ammo;
+  const famRules = familyRules.map((r) => ({ re: new RegExp(r.pattern, 'i'), family: r.family }));
+  const exclusiveFams = new Set(exclusiveFamilies.families);
 
-  const ammoClassOf = (item) => rules.find((r) => r.re.test(item.name))?.cls ?? 'any';
-  const requiredAmmoOf = (item) => {
-    if (weaponAmmoOverrides[item.name]) return weaponAmmoOverrides[item.name];
-    if (selfAmmo.has(item.name)) return null;
-    return categoryAmmoMap[item.category] ?? null;
+  /** Highest-matching metal word in a name ("dragonstone" beats "dragon"). */
+  const metalTier = (name, table) => {
+    const keys = Object.keys(table)
+      .filter((k) => k !== '//')
+      .sort((a, b) => b.length - a.length);
+    const hit = keys.find((m) => new RegExp(`\\b${m}`, 'i').test(name));
+    return hit ? table[hit] : null;
+  };
+
+  const ammoSpecOf = (item) => {
+    const override = ammoOverrides[item.name];
+    if (override && !override['//']) return override;
+    const family = famRules.find((r) => r.re.test(item.name))?.family ?? 'any';
+    if (family === 'any') return { family, tier: 0 };
+    const table = tierTables[family === 'bolt' ? 'bolt' : 'arrow'];
+    return { family, tier: metalTier(item.name, table) ?? 0 };
+  };
+
+  const weaponSpecOf = (item) => {
+    // Exact name, then progressively shorter base names so cosmetic/charged
+    // variants ("Bow of Faerdhinen (c) (Amlodd)") inherit the base weapon's
+    // rule rather than falling back to the whole category.
+    let name = item.name;
+    while (name) {
+      const named = weaponAmmo[name];
+      if (named) return named.family ? named : null; // null family = self-loading
+      const trimmed = name.replace(/\s*\([^)]*\)\s*$/, '').trim();
+      if (trimmed === name) break;
+      name = trimmed;
+    }
+    const fallback = categoryDefaults[item.category];
+    return fallback && !fallback['//'] ? fallback : null;
   };
 
   // ---- 4. App-facing equipment schema -----------------------------------
@@ -192,9 +222,12 @@ const main = async () => {
       tradeable: tradeableIds.has(e.id),
       twoHanded: !!e.isTwoHanded,
       category: e.category || undefined,
-      ammoClass: e.slot === 'ammo' ? ammoClassOf(e) : undefined,
-      ammoExclusive: e.slot === 'ammo' && exclusive.has(ammoClassOf(e)) ? true : undefined,
-      requiredAmmo: e.slot === 'weapon' ? requiredAmmoOf(e) ?? undefined : undefined,
+      ammoClass: e.slot === 'ammo' ? ammoSpecOf(e).family : undefined,
+      ammoTier: e.slot === 'ammo' ? ammoSpecOf(e).tier : undefined,
+      ammoExclusive:
+        e.slot === 'ammo' && exclusiveFams.has(ammoSpecOf(e).family) ? true : undefined,
+      requiredAmmo: e.slot === 'weapon' ? weaponSpecOf(e)?.family ?? undefined : undefined,
+      ammoMaxTier: e.slot === 'weapon' ? weaponSpecOf(e)?.maxTier ?? undefined : undefined,
       tier: tiers.get(e.id),
       speed: e.slot === 'weapon' && e.speed > 0 ? e.speed : undefined,
       offensive: e.offensive,

@@ -68,8 +68,9 @@ describe('budget', () => {
 
   it('huge budget fills every slot', () => {
     const out = roll(basicPool(), settings({ budget: 1_000_000_000 }), mulberry32(1));
-    // 2h may legitimately empty the shield; every other slot must fill.
-    const mustFill = SLOTS.filter((s) => s !== 'shield');
+    // A 2h may legitimately empty the shield, and ammo only rolls behind a
+    // weapon that consumes it; every other slot must fill.
+    const mustFill = SLOTS.filter((s) => s !== 'shield' && s !== 'ammo');
     expect(mustFill.every((s) => out[s] !== null)).toBe(true);
   });
 });
@@ -142,18 +143,26 @@ describe('ammo compatibility', () => {
     }
   });
 
-  it('non-launcher weapons roll any ammo-slot item', () => {
+  it('a weapon that consumes no ammo leaves the ammo slot empty', () => {
     const pool = [
       item('weapon', { name: 'melee sword' }),
       item('ammo', { name: 'blessing', ammoClass: 'any' }),
       item('ammo', { name: 'arrows', ammoClass: 'arrow' }),
     ];
-    const seen = new Set<string>();
     for (const seed of seeds) {
-      const out = roll(pool, settings(), mulberry32(seed));
-      if (out.ammo) seen.add(out.ammo.name);
+      expect(roll(pool, settings(), mulberry32(seed)).ammo).toBeNull();
     }
-    expect(seen).toEqual(new Set(['blessing', 'arrows']));
+  });
+
+  it('ammo respects the weapon tier ceiling', () => {
+    const pool = [
+      item('weapon', { name: 'bronze crossbow', requiredAmmo: 'bolt', ammoMaxTier: 1 }),
+      item('ammo', { name: 'bronze bolts', ammoClass: 'bolt', ammoTier: 1 }),
+      item('ammo', { name: 'runite bolts', ammoClass: 'bolt', ammoTier: 7 }),
+    ];
+    for (const seed of seeds) {
+      expect(roll(pool, settings(), mulberry32(seed)).ammo?.name).toBe('bronze bolts');
+    }
   });
 
   it('exclusive ammo never rolls without its weapon (blowpipe + atlatl dart bug)', () => {
@@ -215,7 +224,7 @@ describe('rerollSlot', () => {
     }
   });
 
-  it('a rerolled 2h weapon clears the shield (cosmetic ammo survives)', () => {
+  it('a rerolled 2h weapon clears the shield and its ammo', () => {
     const pool = [item('weapon', { name: 'only 2h', twoHanded: true })];
     const start: Loadout = {
       ...roll([], settings(), mulberry32(1)),
@@ -226,8 +235,8 @@ describe('rerollSlot', () => {
     const after = rerollSlot(pool, start, 'weapon', settings(), mulberry32(2));
     expect(after.weapon?.twoHanded).toBe(true);
     expect(after.shield).toBeNull();
-    // A melee weapon does not constrain the ammo slot, same as a full roll.
-    expect(after.ammo?.name).toBe('arrows');
+    // A melee weapon consumes no ammo, so the arrows are dropped with it.
+    expect(after.ammo).toBeNull();
   });
 
   it('a rerolled launcher drops ammo it cannot fire', () => {
