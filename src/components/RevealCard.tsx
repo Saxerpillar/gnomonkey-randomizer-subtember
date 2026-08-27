@@ -322,7 +322,7 @@ export const RevealCard = ({
         style={phase === 'minimize' && minimize ? { transform: minimize } : undefined}
       >
         {/* Perched on top of the roulette for the length of an item roll. */}
-        {isSlot && phase === 'roll' && (
+        {(isSlot || isSquad) && phase === 'roll' && (
           <img
             className={styles.roulettePet}
             src={asset(`img/emotes/${EMOTES.roulette.file}`)}

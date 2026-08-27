@@ -29,7 +29,7 @@ import {
   effectiveBudget,
   type Settings,
 } from './components/settings';
-import { unlockAudio } from './components/sound';
+import { setMasterVolume, unlockAudio } from './components/sound';
 import { useCeremony, type RevealData } from './components/useCeremony';
 import { ValueCounter } from './components/ValueCounter';
 import { parseBudget } from './engine/parse';
@@ -193,6 +193,12 @@ const Main = () => {
   // Warm every reel asset while the pre-roll screen is idle, so nothing pops
   // in mid-reveal.
   usePreloadAssets(items, bosses);
+
+  // The audio layer keeps the master level in a module, so it applies to sounds
+  // fired from timers and effects that never see the settings object.
+  useEffect(() => {
+    setMasterVolume(state.settings.volume);
+  }, [state.settings.volume]);
 
   /** GAMBA is capped at one per DECIDE; reset when a new run is rolled. */
   const gambaFired = useRef(false);
@@ -408,6 +414,9 @@ const Main = () => {
       budget: debugIgnoreBudget ? null : parsed.gp,
       allowUntradeables,
       locks: state.locks,
+      // rollForStyle calls roll() once per lane, so a raid satisfies the floors
+      // per skeleton rather than pooling them across the team.
+      tierFloors: settings.tierFloors,
     };
     const rollPool =
       settings.debugMode && settings.forceTier !== 'off'

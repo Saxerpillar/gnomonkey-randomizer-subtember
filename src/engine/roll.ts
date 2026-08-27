@@ -3,6 +3,7 @@ import {
   emptyLoadout,
   SLOTS,
   TIERS,
+  CORE_SLOTS,
   type Item,
   type Loadout,
   type RollSettings,
@@ -98,9 +99,44 @@ const poolBySlot = (pool: Item[], allowUntradeables: boolean): Map<Slot, Item[]>
  * Locks are assumed non-contradictory (the UI resolves 2h-vs-shield conflicts
  * before rolling ever happens).
  */
+/**
+ * Decides which core slots owe which tier, before any rolling happens.
+ *
+ * Rarest first: an elite floor has the fewest slots able to satisfy it, so it
+ * has to claim its slots before a common floor takes them. A floor asking for
+ * more slots than the pool can serve simply gets as many as exist — the roll
+ * degrades rather than failing.
+ */
+export const assignTierFloors = (
+  floors: Partial<Record<Tier, number>>,
+  bySlot: Map<Slot, Item[]>,
+  locks: Partial<Record<Slot, Item>>,
+  rng: Rng,
+): Map<Slot, Tier> => {
+  const assigned = new Map<Slot, Tier>();
+  const free = CORE_SLOTS.filter((s) => !locks[s]);
+  for (const tier of [...TIERS].reverse()) {
+    let need = floors[tier] ?? 0;
+    if (need <= 0) continue;
+    const eligible = shuffled(
+      rng,
+      free.filter(
+        (s) => !assigned.has(s) && (bySlot.get(s) ?? []).some((i) => (i.tier ?? 'common') === tier),
+      ),
+    );
+    for (const s of eligible) {
+      if (need <= 0) break;
+      assigned.set(s, tier);
+      need -= 1;
+    }
+  }
+  return assigned;
+};
+
 export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout => {
-  const { budget, allowUntradeables, locks } = settings;
+  const { budget, allowUntradeables, locks, tierFloors } = settings;
   const bySlot = poolBySlot(pool, allowUntradeables);
+  const floored = tierFloors ? assignTierFloors(tierFloors, bySlot, locks, rng) : new Map();
 
   const loadout = emptyLoadout();
   for (const slot of SLOTS) {
@@ -111,6 +147,23 @@ export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout =>
   let remaining = budget ?? Infinity;
 
   const rollSlot = (slot: Slot, candidates: Item[]): void => {
+    const owed = floored.get(slot);
+    if (owed) {
+      const atTier = candidates.filter((i) => (i.tier ?? 'common') === owed);
+      if (atTier.length) {
+        // Prefer one we can actually afford; overspend only when the tier has
+        // nothing within budget, since a floor outranks the cap by design.
+        const affordable = atTier.filter((i) => costOf(i) <= remaining);
+        const item = pick(rng, affordable.length ? affordable : atTier);
+        loadout[slot] = item;
+        // Never let an overspend go negative and silently starve later slots of
+        // more than it actually cost.
+        remaining = Math.max(0, remaining - costOf(item));
+        return;
+      }
+      // This slot has nothing at that tier at all; fall through to a normal roll
+      // rather than leaving it empty.
+    }
     const item = pickForSlot(slot, candidates, remaining, rng);
     if (!item) return; // stays empty by design
     loadout[slot] = item;

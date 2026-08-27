@@ -126,6 +126,20 @@ decelerating spin. Use OSRS audio (jingles, coin sounds), not generic casino aud
 the hook chat/subs will drive later (a gifted sub upgrades a slot's tier, channel points force
 an elite weapon or curse a slot to junk, chat votes on the finale slot's tier).
 
+## Tier floors (bad-RNG mitigation)
+
+- Floors, not min/max: the failure being mitigated is one-sided (an all-junk loadout), and
+  a max would add a class of unsatisfiable combinations to solve a problem nobody has.
+- Counted over `CORE_SLOTS` — the nine slots that always fill. Shield is empty under a 2h
+  (39% of weapons) and ammo only fills for a launcher (7%), so neither can carry a guarantee.
+- Floors **outrank the gp budget** by explicit decision: a floored slot takes an affordable
+  item of its tier when one exists and overspends only when the tier has nothing in budget.
+  The remaining budget clamps at 0 rather than going negative.
+- Raids satisfy them **per skeleton** — `rollForStyle` calls `roll()` once per lane, so this
+  falls out for free rather than needing team-wide bookkeeping.
+- `assignTierFloors` claims slots rarest-tier-first: an elite floor has the fewest slots
+  able to satisfy it, so it must claim before a common floor takes them.
+
 ## Open backlog (the task list may not survive; recorded here)
 
 1. Custom background art from the streamer's memorable moments (swap the `body` background).
@@ -222,7 +236,8 @@ an elite weapon or curse a slot to junk, chat votes on the finale slot's tier).
   settings, the value counter) must render **outside** it. This bites quietly: a centred
   `left: 50%` still looks right inside the wrapper, and only breaks once you set a real
   px offset.
-- **Never write a source file with `cat > file <<'EOF'`.** It truncates to zero first, and
+- **Never rewrite a source file in place with `cat > file <<'EOF'` or `sed -i`.** Both
+  replace the file in a way Vite's watcher can catch mid-write. It truncates to zero first, and
   Vite's watcher can cache the empty version and serve it forever. This bit twice: once as
   a blank page (a `.tsx` with no exports), once as a CSS module that exported `{}` — every
   class came back `undefined`, so full-screen stingers rendered unstyled and invisible
@@ -231,6 +246,12 @@ an elite weapon or curse a slot to junk, chat votes on the finale slot's tier).
   has no styling. Check with
   `curl -s localhost:5173/src/path/File.module.css | grep '__vite__css = \"\"'`, and fix by
   touching the file. Use the editor tool for source files.
+  Seen three times: a `.tsx` served with no exports (blank page), a CSS module exporting
+  `{}` (stingers rendered unstyled and invisible while their sound still played), and an
+  import line missing from an otherwise-current module (`X is not defined` at runtime while
+  `tsc` resolved X happily). Reloading the PAGE does not help — Vite serves its own cached
+  transform regardless of browser cache. Diff the served module against disk:
+  `curl -s localhost:5173/src/path/File.tsx | grep 'thing'`.
 - `perl -0pi -e` leaves `.bak` siblings on this platform (gitignored, but they pile up).
 - A hidden Browser pane reports `innerWidth`/`innerHeight` of **0** and pauses
   `requestAnimationFrame`, so anything measured or rAF-scheduled reads as empty/stale.

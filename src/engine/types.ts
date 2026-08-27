@@ -93,7 +93,30 @@ export interface RollSettings {
   allowUntradeables: boolean;
   /** Slots the roller must not touch. Locked items cost 0 against the budget. */
   locks: Partial<Record<Slot, Item>>;
+  /**
+   * Bad-RNG mitigation: the minimum number of CORE_SLOTS that must land on each
+   * tier. Floors deliberately outrank the budget — a floor you asked for is
+   * honoured even when the gp cap cannot afford it.
+   */
+  tierFloors?: Partial<Record<Tier, number>>;
 }
+
+/**
+ * The nine slots every loadout fills. Shield is empty under a two-handed weapon
+ * (39% of them) and ammo only fills for a launcher (7%), so neither can carry a
+ * guarantee — tier floors are counted over these nine and nothing else.
+ */
+export const CORE_SLOTS: Slot[] = [
+  'head',
+  'cape',
+  'neck',
+  'body',
+  'legs',
+  'hands',
+  'feet',
+  'ring',
+  'weapon',
+];
 
 export const emptyLoadout = (): Loadout =>
   Object.fromEntries(SLOTS.map((s) => [s, null])) as Loadout;

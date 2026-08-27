@@ -10,12 +10,13 @@ import {
   FORCE_CHALLENGE_OPTIONS,
   FORCE_TIER_OPTIONS,
   POOL_LABEL,
+  freeFloorSlots,
   POOL_TAGS,
   type ForceBoss,
   type ForceChallenge,
   type Settings,
 } from './settings';
-import type { Tier } from '../engine/types';
+import { CORE_SLOTS, TIERS, type Tier } from '../engine/types';
 import styles from './SettingsPanel.module.css';
 
 /** Sentinel for the "as fast as possible" end of the animation-speed scale. */
@@ -80,6 +81,87 @@ const Choice = <T extends string>({
   </label>
 );
 
+/**
+ * Bad-RNG mitigation: a floor on how many of the nine core slots must land on
+ * each tier.
+ *
+ * Floors rather than min/max ranges, because the failure being mitigated is
+ * one-sided — an all-junk loadout — and a max would add a whole class of
+ * unsatisfiable combinations to solve a problem nobody has. The counters share
+ * one pool of nine, and `+` disables once it is spent, so over-allocation is
+ * unreachable rather than merely rejected.
+ */
+const TierFloors = ({
+  floors,
+  onChange,
+}: {
+  floors: Partial<Record<Tier, number>>;
+  onChange: (floors: Partial<Record<Tier, number>>) => void;
+}) => {
+  const free = freeFloorSlots(floors);
+  const set = (tier: Tier, n: number) => onChange({ ...floors, [tier]: n });
+  return (
+    <div className={styles.floors}>
+      <span className={styles.floorsTitle}>Minimum gear quality</span>
+      {[...TIERS].reverse().map((tier) => {
+        const n = floors[tier] ?? 0;
+        return (
+          <div key={tier} className={styles.floorRow}>
+            <span className={styles.floorLabel}>{tier.charAt(0).toUpperCase() + tier.slice(1)}</span>
+            <button
+              type="button"
+              className={styles.floorStep}
+              disabled={n === 0}
+              aria-label={`One fewer ${tier}`}
+              onClick={() => set(tier, n - 1)}
+            >
+              −
+            </button>
+            <span className={styles.floorCount}>{n}</span>
+            <button
+              type="button"
+              className={styles.floorStep}
+              disabled={free === 0}
+              aria-label={`One more ${tier}`}
+              onClick={() => set(tier, n + 1)}
+            >
+              +
+            </button>
+          </div>
+        );
+      })}
+      <span className={styles.floorsFree}>
+        {free} of {CORE_SLOTS.length} slots left to chance
+      </span>
+    </div>
+  );
+};
+
+/** 0..1 slider with a percentage readout. */
+const Slider = ({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  onChange: (value: number) => void;
+}) => (
+  <label className={styles.field}>
+    <span>{label}</span>
+    <input
+      className={styles.slider}
+      type="range"
+      min={0}
+      max={100}
+      step={5}
+      value={Math.round(value * 100)}
+      onChange={(e) => onChange(Number(e.target.value) / 100)}
+    />
+    <span className={styles.sliderValue}>{Math.round(value * 100)}%</span>
+  </label>
+);
+
 const Toggle = ({
   label,
   checked,
@@ -121,6 +203,7 @@ export const SettingsPanel = ({
           onChange={(t) => onChange({ wildyBudgetText: t })}
           placeholder="default 1m"
         />
+        <TierFloors floors={settings.tierFloors} onChange={(f) => onChange({ tierFloors: f })} />
         <Toggle
           label="Allow untradeables (cost 0)"
           checked={settings.allowUntradeables}
@@ -162,6 +245,11 @@ export const SettingsPanel = ({
           label="Remove flashbangs"
           checked={settings.removeFlashbangs}
           onChange={(v) => onChange({ removeFlashbangs: v })}
+        />
+        <Slider
+          label="Volume"
+          value={settings.volume}
+          onChange={(v) => onChange({ volume: v })}
         />
         <Choice
           label="Animation speed"
@@ -240,3 +328,4 @@ export const SettingsPanel = ({
     </RsPanel>
   </div>
 );
+

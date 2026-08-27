@@ -211,3 +211,121 @@
   border-radius: 3px;
   padding: 5px 8px;
 }
+
+.slider {
+  flex: 1;
+  min-width: 0;
+  height: 18px;
+  /* The native widget ignores most theming, so draw the track ourselves and
+     restyle the thumb per engine below. */
+  appearance: none;
+  -webkit-appearance: none;
+  background: linear-gradient(var(--tile), var(--tile)) content-box;
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 18px;
+  margin-top: -6px;
+  background: var(--gold);
+  border: 1px solid var(--border-dark);
+  border-radius: 2px;
+}
+
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 16px;
+  background: var(--gold);
+  border: 1px solid var(--border-dark);
+  border-radius: 2px;
+}
+
+.sliderValue {
+  flex: none;
+  /* Fixed width so the row does not twitch as the number changes width. */
+  min-width: 48px;
+  text-align: right;
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--text-muted);
+}
+
+/* Tier floors: one grouped block, because the counters share a single pool of
+   slots and reading them apart would hide that. */
+.floors {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.floorsTitle {
+  font-family: var(--font-bold);
+  font-size: 18px;
+  color: var(--orange);
+  text-shadow: var(--text-outline);
+}
+
+.floorRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.floorLabel {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--text);
+}
+
+.floorStep {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  font-family: var(--font-bold);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--text);
+  background: var(--tile);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.floorStep:hover:not(:disabled) {
+  background: var(--tile-hover);
+  color: var(--gold-bright);
+}
+
+/* Disabled rather than hidden: the control stays put, and the greying is what
+   tells you the pool is spent. */
+.floorStep:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.floorCount {
+  flex: none;
+  min-width: 22px;
+  text-align: center;
+  font-family: var(--font-bold);
+  font-size: 18px;
+  color: var(--gold-bright);
+  text-shadow: var(--text-outline);
+}
+
+.floorsFree {
+  font-family: var(--font-small);
+  font-size: 14px;
+  color: var(--text-muted);
+}

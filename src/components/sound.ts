@@ -3,6 +3,26 @@ import { asset } from '../asset';
 let tick: HTMLAudioElement | null = null;
 let ctx: AudioContext | null = null;
 
+/**
+ * Master volume, 0..1. Every level in this file is a fraction of it, so the
+ * shipped mix IS full volume and the slider can only ever attenuate — nothing
+ * gets louder than it was tuned to be.
+ */
+let masterVolume = 1;
+
+/**
+ * Holds a level inside 0..1. A stray value from storage must not be able to
+ * push the mix above the tuned level, or make a gain negative (which inverts
+ * the waveform rather than silencing it).
+ */
+export const clampVolume = (v: number): number =>
+  Number.isFinite(v) ? Math.min(1, Math.max(0, v)) : 1;
+
+/** Set from the volume setting. */
+export const setMasterVolume = (v: number) => {
+  masterVolume = clampVolume(v);
+};
+
 const getCtx = (): AudioContext | null => {
   if (typeof window === 'undefined') return null;
   if (!ctx) {
@@ -35,7 +55,7 @@ export const playTick = (volume = 0.6) => {
   try {
     if (tick) tick.pause();
     tick = new Audio(asset('audio/tick.wav'));
-    tick.volume = volume;
+    tick.volume = volume * masterVolume;
     void tick.play().catch(() => {});
   } catch {
     /* never let audio break a roll */
@@ -51,7 +71,7 @@ export const playIncrement = (progress: number) => {
     const gain = c.createGain();
     osc.type = 'square';
     osc.frequency.setValueAtTime(480 + progress * 900, c.currentTime);
-    gain.gain.setValueAtTime(0.045, c.currentTime);
+    gain.gain.setValueAtTime(0.045 * masterVolume, c.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.05);
     osc.connect(gain).connect(c.destination);
     osc.start();
@@ -71,7 +91,7 @@ export const playThud = () => {
     osc.type = 'sine';
     osc.frequency.setValueAtTime(140, c.currentTime);
     osc.frequency.exponentialRampToValueAtTime(55, c.currentTime + 0.22);
-    gain.gain.setValueAtTime(0.18, c.currentTime);
+    gain.gain.setValueAtTime(0.18 * masterVolume, c.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.25);
     osc.connect(gain).connect(c.destination);
     osc.start();
@@ -93,7 +113,7 @@ export const playFanfare = () => {
       const gain = c.createGain();
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(freq, t);
-      gain.gain.setValueAtTime(0.09, t);
+      gain.gain.setValueAtTime(0.09 * masterVolume, t);
       gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
       osc.connect(gain).connect(c.destination);
       osc.start(t);
@@ -127,7 +147,7 @@ const synthBoom = (volume: number) => {
     shaper.curve = curve;
 
     const out = c.createGain();
-    out.gain.value = volume;
+    out.gain.value = volume * masterVolume;
     shaper.connect(out).connect(c.destination);
 
     // Body: the drop itself.
@@ -213,7 +233,7 @@ export const playVineBoom = (volume = 0.7): (() => void) => {
     if (cancelled) return;
     try {
       const gain = c.createGain();
-      gain.gain.value = volume;
+      gain.gain.value = volume * masterVolume;
       source = c.createBufferSource();
       source.buffer = buf;
       source.connect(gain).connect(c.destination);

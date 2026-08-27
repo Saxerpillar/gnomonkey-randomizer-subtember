@@ -1,5 +1,5 @@
 import type { Boss } from './DataProvider';
-import type { Tier } from '../engine/types';
+import { CORE_SLOTS, TIERS, type Tier } from '../engine/types';
 
 export const POOL_TAGS = ['gwd', 'dt2', 'raid', 'minigame', 'delve'] as const;
 export type PoolTag = (typeof POOL_TAGS)[number];
@@ -29,6 +29,14 @@ export interface Settings {
   /** Drop the white screen blowout from every stinger. The art and the boom
    *  still play — this only removes the part that hurts to look at. */
   removeFlashbangs: boolean;
+  /** Master volume, 0..1. 1 is the mix as tuned; the slider only attenuates. */
+  volume: number;
+  /**
+   * Bad-RNG mitigation: the minimum number of the nine core slots that must
+   * land on each tier. Counts sum to at most CORE_SLOTS.length, and a raid
+   * satisfies them per skeleton rather than across the team.
+   */
+  tierFloors: Partial<Record<Tier, number>>;
 
   // ---- debug (all inert by default; hidden unless debugMode is on) ----
   /** Master switch: reveals the debug controls in Settings. */
@@ -112,6 +120,8 @@ export const DEFAULT_SETTINGS: Settings = {
   sporadicBosses: false,
   excludedPools: [],
   removeFlashbangs: false,
+  volume: 1,
+  tierFloors: {},
   debugMode: false,
   forceBoss: 'off',
   forceTier: 'off',
@@ -135,6 +145,10 @@ export const mergeSettings = (saved: unknown): Settings => {
   if (typeof legacy === 'boolean') s.forceChallenge = legacy ? 'any' : 'off';
   return s;
 };
+
+/** Slots still unspoken for by a tier floor. */
+export const freeFloorSlots = (floors: Partial<Record<Tier, number>>): number =>
+  CORE_SLOTS.length - TIERS.reduce((sum, t) => sum + (floors[t] ?? 0), 0);
 
 /** Narrows the pool to whatever the debug "force boss" option asks for. */
 export const applyForceBoss = (bosses: readonly Boss[], force: ForceBoss): Boss[] => {
