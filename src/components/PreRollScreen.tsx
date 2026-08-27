@@ -1,4 +1,5 @@
 import { GnomePeek } from '../theme/GnomePeek';
+import { UpdatePrompt } from './UpdatePrompt';
 import { RsButton } from '../theme/RsButton';
 import { RsTooltip } from '../theme/RsTooltip';
 import styles from './PreRollScreen.module.css';
@@ -6,10 +7,13 @@ import styles from './PreRollScreen.module.css';
 /** The pre-roll hero: one big dramatic CTA, with a small Settings link below. */
 export const PreRollScreen = ({
   decideReady,
+  updateReady = false,
   onDecide,
   onOpenSettings,
 }: {
   decideReady: boolean;
+  /** A newer build is deployed — offer a reload, under the CTA. */
+  updateReady?: boolean;
   onDecide: () => void;
   onOpenSettings: () => void;
 }) => (
@@ -31,6 +35,7 @@ export const PreRollScreen = ({
         DECIDE YOUR FATE
       </RsButton>
     </RsTooltip>
+    {updateReady && <UpdatePrompt />}
     <button className={styles.settings} onClick={onOpenSettings}>
       Settings
     </button>

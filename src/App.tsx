@@ -6,7 +6,6 @@ import { EmoteScatter } from './components/EmoteScatter';
 import { FitScreen } from './components/FitScreen';
 import { TitleBanner } from './components/TitleBanner';
 import { StingerProvider, useStinger } from './components/StingerHost';
-import { UpdatePrompt } from './components/UpdatePrompt';
 import { useDeployWatch } from './components/useDeployWatch';
 import { usePreloadAssets } from './components/usePreloadAssets';
 import { Watermark } from './components/Watermark';
@@ -528,6 +527,9 @@ const Main = () => {
               <TitleBanner />
               <PreRollScreen
                 decideReady={decideReady}
+                updateReady={
+                  updateReady || (state.settings.debugMode && state.settings.forceUpdatePrompt)
+                }
                 onDecide={decide}
                 onOpenSettings={() => setSettingsOpen(true)}
               />
@@ -536,9 +538,6 @@ const Main = () => {
         </FitScreen>
         {/* Fixed overlays live outside FitScreen: inside a scaled element they
             would anchor to it rather than to the viewport. */}
-        {(updateReady || (state.settings.debugMode && state.settings.forceUpdatePrompt)) && (
-          <UpdatePrompt />
-        )}
         {settingsOpen && (
           <SettingsPanel
             settings={state.settings}

@@ -1,9 +1,9 @@
+/* Sits in the pre-roll column directly under DECIDE YOUR FATE, so it is read
+   as part of that moment rather than as chrome parked in a corner. In flow
+   rather than fixed: the pre-roll screen lives inside FitScreen, which
+   transforms, and a fixed element there would anchor to the wrapper instead of
+   the window. */
 .prompt {
-  position: fixed;
-  left: 18px;
-  bottom: 14px;
-  /* Same band as the watermark: above the reveal overlay, below the stingers. */
-  z-index: 350;
   display: flex;
   align-items: center;
   gap: 9px;
