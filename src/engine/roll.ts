@@ -39,11 +39,26 @@ export const DEFAULT_TIER_WEIGHTS: Record<Tier, number> = {
  * actually have affordable candidates, then uniform within that tier. Returns
  * null when nothing is affordable (the slot stays empty by design).
  */
-const pickForSlot = (slot: Slot, candidates: Item[], remaining: number, rng: Rng): Item | null => {
+const pickForSlot = (
+  slot: Slot,
+  candidates: Item[],
+  remaining: number,
+  rng: Rng,
+  tierBias = 1,
+): Item | null => {
   const affordable = candidates.filter((i) => costOf(i) <= remaining);
   if (affordable.length === 0) return null;
 
-  const weights = slot === 'weapon' ? WEAPON_TIER_WEIGHTS : DEFAULT_TIER_WEIGHTS;
+  const base = slot === 'weapon' ? WEAPON_TIER_WEIGHTS : DEFAULT_TIER_WEIGHTS;
+  // Compounding up the ladder: junk is untouched, elite gets bias^4. That keeps
+  // the tables' shape and only leans on it, rather than replacing them per
+  // difficulty and having three sets of numbers to keep in agreement.
+  const weights =
+    tierBias === 1
+      ? base
+      : (Object.fromEntries(
+          TIERS.map((t, rank) => [t, base[t] * tierBias ** rank]),
+        ) as Record<Tier, number>);
   const byTier = new Map<Tier, Item[]>();
   for (const i of affordable) {
     const t = i.tier ?? 'common';
@@ -156,7 +171,7 @@ export const withPoison = (item: Item, rng: Rng): Item => {
 };
 
 export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout => {
-  const { budget, allowUntradeables, locks, tierFloors } = settings;
+  const { budget, allowUntradeables, locks, tierFloors, tierBias } = settings;
   const bySlot = poolBySlot(pool, allowUntradeables);
   const floored = tierFloors ? assignTierFloors(tierFloors, bySlot, locks, rng) : new Map();
 
@@ -186,7 +201,7 @@ export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout =>
       // This slot has nothing at that tier at all; fall through to a normal roll
       // rather than leaving it empty.
     }
-    const item = pickForSlot(slot, candidates, remaining, rng);
+    const item = pickForSlot(slot, candidates, remaining, rng, tierBias);
     if (!item) return; // stays empty by design
     loadout[slot] = item;
     remaining -= costOf(item);
@@ -257,7 +272,7 @@ export const rerollSlot = (
   if (slot === 'weapon' && locks.shield) candidates = candidates.filter((w) => !w.twoHanded);
   if (slot === 'ammo') candidates = ammoCandidatesFor(loadout.weapon, candidates);
 
-  const rolled = pickForSlot(slot, candidates, remaining, rng);
+  const rolled = pickForSlot(slot, candidates, remaining, rng, settings.tierBias);
   if (!rolled) return loadout; // nothing affordable/valid — leave it as it was
   const item = slot === 'weapon' ? withPoison(rolled, rng) : rolled;
 

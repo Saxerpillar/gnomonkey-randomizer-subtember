@@ -14,6 +14,7 @@ import {
   difficultyOf,
   rollChallenge,
   rollGauntletChallenge,
+  TIER_BIAS,
   type Challenge,
 } from './components/challenges';
 import { DataProvider, useGameData, type Boss } from './components/DataProvider';
@@ -421,6 +422,8 @@ const Main = () => {
       // rollForStyle calls roll() once per lane, so a raid satisfies the floors
       // per skeleton rather than pooling them across the team.
       tierFloors: settings.tierFloors,
+      // Harder fights roll better gear.
+      tierBias: TIER_BIAS[difficultyOf(boss.tags)],
     };
     const rollPool =
       settings.debugMode && settings.forceTier !== 'off'

@@ -117,6 +117,15 @@ export interface RollSettings {
    * honoured even when the gp cap cannot afford it.
    */
   tierFloors?: Partial<Record<Tier, number>>;
+  /**
+   * Skews the tier draw toward better gear, for fights that deserve it.
+   *
+   * Each tier's weight is multiplied by `tierBias ** rank`, rank counting from
+   * junk at 0 to elite at 4 — so the effect compounds up the ladder and never
+   * reorders it. 1 leaves the tables exactly as tuned; above 1 lifts the top
+   * end and squeezes junk.
+   */
+  tierBias?: number;
 }
 
 /**

@@ -68,6 +68,21 @@ export const TIME_LIMIT_SECONDS: Record<Difficulty, number> = {
 };
 
 /**
+ * Gear bias by boss difficulty — a harder fight deserves a better kit.
+ *
+ * Fed to the roller as `tierBias`, where each tier's weight is multiplied by
+ * bias^rank. 1 is the tuned table untouched; the values below lift elite from
+ * roughly 5% to 8% on a mid fight and 12% on a hard one, while junk falls away.
+ * Deliberately a nudge rather than a guarantee — the point is that a hard boss
+ * FEELS better equipped, not that it stops being a roll.
+ */
+export const TIER_BIAS: Record<Difficulty, number> = {
+  easy: 1,
+  mid: 1.25,
+  hard: 1.6,
+};
+
+/**
  * How often a run gets an extra challenge, by boss difficulty: easier fights
  * can carry more punishment, so they draw one more often.
  */
