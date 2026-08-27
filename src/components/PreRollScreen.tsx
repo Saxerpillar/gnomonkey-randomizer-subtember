@@ -10,12 +10,14 @@ export const PreRollScreen = ({
   updateReady = false,
   onDecide,
   onOpenSettings,
+  onOpenHistory,
 }: {
   decideReady: boolean;
   /** A newer build is deployed — offer a reload, under the CTA. */
   updateReady?: boolean;
   onDecide: () => void;
   onOpenSettings: () => void;
+  onOpenHistory: () => void;
 }) => (
   <div className={styles.screen}>
     <RsTooltip
@@ -36,8 +38,13 @@ export const PreRollScreen = ({
       </RsButton>
     </RsTooltip>
     {updateReady && <UpdatePrompt />}
-    <button className={styles.settings} onClick={onOpenSettings}>
-      Settings
-    </button>
+    <div className={styles.links}>
+      <button className={styles.settings} onClick={onOpenSettings}>
+        Settings
+      </button>
+      <button className={styles.settings} onClick={onOpenHistory}>
+        History
+      </button>
+    </div>
   </div>
 );

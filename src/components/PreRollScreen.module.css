@@ -27,6 +27,12 @@
   }
 }
 
+/* Two small links side by side under the CTA. */
+.links {
+  display: flex;
+  gap: 22px;
+}
+
 .settings {
   background: none;
   border: none;

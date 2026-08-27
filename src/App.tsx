@@ -7,6 +7,16 @@ import { FitScreen } from './components/FitScreen';
 import { TitleBanner } from './components/TitleBanner';
 import { StingerProvider, useStinger } from './components/StingerHost';
 import { useDeployWatch } from './components/useDeployWatch';
+import { HistoryPanel } from './components/HistoryPanel';
+import {
+  appendRun,
+  loadHistory,
+  markOutcome,
+  saveHistory,
+  type HistoryEntry,
+  type HistoryGear,
+  type Outcome,
+} from './components/history';
 import { usePreloadAssets } from './components/usePreloadAssets';
 import { Watermark } from './components/Watermark';
 import {
@@ -18,7 +28,7 @@ import {
 } from './components/challenges';
 import { DataProvider, useGameData, type Boss } from './components/DataProvider';
 import { EquipmentPanel } from './components/EquipmentPanel';
-import { bossObjective } from './components/objectives';
+import { bossObjective, hardModeLabel } from './components/objectives';
 import { PreRollScreen } from './components/PreRollScreen';
 import { ResultStage } from './components/ResultStage';
 import { RevealCard, type LandingImpact } from './components/RevealCard';
@@ -36,14 +46,7 @@ import { useCeremony, type RevealData } from './components/useCeremony';
 import { ValueCounter } from './components/ValueCounter';
 import { parseBudget } from './engine/parse';
 import { mulberry32, pick, randomSeed } from './engine/rng';
-import {
-  loadoutValue,
-  roll,
-  rerollSlot,
-  rollForStyle,
-  styleOf,
-  type Style,
-} from './engine/roll';
+import { loadoutValue, roll, rerollSlot, rollForStyle, styleOf, type Style } from './engine/roll';
 import { rollSpell, type Spell } from './engine/spell';
 import { sortSquadByStyle } from './engine/squadSort';
 import { emptyLoadout, SLOTS, type Item, type Loadout, type Slot } from './engine/types';
@@ -206,6 +209,18 @@ const Main = () => {
 
   /** GAMBA is capped at one per DECIDE; reset when a new run is rolled. */
   const gambaFired = useRef(false);
+
+  // The run log. Kept out of the settings blob so a corrupt log cannot take
+  // the settings down with it, and vice versa.
+  const [history, setHistory] = useState<HistoryEntry[]>(loadHistory);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  /** The run now on screen, so the result view can mark it without a lookup. */
+  const [currentRunId, setCurrentRunId] = useState<string | null>(null);
+  const runSeq = useRef(0);
+
+  useEffect(() => saveHistory(history), [history]);
+
+  const markRun = (id: string, outcome: Outcome) => setHistory((h) => markOutcome(h, id, outcome));
   // Queued on the host above every screen, so a stinger is never cut short by
   // the ceremony handing over to the result view.
   const queueStinger = useStinger();
@@ -475,6 +490,32 @@ const Main = () => {
     squad?.forEach((s) => preload(s.loadout));
 
     const commit = () => {
+      // Recorded from what was actually rolled, denormalised, so a later data
+      // refresh cannot rewrite what happened.
+      const gearOf = (l: Loadout): HistoryGear[] =>
+        SLOTS.flatMap((s) => {
+          const i = l[s];
+          return i ? [{ slot: s, name: i.name, icon: i.icon }] : [];
+        });
+      const runId = `${Date.now()}-${++runSeq.current}`;
+      setHistory((h) =>
+        appendRun(h, {
+          id: runId,
+          at: Date.now(),
+          boss: boss.name,
+          bossImage: boss.image,
+          hardModeLabel: hardMode ? hardModeLabel(boss) : null,
+          challenge: challenge?.text ?? null,
+          // A raid's roll is all three setups, so the log carries all three.
+          value: squad
+            ? squad.reduce((sum, lane) => sum + loadoutValue(lane.loadout), 0)
+            : loadoutValue(loadout),
+          gear: squad ? squad.flatMap((lane) => gearOf(lane.loadout)) : gearOf(loadout),
+          outcome: null,
+        }),
+      );
+      setCurrentRunId(runId);
+
       dispatch({ type: 'SET_LOADOUT', loadout, spell });
       dispatch({ type: 'SET_BOSS', boss, hardMode });
       dispatch({ type: 'SET_CHALLENGE', challenge });
@@ -532,12 +573,16 @@ const Main = () => {
                 }
                 onDecide={decide}
                 onOpenSettings={() => setSettingsOpen(true)}
+                onOpenHistory={() => setHistoryOpen(true)}
               />
             </div>
           </div>
         </FitScreen>
         {/* Fixed overlays live outside FitScreen: inside a scaled element they
             would anchor to it rather than to the viewport. */}
+        {historyOpen && (
+          <HistoryPanel history={history} onMark={markRun} onClose={() => setHistoryOpen(false)} />
+        )}
         {settingsOpen && (
           <SettingsPanel
             settings={state.settings}
@@ -763,6 +808,20 @@ const Main = () => {
               ))}
             </div>
             <div className="actions" data-solid="">
+              {currentRunId && (
+                <>
+                  <RsButton onClick={() => markRun(currentRunId, 'cleared')}>
+                    {history.find((r) => r.id === currentRunId)?.outcome === 'cleared'
+                      ? '✓ CLEARED'
+                      : 'CLEARED'}
+                  </RsButton>
+                  <RsButton onClick={() => markRun(currentRunId, 'failed')}>
+                    {history.find((r) => r.id === currentRunId)?.outcome === 'failed'
+                      ? '✗ FAILED'
+                      : 'FAILED'}
+                  </RsButton>
+                </>
+              )}
               <RsButton variant="primary" onClick={() => setPhase('pre-roll')}>
                 NEW CHALLENGE
               </RsButton>
@@ -800,6 +859,20 @@ const Main = () => {
             onSlotContextMenu={(slot, e) => openSlotMenu(slot, e)}
           />
           <div className="actions" data-solid="">
+            {currentRunId && (
+              <>
+                <RsButton onClick={() => markRun(currentRunId, 'cleared')}>
+                  {history.find((r) => r.id === currentRunId)?.outcome === 'cleared'
+                    ? '✓ CLEARED'
+                    : 'CLEARED'}
+                </RsButton>
+                <RsButton onClick={() => markRun(currentRunId, 'failed')}>
+                  {history.find((r) => r.id === currentRunId)?.outcome === 'failed'
+                    ? '✗ FAILED'
+                    : 'FAILED'}
+                </RsButton>
+              </>
+            )}
             <RsButton variant="primary" onClick={() => setPhase('pre-roll')}>
               NEW CHALLENGE
             </RsButton>
@@ -826,7 +899,3 @@ const App = () => (
 );
 
 export default App;
-
-
-
-
