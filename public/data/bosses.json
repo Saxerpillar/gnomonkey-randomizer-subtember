@@ -180,7 +180,8 @@
   "image": "Great Olm.png",
   "tags": [
    "raid",
-   "hard"
+   "hard",
+   "hard mode"
   ]
  },
  {
@@ -347,7 +348,8 @@
    "dt2",
    "mid",
    "hard mode"
-  ]
+  ],
+  "style": "ranged"
  },
  {
   "name": "The Nightmare",
@@ -364,7 +366,8 @@
    "dt2",
    "mid",
    "hard mode"
-  ]
+  ],
+  "style": "magic"
  },
  {
   "name": "Theatre of Blood",
@@ -384,7 +387,7 @@
   ]
  },
  {
-  "name": "Tombs of Amascut: Expert Mode",
+  "name": "Tombs of Amascut",
   "image": "Tumeken's Warden (level-489).png",
   "tags": [
    "raid",

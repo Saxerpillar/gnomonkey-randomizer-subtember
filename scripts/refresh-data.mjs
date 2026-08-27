@@ -81,6 +81,41 @@ const main = async () => {
       !nameRes.some((re) => re.test(e.name)),
   );
 
+  // Poisoned ammo arrives under the SAME name as its clean version — upstream
+  // puts the distinction in `version`, not the name — so the collapse below
+  // would silently keep one of four. Rebuild the suffix so each is its own
+  // roll. Ammo only: the same collision affects ~141 poisoned weapons, but
+  // those would double the weapon pool with entries that differ by a passive
+  // the stat formula cannot see anyway.
+  const POISON_SUFFIX = { Poison: ' (p)', 'Poison+': ' (p+)', 'Poison++': ' (p++)' };
+  for (const e of kept) {
+    if (e.slot === 'ammo' && POISON_SUFFIX[e.version]) e.name += POISON_SUFFIX[e.version];
+  }
+
+  // Weapons take the opposite route. A poisoned weapon is stat-identical to its
+  // clean version, so adding all 141 as separate entries would inflate the
+  // dagger and spear families and change how often a dagger rolls at all.
+  // Instead they ride along on the base weapon and are picked by a second,
+  // independent draw at roll time — the odds of rolling that weapon are
+  // untouched, and the poison is decided afterwards.
+  //
+  // They are also pulled out of the collapse below. versionPriority ranks
+  // "Poison" above "Unpoisoned", so leaving them in meant the POISONED id won
+  // the base name: the pool's "Rune dagger" was id 1229, the poisoned one,
+  // showing a poisoned sprite under a clean label.
+  const poisonVariants = new Map(); // base weapon name -> variants
+  const rollable = [];
+  for (const e of kept) {
+    const suffix = e.slot === 'weapon' ? POISON_SUFFIX[e.version] : undefined;
+    if (!suffix) {
+      rollable.push(e);
+      continue;
+    }
+    const list = poisonVariants.get(e.name) ?? [];
+    list.push({ id: e.id, name: e.name + suffix, icon: `${e.id}.png`, image: e.image });
+    poisonVariants.set(e.name, list);
+  }
+
   // Collapse to one canonical entry per item name.
   const prio = curation.canonicalization.versionPriority;
   const rank = (v) => {
@@ -88,7 +123,7 @@ const main = async () => {
     return i === -1 ? prio.length : i;
   };
   const byName = new Map();
-  for (const e of kept) {
+  for (const e of rollable) {
     const cur = byName.get(e.name);
     if (!cur || rank(e.version) < rank(cur.version)) byName.set(e.name, e);
   }
@@ -249,6 +284,8 @@ const main = async () => {
       ammoMaxTier: e.slot === 'weapon' ? weaponSpecOf(e)?.maxTier ?? undefined : undefined,
       tier: tiers.get(e.id),
       speed: e.slot === 'weapon' && e.speed > 0 ? e.speed : undefined,
+      // Cosmetic riders: same stats, same price, different label and sprite.
+      poison: poisonVariants.get(e.name)?.map(({ id, name, icon }) => ({ id, name, icon })),
       offensive: e.offensive,
       defensive: e.defensive,
       bonuses: e.bonuses,
@@ -260,7 +297,12 @@ const main = async () => {
     await mkdir(path.join(ROOT, dir), { recursive: true });
   }
 
-  const iconJobs = pool
+  const iconJobs = [
+    ...pool,
+    // Poisoned weapons are not in the pool, but their sprites still have to be
+    // on disk for the substituted item to render.
+    ...[...poisonVariants.values()].flat(),
+  ]
     .map((e) => ({
       url: `${DPS_RAW}/cdn/equipment/${encodeURIComponent(e.image)}`,
       dest: path.join(ROOT, 'public/img/items', `${e.id}.png`),
@@ -359,7 +401,7 @@ const main = async () => {
   await writeJsonAtomic(path.join(ROOT, 'public/data/spells.json'), appSpells);
   await writeJsonAtomic(
     path.join(ROOT, 'public/data/bosses.json'),
-    bosses.map((b) => ({ name: b.name, image: b.image, tags: b.tags })),
+    bosses.map((b) => ({ name: b.name, image: b.image, tags: b.tags, ...(b.style ? { style: b.style } : {}) })),
   );
 
   const weapons = appItems.filter((i) => i.slot === 'weapon');

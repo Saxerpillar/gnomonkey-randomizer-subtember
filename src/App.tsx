@@ -427,7 +427,14 @@ const Main = () => {
         ? items.filter((i) => i.tier === settings.forceTier)
         : items;
     const rng = mulberry32(randomSeed());
-    const loadout = isGauntlet ? emptyLoadout() : roll(rollPool, rollSettings, rng);
+    // Some fights only make sense with one style — the Leviathan is ranged,
+    // the Whisperer magic — so their weapon roll is forced the same way a
+    // raid lane's is.
+    const loadout = isGauntlet
+      ? emptyLoadout()
+      : boss.style
+        ? rollForStyle(rollPool, boss.style, rollSettings, rng)
+        : roll(rollPool, rollSettings, rng);
     const spell = isGauntlet ? null : rollSpell(loadout.weapon, spells, rng);
 
     // A boss with a hard-mode variant is upgraded on a coin flip; the ceremony

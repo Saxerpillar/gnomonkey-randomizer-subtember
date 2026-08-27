@@ -2,6 +2,7 @@ import { asset } from '../asset';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Item } from '../engine/types';
 import type { Spell } from '../engine/spell';
+import type { Style } from '../engine/roll';
 import { RsButton } from '../theme/RsButton';
 import { RsPanel } from '../theme/RsPanel';
 
@@ -9,6 +10,9 @@ export interface Boss {
   name: string;
   image: string;
   tags: string[];
+  /** Fights that only make sense with one combat style, e.g. the Leviathan's
+   *  ranged-only phases. Forces the weapon roll when set. */
+  style?: Style;
 }
 
 export interface GameData {

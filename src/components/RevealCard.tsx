@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { asset } from '../asset';
 import { EMOTES } from './emotes';
+import { hardModeLabel } from './objectives';
 import { buildTape, tapeTickDelays } from '../engine/reel';
 import { mulberry32, randomSeed } from '../engine/rng';
 import type { Tier } from '../engine/types';
@@ -425,7 +426,9 @@ export const RevealCard = ({
             <span className={styles.bossTitle}>{title}</span>
             <span className={styles.bossSubtitle}>{CHALLENGER_SUBTITLE}</span>
             {!isSlot && data.hardMode && stamped && (
-              <span className={styles.hardModeStamp}>HARD MODE</span>
+              <span className={styles.hardModeStamp}>
+                {hardModeLabel(data.kind === 'boss' ? data.boss : null)}
+              </span>
             )}
           </>
         )}

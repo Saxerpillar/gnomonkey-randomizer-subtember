@@ -1,6 +1,7 @@
 import { asset } from '../asset';
 import type { Challenge } from './challenges';
 import { CountdownTimer } from './CountdownTimer';
+import { hardModeLabel } from './objectives';
 import type { Boss } from './DataProvider';
 import styles from './BossPanel.module.css';
 
@@ -28,7 +29,7 @@ export const BossPanel = ({
             alt={boss.name}
           />
           <div className={styles.name}>{boss.name}</div>
-          {hardMode && <div className={styles.hardMode}>HARD MODE</div>}
+          {hardMode && <div className={styles.hardMode}>{hardModeLabel(boss)}</div>}
           {objective && <div className={styles.objective}>{objective}</div>}
         </>
       ) : revealing ? (

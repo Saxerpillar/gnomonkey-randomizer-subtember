@@ -31,16 +31,33 @@
   }
  },
  {
-  "id": 13267,
+  "id": 13265,
   "name": "Abyssal dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "13267.png",
+  "icon": "13265.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "strong",
   "speed": 4,
+  "poison": [
+   {
+    "id": 13267,
+    "name": "Abyssal dagger (p)",
+    "icon": "13267.png"
+   },
+   {
+    "id": 13269,
+    "name": "Abyssal dagger (p+)",
+    "icon": "13269.png"
+   },
+   {
+    "id": 13271,
+    "name": "Abyssal dagger (p++)",
+    "icon": "13271.png"
+   }
+  ],
   "offensive": {
    "stab": 75,
    "slash": 40,
@@ -63,16 +80,33 @@
   }
  },
  {
-  "id": 27863,
+  "id": 27861,
   "name": "Abyssal dagger (bh)",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "27863.png",
+  "icon": "27861.png",
   "tradeable": false,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "strong",
   "speed": 4,
+  "poison": [
+   {
+    "id": 27863,
+    "name": "Abyssal dagger (bh) (p)",
+    "icon": "27863.png"
+   },
+   {
+    "id": 27865,
+    "name": "Abyssal dagger (bh) (p+)",
+    "icon": "27865.png"
+   },
+   {
+    "id": 27867,
+    "name": "Abyssal dagger (bh) (p++)",
+    "icon": "27867.png"
+   }
+  ],
   "offensive": {
    "stab": 85,
    "slash": 40,
@@ -373,11 +407,107 @@
   }
  },
  {
-  "id": 891,
+  "id": 890,
   "name": "Adamant arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "890.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 5,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 31,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 891,
+  "name": "Adamant arrow (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "891.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 5,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 31,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5620,
+  "name": "Adamant arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5620.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 5,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 31,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5626,
+  "name": "Adamant arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5626.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "arrow",
@@ -467,11 +597,107 @@
   }
  },
  {
-  "id": 9290,
+  "id": 9143,
   "name": "Adamant bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9143.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 100,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9290,
+  "name": "Adamant bolts (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "9290.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 100,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9297,
+  "name": "Adamant bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9297.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 100,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9304,
+  "name": "Adamant bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9304.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "bolt",
@@ -684,16 +910,33 @@
   }
  },
  {
-  "id": 1227,
+  "id": 1211,
   "name": "Adamant dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1227.png",
+  "icon": "1211.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1227,
+    "name": "Adamant dagger (p)",
+    "icon": "1227.png"
+   },
+   {
+    "id": 5676,
+    "name": "Adamant dagger (p+)",
+    "icon": "5676.png"
+   },
+   {
+    "id": 5694,
+    "name": "Adamant dagger (p++)",
+    "icon": "5694.png"
+   }
+  ],
   "offensive": {
    "stab": 15,
    "slash": 8,
@@ -716,16 +959,33 @@
   }
  },
  {
-  "id": 816,
+  "id": 810,
   "name": "Adamant dart",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "816.png",
+  "icon": "810.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "common",
   "speed": 3,
+  "poison": [
+   {
+    "id": 816,
+    "name": "Adamant dart (p)",
+    "icon": "816.png"
+   },
+   {
+    "id": 5633,
+    "name": "Adamant dart (p+)",
+    "icon": "5633.png"
+   },
+   {
+    "id": 5640,
+    "name": "Adamant dart (p++)",
+    "icon": "5640.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -957,16 +1217,33 @@
   }
  },
  {
-  "id": 11407,
+  "id": 11375,
   "name": "Adamant hasta",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "11407.png",
+  "icon": "11375.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Spear",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 11407,
+    "name": "Adamant hasta (p)",
+    "icon": "11407.png"
+   },
+   {
+    "id": 11410,
+    "name": "Adamant hasta (p+)",
+    "icon": "11410.png"
+   },
+   {
+    "id": 11412,
+    "name": "Adamant hasta (p++)",
+    "icon": "11412.png"
+   }
+  ],
   "offensive": {
    "stab": 24,
    "slash": 24,
@@ -1598,11 +1875,110 @@
   }
  },
  {
-  "id": 835,
+  "id": 829,
   "name": "Adamant javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "829.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 5,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 102,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 835,
+  "name": "Adamant javelin (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "835.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 5,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 102,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5646,
+  "name": "Adamant javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5646.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 5,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 102,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5652,
+  "name": "Adamant javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5652.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "javelin",
@@ -2182,16 +2558,33 @@
   }
  },
  {
-  "id": 875,
+  "id": 867,
   "name": "Adamant knife",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "875.png",
+  "icon": "867.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "common",
   "speed": 3,
+  "poison": [
+   {
+    "id": 875,
+    "name": "Adamant knife (p)",
+    "icon": "875.png"
+   },
+   {
+    "id": 5659,
+    "name": "Adamant knife (p+)",
+    "icon": "5659.png"
+   },
+   {
+    "id": 5666,
+    "name": "Adamant knife (p++)",
+    "icon": "5666.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -2918,16 +3311,33 @@
   }
  },
  {
-  "id": 1259,
+  "id": 1245,
   "name": "Adamant spear",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1259.png",
+  "icon": "1245.png",
   "tradeable": true,
   "twoHanded": true,
   "category": "Spear",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1259,
+    "name": "Adamant spear (p)",
+    "icon": "1259.png"
+   },
+   {
+    "id": 5712,
+    "name": "Adamant spear (p+)",
+    "icon": "5712.png"
+   },
+   {
+    "id": 5726,
+    "name": "Adamant spear (p++)",
+    "icon": "5726.png"
+   }
+  ],
   "offensive": {
    "stab": 24,
    "slash": 24,
@@ -3255,11 +3665,107 @@
   }
  },
  {
-  "id": 21332,
+  "id": 21326,
   "name": "Amethyst arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "21326.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 7,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 55,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21332,
+  "name": "Amethyst arrow (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "21332.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 7,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 55,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21334,
+  "name": "Amethyst arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "21334.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 7,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 55,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21336,
+  "name": "Amethyst arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "21336.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "arrow",
@@ -3318,16 +3824,33 @@
   }
  },
  {
-  "id": 25851,
+  "id": 25849,
   "name": "Amethyst dart",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "25851.png",
+  "icon": "25849.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "common",
   "speed": 3,
+  "poison": [
+   {
+    "id": 25851,
+    "name": "Amethyst dart (p)",
+    "icon": "25851.png"
+   },
+   {
+    "id": 25855,
+    "name": "Amethyst dart (p+)",
+    "icon": "25855.png"
+   },
+   {
+    "id": 25857,
+    "name": "Amethyst dart (p++)",
+    "icon": "25857.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -3382,11 +3905,110 @@
   }
  },
  {
-  "id": 21320,
+  "id": 21318,
   "name": "Amethyst javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "21318.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 7,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 135,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21320,
+  "name": "Amethyst javelin (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "21320.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 7,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 135,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21322,
+  "name": "Amethyst javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "21322.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 7,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 135,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21324,
+  "name": "Amethyst javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "21324.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "javelin",
@@ -8414,7 +9036,7 @@
   "ammoClass": "ogre",
   "ammoTier": 0,
   "ammoExclusive": true,
-  "tier": "common",
+  "tier": "junk",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -8820,16 +9442,33 @@
   }
  },
  {
-  "id": 1233,
+  "id": 1217,
   "name": "Black dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1233.png",
+  "icon": "1217.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "junk",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1233,
+    "name": "Black dagger (p)",
+    "icon": "1233.png"
+   },
+   {
+    "id": 5682,
+    "name": "Black dagger (p+)",
+    "icon": "5682.png"
+   },
+   {
+    "id": 5700,
+    "name": "Black dagger (p++)",
+    "icon": "5700.png"
+   }
+  ],
   "offensive": {
    "stab": 10,
    "slash": 5,
@@ -8852,16 +9491,33 @@
   }
  },
  {
-  "id": 3094,
+  "id": 3093,
   "name": "Black dart",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "3094.png",
+  "icon": "3093.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "junk",
   "speed": 3,
+  "poison": [
+   {
+    "id": 3094,
+    "name": "Black dart (p)",
+    "icon": "3094.png"
+   },
+   {
+    "id": 5631,
+    "name": "Black dart (p+)",
+    "icon": "5631.png"
+   },
+   {
+    "id": 5638,
+    "name": "Black dart (p++)",
+    "icon": "5638.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -9293,16 +9949,33 @@
   }
  },
  {
-  "id": 874,
+  "id": 869,
   "name": "Black knife",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "874.png",
+  "icon": "869.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "common",
   "speed": 3,
+  "poison": [
+   {
+    "id": 874,
+    "name": "Black knife (p)",
+    "icon": "874.png"
+   },
+   {
+    "id": 5658,
+    "name": "Black knife (p+)",
+    "icon": "5658.png"
+   },
+   {
+    "id": 5665,
+    "name": "Black knife (p++)",
+    "icon": "5665.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -10209,16 +10882,33 @@
   }
  },
  {
-  "id": 4582,
+  "id": 4580,
   "name": "Black spear",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "4582.png",
+  "icon": "4580.png",
   "tradeable": true,
   "twoHanded": true,
   "category": "Spear",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 4582,
+    "name": "Black spear (p)",
+    "icon": "4582.png"
+   },
+   {
+    "id": 5734,
+    "name": "Black spear (p+)",
+    "icon": "5734.png"
+   },
+   {
+    "id": 5736,
+    "name": "Black spear (p++)",
+    "icon": "5736.png"
+   }
+  ],
   "offensive": {
    "stab": 15,
    "slash": 15,
@@ -12061,11 +12751,107 @@
   }
  },
  {
-  "id": 9286,
+  "id": 9139,
   "name": "Blurite bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9139.png",
+  "tradeable": false,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 2,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 28,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9286,
+  "name": "Blurite bolts (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "9286.png",
+  "tradeable": false,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 2,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 28,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9293,
+  "name": "Blurite bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9293.png",
+  "tradeable": false,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 2,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 28,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9300,
+  "name": "Blurite bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9300.png",
   "tradeable": false,
   "twoHanded": false,
   "ammoClass": "bolt",
@@ -12252,16 +13038,33 @@
   }
  },
  {
-  "id": 8874,
+  "id": 8872,
   "name": "Bone dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "8874.png",
+  "icon": "8872.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "junk",
   "speed": 4,
+  "poison": [
+   {
+    "id": 8874,
+    "name": "Bone dagger (p)",
+    "icon": "8874.png"
+   },
+   {
+    "id": 8876,
+    "name": "Bone dagger (p+)",
+    "icon": "8876.png"
+   },
+   {
+    "id": 8878,
+    "name": "Bone dagger (p++)",
+    "icon": "8878.png"
+   }
+  ],
   "offensive": {
    "stab": 5,
    "slash": 3,
@@ -13340,11 +14143,107 @@
   }
  },
  {
-  "id": 883,
+  "id": 882,
   "name": "Bronze arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "882.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 7,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 883,
+  "name": "Bronze arrow (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "883.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 7,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5616,
+  "name": "Bronze arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5616.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 7,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5622,
+  "name": "Bronze arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5622.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "arrow",
@@ -13434,11 +14333,107 @@
   }
  },
  {
-  "id": 878,
+  "id": 877,
   "name": "Bronze bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "877.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 878,
+  "name": "Bronze bolts (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "878.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 6061,
+  "name": "Bronze bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "6061.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 6062,
+  "name": "Bronze bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "6062.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "bolt",
@@ -13620,16 +14615,33 @@
   }
  },
  {
-  "id": 1221,
+  "id": 1205,
   "name": "Bronze dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1221.png",
+  "icon": "1205.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "junk",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1221,
+    "name": "Bronze dagger (p)",
+    "icon": "1221.png"
+   },
+   {
+    "id": 5670,
+    "name": "Bronze dagger (p+)",
+    "icon": "5670.png"
+   },
+   {
+    "id": 5688,
+    "name": "Bronze dagger (p++)",
+    "icon": "5688.png"
+   }
+  ],
   "offensive": {
    "stab": 4,
    "slash": 2,
@@ -13652,16 +14664,33 @@
   }
  },
  {
-  "id": 812,
+  "id": 806,
   "name": "Bronze dart",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "812.png",
+  "icon": "806.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "junk",
   "speed": 3,
+  "poison": [
+   {
+    "id": 812,
+    "name": "Bronze dart (p)",
+    "icon": "812.png"
+   },
+   {
+    "id": 5628,
+    "name": "Bronze dart (p+)",
+    "icon": "5628.png"
+   },
+   {
+    "id": 5635,
+    "name": "Bronze dart (p++)",
+    "icon": "5635.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -13893,16 +14922,33 @@
   }
  },
  {
-  "id": 11379,
+  "id": 11367,
   "name": "Bronze hasta",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "11379.png",
+  "icon": "11367.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Spear",
   "tier": "junk",
   "speed": 4,
+  "poison": [
+   {
+    "id": 11379,
+    "name": "Bronze hasta (p)",
+    "icon": "11379.png"
+   },
+   {
+    "id": 11382,
+    "name": "Bronze hasta (p+)",
+    "icon": "11382.png"
+   },
+   {
+    "id": 11384,
+    "name": "Bronze hasta (p++)",
+    "icon": "11384.png"
+   }
+  ],
   "offensive": {
    "stab": 5,
    "slash": 5,
@@ -13925,11 +14971,110 @@
   }
  },
  {
-  "id": 831,
+  "id": 825,
   "name": "Bronze javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "825.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 1,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 25,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 831,
+  "name": "Bronze javelin (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "831.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 1,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 25,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5642,
+  "name": "Bronze javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5642.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 1,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 25,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5648,
+  "name": "Bronze javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5648.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "javelin",
@@ -14045,16 +15190,33 @@
   }
  },
  {
-  "id": 870,
+  "id": 864,
   "name": "Bronze knife",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "870.png",
+  "icon": "864.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "junk",
   "speed": 3,
+  "poison": [
+   {
+    "id": 870,
+    "name": "Bronze knife (p)",
+    "icon": "870.png"
+   },
+   {
+    "id": 5654,
+    "name": "Bronze knife (p+)",
+    "icon": "5654.png"
+   },
+   {
+    "id": 5661,
+    "name": "Bronze knife (p++)",
+    "icon": "5661.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -14491,16 +15653,33 @@
   }
  },
  {
-  "id": 1251,
+  "id": 1237,
   "name": "Bronze spear",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1251.png",
+  "icon": "1237.png",
   "tradeable": true,
   "twoHanded": true,
   "category": "Spear",
   "tier": "junk",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1251,
+    "name": "Bronze spear (p)",
+    "icon": "1251.png"
+   },
+   {
+    "id": 5704,
+    "name": "Bronze spear (p+)",
+    "icon": "5704.png"
+   },
+   {
+    "id": 5718,
+    "name": "Bronze spear (p++)",
+    "icon": "5718.png"
+   }
+  ],
   "offensive": {
    "stab": 5,
    "slash": 5,
@@ -20110,11 +21289,107 @@
   }
  },
  {
-  "id": 11227,
+  "id": 11212,
   "name": "Dragon arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "11212.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 8,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 11227,
+  "name": "Dragon arrow (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "11227.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 8,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 11228,
+  "name": "Dragon arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "11228.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 8,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 11229,
+  "name": "Dragon arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "11229.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "arrow",
@@ -20267,11 +21542,107 @@
   }
  },
  {
-  "id": 21924,
+  "id": 21905,
   "name": "Dragon bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "21905.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21924,
+  "name": "Dragon bolts (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "21924.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21926,
+  "name": "Dragon bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "21926.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21928,
+  "name": "Dragon bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "21928.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "bolt",
@@ -20663,16 +22034,33 @@
   }
  },
  {
-  "id": 1231,
+  "id": 1215,
   "name": "Dragon dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1231.png",
+  "icon": "1215.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "decent",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1231,
+    "name": "Dragon dagger (p)",
+    "icon": "1231.png"
+   },
+   {
+    "id": 5680,
+    "name": "Dragon dagger (p+)",
+    "icon": "5680.png"
+   },
+   {
+    "id": 5698,
+    "name": "Dragon dagger (p++)",
+    "icon": "5698.png"
+   }
+  ],
   "offensive": {
    "stab": 40,
    "slash": 25,
@@ -20695,16 +22083,33 @@
   }
  },
  {
-  "id": 28021,
+  "id": 28019,
   "name": "Dragon dagger (cr)",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "28021.png",
+  "icon": "28019.png",
   "tradeable": false,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "decent",
   "speed": 4,
+  "poison": [
+   {
+    "id": 28021,
+    "name": "Dragon dagger (cr) (p)",
+    "icon": "28021.png"
+   },
+   {
+    "id": 28023,
+    "name": "Dragon dagger (cr) (p+)",
+    "icon": "28023.png"
+   },
+   {
+    "id": 28025,
+    "name": "Dragon dagger (cr) (p++)",
+    "icon": "28025.png"
+   }
+  ],
   "offensive": {
    "stab": 40,
    "slash": 25,
@@ -20727,16 +22132,33 @@
   }
  },
  {
-  "id": 11231,
+  "id": 11230,
   "name": "Dragon dart",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "11231.png",
+  "icon": "11230.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "common",
   "speed": 3,
+  "poison": [
+   {
+    "id": 11231,
+    "name": "Dragon dart (p)",
+    "icon": "11231.png"
+   },
+   {
+    "id": 11233,
+    "name": "Dragon dart (p+)",
+    "icon": "11233.png"
+   },
+   {
+    "id": 11234,
+    "name": "Dragon dart (p++)",
+    "icon": "11234.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -21063,16 +22485,33 @@
   }
  },
  {
-  "id": 22734,
+  "id": 22731,
   "name": "Dragon hasta",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "22734.png",
+  "icon": "22731.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Spear",
   "tier": "strong",
   "speed": 4,
+  "poison": [
+   {
+    "id": 22734,
+    "name": "Dragon hasta (p)",
+    "icon": "22734.png"
+   },
+   {
+    "id": 22737,
+    "name": "Dragon hasta (p+)",
+    "icon": "22737.png"
+   },
+   {
+    "id": 22740,
+    "name": "Dragon hasta (p++)",
+    "icon": "22740.png"
+   }
+  ],
   "offensive": {
    "stab": 55,
    "slash": 55,
@@ -21256,11 +22695,110 @@
   }
  },
  {
-  "id": 19486,
+  "id": 19484,
   "name": "Dragon javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "19484.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 8,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 150,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 19486,
+  "name": "Dragon javelin (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "19486.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 8,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 150,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 19488,
+  "name": "Dragon javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "19488.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 8,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 150,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 19490,
+  "name": "Dragon javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "19490.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "javelin",
@@ -21347,16 +22885,33 @@
   }
  },
  {
-  "id": 22806,
+  "id": 22804,
   "name": "Dragon knife",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "22806.png",
+  "icon": "22804.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "common",
   "speed": 3,
+  "poison": [
+   {
+    "id": 22806,
+    "name": "Dragon knife (p)",
+    "icon": "22806.png"
+   },
+   {
+    "id": 22808,
+    "name": "Dragon knife (p+)",
+    "icon": "22808.png"
+   },
+   {
+    "id": 22810,
+    "name": "Dragon knife (p++)",
+    "icon": "22810.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -22073,16 +23628,33 @@
   }
  },
  {
-  "id": 1263,
+  "id": 1249,
   "name": "Dragon spear",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1263.png",
+  "icon": "1249.png",
   "tradeable": true,
   "twoHanded": true,
   "category": "Spear",
   "tier": "strong",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1263,
+    "name": "Dragon spear (p)",
+    "icon": "1263.png"
+   },
+   {
+    "id": 5716,
+    "name": "Dragon spear (p+)",
+    "icon": "5716.png"
+   },
+   {
+    "id": 5730,
+    "name": "Dragon spear (p++)",
+    "icon": "5730.png"
+   }
+  ],
   "offensive": {
    "stab": 55,
    "slash": 55,
@@ -22105,16 +23677,33 @@
   }
  },
  {
-  "id": 28043,
+  "id": 28041,
   "name": "Dragon spear (cr)",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "28043.png",
+  "icon": "28041.png",
   "tradeable": false,
   "twoHanded": true,
   "category": "Spear",
   "tier": "strong",
   "speed": 4,
+  "poison": [
+   {
+    "id": 28043,
+    "name": "Dragon spear (cr) (p)",
+    "icon": "28043.png"
+   },
+   {
+    "id": 28045,
+    "name": "Dragon spear (cr) (p+)",
+    "icon": "28045.png"
+   },
+   {
+    "id": 28047,
+    "name": "Dragon spear (cr) (p++)",
+    "icon": "28047.png"
+   }
+  ],
   "offensive": {
    "stab": 55,
    "slash": 55,
@@ -22476,7 +24065,7 @@
   "twoHanded": false,
   "ammoClass": "bolt",
   "ammoTier": 7,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -22507,7 +24096,7 @@
   "twoHanded": false,
   "ammoClass": "bolt",
   "ammoTier": 7,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -32650,11 +34239,107 @@
   }
  },
  {
-  "id": 885,
+  "id": 884,
   "name": "Iron arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "884.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 2,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 885,
+  "name": "Iron arrow (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "885.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 2,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5617,
+  "name": "Iron arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5617.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 2,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5623,
+  "name": "Iron arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5623.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "arrow",
@@ -32744,11 +34429,107 @@
   }
  },
  {
-  "id": 9287,
+  "id": 9140,
   "name": "Iron bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9140.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 46,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9287,
+  "name": "Iron bolts (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "9287.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 46,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9294,
+  "name": "Iron bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9294.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 46,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9301,
+  "name": "Iron bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9301.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "bolt",
@@ -32930,16 +34711,33 @@
   }
  },
  {
-  "id": 1219,
+  "id": 1203,
   "name": "Iron dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1219.png",
+  "icon": "1203.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "junk",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1219,
+    "name": "Iron dagger (p)",
+    "icon": "1219.png"
+   },
+   {
+    "id": 5668,
+    "name": "Iron dagger (p+)",
+    "icon": "5668.png"
+   },
+   {
+    "id": 5686,
+    "name": "Iron dagger (p++)",
+    "icon": "5686.png"
+   }
+  ],
   "offensive": {
    "stab": 5,
    "slash": 3,
@@ -32962,16 +34760,33 @@
   }
  },
  {
-  "id": 813,
+  "id": 807,
   "name": "Iron dart",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "813.png",
+  "icon": "807.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "junk",
   "speed": 3,
+  "poison": [
+   {
+    "id": 813,
+    "name": "Iron dart (p)",
+    "icon": "813.png"
+   },
+   {
+    "id": 5629,
+    "name": "Iron dart (p+)",
+    "icon": "5629.png"
+   },
+   {
+    "id": 5636,
+    "name": "Iron dart (p++)",
+    "icon": "5636.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -33203,16 +35018,33 @@
   }
  },
  {
-  "id": 11386,
+  "id": 11369,
   "name": "Iron hasta",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "11386.png",
+  "icon": "11369.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Spear",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 11386,
+    "name": "Iron hasta (p)",
+    "icon": "11386.png"
+   },
+   {
+    "id": 11389,
+    "name": "Iron hasta (p+)",
+    "icon": "11389.png"
+   },
+   {
+    "id": 11391,
+    "name": "Iron hasta (p++)",
+    "icon": "11391.png"
+   }
+  ],
   "offensive": {
    "stab": 8,
    "slash": 8,
@@ -33235,11 +35067,110 @@
   }
  },
  {
-  "id": 832,
+  "id": 826,
   "name": "Iron javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "826.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 2,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 42,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 832,
+  "name": "Iron javelin (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "832.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 2,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 42,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5643,
+  "name": "Iron javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5643.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 2,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 42,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5649,
+  "name": "Iron javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5649.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "javelin",
@@ -33355,16 +35286,33 @@
   }
  },
  {
-  "id": 871,
+  "id": 863,
   "name": "Iron knife",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "871.png",
+  "icon": "863.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "junk",
   "speed": 3,
+  "poison": [
+   {
+    "id": 871,
+    "name": "Iron knife (p)",
+    "icon": "871.png"
+   },
+   {
+    "id": 5655,
+    "name": "Iron knife (p+)",
+    "icon": "5655.png"
+   },
+   {
+    "id": 5662,
+    "name": "Iron knife (p++)",
+    "icon": "5662.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -33863,16 +35811,33 @@
   }
  },
  {
-  "id": 1253,
+  "id": 1239,
   "name": "Iron spear",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1253.png",
+  "icon": "1239.png",
   "tradeable": true,
   "twoHanded": true,
   "category": "Spear",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1253,
+    "name": "Iron spear (p)",
+    "icon": "1253.png"
+   },
+   {
+    "id": 5706,
+    "name": "Iron spear (p+)",
+    "icon": "5706.png"
+   },
+   {
+    "id": 5720,
+    "name": "Iron spear (p++)",
+    "icon": "5720.png"
+   }
+  ],
   "offensive": {
    "stab": 8,
    "slash": 8,
@@ -34827,16 +36792,33 @@
   }
  },
  {
-  "id": 10582,
+  "id": 10581,
   "name": "Keris",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "10582.png",
+  "icon": "10581.png",
   "tradeable": false,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "decent",
   "speed": 4,
+  "poison": [
+   {
+    "id": 10582,
+    "name": "Keris (p)",
+    "icon": "10582.png"
+   },
+   {
+    "id": 10583,
+    "name": "Keris (p+)",
+    "icon": "10583.png"
+   },
+   {
+    "id": 10584,
+    "name": "Keris (p++)",
+    "icon": "10584.png"
+   }
+  ],
   "offensive": {
    "stab": 40,
    "slash": 20,
@@ -37847,11 +39829,107 @@
   }
  },
  {
-  "id": 889,
+  "id": 888,
   "name": "Mithril arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "888.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 889,
+  "name": "Mithril arrow (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "889.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5619,
+  "name": "Mithril arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5619.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5625,
+  "name": "Mithril arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5625.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "arrow",
@@ -37941,11 +40019,107 @@
   }
  },
  {
-  "id": 9289,
+  "id": 9142,
   "name": "Mithril bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9142.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 82,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9289,
+  "name": "Mithril bolts (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "9289.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 82,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9296,
+  "name": "Mithril bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9296.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 82,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9303,
+  "name": "Mithril bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9303.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "bolt",
@@ -38127,16 +40301,33 @@
   }
  },
  {
-  "id": 1225,
+  "id": 1209,
   "name": "Mithril dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1225.png",
+  "icon": "1209.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1225,
+    "name": "Mithril dagger (p)",
+    "icon": "1225.png"
+   },
+   {
+    "id": 5674,
+    "name": "Mithril dagger (p+)",
+    "icon": "5674.png"
+   },
+   {
+    "id": 5692,
+    "name": "Mithril dagger (p++)",
+    "icon": "5692.png"
+   }
+  ],
   "offensive": {
    "stab": 11,
    "slash": 5,
@@ -38159,16 +40350,33 @@
   }
  },
  {
-  "id": 815,
+  "id": 809,
   "name": "Mithril dart",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "815.png",
+  "icon": "809.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "junk",
   "speed": 3,
+  "poison": [
+   {
+    "id": 815,
+    "name": "Mithril dart (p)",
+    "icon": "815.png"
+   },
+   {
+    "id": 5632,
+    "name": "Mithril dart (p+)",
+    "icon": "5632.png"
+   },
+   {
+    "id": 5639,
+    "name": "Mithril dart (p++)",
+    "icon": "5639.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -38429,16 +40637,33 @@
   }
  },
  {
-  "id": 11400,
+  "id": 11373,
   "name": "Mithril hasta",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "11400.png",
+  "icon": "11373.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Spear",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 11400,
+    "name": "Mithril hasta (p)",
+    "icon": "11400.png"
+   },
+   {
+    "id": 11403,
+    "name": "Mithril hasta (p+)",
+    "icon": "11403.png"
+   },
+   {
+    "id": 11405,
+    "name": "Mithril hasta (p++)",
+    "icon": "11405.png"
+   }
+  ],
   "offensive": {
    "stab": 17,
    "slash": 17,
@@ -38461,11 +40686,110 @@
   }
  },
  {
-  "id": 834,
+  "id": 828,
   "name": "Mithril javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "828.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 4,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 85,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 834,
+  "name": "Mithril javelin (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "834.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 4,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 85,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5645,
+  "name": "Mithril javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5645.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 4,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 85,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5651,
+  "name": "Mithril javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5651.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "javelin",
@@ -38581,16 +40905,33 @@
   }
  },
  {
-  "id": 873,
+  "id": 866,
   "name": "Mithril knife",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "873.png",
+  "icon": "866.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "common",
   "speed": 3,
+  "poison": [
+   {
+    "id": 873,
+    "name": "Mithril knife (p)",
+    "icon": "873.png"
+   },
+   {
+    "id": 5657,
+    "name": "Mithril knife (p+)",
+    "icon": "5657.png"
+   },
+   {
+    "id": 5664,
+    "name": "Mithril knife (p++)",
+    "icon": "5664.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -39058,16 +41399,33 @@
   }
  },
  {
-  "id": 1257,
+  "id": 1243,
   "name": "Mithril spear",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1257.png",
+  "icon": "1243.png",
   "tradeable": true,
   "twoHanded": true,
   "category": "Spear",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1257,
+    "name": "Mithril spear (p)",
+    "icon": "1257.png"
+   },
+   {
+    "id": 5710,
+    "name": "Mithril spear (p+)",
+    "icon": "5710.png"
+   },
+   {
+    "id": 5724,
+    "name": "Mithril spear (p++)",
+    "icon": "5724.png"
+   }
+  ],
   "offensive": {
    "stab": 17,
    "slash": 17,
@@ -42306,7 +44664,7 @@
   "twoHanded": false,
   "ammoClass": "bolt",
   "ammoTier": 7,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -46053,11 +48411,107 @@
   }
  },
  {
-  "id": 893,
+  "id": 892,
   "name": "Rune arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "892.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 6,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 49,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 893,
+  "name": "Rune arrow (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "893.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 6,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 49,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5621,
+  "name": "Rune arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5621.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 6,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 49,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5627,
+  "name": "Rune arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5627.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "arrow",
@@ -46185,7 +48639,7 @@
   "ammoClass": "ogre",
   "ammoTier": 6,
   "ammoExclusive": true,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -46365,16 +48819,33 @@
   }
  },
  {
-  "id": 1229,
+  "id": 1213,
   "name": "Rune dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1229.png",
+  "icon": "1213.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1229,
+    "name": "Rune dagger (p)",
+    "icon": "1229.png"
+   },
+   {
+    "id": 5678,
+    "name": "Rune dagger (p+)",
+    "icon": "5678.png"
+   },
+   {
+    "id": 5696,
+    "name": "Rune dagger (p++)",
+    "icon": "5696.png"
+   }
+  ],
   "offensive": {
    "stab": 25,
    "slash": 12,
@@ -46397,16 +48868,33 @@
   }
  },
  {
-  "id": 817,
+  "id": 811,
   "name": "Rune dart",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "817.png",
+  "icon": "811.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "common",
   "speed": 3,
+  "poison": [
+   {
+    "id": 817,
+    "name": "Rune dart (p)",
+    "icon": "817.png"
+   },
+   {
+    "id": 5634,
+    "name": "Rune dart (p+)",
+    "icon": "5634.png"
+   },
+   {
+    "id": 5641,
+    "name": "Rune dart (p++)",
+    "icon": "5641.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -46697,16 +49185,33 @@
   }
  },
  {
-  "id": 11414,
+  "id": 11377,
   "name": "Rune hasta",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "11414.png",
+  "icon": "11377.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Spear",
   "tier": "decent",
   "speed": 4,
+  "poison": [
+   {
+    "id": 11414,
+    "name": "Rune hasta (p)",
+    "icon": "11414.png"
+   },
+   {
+    "id": 11417,
+    "name": "Rune hasta (p+)",
+    "icon": "11417.png"
+   },
+   {
+    "id": 11419,
+    "name": "Rune hasta (p++)",
+    "icon": "11419.png"
+   }
+  ],
   "offensive": {
    "stab": 36,
    "slash": 36,
@@ -47338,11 +49843,110 @@
   }
  },
  {
-  "id": 836,
+  "id": 830,
   "name": "Rune javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "830.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 6,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 124,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 836,
+  "name": "Rune javelin (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "836.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 6,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 124,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5647,
+  "name": "Rune javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5647.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 6,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 124,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5653,
+  "name": "Rune javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5653.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "javelin",
@@ -47922,16 +50526,33 @@
   }
  },
  {
-  "id": 876,
+  "id": 868,
   "name": "Rune knife",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "876.png",
+  "icon": "868.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "common",
   "speed": 3,
+  "poison": [
+   {
+    "id": 876,
+    "name": "Rune knife (p)",
+    "icon": "876.png"
+   },
+   {
+    "id": 5660,
+    "name": "Rune knife (p+)",
+    "icon": "5660.png"
+   },
+   {
+    "id": 5667,
+    "name": "Rune knife (p++)",
+    "icon": "5667.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -48782,16 +51403,33 @@
   }
  },
  {
-  "id": 1261,
+  "id": 1247,
   "name": "Rune spear",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1261.png",
+  "icon": "1247.png",
   "tradeable": true,
   "twoHanded": true,
   "category": "Spear",
   "tier": "decent",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1261,
+    "name": "Rune spear (p)",
+    "icon": "1261.png"
+   },
+   {
+    "id": 5714,
+    "name": "Rune spear (p+)",
+    "icon": "5714.png"
+   },
+   {
+    "id": 5728,
+    "name": "Rune spear (p++)",
+    "icon": "5728.png"
+   }
+  ],
   "offensive": {
    "stab": 36,
    "slash": 36,
@@ -48966,8 +51604,40 @@
   }
  },
  {
-  "id": 9291,
+  "id": 9144,
   "name": "Runite bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9144.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 115,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9291,
+  "name": "Runite bolts (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "9291.png",
@@ -48975,7 +51645,71 @@
   "twoHanded": false,
   "ammoClass": "bolt",
   "ammoTier": 7,
-  "tier": "decent",
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 115,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9298,
+  "name": "Runite bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9298.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 115,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9305,
+  "name": "Runite bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9305.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -50773,7 +53507,7 @@
   "twoHanded": false,
   "ammoClass": "arrow",
   "ammoTier": 2,
-  "tier": "common",
+  "tier": "junk",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -52014,11 +54748,107 @@
   }
  },
  {
-  "id": 9292,
+  "id": 9145,
   "name": "Silver bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9145.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 36,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9292,
+  "name": "Silver bolts (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "9292.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 36,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9299,
+  "name": "Silver bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9299.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 36,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9306,
+  "name": "Silver bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9306.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "bolt",
@@ -54185,11 +57015,107 @@
   }
  },
  {
-  "id": 887,
+  "id": 886,
   "name": "Steel arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "886.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 3,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 16,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 887,
+  "name": "Steel arrow (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "887.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 3,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 16,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5618,
+  "name": "Steel arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5618.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 3,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 16,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5624,
+  "name": "Steel arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5624.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "arrow",
@@ -54279,11 +57205,107 @@
   }
  },
  {
-  "id": 9288,
+  "id": 9141,
   "name": "Steel bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9141.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 4,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9288,
+  "name": "Steel bolts (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "9288.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 4,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9295,
+  "name": "Steel bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9295.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 4,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9302,
+  "name": "Steel bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9302.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "bolt",
@@ -54349,7 +57371,7 @@
   "ammoClass": "ogre",
   "ammoTier": 3,
   "ammoExclusive": true,
-  "tier": "common",
+  "tier": "junk",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -54465,16 +57487,33 @@
   }
  },
  {
-  "id": 1223,
+  "id": 1207,
   "name": "Steel dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1223.png",
+  "icon": "1207.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "junk",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1223,
+    "name": "Steel dagger (p)",
+    "icon": "1223.png"
+   },
+   {
+    "id": 5672,
+    "name": "Steel dagger (p+)",
+    "icon": "5672.png"
+   },
+   {
+    "id": 5690,
+    "name": "Steel dagger (p++)",
+    "icon": "5690.png"
+   }
+  ],
   "offensive": {
    "stab": 8,
    "slash": 4,
@@ -54497,16 +57536,33 @@
   }
  },
  {
-  "id": 814,
+  "id": 808,
   "name": "Steel dart",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "814.png",
+  "icon": "808.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "junk",
   "speed": 3,
+  "poison": [
+   {
+    "id": 814,
+    "name": "Steel dart (p)",
+    "icon": "814.png"
+   },
+   {
+    "id": 5630,
+    "name": "Steel dart (p+)",
+    "icon": "5630.png"
+   },
+   {
+    "id": 5637,
+    "name": "Steel dart (p++)",
+    "icon": "5637.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -54767,16 +57823,33 @@
   }
  },
  {
-  "id": 11393,
+  "id": 11371,
   "name": "Steel hasta",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "11393.png",
+  "icon": "11371.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Spear",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 11393,
+    "name": "Steel hasta (p)",
+    "icon": "11393.png"
+   },
+   {
+    "id": 11396,
+    "name": "Steel hasta (p+)",
+    "icon": "11396.png"
+   },
+   {
+    "id": 11398,
+    "name": "Steel hasta (p++)",
+    "icon": "11398.png"
+   }
+  ],
   "offensive": {
    "stab": 12,
    "slash": 12,
@@ -55263,11 +58336,110 @@
   }
  },
  {
-  "id": 833,
+  "id": 827,
   "name": "Steel javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "827.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 3,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 833,
+  "name": "Steel javelin (p)",
   "version": "Poison",
   "slot": "ammo",
   "icon": "833.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 3,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5644,
+  "name": "Steel javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5644.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 3,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5650,
+  "name": "Steel javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5650.png",
   "tradeable": true,
   "twoHanded": false,
   "ammoClass": "javelin",
@@ -55847,16 +59019,33 @@
   }
  },
  {
-  "id": 872,
+  "id": 865,
   "name": "Steel knife",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "872.png",
+  "icon": "865.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
   "tier": "junk",
   "speed": 3,
+  "poison": [
+   {
+    "id": 872,
+    "name": "Steel knife (p)",
+    "icon": "872.png"
+   },
+   {
+    "id": 5656,
+    "name": "Steel knife (p+)",
+    "icon": "5656.png"
+   },
+   {
+    "id": 5663,
+    "name": "Steel knife (p++)",
+    "icon": "5663.png"
+   }
+  ],
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -56322,16 +59511,33 @@
   }
  },
  {
-  "id": 1255,
+  "id": 1241,
   "name": "Steel spear",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "1255.png",
+  "icon": "1241.png",
   "tradeable": true,
   "twoHanded": true,
   "category": "Spear",
   "tier": "common",
   "speed": 4,
+  "poison": [
+   {
+    "id": 1255,
+    "name": "Steel spear (p)",
+    "icon": "1255.png"
+   },
+   {
+    "id": 5708,
+    "name": "Steel spear (p+)",
+    "icon": "5708.png"
+   },
+   {
+    "id": 5722,
+    "name": "Steel spear (p++)",
+    "icon": "5722.png"
+   }
+  ],
   "offensive": {
    "stab": 12,
    "slash": 12,
@@ -63078,16 +66284,33 @@
   }
  },
  {
-  "id": 6593,
+  "id": 6591,
   "name": "White dagger",
-  "version": "Poison",
+  "version": "Unpoisoned",
   "slot": "weapon",
-  "icon": "6593.png",
+  "icon": "6591.png",
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "junk",
   "speed": 4,
+  "poison": [
+   {
+    "id": 6593,
+    "name": "White dagger (p)",
+    "icon": "6593.png"
+   },
+   {
+    "id": 6595,
+    "name": "White dagger (p+)",
+    "icon": "6595.png"
+   },
+   {
+    "id": 6597,
+    "name": "White dagger (p++)",
+    "icon": "6597.png"
+   }
+  ],
   "offensive": {
    "stab": 10,
    "slash": 5,

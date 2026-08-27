@@ -133,6 +133,28 @@ export const assignTierFloors = (
   return assigned;
 };
 
+/**
+ * Decides a weapon's poison AFTER it has been rolled, by an even draw between
+ * the clean version and each poisoned one.
+ *
+ * Keeping the variants off the pool and resolving them here is the whole point:
+ * the odds of rolling a rune dagger at all are exactly what they were before
+ * poison existed, and only then does a second, independent draw decide whether
+ * it is poisoned. Adding 141 poisoned weapons as their own entries would have
+ * quietly tripled how often the dagger and spear families come up.
+ *
+ * The variant swaps identity only — id, name, sprite. Stats, price and tier
+ * stay the base weapon's, so the budget, the tier weights and the ammo rules
+ * never notice the substitution.
+ */
+export const withPoison = (item: Item, rng: Rng): Item => {
+  if (!item.poison?.length) return item;
+  const choice = Math.floor(rng() * (item.poison.length + 1));
+  if (choice === 0) return item;
+  const v = item.poison[choice - 1];
+  return { ...item, id: v.id, name: v.name, icon: v.icon };
+};
+
 export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout => {
   const { budget, allowUntradeables, locks, tierFloors } = settings;
   const bySlot = poolBySlot(pool, allowUntradeables);
@@ -194,6 +216,10 @@ export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout =>
     if (candidates.length) rollSlot('ammo', candidates);
   }
 
+  // Poison last of all, once the weapon is settled. A locked weapon is left
+  // exactly as it was locked.
+  if (!locks.weapon && loadout.weapon) loadout.weapon = withPoison(loadout.weapon, rng);
+
   return loadout;
 };
 
@@ -231,8 +257,9 @@ export const rerollSlot = (
   if (slot === 'weapon' && locks.shield) candidates = candidates.filter((w) => !w.twoHanded);
   if (slot === 'ammo') candidates = ammoCandidatesFor(loadout.weapon, candidates);
 
-  const item = pickForSlot(slot, candidates, remaining, rng);
-  if (!item) return loadout; // nothing affordable/valid — leave it as it was
+  const rolled = pickForSlot(slot, candidates, remaining, rng);
+  if (!rolled) return loadout; // nothing affordable/valid — leave it as it was
+  const item = slot === 'weapon' ? withPoison(rolled, rng) : rolled;
 
   const next: Loadout = { ...loadout, [slot]: item };
 

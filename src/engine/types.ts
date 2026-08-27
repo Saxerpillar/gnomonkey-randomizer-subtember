@@ -73,6 +73,16 @@ export interface Item {
   ammoMaxTier?: number;
   /** Weapons only: the ammo class this weapon needs to fire, if any. */
   requiredAmmo?: Exclude<AmmoClass, 'any'>;
+  /**
+   * Weapons only: poisoned versions of this exact weapon.
+   *
+   * They are riders rather than pool entries on purpose. A poisoned weapon is
+   * stat-identical to its clean version, so adding all 141 as separate items
+   * would inflate the dagger and spear families and change how often a dagger
+   * rolls at all. Instead the weapon is rolled at its normal odds and the
+   * poison is decided afterwards, by an independent draw.
+   */
+  poison?: ItemVariant[];
   /** GE price snapshot (midpoint). Absent for untradeables. */
   price?: number;
   /** Rarity tier (per-slot power percentile). */
@@ -85,6 +95,14 @@ export interface Item {
 }
 
 export type Loadout = Record<Slot, Item | null>;
+
+/** A cosmetic variant of an item: same stats and price, different label and
+ *  sprite. Poisoned weapons are the only ones so far. */
+export interface ItemVariant {
+  id: number;
+  name: string;
+  icon: string;
+}
 
 export interface RollSettings {
   /** Max total gp the ROLLED tradeable items may cost. null = no budget. */

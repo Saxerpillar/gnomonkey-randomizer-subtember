@@ -20,6 +20,24 @@ const OBJECTIVES: Record<string, ObjectiveSpec> = {
   'The Inferno': { label: (n) => `Complete wave ${n}`, min: 18, max: 69 },
 };
 
+/**
+ * What a boss's upgraded version is actually called. Every fight has its own
+ * word for it, and "HARD MODE" on Tombs of Amascut is simply wrong.
+ *
+ * Uppercase because the stamp has no text-transform — the caps are the string.
+ */
+const HARD_MODE_NAME: Record<string, string> = {
+  'Tombs of Amascut': 'EXPERT MODE',
+  // Chambers of Xeric is stored under its boss, Great Olm.
+  'Great Olm': 'CHALLENGE MODE',
+};
+
+export const hardModeLabel = (boss: { name: string; tags: string[] } | null): string => {
+  if (!boss) return 'HARD MODE';
+  // The Desert Treasure II bosses share one word for it.
+  return HARD_MODE_NAME[boss.name] ?? (boss.tags.includes('dt2') ? 'AWAKENED' : 'HARD MODE');
+};
+
 /** The scaled objective for this boss, or null when it's an ordinary kill. */
 export const bossObjective = (bossName: string, loadoutGp: number): string | null => {
   const spec = OBJECTIVES[bossName];
