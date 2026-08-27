@@ -92,8 +92,42 @@ const main = async () => {
     const cur = byName.get(e.name);
     if (!cur || rank(e.version) < rank(cur.version)) byName.set(e.name, e);
   }
-  const pool = [...byName.values()];
-  console.log(`  ${kept.length} after exclusions, ${pool.length} canonical items`);
+  // Crude combat-power composite: best attack bonus + best damage bonus +
+  // scaled defence + prayer. Only used RELATIVELY, per slot, to bucket items
+  // into rarity tiers — percentiles absorb the formula's crudeness.
+  // Weights: damage wins fights, so it carries the most; accuracy matters but
+  // less; defence is heavily discounted (its raw sums dwarf everything —
+  // Bandos chestplate totals 423 where the best damage bonus in the game is
+  // 75); prayer is slightly discounted. magic_str is stored as percent x10,
+  // so it is rescaled into melee-strength units (Occult 50 -> 10, level with
+  // Amulet of torture's +10 str) before being weighed as damage.
+  const MAGIC_SCALE = 5;
+  const powerOf = (e) => {
+    const damage = Math.max(
+      e.bonuses.str,
+      e.bonuses.ranged_str,
+      e.bonuses.magic_str / MAGIC_SCALE,
+      0,
+    );
+    return (
+      Math.max(...Object.values(e.offensive), 0) * 1.0 +
+      damage * 2.5 +
+      Object.values(e.defensive).reduce((a, b) => a + b, 0) * 0.08 +
+      Math.max(e.bonuses.prayer, 0) * 0.5
+    );
+  };
+
+  // Anything with no combat stats at all is not gear — a cosmetic cape with
+  // zero bonuses has no place in a gear randomiser, the same reasoning that
+  // drops skilling tools. Cutting them here also lets junk become a real
+  // low-power BAND rather than a synonym for "unstatted", which is what makes
+  // a target tier distribution reachable at all.
+  const canonical = [...byName.values()];
+  const pool = canonical.filter((e) => powerOf(e) > 0);
+  console.log(
+    `  ${kept.length} after exclusions, ${canonical.length} canonical, ` +
+      `${pool.length} with combat stats (${canonical.length - pool.length} stat-less dropped)`,
+  );
 
   // ---- 2. Prices ---------------------------------------------------------
   console.log('Fetching GE mapping + latest prices ...');
@@ -156,48 +190,33 @@ const main = async () => {
   };
 
   // ---- 4. App-facing equipment schema -----------------------------------
-  // Crude combat-power composite: best attack bonus + best damage bonus +
-  // scaled defence + prayer. Only used RELATIVELY, per slot, to bucket items
-  // into rarity tiers — percentiles absorb the formula's crudeness.
-  // Weights: damage wins fights, so it carries the most; accuracy matters but
-  // less; defence is heavily discounted (its raw sums dwarf everything —
-  // Bandos chestplate totals 423 where the best damage bonus in the game is
-  // 75); prayer is slightly discounted. magic_str is stored as percent x10,
-  // so it is rescaled into melee-strength units (Occult 50 -> 10, level with
-  // Amulet of torture's +10 str) before being weighed as damage.
-  const MAGIC_SCALE = 5;
-  const powerOf = (e) => {
-    const damage = Math.max(
-      e.bonuses.str,
-      e.bonuses.ranged_str,
-      e.bonuses.magic_str / MAGIC_SCALE,
-      0,
-    );
-    return (
-      Math.max(...Object.values(e.offensive), 0) * 1.0 +
-      damage * 2.5 +
-      Object.values(e.defensive).reduce((a, b) => a + b, 0) * 0.08 +
-      Math.max(e.bonuses.prayer, 0) * 0.5
-    );
-  };
+  /**
+   * Target share of each tier, within every slot. Every item in the pool now
+   * has combat stats, so these are pure percentile bands — an item is junk
+   * because it is in the weakest fifth of its slot, not because it has no
+   * stats at all.
+   *
+   * Ties are resolved by rank, so a run of identically-powered items can push
+   * a band's real share slightly off target; that is the "unless there are
+   * literal ties" case and it is why these are targets rather than guarantees.
+   */
+  const TIER_TARGET = { junk: 0.2, common: 0.35, decent: 0.2, strong: 0.15, elite: 0.1 };
+  const TIER_CUTS = (() => {
+    const order = ['junk', 'common', 'decent', 'strong', 'elite'];
+    let acc = 0;
+    return order.map((tier) => ({ tier, upto: (acc += TIER_TARGET[tier]) }));
+  })();
 
-  // Tier assignment: zero power = junk; the rest bucket by percentile WITHIN
-  // their slot (common 45% / decent 30% / strong 17% / elite top 8%).
   const tiers = new Map(); // id -> tier
   for (const slot of SLOTS) {
-    const slotItems = pool.filter((e) => e.slot === slot);
-    const scored = slotItems
+    const scored = pool
+      .filter((e) => e.slot === slot)
       .map((e) => ({ e, p: powerOf(e) }))
       .sort((a, b) => a.p - b.p);
-    const nonJunk = scored.filter((s) => s.p > 0);
-    for (const s of scored) {
-      if (s.p <= 0) {
-        tiers.set(s.e.id, 'junk');
-        continue;
-      }
-      const pct = nonJunk.findIndex((x) => x === s) / nonJunk.length;
-      tiers.set(s.e.id, pct < 0.45 ? 'common' : pct < 0.75 ? 'decent' : pct < 0.92 ? 'strong' : 'elite');
-    }
+    scored.forEach((s, i) => {
+      const pct = i / scored.length;
+      tiers.set(s.e.id, (TIER_CUTS.find((c) => pct < c.upto) ?? TIER_CUTS.at(-1)).tier);
+    });
   }
   // Manual fixes for passive-power items the stat formula can't see.
   for (const e of pool) {

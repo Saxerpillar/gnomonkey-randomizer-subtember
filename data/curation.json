@@ -36,7 +36,8 @@
       "\\(locked\\)",
       "^Corrupted ",
       "felling axe",
-      "^Dummy "
+      "^Dummy ",
+      "^3rd Age "
     ],
     "ids": [],
     "questOnlyNames": [
