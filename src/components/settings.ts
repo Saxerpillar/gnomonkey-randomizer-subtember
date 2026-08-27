@@ -26,6 +26,8 @@ export interface Settings {
   sporadicBosses: boolean;
   /** Pool tags excluded from the boss pool (gwd/dt2/raid/minigame/delve). */
   excludedPools: PoolTag[];
+  /** Individual bosses switched off by name, from the boss pool manager. */
+  excludedBosses: string[];
   /** Drop the white screen blowout from every stinger. The art and the boom
    *  still play — this only removes the part that hurts to look at. */
   removeFlashbangs: boolean;
@@ -55,6 +57,9 @@ export interface Settings {
   forceFlashbang: boolean;
   /** Always fire the GAMBA stinger on the first reveal (normally 2%, once per run). */
   forceGamba: boolean;
+  /** Show the "new version ready" prompt. It cannot appear on the dev server
+   *  otherwise — there is no hashed bundle to compare against. */
+  forceUpdatePrompt: boolean;
   /** Always show the AHHHH emote beside a hard-mode challenge (normally 50%). */
   forceHardModeEmote: boolean;
   /** Animation speed multiplier for the ceremony (1x / 2x / 4x). Not debug. */
@@ -119,6 +124,7 @@ export const DEFAULT_SETTINGS: Settings = {
   slayerBosses: false,
   sporadicBosses: false,
   excludedPools: [],
+  excludedBosses: [],
   removeFlashbangs: false,
   volume: 1,
   tierFloors: {},
@@ -130,6 +136,7 @@ export const DEFAULT_SETTINGS: Settings = {
   ignoreBudget: false,
   forceFlashbang: false,
   forceGamba: false,
+  forceUpdatePrompt: false,
   forceHardModeEmote: false,
   ceremonySpeed: 1,
 };
@@ -170,19 +177,33 @@ export const applyForceBoss = (bosses: readonly Boss[], force: ForceBoss): Boss[
 
 /** Applies every pool toggle to the boss list; used by both the roll and the
  *  DECIDE-ready check so the two can never disagree. */
+/**
+ * Why a group-level toggle is keeping this boss out, or null if none is.
+ *
+ * Returned as a reason rather than a boolean so the pool manager can say WHICH
+ * setting is responsible — a boss ticked on in the manager but silently held
+ * out by "Slayer bosses off" is the most confusing state this UI can produce.
+ * `filterBossPool` uses the same helper, so the explanation can never drift
+ * from the actual rule.
+ */
+export const blockedByGroupRule = (boss: Boss, settings: Settings): string | null => {
+  if (settings.excludeWildy && boss.tags.includes('wildy')) return 'Wilderness excluded';
+  if (!settings.slayerBosses && boss.tags.includes('slayer')) return 'Slayer bosses off';
+  if (!settings.sporadicBosses && boss.tags.includes('sporadic')) return 'Sporadic bosses off';
+  for (const p of settings.excludedPools) {
+    if (boss.tags.includes(p)) return `${POOL_LABEL[p]} off`;
+  }
+  return null;
+};
+
 export const filterBossPool = (bosses: readonly Boss[], settings: Settings): Boss[] => {
   // Debug forcing bypasses the normal pool toggles: if you asked for gauntlets,
   // a "slayer bosses off" toggle should not empty the pool.
   if (settings.debugMode && settings.forceBoss !== 'off') {
     return applyForceBoss(bosses, settings.forceBoss);
   }
-  return bosses.filter((b) => {
-    if (settings.excludeWildy && b.tags.includes('wildy')) return false;
-    if (!settings.slayerBosses && b.tags.includes('slayer')) return false;
-    if (!settings.sporadicBosses && b.tags.includes('sporadic')) return false;
-    for (const p of settings.excludedPools) {
-      if (b.tags.includes(p)) return false;
-    }
-    return true;
-  });
+  return bosses.filter(
+    (b) => !settings.excludedBosses.includes(b.name) && !blockedByGroupRule(b, settings),
+  );
 };
+

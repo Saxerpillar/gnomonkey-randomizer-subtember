@@ -1,0 +1,54 @@
+.prompt {
+  position: fixed;
+  left: 18px;
+  bottom: 14px;
+  /* Same band as the watermark: above the reveal overlay, below the stingers. */
+  z-index: 350;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-body);
+  font-size: 19px;
+  color: var(--text);
+  background: linear-gradient(var(--panel-raised), var(--panel));
+  border: 1px solid var(--gold);
+  outline: 1px solid var(--border-dark);
+  border-radius: 4px;
+  padding: 8px 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  text-shadow: var(--text-outline);
+}
+
+.prompt:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold-bright);
+}
+
+/* A slow pulse, not a flash — this should be noticeable between runs without
+   competing with anything on screen. */
+.dot {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green-glow);
+  animation: updatePulse 2s ease-in-out infinite;
+}
+
+@keyframes updatePulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    animation: none;
+  }
+}

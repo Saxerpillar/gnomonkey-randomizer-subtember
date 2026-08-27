@@ -650,37 +650,6 @@
   }
  },
  {
-  "id": 28226,
-  "name": "3rd Age felling axe",
-  "slot": "weapon",
-  "icon": "28226.png",
-  "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "strong",
-  "speed": 7,
-  "offensive": {
-   "stab": -3,
-   "slash": 60,
-   "crush": 51,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 67,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 10350,
   "name": "3rd Age full helmet",
   "slot": "head",
@@ -2099,37 +2068,6 @@
   },
   "bonuses": {
    "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28211,
-  "name": "Adamant felling axe",
-  "slot": "weapon",
-  "icon": "28211.png",
-  "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "decent",
-  "speed": 7,
-  "offensive": {
-   "stab": -3,
-   "slash": 27,
-   "crush": 24,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 30,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -13229,37 +13167,6 @@
   }
  },
  {
-  "id": 28205,
-  "name": "Black felling axe",
-  "slot": "weapon",
-  "icon": "28205.png",
-  "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "common",
-  "speed": 7,
-  "offensive": {
-   "stab": -2,
-   "slash": 10,
-   "crush": 8,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 12,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 2476,
   "name": "Black flowers",
   "slot": "weapon",
@@ -15454,7 +15361,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Slash Sword",
-  "tier": "elite",
+  "tier": "strong",
   "speed": 4,
   "offensive": {
    "stab": 55,
@@ -20283,37 +20190,6 @@
   },
   "bonuses": {
    "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28196,
-  "name": "Bronze felling axe",
-  "slot": "weapon",
-  "icon": "28196.png",
-  "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "common",
-  "speed": 7,
-  "offensive": {
-   "stab": -3,
-   "slash": 6,
-   "crush": 3,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 8,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -31153,38 +31029,6 @@
   }
  },
  {
-  "id": 28220,
-  "name": "Crystal felling axe",
-  "version": "Active",
-  "slot": "weapon",
-  "icon": "28220.png",
-  "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "strong",
-  "speed": 7,
-  "offensive": {
-   "stab": -3,
-   "slash": 60,
-   "crush": 51,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 67,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 31760,
   "name": "Crystal glider's hat",
   "slot": "head",
@@ -36860,7 +36704,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Polestaff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 40,
@@ -37280,37 +37124,6 @@
   },
   "bonuses": {
    "str": 6,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28217,
-  "name": "Dragon felling axe",
-  "slot": "weapon",
-  "icon": "28217.png",
-  "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "strong",
-  "speed": 7,
-  "offensive": {
-   "stab": -3,
-   "slash": 60,
-   "crush": 51,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 67,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -39588,37 +39401,6 @@
   },
   "bonuses": {
    "str": 14,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 33644,
-  "name": "Dummy stymphike feather",
-  "slot": "weapon",
-  "icon": "33644.png",
-  "tradeable": true,
-  "twoHanded": false,
-  "category": "Blunt",
-  "tier": "junk",
-  "speed": 3,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -56282,37 +56064,6 @@
   }
  },
  {
-  "id": 28199,
-  "name": "Iron felling axe",
-  "slot": "weapon",
-  "icon": "28199.png",
-  "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "common",
-  "speed": 7,
-  "offensive": {
-   "stab": -3,
-   "slash": 8,
-   "crush": 4,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 11,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 2533,
   "name": "Iron fire arrow",
   "version": "Lit",
@@ -63493,37 +63244,6 @@
   },
   "bonuses": {
    "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28208,
-  "name": "Mithril felling axe",
-  "slot": "weapon",
-  "icon": "28208.png",
-  "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "common",
-  "speed": 7,
-  "offensive": {
-   "stab": -3,
-   "slash": 19,
-   "crush": 16,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 20,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -78004,37 +77724,6 @@
   }
  },
  {
-  "id": 28214,
-  "name": "Rune felling axe",
-  "slot": "weapon",
-  "icon": "28214.png",
-  "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "decent",
-  "speed": 7,
-  "offensive": {
-   "stab": -3,
-   "slash": 41,
-   "crush": 38,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 46,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 2541,
   "name": "Rune fire arrow",
   "version": "Lit",
@@ -89838,37 +89527,6 @@
   },
   "bonuses": {
    "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28202,
-  "name": "Steel felling axe",
-  "slot": "weapon",
-  "icon": "28202.png",
-  "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "common",
-  "speed": 7,
-  "offensive": {
-   "stab": -3,
-   "slash": 12,
-   "crush": 9,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 14,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0

@@ -25,10 +25,12 @@ export const CHALLENGES = [
   "Don't fall below 90 HP",
   "Don't go above 10 HP",
   'No movement allowed',
-  '10 tile budget',
+  'Static camera angle and zoom',
   'No F-keys',
   'Fullscreen & Stretched Mode disabled',
   'Entity Hider > Hide Attacker',
+  // The one challenge the stream itself decides.
+  'First chatter to gift 10 subs chooses',
 ] as const;
 
 /**
@@ -112,3 +114,4 @@ export const rollChallenge = (
   ];
   return pick(rng, options);
 };
+

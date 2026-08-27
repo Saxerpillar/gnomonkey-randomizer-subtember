@@ -256,6 +256,37 @@
   color: var(--text-muted);
 }
 
+/* Opens the per-boss pool manager. Styled as a button rather than a toggle
+   because it leads somewhere instead of setting something. */
+.manage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 19px;
+  color: var(--text);
+  background: var(--tile);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 7px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.manage:hover {
+  background: var(--tile-hover);
+  color: var(--gold-bright);
+}
+
+/* Only rendered when something is switched off, so the row stays quiet until
+   there is actually a reason to look at it. */
+.manageCount {
+  margin-left: auto;
+  font-family: var(--font-small);
+  font-size: 14px;
+  color: var(--orange);
+}
+
 /* Tier floors: one grouped block, because the counters share a single pool of
    slots and reading them apart would hide that. */
 .floors {

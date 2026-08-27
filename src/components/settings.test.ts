@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   DEFAULT_SETTINGS,
   effectiveBudget,
+  blockedByGroupRule,
   filterBossPool,
   WILDY_DEFAULT_GP,
   type Settings,
@@ -58,5 +59,64 @@ describe('effectiveBudget', () => {
 
   it('never lets the wildy allowance fall below the 1m default', () => {
     expect(effectiveBudget(384 * M, 50_000, true)).toBe(WILDY_DEFAULT_GP);
+  });
+});
+
+describe('individual boss exclusions', () => {
+  const pool = [boss('Zulrah', ['mid']), boss('Vorkath', ['mid']), boss('Hespori', ['easy'])];
+
+  it('drops a boss switched off by name', () => {
+    const out = filterBossPool(pool, withPool({ excludedBosses: ['Vorkath'] }));
+    expect(out.map((b) => b.name)).toEqual(['Zulrah', 'Hespori']);
+  });
+
+  it('can empty the pool entirely, which the DECIDE gate then catches', () => {
+    const out = filterBossPool(pool, withPool({ excludedBosses: pool.map((b) => b.name) }));
+    expect(out).toEqual([]);
+  });
+
+  it('composes with the group toggles rather than overriding them', () => {
+    // Ticked on individually, still held out by "slayer bosses off".
+    const slayer = [boss('Kraken', ['slayer'])];
+    expect(filterBossPool(slayer, withPool({ excludedBosses: [] }))).toEqual([]);
+  });
+
+  it('is bypassed by debug force-boss, like every other pool rule', () => {
+    const raid = [boss('Chambers', ['raid'])];
+    const out = filterBossPool(
+      raid,
+      withPool({ debugMode: true, forceBoss: 'raid', excludedBosses: ['Chambers'] }),
+    );
+    expect(out.map((b) => b.name)).toEqual(['Chambers']);
+  });
+});
+
+describe('blockedByGroupRule', () => {
+  it('names the setting responsible, so the pool manager can explain itself', () => {
+    expect(blockedByGroupRule(boss('K', ['slayer']), withPool({}))).toBe('Slayer bosses off');
+    expect(blockedByGroupRule(boss('H', ['sporadic']), withPool({}))).toBe('Sporadic bosses off');
+    expect(blockedByGroupRule(boss('S', ['wildy']), withPool({ excludeWildy: true }))).toBe(
+      'Wilderness excluded',
+    );
+    expect(blockedByGroupRule(boss('C', ['raid']), withPool({ excludedPools: ['raid'] }))).toBe(
+      'Include Raids off',
+    );
+  });
+
+  it('returns null when nothing is holding the boss out', () => {
+    expect(blockedByGroupRule(boss('Zulrah', ['mid']), withPool({}))).toBeNull();
+  });
+
+  it('agrees with filterBossPool — the UI reason cannot drift from the rule', () => {
+    const pool = [
+      boss('a', ['slayer']),
+      boss('b', ['sporadic']),
+      boss('c', ['wildy']),
+      boss('d', ['mid']),
+    ];
+    const settings = withPool({ excludeWildy: true });
+    const kept = filterBossPool(pool, settings).map((b) => b.name);
+    const unblocked = pool.filter((b) => !blockedByGroupRule(b, settings)).map((b) => b.name);
+    expect(kept).toEqual(unblocked);
   });
 });

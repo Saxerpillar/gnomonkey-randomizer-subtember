@@ -1,0 +1,171 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  /* Above the Settings panel (50), which stays open behind it. */
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: rgba(8, 6, 4, 0.72);
+  padding: 24px;
+}
+
+.panel {
+  width: 100%;
+  max-width: 520px;
+  /* 55 bosses will not fit any window, so this list scrolls — the same
+     deliberate exception the Settings dialog makes. */
+  max-height: calc(100dvh - 48px);
+  min-height: 0;
+}
+
+/* RsPanel's padded body has to be a flex column for the list below to be a
+   shrinkable flex item; a percentage max-height would not resolve there. */
+.panelBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) transparent;
+}
+
+.body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 5px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Sticks so you always know which difficulty you are scrolled into. */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 4px 0;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.groupTitle {
+  flex: 1;
+  font-family: var(--font-bold);
+  font-size: 20px;
+  color: var(--orange);
+  text-shadow: var(--text-outline);
+}
+
+.groupCount {
+  font-family: var(--font-small);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.bulk {
+  flex: none;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--tile);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+.bulk:hover {
+  background: var(--tile-hover);
+  color: var(--gold-bright);
+}
+
+.boss {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1px 0 1px 4px;
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.boss input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Same stone box as the Settings toggles: red cross off, green check on. */
+.checkbox {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  background: linear-gradient(var(--tile), var(--panel));
+  border: 1px solid var(--border-light);
+  outline: 1px solid var(--border-dark);
+  border-radius: 3px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.55);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.checkbox::after {
+  content: '✗';
+  color: var(--red);
+  text-shadow: 1px 1px 0 #000;
+}
+
+.boss input:checked ~ .checkbox::after {
+  content: '✓';
+  color: var(--green);
+}
+
+.boss:hover .checkbox {
+  filter: brightness(1.2);
+}
+
+.bossName {
+  flex: 1;
+}
+
+/* Ticked here but held out by a group toggle elsewhere. Says which one, so the
+   row explains itself rather than looking broken. */
+.blocked {
+  flex: none;
+  font-family: var(--font-small);
+  font-size: 13px;
+  color: var(--red);
+  text-shadow: var(--text-outline);
+}

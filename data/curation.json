@@ -34,7 +34,9 @@
       "\\(beta\\)",
       "\\(broken\\)",
       "\\(locked\\)",
-      "^Corrupted "
+      "^Corrupted ",
+      "felling axe",
+      "^Dummy "
     ],
     "ids": [],
     "questOnlyNames": [

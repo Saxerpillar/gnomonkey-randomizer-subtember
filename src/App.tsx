@@ -6,6 +6,8 @@ import { EmoteScatter } from './components/EmoteScatter';
 import { FitScreen } from './components/FitScreen';
 import { TitleBanner } from './components/TitleBanner';
 import { StingerProvider, useStinger } from './components/StingerHost';
+import { UpdatePrompt } from './components/UpdatePrompt';
+import { useDeployWatch } from './components/useDeployWatch';
 import { usePreloadAssets } from './components/usePreloadAssets';
 import { Watermark } from './components/Watermark';
 import {
@@ -43,6 +45,7 @@ import {
   type Style,
 } from './engine/roll';
 import { rollSpell, type Spell } from './engine/spell';
+import { sortSquadByStyle } from './engine/squadSort';
 import { emptyLoadout, SLOTS, type Item, type Loadout, type Slot } from './engine/types';
 import { GpValue } from './theme/GpValue';
 import { RsButton } from './theme/RsButton';
@@ -193,6 +196,7 @@ const Main = () => {
   // Warm every reel asset while the pre-roll screen is idle, so nothing pops
   // in mid-reveal.
   usePreloadAssets(items, bosses);
+  const updateReady = useDeployWatch();
 
   // The audio layer keeps the master level in a module, so it applies to sounds
   // fired from timers and effects that never see the settings object.
@@ -439,12 +443,16 @@ const Main = () => {
 
     // Raids send a team: one style-forced setup each for melee, ranged, magic.
     const isRaid = boss.tags.includes('raid');
+    // Each lane rolls independently, then the team's gear is dealt back out so
+    // the pieces land on the setup they suit — before anything is revealed.
     const squad =
       isRaid && !isGauntlet
-        ? (['melee', 'ranged', 'magic'] as const).map((style) => ({
-            style,
-            loadout: rollForStyle(rollPool, style, rollSettings, mulberry32(randomSeed())),
-          }))
+        ? sortSquadByStyle(
+            (['melee', 'ranged', 'magic'] as const).map((style) => ({
+              style,
+              loadout: rollForStyle(rollPool, style, rollSettings, mulberry32(randomSeed())),
+            })),
+          )
         : null;
 
     // Preload the winners so the reveal isn't gated on image load latency.
@@ -518,9 +526,13 @@ const Main = () => {
         </FitScreen>
         {/* Fixed overlays live outside FitScreen: inside a scaled element they
             would anchor to it rather than to the viewport. */}
+        {(updateReady || (state.settings.debugMode && state.settings.forceUpdatePrompt)) && (
+          <UpdatePrompt />
+        )}
         {settingsOpen && (
           <SettingsPanel
             settings={state.settings}
+            bosses={bosses}
             onChange={(patch) => dispatch({ type: 'SET_SETTINGS', patch })}
             onClose={() => setSettingsOpen(false)}
           />
@@ -805,3 +817,7 @@ const App = () => (
 );
 
 export default App;
+
+
+
+

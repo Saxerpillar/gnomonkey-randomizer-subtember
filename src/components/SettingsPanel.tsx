@@ -17,6 +17,8 @@ import {
   type Settings,
 } from './settings';
 import { CORE_SLOTS, TIERS, type Tier } from '../engine/types';
+import { BossPoolPanel } from './BossPoolPanel';
+import type { Boss } from './DataProvider';
 import styles from './SettingsPanel.module.css';
 
 /** Sentinel for the "as fast as possible" end of the animation-speed scale. */
@@ -182,13 +184,19 @@ const Toggle = ({
  *  the challenge/presentation toggles. Persisted through App's reducer. */
 export const SettingsPanel = ({
   settings,
+  bosses,
   onChange,
   onClose,
 }: {
   settings: Settings;
+  bosses: readonly Boss[];
   onChange: (patch: Partial<Settings>) => void;
   onClose: () => void;
-}) => (
+}) => {
+  // The pool manager opens over the top of Settings rather than replacing it,
+  // so closing it puts you back exactly where you were.
+  const [managingPool, setManagingPool] = useState(false);
+  return (
   <div className={styles.backdrop} onClick={(e) => e.target === e.currentTarget && onClose()}>
     <RsPanel title="Settings" className={styles.panel} bodyClassName={styles.panelBody}>
       <div className={styles.body}>
@@ -236,6 +244,16 @@ export const SettingsPanel = ({
             }}
           />
         ))}
+        <button
+          type="button"
+          className={styles.manage}
+          onClick={() => setManagingPool(true)}
+        >
+          Manage boss pool
+          {settings.excludedBosses.length > 0 && (
+            <span className={styles.manageCount}>{settings.excludedBosses.length} off</span>
+          )}
+        </button>
         <Toggle
           label="Mute sounds"
           checked={settings.muteSounds}
@@ -315,6 +333,11 @@ export const SettingsPanel = ({
               onChange={(v) => onChange({ forceGamba: v })}
             />
             <Toggle
+              label="Show update prompt"
+              checked={settings.forceUpdatePrompt}
+              onChange={(v) => onChange({ forceUpdatePrompt: v })}
+            />
+            <Toggle
               label="Always AHHHH emote"
               checked={settings.forceHardModeEmote}
               onChange={(v) => onChange({ forceHardModeEmote: v })}
@@ -326,6 +349,17 @@ export const SettingsPanel = ({
         </RsButton>
       </div>
     </RsPanel>
+    {managingPool && (
+      <BossPoolPanel
+        bosses={bosses}
+        settings={settings}
+        onChange={onChange}
+        onClose={() => setManagingPool(false)}
+      />
+    )}
   </div>
-);
+  );
+};
+
+
 
