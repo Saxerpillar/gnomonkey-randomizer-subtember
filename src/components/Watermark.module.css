@@ -40,3 +40,15 @@
   image-rendering: auto;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
 }
+
+/* Asset credit. Deliberately quiet next to the 42px line above — it is a
+   credit, not a second title — but not so faint it stops being readable on
+   stream, which would defeat the point of crediting anyone. */
+.credit {
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1;
+  color: var(--text-muted);
+  text-shadow: var(--text-outline);
+  white-space: nowrap;
+}

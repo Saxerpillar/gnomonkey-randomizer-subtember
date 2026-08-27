@@ -13,12 +13,14 @@ import styles from './Watermark.module.css';
  * below the stingers, which are entitled to own the screen for their 2.5s.
  *
  * If the sprite is missing the text still stands on its own — a broken-image
- * icon in the corner of a stream would be worse than no sprite at all.
+ * icon in the corner of a stream would be worse than no sprite at all. The
+ * asset credit is plain text for the same reason: it must survive whatever
+ * happens to the artwork around it.
  */
 export const Watermark = () => {
   const [spriteOk, setSpriteOk] = useState(true);
   return (
-    <div className={styles.mark} aria-label="Made with love">
+    <div className={styles.mark} aria-label="Made with love. Assets by chunkyatlas.">
       <span className={styles.text}>Made with love</span>
       {spriteOk && (
         <img
@@ -30,6 +32,7 @@ export const Watermark = () => {
           onError={() => setSpriteOk(false)}
         />
       )}
+      <span className={styles.credit}>Assets by chunkyatlas</span>
     </div>
   );
 };
