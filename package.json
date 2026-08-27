@@ -9,7 +9,8 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "vitest run",
-    "refresh-data": "node scripts/refresh-data.mjs"
+    "refresh-data": "node scripts/refresh-data.mjs",
+    "refresh-emotes": "node scripts/refresh-emotes.mjs"
   },
   "dependencies": {
     "react": "^19.2.7",
