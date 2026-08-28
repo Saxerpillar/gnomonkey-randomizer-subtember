@@ -7,8 +7,17 @@
   width: 100%;
 }
 
-/* Pinned to the corner so it is always the same place and never shifts the
-   board below it. Solid like the app's other buttons, not a ghost link. */
+/* The two-row title: the NUZLOCKE wordmark above, the X/total readout under it,
+   both centered. */
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Corner-pinned so it is always the same place and never overlaps the centered
+   two rows. Solid like the app's other buttons, not a ghost link. */
 .reset {
   position: absolute;
   top: 0;
@@ -44,6 +53,11 @@
   letter-spacing: 4px;
   color: var(--red);
   text-shadow: var(--text-outline);
+}
+
+/* The header turns green once the whole pool is cleared. */
+.tagDone {
+  color: var(--green);
 }
 
 .counter {
@@ -157,14 +171,6 @@
 
 .uncompleted .mark {
   color: var(--red);
-}
-
-.cleared {
-  font-family: var(--font-body);
-  font-size: 17px;
-  color: var(--orange);
-  text-shadow: var(--text-outline);
-  margin: 0;
 }
 
 .controls {

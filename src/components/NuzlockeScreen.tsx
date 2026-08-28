@@ -48,29 +48,33 @@ export const NuzlockeScreen = ({
   onOpenHistory: () => void;
 }) => {
   const pool = filterBossPool(bosses, settings);
-  // Alphabetical by the boss's CURRENT name — a rename (Great Olm ->
-  // Chambers of Xeric) must move the tile with it, not leave it in its old
-  // data-file position.
+  // Alphabetical by the boss's CURRENT name (a rename, e.g. Great Olm to
+  // Chambers of Xeric, must move the tile with it, not leave it in its old
+  // data-file position).
   const sortedPool = [...pool].sort((a, b) => a.name.localeCompare(b.name));
   const total = pool.length;
   const available = availableBosses(pool, bossStates).length;
   const cleared = available === 0;
+  const clearedCount = pool.filter((b) => bossStates[b.name] === 'completed').length;
   const pct = Math.round(settings.nuzlockeRepeat * 100);
   return (
     <div className={styles.screen}>
-      {/* Pinned top-right so it never moves the board, and always rendered —
-          the only condition for it being here is the Nuzlocke screen itself. */}
+      {/* Corner-pinned, so it can never sit on the centered two-row title. */}
       <button type="button" className={styles.reset} data-solid="" onClick={onReset}>
         Reset nuzlocke
       </button>
-      <header className={styles.header} data-solid="strict">
-        <span className={styles.tag}>Nuzlocke</span>
+      <div className={styles.head} data-solid="strict">
+        <span className={`${styles.tag} ${cleared ? styles.tagDone : ''}`}>
+          {cleared ? 'Nuzlocke completed!' : 'Nuzlocke'}
+        </span>
         <div className={styles.counter}>
-          <span className={styles.counterNum}>{available}</span>
-          <span className={styles.counterDen}>/ {cleared ? 0 : total}</span>
-          <span className={styles.counterLabel}>bosses left</span>
+          <span className={styles.counterNum}>{cleared ? clearedCount : available}</span>
+          <span className={styles.counterDen}>/ {total}</span>
+          <span className={styles.counterLabel}>
+            {cleared ? 'bosses cleared' : 'bosses left'}
+          </span>
         </div>
-      </header>
+      </div>
       <div className={styles.board} data-solid="strict">
         {sortedPool.map((b) => {
           const state = bossStates[b.name];
@@ -78,16 +82,14 @@ export const NuzlockeScreen = ({
             <RsTooltip
               key={b.name}
               content={
-                state == null
-                  ? b.name
-                  : `${b.name} — ${state === 'completed' ? 'completed' : 'uncompleted'}`
+                state == null ? b.name : `${b.name} (${state === 'completed' ? 'completed' : 'uncompleted'})`
               }
               className={styles.cellWrap}
             >
               <div
                 className={`${styles.cell} ${state != null ? styles[state] : ''}`}
                 role="button"
-                aria-label={`${b.name} — ${state ?? 'not rolled'}`}
+                aria-label={`${b.name} (${state ?? 'not rolled'})`}
                 onClick={() => onCycleBoss(b.name)}
               >
                 <img src={asset(`img/bosses/${b.image}`)} alt="" draggable={false} />
@@ -103,12 +105,9 @@ export const NuzlockeScreen = ({
           );
         })}
       </div>
-      {cleared && (
-        <p className={styles.cleared}>The whole pool is cleared — the next roll starts it over.</p>
-      )}
       <div className={styles.controls}>
         <label className={styles.sliderField}>
-          <span className={styles.sliderLabel}>Repeat a boss</span>
+          <span className={styles.sliderLabel}>Chance to get repeats:</span>
           <input
             className={styles.slider}
             type="range"
