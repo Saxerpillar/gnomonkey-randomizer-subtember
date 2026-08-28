@@ -103,14 +103,10 @@ const Choice = <T extends string>({
  */
 const TierFloors = ({
   floors,
-  allowUntradeables,
-  onToggleUntradeables,
   onChange,
   disabled = false,
 }: {
   floors: Partial<Record<Tier, number>>;
-  allowUntradeables: boolean;
-  onToggleUntradeables: (v: boolean) => void;
   onChange: (floors: Partial<Record<Tier, number>>) => void;
   disabled?: boolean;
 }) => {
@@ -148,9 +144,12 @@ const TierFloors = ({
                 >
                   −
                 </button>
-                {/* 0 reads as "Random": the tier is left entirely to chance. */}
-                <span className={`${styles.floorCount} ${n === 0 ? styles.floorRandom : ''}`}>
-                  {n === 0 ? 'Random' : n}
+                {/* 0 reads as "Random" for the upper tiers; junk's default 0
+                    stays a plain 0. */}
+                <span
+                  className={`${styles.floorCount} ${n === 0 && tier !== 'junk' ? styles.floorRandom : ''}`}
+                >
+                  {n === 0 && tier !== 'junk' ? 'Random' : n}
                 </span>
                 <button
                   type="button"
@@ -167,14 +166,6 @@ const TierFloors = ({
           <span className={styles.floorsFree}>
             {free} of {CORE_SLOTS.length} slots left to chance
           </span>
-          <div className={styles.floorsUntradeables}>
-            <Toggle
-              label="Allow untradeables"
-              checked={allowUntradeables}
-              onChange={onToggleUntradeables}
-              disabled={disabled}
-            />
-          </div>
         </div>
       )}
     </div>
@@ -301,8 +292,6 @@ export const SettingsPanel = ({
         />
         <TierFloors
           floors={settings.tierFloors}
-          allowUntradeables={settings.allowUntradeables}
-          onToggleUntradeables={(v) => onChange({ allowUntradeables: v })}
           onChange={(f) => onChange({ tierFloors: f })}
           disabled={nuzlockeLocked}
         />

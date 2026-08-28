@@ -69,20 +69,6 @@ describe('generated equipment.json', () => {
     }
   });
 
-  it('every weapon that needs ammo has a compatible ammo class in the pool', () => {
-    // Guards the atlatl-dart case: zero-stat ammo gets dropped by the refresh
-    // unless it is on the curated keep list, which would starve the Eclipse
-    // atlatl (and any launcher) of ammo entirely.
-    const ammoClasses = new Set(
-      items.filter((i) => i.slot === 'ammo').map((i) => i.ammoClass as string),
-    );
-    for (const i of items) {
-      if (i.slot === 'weapon' && i.requiredAmmo !== undefined) {
-        expect(ammoClasses.has(i.requiredAmmo as string), i.name as string).toBe(true);
-      }
-    }
-  });
-
   it('weapon-exclusive ammo classes are stamped ammoExclusive', () => {
     const exclusive = new Set(['atlatl', 'tar', 'kebbit', 'antler', 'boltrack', 'bone', 'ogre', 'javelin']);
     for (const i of items) {

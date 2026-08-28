@@ -101,15 +101,15 @@ export const NuzlockeScreen = ({
       if (w === lastWidth.current) return;
       lastWidth.current = w;
       const tiles = Array.from(el.querySelectorAll<HTMLElement>('[data-tile]'));
-      // Card width drives the art size: 84px cards keep the base 46px icon,
+      // Card width drives the art size: 100px cards keep the base 46px icon,
       // growing toward the cap as the pool thins out. Scale FIRST so the
       // height pass below measures the content at its final size.
       const cardW = tiles.length > 0 ? tiles[0].offsetWidth : 0;
       const imgSize = cardW
-        ? Math.min(92, Math.max(46, 46 + Math.round((cardW - 84) * 0.7)))
+        ? Math.min(92, Math.max(46, 46 + Math.round((cardW - 100) * 0.8)))
         : 46;
       const nameSize = cardW
-        ? Math.min(17, Math.max(14, 14 + Math.round((cardW - 84) * 0.045)))
+        ? Math.min(17, Math.max(14, 14 + Math.round((cardW - 100) * 0.05)))
         : 14;
       for (const t of tiles) {
         t.style.height = '';

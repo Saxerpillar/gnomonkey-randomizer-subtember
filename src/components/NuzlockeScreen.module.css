@@ -164,14 +164,15 @@
 
 /* Every available boss as a card, like the boss pool's icon view: the portrait
    with the name under it. auto-fit lets a thinning pool widen the cards up to
-   the 150px cap (the art scales with them in the layout effect). */
+   the cap (the art scales with them in the layout effect); the cap is sized so
+   a row can still fit eight entries. */
 .board {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(84px, 150px));
+  grid-template-columns: repeat(auto-fit, minmax(100px, 132px));
   justify-content: center;
   gap: 6px;
   width: 100%;
-  max-width: 880px;
+  max-width: 1100px;
 }
 
 .cellWrap {

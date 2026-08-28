@@ -7,6 +7,7 @@ import { difficultyOf, type Difficulty } from './challenges';
 import type { Boss } from './DataProvider';
 import {
   blockedByGroupRule,
+  POOL_TAGS,
   type PoolTag,
   type Settings,
 } from './settings';
@@ -18,8 +19,11 @@ const GROUPS: { key: Difficulty; label: string }[] = [
   { key: 'hard', label: 'Hard' },
 ];
 
-/** The group-level toggles that shape the pool, shown above the bosses. */
-const GROUP_TOGGLES: { key: 'wildy' | 'slayer' | 'sporadic' | PoolTag; label: string }[] = [
+type GroupKey = 'wildy' | 'slayer' | 'sporadic' | PoolTag | 'other';
+
+/** The group-level toggles that shape the pool, shown above the bosses.
+ *  "Other" covers every boss not in any of the tagged categories. */
+const GROUP_TOGGLES: { key: GroupKey; label: string }[] = [
   { key: 'wildy', label: 'Wilderness' },
   { key: 'slayer', label: 'Slayer' },
   { key: 'sporadic', label: 'Sporadic' },
@@ -28,7 +32,16 @@ const GROUP_TOGGLES: { key: 'wildy' | 'slayer' | 'sporadic' | PoolTag; label: st
   { key: 'raid', label: 'Raids' },
   { key: 'minigame', label: 'Wave-based' },
   { key: 'quest', label: 'Quest' },
+  { key: 'other', label: 'Other' },
 ];
+
+/** The tags the named categories cover; "other" is the complement. */
+const GROUP_TAGS = ['wildy', 'slayer', 'sporadic', ...POOL_TAGS];
+
+const inCategory = (key: GroupKey, boss: Boss): boolean =>
+  key === 'other'
+    ? !GROUP_TAGS.some((t) => boss.tags.includes(t))
+    : boss.tags.includes(key);
 
 /** Whether a boss can roll its hard-mode variant (its "Hard mode" button). */
 const hardModeEligible = (boss: Boss, settings: Settings): boolean =>
@@ -69,6 +82,8 @@ export const BossPoolPanel = ({
   onClose: () => void;
 }) => {
   const [view, setView] = useState<'list' | 'icons'>('list');
+  /** Collapsed difficulty groups in list view. */
+  const [collapsed, setCollapsed] = useState<Partial<Record<Difficulty, boolean>>>({});
   const excluded = new Set(settings.excludedBosses);
 
   // Icon view: names wrap to different line counts, which would give cards
@@ -118,33 +133,39 @@ export const BossPoolPanel = ({
     setExcluded(next);
   };
 
-  const groupOn = (key: (typeof GROUP_TOGGLES)[number]['key']): boolean => {
-    switch (key) {
-      case 'wildy':
-        return !settings.excludeWildy;
-      case 'slayer':
-        return settings.slayerBosses;
-      case 'sporadic':
-        return settings.sporadicBosses;
-      default:
-        return !settings.excludedPools.includes(key as PoolTag);
-    }
+  /**
+   * The category chip's live state, derived from its bosses' actual
+   * availability (individual exclusions + group rules): all on (green), some
+   * on (yellow) or none on (red).
+   */
+  const categoryState = (key: GroupKey): { on: number; total: number } => {
+    const group = bosses.filter((b) => inCategory(key, b));
+    const on = group.filter((b) => !excluded.has(b.name) && !blockedByGroupRule(b, settings))
+      .length;
+    return { on, total: group.length };
   };
 
-  const toggleGroup = (key: (typeof GROUP_TOGGLES)[number]['key'], on: boolean) => {
-    switch (key) {
-      case 'wildy':
-        return onChange({ excludeWildy: !on });
-      case 'slayer':
-        return onChange({ slayerBosses: on });
-      case 'sporadic':
-        return onChange({ sporadicBosses: on });
-      default: {
-        const excludedPools = settings.excludedPools.filter((p) => p !== key);
-        if (!on) excludedPools.push(key as PoolTag);
-        return onChange({ excludedPools });
-      }
+  const toggleGroup = (key: GroupKey, on: boolean) => {
+    // The category chip does BOTH: it flips the group setting AND toggles
+    // every boss in that category on/off individually, so the click actually
+    // moves the bosses rather than just red-listing them. "Other" has no group
+    // setting of its own — only the individual toggles.
+    const excludedBosses = new Set(settings.excludedBosses);
+    for (const b of bosses) {
+      if (!inCategory(key, b)) continue;
+      if (on) excludedBosses.delete(b.name);
+      else excludedBosses.add(b.name);
     }
+    const patch: Partial<Settings> = { excludedBosses: [...excludedBosses] };
+    if (key === 'wildy') patch.excludeWildy = !on;
+    else if (key === 'slayer') patch.slayerBosses = on;
+    else if (key === 'sporadic') patch.sporadicBosses = on;
+    else if (key !== 'other') {
+      const excludedPools = settings.excludedPools.filter((p) => p !== key);
+      if (!on) excludedPools.push(key as PoolTag);
+      patch.excludedPools = excludedPools;
+    }
+    onChange(patch);
   };
 
   const toggleHardMode = (name: string) => {
@@ -234,16 +255,28 @@ export const BossPoolPanel = ({
             </div>
             <div className={styles.groupToggles}>
               {GROUP_TOGGLES.map((g) => {
-                const on = groupOn(g.key);
+                const { on, total } = categoryState(g.key);
+                const allOn = total > 0 && on === total;
+                const noneOn = on === 0;
+                const stateCls = allOn
+                  ? styles.groupOn
+                  : noneOn
+                    ? styles.groupOff
+                    : styles.groupPartial;
                 return (
                   <button
                     key={g.key}
                     type="button"
-                    className={`${styles.groupToggle} ${on ? styles.groupOn : ''}`}
-                    onClick={() => toggleGroup(g.key, !on)}
-                    aria-pressed={on}
+                    className={`${styles.groupToggle} ${stateCls}`}
+                    // All on toggles everything off; anything else turns the
+                    // whole category on.
+                    onClick={() => toggleGroup(g.key, !allOn)}
+                    aria-pressed={allOn}
                   >
                     {g.label}
+                    {!allOn && !noneOn && (
+                      <span className={styles.groupCount}>{on}/{total}</span>
+                    )}
                   </button>
                 );
               })}
@@ -257,13 +290,22 @@ export const BossPoolPanel = ({
                 .slice()
                 .sort((a, b) => a.name.localeCompare(b.name));
               const on = group.filter((b) => !excluded.has(b.name)).length;
+              const open = !collapsed[key];
               return (
                 <div key={key} className={styles.group}>
                   <div className={styles.groupHead}>
-                    <span className={styles.groupTitle}>{label}</span>
-                    <span className={styles.groupCount}>
-                      {on}/{group.length}
-                    </span>
+                    <button
+                      type="button"
+                      className={styles.groupTitleBtn}
+                      onClick={() => setCollapsed((c) => ({ ...c, [key]: open }))}
+                      aria-expanded={open}
+                    >
+                      <span className={styles.chevron}>{open ? '▾' : '▸'}</span>
+                      <span className={styles.groupTitle}>{label}</span>
+                      <span className={styles.groupCount}>
+                        {on}/{group.length}
+                      </span>
+                    </button>
                     <button type="button" className={styles.bulk} onClick={() => setGroup(group, true)}>
                       All
                     </button>
@@ -271,25 +313,26 @@ export const BossPoolPanel = ({
                       None
                     </button>
                   </div>
-                  {group.map((b) => {
-                    const blocked = blockedByGroupRule(b, settings);
-                    return (
-                      <label
-                        key={b.name}
-                        className={`${styles.boss} ${blocked ? styles.bossBlocked : ''}`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={!excluded.has(b.name)}
-                          onChange={() => toggle(b.name)}
-                        />
-                        <span className={styles.checkbox} aria-hidden="true" />
-                        <span className={styles.bossName}>{b.name}</span>
-                        <HardModeSlot boss={b} />
-                        {blocked && <span className={styles.blocked}>{blocked}</span>}
-                      </label>
-                    );
-                  })}
+                  {open &&
+                    group.map((b) => {
+                      const blocked = blockedByGroupRule(b, settings);
+                      return (
+                        <label
+                          key={b.name}
+                          className={`${styles.boss} ${blocked ? styles.bossBlocked : ''}`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={!excluded.has(b.name)}
+                            onChange={() => toggle(b.name)}
+                          />
+                          <span className={styles.checkbox} aria-hidden="true" />
+                          <span className={styles.bossName}>{b.name}</span>
+                          <HardModeSlot boss={b} />
+                          {blocked && <span className={styles.blocked}>{blocked}</span>}
+                        </label>
+                      );
+                    })}
                 </div>
               );
             })

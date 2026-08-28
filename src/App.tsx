@@ -439,7 +439,8 @@ const Main = () => {
     const isWildy = state.boss?.tags.includes('wildy') ?? false;
     const parsed = budgetFor(isWildy);
     if (!parsed.ok) return;
-    const allowUntradeables = isWildy ? false : settings.allowUntradeables;
+    // Untradeables are curated out of play entirely — they never roll.
+    const allowUntradeables = false;
     const pool = filterWeaponsFor(items, bossWeaponRule(state.boss));
     const rng = mulberry32(randomSeed());
     const loadout = ensureAtlatlAmmo(
@@ -494,7 +495,8 @@ const Main = () => {
     const isWildy = state.boss?.tags.includes('wildy') ?? false;
     const parsed = budgetFor(isWildy);
     if (!parsed.ok) return;
-    const allowUntradeables = isWildy ? false : settings.allowUntradeables;
+    // Untradeables are curated out of play entirely — they never roll.
+    const allowUntradeables = false;
     const rng = mulberry32(randomSeed());
     const styled = filterWeaponsFor(
       // Style-forced lanes (raids) reroll within their style; the wave-based
@@ -594,7 +596,8 @@ const Main = () => {
     const parsed = budgetFor(isWildy);
     if (!parsed.ok) return;
     // A wildy boss invisibly disables untradeables and uses the wildy budget.
-    const allowUntradeables = isWildy ? false : settings.allowUntradeables;
+    // Untradeables are curated out of play entirely — they never roll.
+    const allowUntradeables = false;
     // Debug: an ignored budget and a tier-locked pool make any combination
     // reachable without fishing for it.
     const debugIgnoreBudget = settings.debugMode && settings.ignoreBudget;
@@ -649,22 +652,46 @@ const Main = () => {
 
     // Raids send a style-forced team; wave-based encounters roll two plain
     // setups (the same multi-skeleton machinery, minus the style sorting).
+    // Each setup rolls after the last, EXCLUDING the items already taken, so
+    // no piece appears in two skeletons.
     const isRaid = boss.tags.includes('raid');
     const isWave = boss.tags.includes('minigame');
+    const markUsed = (l: Loadout, used: Set<number>) => {
+      for (const s of SLOTS) {
+        const it = l[s];
+        if (it) used.add(it.id);
+      }
+    };
     let squad: { label: string; style?: Style; loadout: Loadout }[] | null = null;
     if (!isGauntlet) {
       if (isRaid) {
-        squad = sortSquadByStyle(
-          (['melee', 'ranged', 'magic'] as const).map((style) => ({
+        const used = new Set<number>();
+        const lanes = (['melee', 'ranged', 'magic'] as const).map((style) => {
+          const lane = rollForStyle(
+            bossPool,
             style,
-            loadout: rollForStyle(bossPool, style, rollSettings, mulberry32(randomSeed())),
-          })),
-        ).map((s) => ({ label: STYLE_LABEL[s.style], style: s.style, loadout: s.loadout }));
-      } else if (isWave) {
-        squad = ([1, 2] as const).map((n) => ({
-          label: `Setup ${n}`,
-          loadout: roll(bossPool, rollSettings, mulberry32(randomSeed())),
+            { ...rollSettings, excludeIds: used },
+            mulberry32(randomSeed()),
+          );
+          markUsed(lane, used);
+          return { style, loadout: lane };
+        });
+        squad = sortSquadByStyle(lanes).map((s) => ({
+          label: STYLE_LABEL[s.style],
+          style: s.style,
+          loadout: s.loadout,
         }));
+      } else if (isWave) {
+        const used = new Set<number>();
+        squad = ([1, 2] as const).map((n) => {
+          const lane = roll(
+            bossPool,
+            { ...rollSettings, excludeIds: used },
+            mulberry32(randomSeed()),
+          );
+          markUsed(lane, used);
+          return { label: `Setup ${n}`, loadout: lane };
+        });
       }
     }
 

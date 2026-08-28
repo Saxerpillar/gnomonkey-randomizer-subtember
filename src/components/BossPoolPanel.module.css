@@ -125,10 +125,34 @@
   color: var(--gold-bright);
 }
 
+/* All bosses in the category are available. */
 .groupOn {
   color: var(--green);
   border-color: var(--green);
   background: linear-gradient(rgba(70, 194, 70, 0.28), rgba(70, 194, 70, 0.16));
+  text-shadow: var(--text-outline);
+}
+
+/* Only some are available — clicking turns the rest on. */
+.groupPartial {
+  color: var(--yellow);
+  border-color: var(--yellow);
+  background: linear-gradient(rgba(255, 255, 0, 0.2), rgba(255, 255, 0, 0.1));
+  text-shadow: var(--text-outline);
+}
+
+.groupCount {
+  margin-left: 5px;
+  font-family: var(--font-small);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* None are available. */
+.groupOff {
+  color: var(--red);
+  border-color: var(--red);
+  background: linear-gradient(rgba(216, 67, 67, 0.22), rgba(216, 67, 67, 0.1));
   text-shadow: var(--text-outline);
 }
 
@@ -187,6 +211,34 @@
   padding: 4px 0;
   background: var(--panel);
   border-bottom: 1px solid var(--border);
+}
+
+/* The whole title row collapses the group. */
+.groupTitleBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  padding: 2px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.groupTitleBtn:hover .groupTitle {
+  color: var(--gold-bright);
+}
+
+.chevron {
+  flex: none;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.groupTitleBtn:hover .chevron {
+  color: var(--gold-bright);
 }
 
 .groupTitle {

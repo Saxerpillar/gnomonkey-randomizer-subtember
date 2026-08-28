@@ -109,6 +109,9 @@ export interface RollSettings {
   budget: number | null;
   /** When false, untradeable items never roll. */
   allowUntradeables: boolean;
+  /** Item ids the roller must never pick — used when several setups roll
+   *  together (raids, wave-based), so no item appears twice. */
+  excludeIds?: ReadonlySet<number>;
   /**
    * Bad-RNG mitigation: the minimum number of CORE_SLOTS that must land on each
    * tier. Floors deliberately outrank the budget — a floor you asked for is

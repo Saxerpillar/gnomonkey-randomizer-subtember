@@ -397,6 +397,26 @@ describe('minWeaponTier', () => {
   });
 });
 
+describe('excludeIds', () => {
+  it('never rolls an excluded item (used by another setup)', () => {
+    const pool = [
+      item('head', { name: 'a', id: 101 }),
+      item('head', { name: 'b', id: 102 }),
+      item('head', { name: 'c', id: 103 }),
+    ];
+    for (const seed of seeds.slice(0, 40)) {
+      const out = roll(pool, settings({ excludeIds: new Set([101, 102]) }), mulberry32(seed));
+      expect(out.head?.id).toBe(103);
+    }
+  });
+
+  it('leaves the slot empty when every candidate is excluded', () => {
+    const pool = [item('head', { name: 'only', id: 201 })];
+    const out = roll(pool, settings({ excludeIds: new Set([201]) }), mulberry32(1));
+    expect(out.head).toBeNull();
+  });
+});
+
 describe('loadoutValue', () => {
   it('counts all equipped tradeables', () => {
     const out = roll(

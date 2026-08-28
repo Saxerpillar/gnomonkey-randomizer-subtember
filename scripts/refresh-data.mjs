@@ -63,8 +63,18 @@ const main = async () => {
   const raw = await fetchJson(`${DPS_RAW}/cdn/json/equipment.json`);
   console.log(`  ${raw.length} raw entries`);
 
-  const { versionBlocklist, namePatterns, ids, questOnlyNames } = curation.poolExclusions;
+  const {
+    versionBlocklist,
+    namePatterns,
+    ids,
+    questOnlyNames,
+    excludeAmmo,
+    removeNames,
+    removeNamePatterns,
+  } = curation.poolExclusions;
   const nameRes = namePatterns.map((p) => new RegExp(p, 'i'));
+  const removedRes = (removeNamePatterns ?? []).map((p) => new RegExp(p, 'i'));
+  const removedNames = new Set(removeNames ?? []);
   const excludedIds = new Set(ids);
   const versionBlocked = new Set(versionBlocklist);
   const questOnly = new Set(questOnlyNames ?? []);
@@ -72,13 +82,16 @@ const main = async () => {
   const kept = raw.filter(
     (e) =>
       SLOTS.includes(e.slot) &&
+      !(excludeAmmo && e.slot === 'ammo') &&
       Number.isInteger(e.id) &&
       e.id > 0 &&
       e.image &&
       !versionBlocked.has(e.version) &&
       !excludedIds.has(e.id) &&
       !questOnly.has(e.name) &&
-      !nameRes.some((re) => re.test(e.name)),
+      !removedNames.has(e.name) &&
+      !nameRes.some((re) => re.test(e.name)) &&
+      !removedRes.some((re) => re.test(e.name)),
   );
 
   // Poisoned ammo arrives under the SAME name as its clean version — upstream
@@ -291,18 +304,22 @@ const main = async () => {
       assignBand(slotItems);
     }
   }
-  // Manual fixes for passive-power items the stat formula can't see.
-  for (const e of pool) {
-    const override = curation.tierOverrides[e.name];
-    if (override && typeof override === 'string' && !override.startsWith('//')) tiers.set(e.id, override);
-  }
-  // Cape and ammo never reach elite: nothing in those slots swings a fight the
-  // way a weapon or a BIS ring does, and their raw stats mislead (ogre arrows
-  // carry huge ranged_str). Their ceiling is 'strong'.
+  // Cape and ammo never reach elite by percentile: nothing in those slots
+  // swings a fight the way a weapon or a BIS ring does, and their raw stats
+  // mislead (ogre arrows carry huge ranged_str). Their ceiling is 'strong' —
+  // but a CURATED override below still wins, so named capes can be elite.
   const NO_ELITE_SLOTS = new Set(['cape', 'ammo']);
   for (const e of pool) {
     if (NO_ELITE_SLOTS.has(e.slot) && tiers.get(e.id) === 'elite') tiers.set(e.id, 'strong');
   }
+  // Manual fixes for passive-power items the stat formula can't see. Applied
+  // AFTER the no-elite demotion so an override can promote a cape back.
+  for (const e of pool) {
+    const override = curation.tierOverrides[e.name];
+    if (override && typeof override === 'string' && !override.startsWith('//')) tiers.set(e.id, override);
+  }
+
+  const forceTradeable = new Set(curation.forceTradeable ?? []);
 
   const appItems = pool
     .map((e) => ({
@@ -311,7 +328,7 @@ const main = async () => {
       version: e.version || undefined,
       slot: e.slot,
       icon: `${e.id}.png`,
-      tradeable: tradeableIds.has(e.id),
+      tradeable: tradeableIds.has(e.id) || forceTradeable.has(e.name),
       twoHanded: !!e.isTwoHanded,
       category: e.category || undefined,
       ammoClass: e.slot === 'ammo' ? ammoSpecOf(e).family : undefined,

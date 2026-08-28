@@ -16,7 +16,6 @@ export const POOL_LABEL: Record<PoolTag, string> = {
 export interface Settings {
   budgetText: string;
   wildyBudgetText: string;
-  allowUntradeables: boolean;
   excludeWildy: boolean;
   skipAnimations: boolean;
   muteSounds: boolean;
@@ -125,7 +124,6 @@ export const effectiveBudget = (
 export const DEFAULT_SETTINGS: Settings = {
   budgetText: '',
   wildyBudgetText: '',
-  allowUntradeables: false,
   excludeWildy: false,
   skipAnimations: false,
   muteSounds: false,

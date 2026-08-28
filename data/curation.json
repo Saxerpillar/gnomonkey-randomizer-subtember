@@ -41,7 +41,50 @@
     ],
     "ids": [],
     "keepZeroStat": [
-      "Atlatl dart"
+      "Atlatl dart",
+      "Lightbearer"
+    ],
+    "excludeAmmo": true,
+    "removeNames": [
+      "Ring of suffering",
+      "Shayzien boots (1)",
+      "Shayzien boots (2)",
+      "Shayzien boots (3)",
+      "Shayzien boots (4)",
+      "Fremennik sea boots 1",
+      "Fremennik sea boots 2",
+      "Fremennik sea boots 3",
+      "Wilderness champion amulet",
+      "Saradomin banner",
+      "Zamorak banner",
+      "Runner hat",
+      "Fighter hat",
+      "Ranger hat",
+      "Healer hat",
+      "Penance skirt",
+      "Runner boots",
+      "Penance gloves",
+      "Infernal max cape",
+      "Dizana's max cape",
+      "Imbued Guthix max cape",
+      "Imbued Saradomin max cape",
+      "Imbued Zamorak max cape"
+    ],
+    "removeNamePatterns": [
+      "castle wars",
+      "barbarian assault",
+      "decorative",
+      "castlewars",
+      "halo",
+      "\\(broken\\)",
+      "\\(mangled\\)",
+      "calamity",
+      "\\(\\+ or\\)",
+      "\\(or\\)",
+      "\\(bh\\)",
+      "twisted ancestral",
+      "^Echo (?!boots)",
+      "ironman"
     ],
     "questOnlyNames": [
       "'perfect' necklace",
@@ -623,6 +666,11 @@
     "Elidinis' ward": "elite",
     "Ava's assembler": "elite",
     "Assembler max cape": "elite",
+    "Infernal cape": "elite",
+    "Dizana's quiver": "elite",
+    "Imbued Guthix cape": "elite",
+    "Imbued Saradomin cape": "elite",
+    "Imbued Zamorak cape": "elite",
     "Blade of Saeldor": "elite",
     "Blade of Saeldor (c)": "elite",
     "Harmonised Nightmare staff": "elite",
@@ -694,5 +742,14 @@
       "Bladed Staff",
       "Polestaff"
     ]
-  }
+  },
+  "forceTradeable": [
+    "Ring of suffering (i)",
+    "Echo boots",
+    "Amulet of glory",
+    "Amulet of glory (t)",
+    "Imbued Guthix cape",
+    "Imbued Saradomin cape",
+    "Imbued Zamorak cape"
+  ]
 }

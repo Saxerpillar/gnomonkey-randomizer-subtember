@@ -120,8 +120,14 @@ export const ammoCandidatesFor = (weapon: Item | null, ammo: Item[]): Item[] => 
   return ammo.filter((a) => a.ammoClass === need && (max == null || (a.ammoTier ?? 0) <= max));
 };
 
-const poolBySlot = (pool: Item[], allowUntradeables: boolean): Map<Slot, Item[]> => {
-  const available = allowUntradeables ? pool : pool.filter((i) => i.tradeable);
+const poolBySlot = (
+  pool: Item[],
+  allowUntradeables: boolean,
+  excludeIds?: ReadonlySet<number>,
+): Map<Slot, Item[]> => {
+  const available = pool.filter(
+    (i) => (allowUntradeables || i.tradeable) && !(excludeIds?.has(i.id) ?? false),
+  );
   const bySlot = new Map<Slot, Item[]>(SLOTS.map((s) => [s, []]));
   for (const item of available) bySlot.get(item.slot)!.push(item);
   return bySlot;
@@ -193,8 +199,8 @@ export const withPoison = (item: Item, rng: Rng): Item => {
 };
 
 export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout => {
-  const { budget, allowUntradeables, tierFloors, tierBias } = settings;
-  const bySlot = poolBySlot(pool, allowUntradeables);
+  const { budget, allowUntradeables, tierFloors, tierBias, excludeIds } = settings;
+  const bySlot = poolBySlot(pool, allowUntradeables, excludeIds);
   const floored = tierFloors ? assignTierFloors(tierFloors, bySlot, rng) : new Map();
 
   const loadout = emptyLoadout();
@@ -279,8 +285,8 @@ export const rerollSlot = (
   settings: RollSettings,
   rng: Rng,
 ): Loadout => {
-  const { budget, allowUntradeables } = settings;
-  const bySlot = poolBySlot(pool, allowUntradeables);
+  const { budget, allowUntradeables, excludeIds } = settings;
+  const bySlot = poolBySlot(pool, allowUntradeables, excludeIds);
 
   const twoHandedNow = loadout.weapon?.twoHanded ?? false;
   if (slot === 'shield' && twoHandedNow) return loadout;
