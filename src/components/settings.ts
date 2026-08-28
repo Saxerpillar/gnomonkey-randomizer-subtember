@@ -27,6 +27,8 @@ export interface Settings {
   excludedPools: PoolTag[];
   /** Individual bosses switched off by name, from the boss pool manager. */
   excludedBosses: string[];
+  /** Individual bosses forced ON despite a group toggle holding them out. */
+  includedBosses: string[];
   /** Bosses whose hard-mode variant is off (the pool button reads "Normal
    *  mode"); an empty list means every hard-mode boss is eligible. */
   normalOnlyBosses: string[];
@@ -131,6 +133,7 @@ export const DEFAULT_SETTINGS: Settings = {
   sporadicBosses: false,
   excludedPools: [],
   excludedBosses: [],
+  includedBosses: [],
   normalOnlyBosses: [],
   removeFlashbangs: false,
   volume: 1,
@@ -210,8 +213,18 @@ export const filterBossPool = (bosses: readonly Boss[], settings: Settings): Bos
   if (settings.debugMode && settings.forceBoss !== 'off') {
     return applyForceBoss(bosses, settings.forceBoss);
   }
-  return bosses.filter(
-    (b) => !settings.excludedBosses.includes(b.name) && !blockedByGroupRule(b, settings),
-  );
+  return bosses.filter((b) => isBossAvailable(b, settings));
+};
+
+/**
+ * Whether a boss is actually rollable. An individual choice wins over the
+ * group rules: explicitly EXCLUDED bosses never roll, explicitly INCLUDED
+ * bosses always roll (even when a group toggle holds them out), and anything
+ * untouched follows the group defaults.
+ */
+export const isBossAvailable = (boss: Boss, settings: Settings): boolean => {
+  if (settings.excludedBosses.includes(boss.name)) return false;
+  if (settings.includedBosses.includes(boss.name)) return true;
+  return blockedByGroupRule(boss, settings) == null;
 };
 

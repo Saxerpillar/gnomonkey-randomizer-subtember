@@ -682,13 +682,29 @@ const Main = () => {
           loadout: s.loadout,
         }));
       } else if (isWave) {
+        // Some wave fights demand a style: the Inferno needs a ranged weapon,
+        // the Colosseum a melee one — setup 1 is style-forced to guarantee it.
+        const requiredStyle =
+          boss.name === 'The Inferno'
+            ? ('ranged' as const)
+            : boss.name === 'Fortis Colosseum'
+              ? ('melee' as const)
+              : null;
         const used = new Set<number>();
         squad = ([1, 2] as const).map((n) => {
-          const lane = roll(
-            bossPool,
-            { ...rollSettings, excludeIds: used },
-            mulberry32(randomSeed()),
-          );
+          const lane =
+            requiredStyle && n === 1
+              ? rollForStyle(
+                  bossPool,
+                  requiredStyle,
+                  { ...rollSettings, excludeIds: used },
+                  mulberry32(randomSeed()),
+                )
+              : roll(
+                  bossPool,
+                  { ...rollSettings, excludeIds: used },
+                  mulberry32(randomSeed()),
+                );
           markUsed(lane, used);
           return { label: `Setup ${n}`, loadout: lane };
         });

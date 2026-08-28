@@ -296,6 +296,134 @@
   }
  },
  {
+  "id": 890,
+  "name": "Adamant arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "890.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 5,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 31,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 891,
+  "name": "Adamant arrow (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "891.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 5,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 31,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5620,
+  "name": "Adamant arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5620.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 5,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 31,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5626,
+  "name": "Adamant arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5626.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 5,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 31,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 1357,
   "name": "Adamant axe",
   "slot": "weapon",
@@ -358,6 +486,134 @@
   }
  },
  {
+  "id": 9143,
+  "name": "Adamant bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9143.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 100,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9290,
+  "name": "Adamant bolts (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "9290.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 100,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9297,
+  "name": "Adamant bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9297.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 100,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9304,
+  "name": "Adamant bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9304.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 100,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 4129,
   "name": "Adamant boots",
   "slot": "feet",
@@ -382,6 +638,38 @@
   "bonuses": {
    "str": 1,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 4798,
+  "name": "Adamant brutal",
+  "slot": "ammo",
+  "icon": "4798.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "ogre",
+  "ammoTier": 5,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 45,
    "magic_str": 0,
    "prayer": 0
   }
@@ -1439,6 +1727,138 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 829,
+  "name": "Adamant javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "829.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 5,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 102,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 835,
+  "name": "Adamant javelin (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "835.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 5,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 102,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5646,
+  "name": "Adamant javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5646.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 5,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 102,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5652,
+  "name": "Adamant javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5652.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 5,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 102,
    "magic_str": 0,
    "prayer": 0
   }
@@ -2638,6 +3058,165 @@
   }
  },
  {
+  "id": 21326,
+  "name": "Amethyst arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "21326.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 7,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 55,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21332,
+  "name": "Amethyst arrow (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "21332.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 7,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 55,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21334,
+  "name": "Amethyst arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "21334.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 7,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 55,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21336,
+  "name": "Amethyst arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "21336.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 7,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 55,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21316,
+  "name": "Amethyst broad bolts",
+  "slot": "ammo",
+  "icon": "21316.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 115,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 25849,
   "name": "Amethyst dart",
   "version": "Unpoisoned",
@@ -2682,6 +3261,138 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 28,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21318,
+  "name": "Amethyst javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "21318.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 7,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 135,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21320,
+  "name": "Amethyst javelin (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "21320.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 7,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 135,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21322,
+  "name": "Amethyst javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "21322.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 7,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 135,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21324,
+  "name": "Amethyst javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "21324.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 7,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 135,
    "magic_str": 0,
    "prayer": 0
   }
@@ -3298,6 +4009,37 @@
    "ranged_str": 0,
    "magic_str": 30,
    "prayer": 0
+  }
+ },
+ {
+  "id": 20235,
+  "name": "Ancient blessing",
+  "slot": "ammo",
+  "icon": "20235.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "any",
+  "ammoTier": 0,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 1
   }
  },
  {
@@ -5514,6 +6256,38 @@
   }
  },
  {
+  "id": 28991,
+  "name": "Atlatl dart",
+  "slot": "ammo",
+  "icon": "28991.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "atlatl",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 9748,
   "name": "Attack cape",
   "version": "Trimmed",
@@ -6364,6 +7138,37 @@
   }
  },
  {
+  "id": 881,
+  "name": "Barbed bolts",
+  "slot": "ammo",
+  "icon": "881.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 12,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 10887,
   "name": "Barrelchest anchor",
   "version": "Fixed",
@@ -6931,6 +7736,38 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 4788,
+  "name": "Black brutal",
+  "slot": "ammo",
+  "icon": "4788.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "ogre",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
    "magic_str": 0,
    "prayer": 0
   }
@@ -10660,6 +11497,70 @@
   }
  },
  {
+  "id": 4740,
+  "name": "Bolt rack",
+  "slot": "ammo",
+  "icon": "4740.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "boltrack",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 55,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 8882,
+  "name": "Bone bolts",
+  "slot": "ammo",
+  "icon": "8882.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bone",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 49,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 5018,
   "name": "Bone club",
   "slot": "weapon",
@@ -11528,6 +12429,37 @@
   }
  },
  {
+  "id": 11875,
+  "name": "Broad bolts",
+  "slot": "ammo",
+  "icon": "11875.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 100,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 3335,
   "name": "Broken bark snelm",
   "slot": "head",
@@ -11583,6 +12515,134 @@
   "bonuses": {
    "str": 10,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 882,
+  "name": "Bronze arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "882.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 7,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 883,
+  "name": "Bronze arrow (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "883.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 7,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5616,
+  "name": "Bronze arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5616.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 7,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5622,
+  "name": "Bronze arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5622.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 7,
    "magic_str": 0,
    "prayer": 0
   }
@@ -11650,6 +12710,134 @@
   }
  },
  {
+  "id": 877,
+  "name": "Bronze bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "877.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 878,
+  "name": "Bronze bolts (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "878.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 6061,
+  "name": "Bronze bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "6061.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 6062,
+  "name": "Bronze bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "6062.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 4119,
   "name": "Bronze boots",
   "slot": "feet",
@@ -11674,6 +12862,38 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 4773,
+  "name": "Bronze brutal",
+  "slot": "ammo",
+  "icon": "4773.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "ogre",
+  "ammoTier": 1,
+  "ammoExclusive": true,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 11,
    "magic_str": 0,
    "prayer": 0
   }
@@ -12091,6 +13311,138 @@
   "bonuses": {
    "str": 6,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 825,
+  "name": "Bronze javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "825.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 1,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 25,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 831,
+  "name": "Bronze javelin (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "831.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 1,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 25,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5642,
+  "name": "Bronze javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5642.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 1,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 25,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5648,
+  "name": "Bronze javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5648.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 1,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 25,
    "magic_str": 0,
    "prayer": 0
   }
@@ -16749,6 +18101,130 @@
   }
  },
  {
+  "id": 9340,
+  "name": "Diamond bolts",
+  "slot": "ammo",
+  "icon": "9340.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 105,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9243,
+  "name": "Diamond bolts (e)",
+  "slot": "ammo",
+  "icon": "9243.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 105,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21969,
+  "name": "Diamond dragon bolts",
+  "slot": "ammo",
+  "icon": "21969.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21946,
+  "name": "Diamond dragon bolts (e)",
+  "slot": "ammo",
+  "icon": "21946.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 33709,
   "name": "Diamond sickle (b)",
   "slot": "weapon",
@@ -16935,6 +18411,134 @@
   }
  },
  {
+  "id": 11212,
+  "name": "Dragon arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "11212.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 8,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 11227,
+  "name": "Dragon arrow (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "11227.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 8,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 11228,
+  "name": "Dragon arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "11228.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 8,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 11229,
+  "name": "Dragon arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "11229.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 8,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 6739,
   "name": "Dragon axe",
   "slot": "weapon",
@@ -16992,6 +18596,134 @@
   "bonuses": {
    "str": 85,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21905,
+  "name": "Dragon bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "21905.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21924,
+  "name": "Dragon bolts (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "21924.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21926,
+  "name": "Dragon bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "21926.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21928,
+  "name": "Dragon bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "21928.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
    "magic_str": 0,
    "prayer": 0
   }
@@ -17568,6 +19300,138 @@
    "str": 0,
    "ranged_str": 0,
    "magic_str": 100,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 19484,
+  "name": "Dragon javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "19484.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 8,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 150,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 19486,
+  "name": "Dragon javelin (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "19486.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 8,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 150,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 19488,
+  "name": "Dragon javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "19488.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 8,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 150,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 19490,
+  "name": "Dragon javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "19490.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 8,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 150,
+   "magic_str": 0,
    "prayer": 0
   }
  },
@@ -18150,6 +20014,68 @@
   }
  },
  {
+  "id": 9341,
+  "name": "Dragonstone bolts",
+  "slot": "ammo",
+  "icon": "9341.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 117,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9244,
+  "name": "Dragonstone bolts (e)",
+  "slot": "ammo",
+  "icon": "9244.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 117,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 24043,
   "name": "Dragonstone boots",
   "slot": "feet",
@@ -18174,6 +20100,68 @@
   "bonuses": {
    "str": 2,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21971,
+  "name": "Dragonstone dragon bolts",
+  "slot": "ammo",
+  "icon": "21971.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21948,
+  "name": "Dragonstone dragon bolts (e)",
+  "slot": "ammo",
+  "icon": "21948.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
    "magic_str": 0,
    "prayer": 0
   }
@@ -19220,6 +21208,130 @@
   "bonuses": {
    "str": 13,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9338,
+  "name": "Emerald bolts",
+  "slot": "ammo",
+  "icon": "9338.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 85,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9241,
+  "name": "Emerald bolts (e)",
+  "slot": "ammo",
+  "icon": "9241.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 85,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21965,
+  "name": "Emerald dragon bolts",
+  "slot": "ammo",
+  "icon": "21965.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21942,
+  "name": "Emerald dragon bolts (e)",
+  "slot": "ammo",
+  "icon": "21942.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
    "magic_str": 0,
    "prayer": 0
   }
@@ -23321,6 +25433,38 @@
   }
  },
  {
+  "id": 10142,
+  "name": "Guam tar",
+  "slot": "ammo",
+  "icon": "10142.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "tar",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 16,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 21733,
   "name": "Guardian boots",
   "slot": "feet",
@@ -24441,6 +26585,38 @@
   }
  },
  {
+  "id": 10145,
+  "name": "Harralander tar",
+  "slot": "ammo",
+  "icon": "10145.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "tar",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 49,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 7141,
   "name": "Harry's cutlass",
   "slot": "weapon",
@@ -24714,6 +26890,37 @@
   }
  },
  {
+  "id": 20220,
+  "name": "Holy blessing",
+  "slot": "ammo",
+  "icon": "20220.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "any",
+  "ammoTier": 0,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 1
+  }
+ },
+ {
   "id": 3840,
   "name": "Holy book",
   "slot": "shield",
@@ -24982,6 +27189,37 @@
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 3
+  }
+ },
+ {
+  "id": 20229,
+  "name": "Honourable blessing",
+  "slot": "ammo",
+  "icon": "20229.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "any",
+  "ammoTier": 0,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 1
   }
  },
  {
@@ -26215,6 +28453,38 @@
   }
  },
  {
+  "id": 28837,
+  "name": "Irit tar",
+  "slot": "ammo",
+  "icon": "28837.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "tar",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 1309,
   "name": "Iron 2h sword",
   "slot": "weapon",
@@ -26241,6 +28511,134 @@
   "bonuses": {
    "str": 14,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 884,
+  "name": "Iron arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "884.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 2,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 885,
+  "name": "Iron arrow (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "885.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 2,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5617,
+  "name": "Iron arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5617.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 2,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5623,
+  "name": "Iron arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5623.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 2,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
    "magic_str": 0,
    "prayer": 0
   }
@@ -26308,6 +28706,134 @@
   }
  },
  {
+  "id": 9140,
+  "name": "Iron bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9140.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 46,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9287,
+  "name": "Iron bolts (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "9287.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 46,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9294,
+  "name": "Iron bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9294.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 46,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9301,
+  "name": "Iron bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9301.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 46,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 4121,
   "name": "Iron boots",
   "slot": "feet",
@@ -26332,6 +28858,38 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 4778,
+  "name": "Iron brutal",
+  "slot": "ammo",
+  "icon": "4778.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "ogre",
+  "ammoTier": 2,
+  "ammoExclusive": true,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 13,
    "magic_str": 0,
    "prayer": 0
   }
@@ -26749,6 +29307,138 @@
   "bonuses": {
    "str": 10,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 826,
+  "name": "Iron javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "826.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 2,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 42,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 832,
+  "name": "Iron javelin (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "832.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 2,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 42,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5643,
+  "name": "Iron javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5643.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 2,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 42,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5649,
+  "name": "Iron javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5649.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 2,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 42,
    "magic_str": 0,
    "prayer": 0
   }
@@ -27569,6 +30259,68 @@
   }
  },
  {
+  "id": 21957,
+  "name": "Jade dragon bolts",
+  "slot": "ammo",
+  "icon": "21957.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21934,
+  "name": "Jade dragon bolts (e)",
+  "slot": "ammo",
+  "icon": "21934.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 6315,
   "name": "Jade machete",
   "slot": "weapon",
@@ -28068,6 +30820,38 @@
   "bonuses": {
    "str": 40,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 10158,
+  "name": "Kebbit bolts",
+  "slot": "ammo",
+  "icon": "10158.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "kebbit",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 28,
    "magic_str": 0,
    "prayer": 0
   }
@@ -29228,6 +32012,35 @@
   }
  },
  {
+  "id": 25975,
+  "name": "Lightbearer",
+  "slot": "ring",
+  "icon": "25975.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "tier": "elite",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 33255,
   "name": "Lithic sceptre",
   "version": "Charged",
@@ -29255,6 +32068,38 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 10159,
+  "name": "Long kebbit bolts",
+  "slot": "ammo",
+  "icon": "10159.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "kebbit",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 38,
    "magic_str": 0,
    "prayer": 0
   }
@@ -30388,6 +33233,38 @@
   }
  },
  {
+  "id": 10143,
+  "name": "Marrentill tar",
+  "slot": "ammo",
+  "icon": "10143.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "tar",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 23522,
   "name": "Mask of Ranul",
   "slot": "head",
@@ -30953,6 +33830,134 @@
   }
  },
  {
+  "id": 888,
+  "name": "Mithril arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "888.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 889,
+  "name": "Mithril arrow (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "889.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 4,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5619,
+  "name": "Mithril arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5619.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5625,
+  "name": "Mithril arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5625.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 1355,
   "name": "Mithril axe",
   "slot": "weapon",
@@ -31015,6 +34020,134 @@
   }
  },
  {
+  "id": 9142,
+  "name": "Mithril bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9142.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 82,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9289,
+  "name": "Mithril bolts (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "9289.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 82,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9296,
+  "name": "Mithril bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9296.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 82,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9303,
+  "name": "Mithril bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9303.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 82,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 4127,
   "name": "Mithril boots",
   "slot": "feet",
@@ -31039,6 +34172,38 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 4793,
+  "name": "Mithril brutal",
+  "slot": "ammo",
+  "icon": "4793.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "ogre",
+  "ammoTier": 4,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 34,
    "magic_str": 0,
    "prayer": 0
   }
@@ -31485,6 +34650,138 @@
   "bonuses": {
    "str": 18,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 828,
+  "name": "Mithril javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "828.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 4,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 85,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 834,
+  "name": "Mithril javelin (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "834.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 4,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 85,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5645,
+  "name": "Mithril javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5645.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 4,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 85,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5651,
+  "name": "Mithril javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5651.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 4,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 85,
    "magic_str": 0,
    "prayer": 0
   }
@@ -32728,6 +36025,38 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 28878,
+  "name": "Moonlight antler bolts",
+  "slot": "ammo",
+  "icon": "28878.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "antler",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
    "magic_str": 0,
    "prayer": 0
   }
@@ -34721,6 +38050,38 @@
   }
  },
  {
+  "id": 2866,
+  "name": "Ogre arrow",
+  "slot": "ammo",
+  "icon": "2866.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "ogre",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 2883,
   "name": "Ogre bow",
   "slot": "weapon",
@@ -34749,6 +38110,254 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9342,
+  "name": "Onyx bolts",
+  "slot": "ammo",
+  "icon": "9342.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 120,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9245,
+  "name": "Onyx bolts (e)",
+  "slot": "ammo",
+  "icon": "9245.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 120,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21973,
+  "name": "Onyx dragon bolts",
+  "slot": "ammo",
+  "icon": "21973.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21950,
+  "name": "Onyx dragon bolts (e)",
+  "slot": "ammo",
+  "icon": "21950.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 879,
+  "name": "Opal bolts",
+  "slot": "ammo",
+  "icon": "879.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 14,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9236,
+  "name": "Opal bolts (e)",
+  "slot": "ammo",
+  "icon": "9236.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 14,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21955,
+  "name": "Opal dragon bolts",
+  "slot": "ammo",
+  "icon": "21955.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21932,
+  "name": "Opal dragon bolts (e)",
+  "slot": "ammo",
+  "icon": "21932.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
    "magic_str": 0,
    "prayer": 0
   }
@@ -35047,6 +38656,161 @@
   "bonuses": {
    "str": 103,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 20226,
+  "name": "Peaceful blessing",
+  "slot": "ammo",
+  "icon": "20226.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "any",
+  "ammoTier": 0,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 1
+  }
+ },
+ {
+  "id": 880,
+  "name": "Pearl bolts",
+  "slot": "ammo",
+  "icon": "880.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 48,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9238,
+  "name": "Pearl bolts (e)",
+  "slot": "ammo",
+  "icon": "9238.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 48,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21959,
+  "name": "Pearl dragon bolts",
+  "slot": "ammo",
+  "icon": "21959.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21936,
+  "name": "Pearl dragon bolts (e)",
+  "slot": "ammo",
+  "icon": "21936.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
    "magic_str": 0,
    "prayer": 0
   }
@@ -37677,6 +41441,130 @@
   }
  },
  {
+  "id": 9339,
+  "name": "Ruby bolts",
+  "slot": "ammo",
+  "icon": "9339.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 103,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9242,
+  "name": "Ruby bolts (e)",
+  "slot": "ammo",
+  "icon": "9242.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 6,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 103,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21967,
+  "name": "Ruby dragon bolts",
+  "slot": "ammo",
+  "icon": "21967.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21944,
+  "name": "Ruby dragon bolts (e)",
+  "slot": "ammo",
+  "icon": "21944.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 24693,
   "name": "Ruby sickle (b)",
   "slot": "weapon",
@@ -37734,6 +41622,134 @@
   "bonuses": {
    "str": 70,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 892,
+  "name": "Rune arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "892.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 6,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 49,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 893,
+  "name": "Rune arrow (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "893.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 6,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 49,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5621,
+  "name": "Rune arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5621.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 6,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 49,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5627,
+  "name": "Rune arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5627.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 6,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 49,
    "magic_str": 0,
    "prayer": 0
   }
@@ -37825,6 +41841,38 @@
   "bonuses": {
    "str": 2,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 4803,
+  "name": "Rune brutal",
+  "slot": "ammo",
+  "icon": "4803.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "ogre",
+  "ammoTier": 6,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
    "magic_str": 0,
    "prayer": 0
   }
@@ -38946,6 +42994,138 @@
   }
  },
  {
+  "id": 830,
+  "name": "Rune javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "830.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 6,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 124,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 836,
+  "name": "Rune javelin (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "836.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 6,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 124,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5647,
+  "name": "Rune javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5647.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 6,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 124,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5653,
+  "name": "Rune javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5653.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 6,
+  "ammoExclusive": true,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 124,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 1201,
   "name": "Rune kiteshield",
   "slot": "shield",
@@ -39987,6 +44167,134 @@
   }
  },
  {
+  "id": 9144,
+  "name": "Runite bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9144.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 115,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9291,
+  "name": "Runite bolts (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "9291.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 115,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9298,
+  "name": "Runite bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9298.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 115,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9305,
+  "name": "Runite bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9305.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 7,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 115,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 26731,
   "name": "Saika's hood",
   "version": "Normal",
@@ -40514,6 +44822,130 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9337,
+  "name": "Sapphire bolts",
+  "slot": "ammo",
+  "icon": "9337.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 83,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9240,
+  "name": "Sapphire bolts (e)",
+  "slot": "ammo",
+  "icon": "9240.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 83,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21963,
+  "name": "Sapphire dragon bolts",
+  "slot": "ammo",
+  "icon": "21963.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21940,
+  "name": "Sapphire dragon bolts (e)",
+  "slot": "ammo",
+  "icon": "21940.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 5,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
    "magic_str": 0,
    "prayer": 0
   }
@@ -41350,6 +45782,254 @@
   "bonuses": {
    "str": 75,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33577,
+  "name": "Seeking adamant arrow",
+  "slot": "ammo",
+  "icon": "33577.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 5,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 20
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 31,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33589,
+  "name": "Seeking amethyst arrow",
+  "slot": "ammo",
+  "icon": "33589.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 7,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 20
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 55,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33553,
+  "name": "Seeking bronze arrow",
+  "slot": "ammo",
+  "icon": "33553.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 1,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 20
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 7,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33595,
+  "name": "Seeking dragon arrow",
+  "slot": "ammo",
+  "icon": "33595.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 8,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 20
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 60,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33559,
+  "name": "Seeking iron arrow",
+  "slot": "ammo",
+  "icon": "33559.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 2,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 20
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 10,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33571,
+  "name": "Seeking mithril arrow",
+  "slot": "ammo",
+  "icon": "33571.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 20
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 22,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33583,
+  "name": "Seeking rune arrow",
+  "slot": "ammo",
+  "icon": "33583.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 6,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 20
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 49,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 33565,
+  "name": "Seeking steel arrow",
+  "slot": "ammo",
+  "icon": "33565.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 20
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 16,
    "magic_str": 0,
    "prayer": 0
   }
@@ -42300,6 +46980,134 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9145,
+  "name": "Silver bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9145.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 36,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9292,
+  "name": "Silver bolts (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "9292.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 36,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9299,
+  "name": "Silver bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9299.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 36,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9306,
+  "name": "Silver bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9306.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 3,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 36,
    "magic_str": 0,
    "prayer": 0
   }
@@ -44166,6 +48974,134 @@
   }
  },
  {
+  "id": 886,
+  "name": "Steel arrow",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "886.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 3,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 16,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 887,
+  "name": "Steel arrow (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "887.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 3,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 16,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5618,
+  "name": "Steel arrow (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5618.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 3,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 16,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5624,
+  "name": "Steel arrow (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5624.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "arrow",
+  "ammoTier": 3,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 16,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 1353,
   "name": "Steel axe",
   "slot": "weapon",
@@ -44228,6 +49164,134 @@
   }
  },
  {
+  "id": 9141,
+  "name": "Steel bolts",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "9141.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9288,
+  "name": "Steel bolts (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "9288.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9295,
+  "name": "Steel bolts (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "9295.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9302,
+  "name": "Steel bolts (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "9302.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 4,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 4123,
   "name": "Steel boots",
   "slot": "feet",
@@ -44252,6 +49316,38 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 4783,
+  "name": "Steel brutal",
+  "slot": "ammo",
+  "icon": "4783.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "ogre",
+  "ammoTier": 3,
+  "ammoExclusive": true,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 19,
    "magic_str": 0,
    "prayer": 0
   }
@@ -45162,6 +50258,138 @@
   "bonuses": {
    "str": 0,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 827,
+  "name": "Steel javelin",
+  "version": "Unpoisoned",
+  "slot": "ammo",
+  "icon": "827.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 3,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 833,
+  "name": "Steel javelin (p)",
+  "version": "Poison",
+  "slot": "ammo",
+  "icon": "833.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 3,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5644,
+  "name": "Steel javelin (p+)",
+  "version": "Poison+",
+  "slot": "ammo",
+  "icon": "5644.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 3,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 5650,
+  "name": "Steel javelin (p++)",
+  "version": "Poison++",
+  "slot": "ammo",
+  "icon": "5650.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "javelin",
+  "ammoTier": 3,
+  "ammoExclusive": true,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 64,
    "magic_str": 0,
    "prayer": 0
   }
@@ -46268,6 +51496,38 @@
   }
  },
  {
+  "id": 28872,
+  "name": "Sunlight antler bolts",
+  "slot": "ammo",
+  "icon": "28872.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "antler",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 55,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 33722,
   "name": "Sunspear",
   "slot": "weapon",
@@ -46502,6 +51762,38 @@
   "bonuses": {
    "str": 5,
    "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 10144,
+  "name": "Tarromin tar",
+  "slot": "ammo",
+  "icon": "10144.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "tar",
+  "ammoTier": 0,
+  "ammoExclusive": true,
+  "tier": "common",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 31,
    "magic_str": 0,
    "prayer": 0
   }
@@ -48622,6 +53914,130 @@
   }
  },
  {
+  "id": 9336,
+  "name": "Topaz bolts",
+  "slot": "ammo",
+  "icon": "9336.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 4,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 66,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 9239,
+  "name": "Topaz bolts (e)",
+  "slot": "ammo",
+  "icon": "9239.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 4,
+  "tier": "decent",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 66,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21961,
+  "name": "Topaz dragon bolts",
+  "slot": "ammo",
+  "icon": "21961.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
+  "id": 21938,
+  "name": "Topaz dragon bolts (e)",
+  "slot": "ammo",
+  "icon": "21938.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "bolt",
+  "ammoTier": 8,
+  "tier": "strong",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 122,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 4747,
   "name": "Torag's hammers",
   "version": "Undamaged",
@@ -49889,6 +55305,37 @@
   }
  },
  {
+  "id": 20223,
+  "name": "Unholy blessing",
+  "slot": "ammo",
+  "icon": "20223.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "any",
+  "ammoTier": 0,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 1
+  }
+ },
+ {
   "id": 3842,
   "name": "Unholy book",
   "slot": "shield",
@@ -50997,6 +56444,37 @@
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
+  }
+ },
+ {
+  "id": 20232,
+  "name": "War blessing",
+  "slot": "ammo",
+  "icon": "20232.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "any",
+  "ammoTier": 0,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 1
   }
  },
  {
@@ -54165,35 +59643,6 @@
   },
   "bonuses": {
    "str": 2,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 25975,
-  "name": "Lightbearer",
-  "slot": "ring",
-  "icon": "25975.png",
-  "tradeable": true,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0

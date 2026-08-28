@@ -5,6 +5,7 @@ import { RsTooltip } from '../theme/RsTooltip';
 import { GnomePeek } from '../theme/GnomePeek';
 import type { Boss } from './DataProvider';
 import { availableBosses, type NuzlockeRun } from './nuzlocke';
+import { alphaKey } from './copy';
 import { filterBossPool, type Settings } from './settings';
 import styles from './NuzlockeScreen.module.css';
 
@@ -63,10 +64,9 @@ export const NuzlockeScreen = ({
   onOpenHistory: () => void;
 }) => {
   const pool = filterBossPool(bosses, settings);
-  // Alphabetical by the boss's CURRENT name (a rename, e.g. Great Olm to
-  // Chambers of Xeric, must move the tile with it, not leave it in its old
-  // data-file position).
-  const sortedPool = [...pool].sort((a, b) => a.name.localeCompare(b.name));
+  // Alphabetical by the boss's CURRENT name, ignoring leading articles, so a
+  // rename (e.g. Great Olm to Chambers of Xeric) moves the tile correctly.
+  const sortedPool = [...pool].sort((a, b) => alphaKey(a.name).localeCompare(alphaKey(b.name)));
   const { states } = nuzlocke;
   const total = pool.length;
   const available = availableBosses(pool, states).length;

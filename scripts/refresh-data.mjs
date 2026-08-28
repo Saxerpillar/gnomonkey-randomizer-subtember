@@ -68,7 +68,6 @@ const main = async () => {
     namePatterns,
     ids,
     questOnlyNames,
-    excludeAmmo,
     removeNames,
     removeNamePatterns,
   } = curation.poolExclusions;
@@ -82,7 +81,6 @@ const main = async () => {
   const kept = raw.filter(
     (e) =>
       SLOTS.includes(e.slot) &&
-      !(excludeAmmo && e.slot === 'ammo') &&
       Number.isInteger(e.id) &&
       e.id > 0 &&
       e.image &&
@@ -149,6 +147,21 @@ const main = async () => {
   // 75); prayer is slightly discounted. magic_str is stored as percent x10,
   // so it is rescaled into melee-strength units (Occult 50 -> 10, level with
   // Amulet of torture's +10 str) before being weighed as damage.
+  // Weapon attack styles, used by the speed-adjusted power formula and the
+  // per-style tier bands. Keep in sync with STYLE_BY_CATEGORY in
+  // src/engine/roll.ts.
+  const STYLE_BY_CATEGORY = {
+    'Slash Sword': 'melee', 'Stab Sword': 'melee', '2h Sword': 'melee',
+    Blunt: 'melee', blunt: 'melee', Axe: 'melee', Spear: 'melee', Spiked: 'melee',
+    Claw: 'melee', Polearm: 'melee', Whip: 'melee', Bludgeon: 'melee', Scythe: 'melee',
+    Flail: 'melee', Partisan: 'melee', 'Multi-Melee': 'melee', Pickaxe: 'melee',
+    Bulwark: 'melee', Unarmed: 'melee',
+    Bow: 'ranged', Crossbow: 'ranged', Thrown: 'ranged', Chinchompas: 'ranged',
+    Gun: 'ranged', Blaster: 'ranged', Salamander: 'ranged',
+    Staff: 'magic', 'Bladed Staff': 'magic', 'Powered Staff': 'magic', Polestaff: 'magic',
+  };
+  const styleOf = (e) => (e.slot === 'weapon' ? STYLE_BY_CATEGORY[e.category] ?? null : null);
+
   const MAGIC_SCALE = 5;
   const powerOf = (e) => {
     const damage = Math.max(
@@ -204,6 +217,15 @@ const main = async () => {
   const poolBefore = pool.length;
   pool = pool.filter((e) => tradeableIds.has(e.id) || !tradeableBases.has(variantBase(e.name)));
   console.log(`  ${poolBefore - pool.length} untradeable duplicates of tradeable variants dropped`);
+
+  // Ammo stays in the pool only when it's TRADEABLE (the untradeable versions
+  // are pure clutter) — except the curated atlatl dart, whose launcher depends
+  // on it.
+  const ammoBefore = pool.length;
+  pool = pool.filter(
+    (e) => e.slot !== 'ammo' || tradeableIds.has(e.id) || keepZeroStat.has(e.name),
+  );
+  console.log(`  ${ammoBefore - pool.length} untradeable ammo dropped`);
 
   const prices = {};
   for (const item of pool) {
@@ -278,20 +300,7 @@ const main = async () => {
   })();
 
   // Weapons tier WITHIN their attack style, so a style isn't starved of
-  // strong/elite picks by the sheer volume of melee weapons. Keep in sync with
-  // STYLE_BY_CATEGORY in src/engine/roll.ts.
-  const STYLE_BY_CATEGORY = {
-    'Slash Sword': 'melee', 'Stab Sword': 'melee', '2h Sword': 'melee',
-    Blunt: 'melee', blunt: 'melee', Axe: 'melee', Spear: 'melee', Spiked: 'melee',
-    Claw: 'melee', Polearm: 'melee', Whip: 'melee', Bludgeon: 'melee', Scythe: 'melee',
-    Flail: 'melee', Partisan: 'melee', 'Multi-Melee': 'melee', Pickaxe: 'melee',
-    Bulwark: 'melee', Unarmed: 'melee',
-    Bow: 'ranged', Crossbow: 'ranged', Thrown: 'ranged', Chinchompas: 'ranged',
-    Gun: 'ranged', Blaster: 'ranged', Salamander: 'ranged',
-    Staff: 'magic', 'Bladed Staff': 'magic', 'Powered Staff': 'magic', Polestaff: 'magic',
-  };
-  const styleOf = (e) => (e.slot === 'weapon' ? STYLE_BY_CATEGORY[e.category] ?? null : null);
-
+  // strong/elite picks by the sheer volume of melee weapons.
   const assignBand = (group) => {
     const scored = group.map((e) => ({ e, p: powerOf(e) })).sort((a, b) => a.p - b.p);
     scored.forEach((s, i) => {

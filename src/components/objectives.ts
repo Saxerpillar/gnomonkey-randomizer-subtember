@@ -35,7 +35,7 @@ const OBJECTIVES: Record<string, ObjectiveSpec> = {
     bossWave: 58,
     bossLabel: 'Defeat TzKal-Zuk',
   },
-  'TzTok-Jad': {
+  'The Fight Caves': {
     label: (n) => `Complete wave ${n}`,
     min: 8,
     max: 63,

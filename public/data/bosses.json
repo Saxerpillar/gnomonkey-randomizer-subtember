@@ -176,11 +176,11 @@
  {
   "name": "Galvek",
   "image": "Galvek.png",
-  "noMeleeWeapons": true,
   "tags": [
    "quest",
    "mid"
-  ]
+  ],
+  "noMeleeWeapons": true
  },
  {
   "name": "General Graardor",
@@ -258,22 +258,22 @@
  {
   "name": "Kraken",
   "image": "Kraken.png",
-  "noMeleeWeapons": true,
   "tags": [
    "slayer",
    "easy"
-  ]
+  ],
+  "noMeleeWeapons": true
  },
  {
   "name": "Kree'arra",
   "image": "Kree'arra.png",
-  "noMeleeWeapons": true,
-  "meleeExceptions": [
-   "Noxious halberd"
-  ],
   "tags": [
    "gwd",
    "mid"
+  ],
+  "noMeleeWeapons": true,
+  "meleeExceptions": [
+   "Noxious halberd"
   ]
  },
  {
@@ -286,10 +286,10 @@
  {
   "name": "Maggot King",
   "image": "Maggot King.png",
-  "noMeleeWeapons": true,
   "tags": [
    "hard"
-  ]
+  ],
+  "noMeleeWeapons": true
  },
  {
   "name": "Mimic",
@@ -499,12 +499,12 @@
  {
   "name": "Zulrah",
   "image": "Zulrah (magma).png",
+  "tags": [
+   "mid"
+  ],
   "noMeleeWeapons": true,
   "meleeExceptions": [
    "Noxious halberd"
-  ],
-  "tags": [
-   "mid"
   ]
  }
 ]

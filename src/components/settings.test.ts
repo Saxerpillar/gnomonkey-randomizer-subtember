@@ -4,6 +4,7 @@ import {
   effectiveBudget,
   blockedByGroupRule,
   filterBossPool,
+  isBossAvailable,
   WILDY_DEFAULT_GP,
   type Settings,
 } from './settings';
@@ -30,6 +31,18 @@ describe('filterBossPool', () => {
     const pool = [boss('B', ['slayer']), boss('C', ['sporadic'])];
     expect(filterBossPool(pool, withPool({}))).toEqual([]);
     expect(filterBossPool(pool, withPool({ slayerBosses: true, sporadicBosses: true }))).toHaveLength(2);
+  });
+
+  it('an individually included boss rolls despite its group toggle', () => {
+    const pool = [boss('A', ['gwd']), boss('B', ['gwd']), boss('C', ['slayer'])];
+    const settings = withPool({ excludedPools: ['gwd'], includedBosses: ['B'] });
+    expect(isBossAvailable(boss('B', ['gwd']), settings)).toBe(true);
+    expect(filterBossPool(pool, settings).map((b) => b.name)).toEqual(['B']);
+  });
+
+  it('an individual exclusion still beats everything', () => {
+    const settings = withPool({ slayerBosses: true, excludedBosses: ['B'], includedBosses: ['B'] });
+    expect(isBossAvailable(boss('B', ['slayer']), settings)).toBe(false);
   });
 });
 

@@ -22,9 +22,9 @@ describe('bossObjective', () => {
   });
 
   it('names TzTok-Jad from wave 45 up', () => {
-    expect(bossObjective('TzTok-Jad', 0.5)).toBe('Complete wave 36');
-    expect(bossObjective('TzTok-Jad', 0.674)).toBe('Defeat TzTok-Jad'); // wave 45
-    expect(bossObjective('TzTok-Jad', 1)).toBe('Defeat TzTok-Jad'); // 63
+    expect(bossObjective('The Fight Caves', 0.5)).toBe('Complete wave 36');
+    expect(bossObjective('The Fight Caves', 0.674)).toBe('Defeat TzTok-Jad'); // wave 45
+    expect(bossObjective('The Fight Caves', 1)).toBe('Defeat TzTok-Jad'); // 63
   });
 
   it('leaves other objectives as plain lines', () => {
