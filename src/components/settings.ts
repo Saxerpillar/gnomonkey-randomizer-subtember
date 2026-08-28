@@ -1,14 +1,14 @@
 import type { Boss } from './DataProvider';
 import { CORE_SLOTS, TIERS, type Tier } from '../engine/types';
 
-export const POOL_TAGS = ['gwd', 'dt2', 'raid', 'minigame', 'quest'] as const;
+export const POOL_TAGS = ['gwd', 'dt2', 'raid', 'wave-based', 'quest'] as const;
 export type PoolTag = (typeof POOL_TAGS)[number];
 
 export const POOL_LABEL: Record<PoolTag, string> = {
   gwd: 'GWD bosses',
   dt2: 'DT2 bosses',
   raid: 'Include Raids',
-  minigame: 'Wave-based encounters',
+  'wave-based': 'Wave-based encounters',
   quest: 'Quest bosses',
 };
 
@@ -23,7 +23,7 @@ export interface Settings {
   slayerBosses: boolean;
   /** Sporadic bosses are not repeatable on demand, default OFF. */
   sporadicBosses: boolean;
-  /** Pool tags excluded from the boss pool (gwd/dt2/raid/minigame/quest). */
+  /** Pool tags excluded from the boss pool (gwd/dt2/raid/wave-based/quest). */
   excludedPools: PoolTag[];
   /** Individual bosses switched off by name, from the boss pool manager. */
   excludedBosses: string[];

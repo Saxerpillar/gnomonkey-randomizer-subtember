@@ -157,12 +157,20 @@ const main = async () => {
       e.bonuses.magic_str / MAGIC_SCALE,
       0,
     );
-    return (
+    const power =
       Math.max(...Object.values(e.offensive), 0) * 1.0 +
       damage * 2.5 +
       Object.values(e.defensive).reduce((a, b) => a + b, 0) * 0.08 +
-      Math.max(e.bonuses.prayer, 0) * 0.5
-    );
+      Math.max(e.bonuses.prayer, 0) * 0.5;
+    // Weapons: DPS scales with attack speed, so a weapon's power is its
+    // raw strength per tick. Ranged weapons attack with the rapid style
+    // (one tick faster than their stored base speed). Lower speed = faster
+    // = higher power per tick.
+    if (e.slot === 'weapon' && e.speed > 0) {
+      const speed = styleOf(e) === 'ranged' ? Math.max(1, e.speed - 1) : e.speed;
+      return power / speed;
+    }
+    return power;
   };
 
   // Anything with no combat stats at all is not gear — a cosmetic cape with

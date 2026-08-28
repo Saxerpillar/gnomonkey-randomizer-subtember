@@ -655,7 +655,7 @@ const Main = () => {
     // Each setup rolls after the last, EXCLUDING the items already taken, so
     // no piece appears in two skeletons.
     const isRaid = boss.tags.includes('raid');
-    const isWave = boss.tags.includes('minigame');
+    const isWave = boss.tags.includes('wave-based');
     const markUsed = (l: Loadout, used: Set<number>) => {
       for (const s of SLOTS) {
         const it = l[s];
@@ -1103,7 +1103,7 @@ const Main = () => {
                           // Wave-based fights scale the objective with the
                           // tier-point score (best of the two setups), not
                           // the gp value of the kit.
-                          state.boss.tags.includes('minigame') && state.squad
+                          state.boss.tags.includes('wave-based') && state.squad
                             ? (Math.max(...state.squad.map((l) => gearScore(l.loadout))) -
                                 GEAR_SCORE_MIN) /
                               (GEAR_SCORE_MAX - GEAR_SCORE_MIN)

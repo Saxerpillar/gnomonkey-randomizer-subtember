@@ -42,7 +42,6 @@
     "name": "Barrows",
     "image": "Barrows.png",
     "tags": [
-      "minigame",
       "easy"
     ]
   },
@@ -170,7 +169,7 @@
     "name": "Fortis Colosseum",
     "image": "Sol Heredit.png",
     "tags": [
-      "minigame",
+      "wave-based",
       "hard"
     ]
   },
@@ -382,7 +381,7 @@
     "name": "The Fight Caves",
     "image": "TzTok-Jad.png",
     "tags": [
-      "minigame",
+      "wave-based",
       "mid"
     ]
   },
@@ -398,7 +397,7 @@
     "name": "The Inferno",
     "image": "TzKal-Zuk.png",
     "tags": [
-      "minigame",
+      "wave-based",
       "hard"
     ]
   },

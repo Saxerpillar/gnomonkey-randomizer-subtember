@@ -175,7 +175,10 @@
 
 .squad {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* auto-fit: three raid lanes make three equal columns; a two-setup
+     wave run collapses to two, so the pair stays centred instead of hugging
+     the left with an empty third column. */
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: 16px;
   align-items: start;
 }

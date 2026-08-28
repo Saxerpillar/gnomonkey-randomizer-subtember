@@ -30,7 +30,7 @@ const GROUP_TOGGLES: { key: GroupKey; label: string }[] = [
   { key: 'gwd', label: 'GWD' },
   { key: 'dt2', label: 'DT2' },
   { key: 'raid', label: 'Raids' },
-  { key: 'minigame', label: 'Wave-based' },
+  { key: 'wave-based', label: 'Wave-based' },
   { key: 'quest', label: 'Quest' },
   { key: 'other', label: 'Other' },
 ];
