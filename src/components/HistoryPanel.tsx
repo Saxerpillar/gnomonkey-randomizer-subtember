@@ -144,7 +144,7 @@ export const HistoryPanel = ({
     <div className={styles.backdrop} onClick={(e) => e.target === e.currentTarget && onClose()}>
       <RsPanel title="Run history" className={styles.panel} bodyClassName={styles.panelBody}>
         <div className={styles.summary}>
-          <span className={styles.cleared}>{counts.cleared} cleared</span>
+          <span className={styles.cleared}>{counts.cleared} completed</span>
           <span className={styles.failed}>{counts.failed} failed</span>
           <span className={styles.unmarked}>{counts.unmarked} unmarked</span>
         </div>

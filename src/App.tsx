@@ -29,7 +29,7 @@ import {
 } from './components/challenges';
 import { DataProvider, useGameData, type Boss } from './components/DataProvider';
 import { EquipmentPanel } from './components/EquipmentPanel';
-import { bossObjective, hardModeLabel } from './components/objectives';
+import { bossObjective, hardModeLabel, VALUE_CAP } from './components/objectives';
 import {
   nuzlockeLabel,
   rollNuzlockeBoss,
@@ -56,7 +56,11 @@ import { ValueCounter } from './components/ValueCounter';
 import { parseBudget } from './engine/parse';
 import { mulberry32, pick, randomSeed } from './engine/rng';
 import {
+  ammoCandidatesFor,
   filterWeaponsFor,
+  gearScore,
+  GEAR_SCORE_MAX,
+  GEAR_SCORE_MIN,
   loadoutValue,
   roll,
   rerollSlot,
@@ -65,7 +69,7 @@ import {
   type Style,
 } from './engine/roll';
 import { sortSquadByStyle } from './engine/squadSort';
-import { emptyLoadout, SLOTS, type Loadout, type Slot } from './engine/types';
+import { emptyLoadout, SLOTS, type Item, type Loadout, type Slot } from './engine/types';
 import { GpValue } from './theme/GpValue';
 import { RsButton } from './theme/RsButton';
 import { RsContextMenu, type MenuEntry } from './theme/RsContextMenu';
@@ -77,8 +81,16 @@ interface State {
   challenge: Challenge | null;
   /** The rolled fight is the hard-mode variant. */
   hardMode: boolean;
-  /** Raids only: one style-forced setup per team member. */
-  squad: { style: Style; loadout: Loadout }[] | null;
+  /** Raids: one style-forced setup per team member; wave-based encounters:
+   *  two unlabelled setups. `style` marks the style-forced lanes. */
+  squad: { label: string; style?: Style; loadout: Loadout }[] | null;
+  /** Doom of Mokhaiotl: post-reveal extra weapons (with their ammo). */
+  extras: {
+    weapon: Item;
+    ammo: Item | null;
+    candidates: Item[];
+    ammoCandidates: Item[];
+  }[] | null;
   settings: Settings;
 }
 
@@ -88,7 +100,19 @@ type Action =
   | { type: 'SET_LOADOUT'; loadout: Loadout }
   | { type: 'SET_BOSS'; boss: Boss; hardMode: boolean }
   | { type: 'SET_CHALLENGE'; challenge: Challenge | null }
-  | { type: 'SET_SQUAD'; squad: { style: Style; loadout: Loadout }[] | null }
+  | {
+      type: 'SET_SQUAD';
+      squad: { label: string; style?: Style; loadout: Loadout }[] | null;
+    }
+  | {
+      type: 'SET_EXTRAS';
+      extras: {
+        weapon: Item;
+        ammo: Item | null;
+        candidates: Item[];
+        ammoCandidates: Item[];
+      }[] | null;
+    }
   | { type: 'REMOVE_ITEM'; slot: Slot }
   | { type: 'REROLL_SLOT'; slot: Slot; loadout: Loadout }
   | { type: 'REROLL_SQUAD_SLOT'; lane: number; loadout: Loadout }
@@ -111,6 +135,7 @@ const initialState = (): State => {
     challenge: null,
     hardMode: false,
     squad: null,
+    extras: null,
     settings: { ...DEFAULT_SETTINGS },
   };
   try {
@@ -134,6 +159,8 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, challenge: action.challenge };
     case 'SET_SQUAD':
       return { ...state, squad: action.squad };
+    case 'SET_EXTRAS':
+      return { ...state, extras: action.extras };
     // Raid lanes are independent setups, so only the lane's own loadout changes.
     case 'REROLL_SQUAD_SLOT':
       return {
@@ -200,26 +227,26 @@ const Main = () => {
 
   const markRun = (id: string, outcome: Outcome) => {
     setHistory((h) => markOutcome(h, id, outcome));
-    // Reflect the fight's outcome on the Nuzlocke board: cleared -> ✓, failed -> ✗.
+    // Reflect the fight's outcome on the Nuzlocke board: completed -> ✓, failed -> ✗.
     const run = history.find((r) => r.id === id);
     if (run?.boss && run.nuzlockeId) {
       setNuzlocke((n) => ({
         ...n,
         states: {
           ...n.states,
-          [run.boss]: outcome === 'cleared' ? 'completed' : 'uncompleted',
+          [run.boss]: outcome === 'cleared' ? 'completed' : 'failed',
         },
       }));
     }
   };
   const deleteRun = (id: string) => setHistory((h) => removeRun(h, id));
   // Clicking a boss on the Nuzlocke board cycles it: not rolled -> completed ->
-  // uncompleted -> not rolled, so a missed or mistaken mark can be fixed live.
+  // failed -> not rolled, so a missed or mistaken mark can be fixed live.
   const cycleBoss = (name: string) => {
     setNuzlocke((n) => {
       const s = n.states;
       if (!(name in s)) return { ...n, states: { ...s, [name]: 'completed' } };
-      if (s[name] === 'completed') return { ...n, states: { ...s, [name]: 'uncompleted' } };
+      if (s[name] === 'completed') return { ...n, states: { ...s, [name]: 'failed' } };
       const next = { ...s };
       delete next[name];
       return { ...n, states: next };
@@ -227,8 +254,7 @@ const Main = () => {
   };
   // Abandon the current run: clear the board and start over (names of past
   // nuzlockes are kept, since history still groups by them).
-  const abandonNuzlocke = () => setNuzlocke({ states: {}, id: null, paused: false });
-  const togglePauseNuzlocke = () => setNuzlocke((n) => ({ ...n, paused: !n.paused }));
+  const abandonNuzlocke = () => setNuzlocke({ states: {}, id: null });
   const renameNuzlocke = (id: string, name: string) =>
     setNuzlockeNames((m) => ({ ...m, [id]: name }));
   // Marking a run's outcome is the way home too: clicking the button you
@@ -263,27 +289,42 @@ const Main = () => {
   } | null>(null);
   const { view, reveal, start: startCeremony, onRevealDone } = useCeremony(items);
 
-  /** Nuzlocke progress: per-boss fight outcome for the current pool cycle,
-   *  the run's stable id, and whether it is paused (settings unlocked). The
-   *  states blob is kept out of the history log so a corrupt run log cannot
-   *  take the pool down with it, and vice versa. */
+  /** Nuzlocke progress: per-boss fight outcome for the current pool cycle and
+   *  the run's stable id. Pausing is implicit — leaving the Nuzlocke view IS
+   *  the pause. The states blob is kept out of the history log so a corrupt
+   *  run log cannot take the pool down with it, and vice versa. */
   const [nuzlocke, setNuzlocke] = useState<NuzlockeRun>(() => {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
       const raw = saved.nuzlocke;
-      if (raw == null) return { states: {}, id: null, paused: false };
+      if (raw == null) return { states: {}, id: null };
       // v1 stored a bare list of fought names; v2 a states map. Both promote
       // to a run with no id, which is assigned on the next committed roll.
       if (Array.isArray(raw))
         return {
           states: Object.fromEntries(raw.map((n: string) => [n, 'completed'])),
           id: null,
-          paused: false,
         };
-      if (typeof raw === 'object' && 'states' in (raw as object)) return raw as NuzlockeRun;
-      return { states: raw as BossStates, id: null, paused: false };
+      if (typeof raw === 'object' && 'states' in (raw as object)) {
+        // 'uncompleted' was the old word for a failed fight.
+        const states = Object.fromEntries(
+          Object.entries((raw as { states: Record<string, string> }).states).map(
+            ([name, s]) => [name, s === 'uncompleted' ? 'failed' : s],
+          ),
+        ) as BossStates;
+        return { states, id: (raw as { id: string | null }).id ?? null };
+      }
+      return {
+        states: Object.fromEntries(
+          Object.entries(raw as Record<string, string>).map(([name, s]) => [
+            name,
+            s === 'uncompleted' ? 'failed' : s,
+          ]),
+        ) as BossStates,
+        id: null,
+      };
     } catch {
-      return { states: {}, id: null, paused: false };
+      return { states: {}, id: null };
     }
   });
   /** User-renamed nuzlocke labels, keyed by run id. */
@@ -308,11 +349,13 @@ const Main = () => {
   });
 
   // Once a nuzlocke's first roll commits, the gameplay settings are locked in
-  // until the run is paused or abandoned.
-  const nuzlockeLocked = nuzlocke.id != null && !nuzlocke.paused;
+  // while the Nuzlocke view is open. Leaving the view pauses the run (settings
+  // unlock); abandoning clears it.
+  const nuzlockeLocked = nuzlocke.id != null && screen === 'nuzlocke';
 
   // A locked nuzlocke is no place for debug rigging: rather than sitting
-  // disabled-but-on, debug mode switches itself off (pause to re-enable).
+  // disabled-but-on, debug mode switches itself off (leave the view to
+  // re-enable).
   useEffect(() => {
     if (nuzlockeLocked && state.settings.debugMode) {
       dispatch({ type: 'SET_SETTINGS', patch: { debugMode: false } });
@@ -381,6 +424,14 @@ const Main = () => {
   const bossWeaponRule = (b: Boss | null) =>
     b?.noMeleeWeapons ? { noMelee: true, meleeExceptions: b.meleeExceptions ?? [] } : null;
 
+  /** The Eclipse atlatl's darts are its whole damage — it must never roll
+   *  without them, however tight the budget was. */
+  const ensureAtlatlAmmo = (loadout: Loadout): Loadout => {
+    if (loadout.weapon?.name !== 'Eclipse atlatl' || loadout.ammo) return loadout;
+    const dart = items.find((i) => i.name === 'Atlatl dart');
+    return dart ? { ...loadout, ammo: dart } : loadout;
+  };
+
   /** Reroll a single slot, leaving the rest of the loadout alone. */
   const rerollOneSlot = (slot: Slot) => {
     const { settings } = state;
@@ -391,12 +442,14 @@ const Main = () => {
     const allowUntradeables = isWildy ? false : settings.allowUntradeables;
     const pool = filterWeaponsFor(items, bossWeaponRule(state.boss));
     const rng = mulberry32(randomSeed());
-    const loadout = rerollSlot(
-      pool,
-      state.loadout,
-      slot,
-      { budget: parsed.gp, allowUntradeables },
-      rng,
+    const loadout = ensureAtlatlAmmo(
+      rerollSlot(
+        pool,
+        state.loadout,
+        slot,
+        { budget: parsed.gp, allowUntradeables },
+        rng,
+      ),
     );
     const rolled = loadout[slot];
     if (!rolled) {
@@ -444,7 +497,11 @@ const Main = () => {
     const allowUntradeables = isWildy ? false : settings.allowUntradeables;
     const rng = mulberry32(randomSeed());
     const styled = filterWeaponsFor(
-      items.filter((i) => i.slot !== 'weapon' || styleOf(i) === entry.style),
+      // Style-forced lanes (raids) reroll within their style; the wave-based
+      // setups have no style and reroll from the whole weapon pool.
+      entry.style
+        ? items.filter((i) => i.slot !== 'weapon' || styleOf(i) === entry.style)
+        : items,
       bossWeaponRule(state.boss),
     );
     const loadout = rerollSlot(
@@ -541,6 +598,18 @@ const Main = () => {
     // Debug: an ignored budget and a tier-locked pool make any combination
     // reachable without fishing for it.
     const debugIgnoreBudget = settings.debugMode && settings.ignoreBudget;
+    const debug = settings.debugMode;
+    // A boss with a hard-mode variant is upgraded on a coin flip. Decided
+    // BEFORE the gear roll: a hard-mode fight lifts the weapon floor.
+    const hardMode =
+      boss.tags.includes('hard mode') &&
+      !settings.normalOnlyBosses.includes(boss.name) &&
+      (debug && settings.forceHardMode ? true : mulberry32(randomSeed())() < 0.5);
+    // Cosmetic coin flip, so plain Math.random rather than the seeded roller
+    // the actual outcomes use.
+    const challengeEmote =
+      challenge != null && (debug && settings.forceHardModeEmote ? true : Math.random() < 0.5);
+    const difficulty = difficultyOf(boss.tags);
     const rollSettings = {
       budget: debugIgnoreBudget ? null : parsed.gp,
       allowUntradeables,
@@ -548,7 +617,16 @@ const Main = () => {
       // per skeleton rather than pooling them across the team.
       tierFloors: settings.tierFloors,
       // Harder fights roll better gear.
-      tierBias: TIER_BIAS[difficultyOf(boss.tags)],
+      tierBias: TIER_BIAS[difficulty],
+      // The weapon floor scales with the fight: medium floors at decent
+      // (50/35/15 across decent/strong/elite), hard and hard-mode at strong
+      // (75/25).
+      minWeaponTier:
+        difficulty === 'hard' || hardMode
+          ? ('strong' as const)
+          : difficulty === 'mid'
+            ? ('decent' as const)
+            : undefined,
     };
     const rollPool =
       settings.debugMode && settings.forceTier !== 'off'
@@ -560,37 +638,83 @@ const Main = () => {
     // Some fights only make sense with one style — the Leviathan is ranged,
     // the Whisperer magic — so their weapon roll is forced the same way a
     // raid lane's is.
-    const loadout = isGauntlet
+    let loadout: Loadout = isGauntlet
       ? emptyLoadout()
       : boss.style
         ? rollForStyle(bossPool, boss.style, rollSettings, rng)
         : roll(bossPool, rollSettings, rng);
+    // The Eclipse atlatl always carries its darts, even when the budget ran
+    // out before ammo rolled.
+    if (!isGauntlet) loadout = ensureAtlatlAmmo(loadout);
 
-    // A boss with a hard-mode variant is upgraded on a coin flip; the ceremony
-    // reveals the normal fight first, then stamps HARD MODE after a beat.
-    const debug = settings.debugMode;
-    // Cosmetic coin flip, so plain Math.random rather than the seeded roller
-    // the actual outcomes use.
-    const challengeEmote =
-      challenge != null && (debug && settings.forceHardModeEmote ? true : Math.random() < 0.5);
-    const hardMode =
-      boss.tags.includes('hard mode') &&
-      !settings.normalOnlyBosses.includes(boss.name) &&
-      (debug && settings.forceHardMode ? true : mulberry32(randomSeed())() < 0.5);
-
-    // Raids send a team: one style-forced setup each for melee, ranged, magic.
+    // Raids send a style-forced team; wave-based encounters roll two plain
+    // setups (the same multi-skeleton machinery, minus the style sorting).
     const isRaid = boss.tags.includes('raid');
-    // Each lane rolls independently, then the team's gear is dealt back out so
-    // the pieces land on the setup they suit — before anything is revealed.
-    const squad =
-      isRaid && !isGauntlet
-        ? sortSquadByStyle(
-            (['melee', 'ranged', 'magic'] as const).map((style) => ({
-              style,
-              loadout: rollForStyle(bossPool, style, rollSettings, mulberry32(randomSeed())),
-            })),
-          )
+    const isWave = boss.tags.includes('minigame');
+    let squad: { label: string; style?: Style; loadout: Loadout }[] | null = null;
+    if (!isGauntlet) {
+      if (isRaid) {
+        squad = sortSquadByStyle(
+          (['melee', 'ranged', 'magic'] as const).map((style) => ({
+            style,
+            loadout: rollForStyle(bossPool, style, rollSettings, mulberry32(randomSeed())),
+          })),
+        ).map((s) => ({ label: STYLE_LABEL[s.style], style: s.style, loadout: s.loadout }));
+      } else if (isWave) {
+        squad = ([1, 2] as const).map((n) => ({
+          label: `Setup ${n}`,
+          loadout: roll(bossPool, rollSettings, mulberry32(randomSeed())),
+        }));
+      }
+    }
+
+    // Doom of Mokhaiotl: the main weapon is one style, the other two arrive
+    // AFTER the boss reveal, each with its ammo when it needs any.
+    const extras: {
+      weapon: Item;
+      ammo: Item | null;
+      candidates: Item[];
+      ammoCandidates: Item[];
+    }[] | null =
+      boss.name === 'Doom of Mokhaiotl' && !isGauntlet
+        ? (['melee', 'ranged', 'magic'] as const)
+            .filter(
+              (style) => style !== (loadout.weapon ? styleOf(loadout.weapon) : 'melee'),
+            )
+            .map((style) => {
+              const lane = rollForStyle(bossPool, style, rollSettings, mulberry32(randomSeed()));
+              if (!lane.weapon) return null;
+              // The lane's own ammo rolled after its armour, so a tight budget
+              // can starve it — and a ranged extra must always carry ammo it
+              // can actually fire. Fall back to a fresh compatible pick.
+              const ammo =
+                lane.ammo && ammoCandidatesFor(lane.weapon, [lane.ammo]).length
+                  ? lane.ammo
+                  : (() => {
+                      const compatible = ammoCandidatesFor(lane.weapon, items);
+                      return compatible.length > 0
+                        ? pick(mulberry32(randomSeed()), compatible)
+                        : null;
+                    })();
+              return {
+                weapon: lane.weapon,
+                ammo,
+                candidates: bossPool.filter(
+                  (i) => i.slot === 'weapon' && styleOf(i) === style,
+                ),
+                ammoCandidates: ammoCandidatesFor(lane.weapon, items),
+              };
+            })
+            .filter((e): e is NonNullable<typeof e> => e != null)
         : null;
+    // An extra ranged weapon's ammo lives in the GEAR SKELETON's ammo slot —
+    // never under the extra weapons. The main weapon is a different style than
+    // any extra, so when an extra is ranged the main one never needs ammo and
+    // the slot is free.
+    if (extras) {
+      const extraAmmo = extras.find((e) => e.ammo)?.ammo ?? null;
+      if (extraAmmo) loadout.ammo = extraAmmo;
+    }
 
     // Preload the winners so the reveal isn't gated on image load latency.
     const preload = (l: Loadout) => {
@@ -601,6 +725,10 @@ const Main = () => {
     };
     preload(loadout);
     squad?.forEach((s) => preload(s.loadout));
+    extras?.forEach((e) => {
+      new Image().src = asset(`img/items/${e.weapon.icon}`);
+      if (e.ammo) new Image().src = asset(`img/items/${e.ammo.icon}`);
+    });
 
     const commit = () => {
       // The boss counts as fought the moment the run commits, not when it was
@@ -632,7 +760,7 @@ const Main = () => {
           hardModeLabel: hardMode ? hardModeLabel(boss) : null,
           challenge: challenge?.text ?? null,
           nuzlockeId: runNuzlockeId,
-          // A raid's roll is all three setups, so the log carries all three.
+          // A multi-setup roll (raid or wave-based) logs every skeleton.
           value: squad
             ? squad.reduce((sum, lane) => sum + loadoutValue(lane.loadout), 0)
             : loadoutValue(loadout),
@@ -646,6 +774,7 @@ const Main = () => {
       dispatch({ type: 'SET_BOSS', boss, hardMode });
       dispatch({ type: 'SET_CHALLENGE', challenge });
       dispatch({ type: 'SET_SQUAD', squad });
+      dispatch({ type: 'SET_EXTRAS', extras });
       setPhase('result');
       if (!settings.skipAnimations) {
         if (challenge) pushStinger('challenge');
@@ -671,15 +800,15 @@ const Main = () => {
       isGauntlet,
       squad
         ? squad.map((s) => ({
-            label: STYLE_LABEL[s.style],
+            label: s.label,
             loadout: s.loadout,
           }))
         : null,
+      extras,
     );
   };
 
-  const normalOk = parseBudget(state.settings.budgetText).ok;
-  const wildyOk = parseBudget(state.settings.wildyBudgetText).ok;
+  const normalOk = parseBudget(state.settings.budgetText).ok;  const wildyOk = parseBudget(state.settings.wildyBudgetText).ok;
   const poolOk = filterBossPool(bosses, state.settings).length > 0;
   const decideReady = normalOk && (state.settings.excludeWildy || wildyOk) && poolOk;
   // The new-build prompt is in-flow under the CTA on the plain hero, but the
@@ -709,7 +838,7 @@ const Main = () => {
                   decideReady={decideReady}
                   onCycleBoss={cycleBoss}
                   onReset={abandonNuzlocke}
-                  onTogglePause={togglePauseNuzlocke}
+                  onRenameNuzlocke={renameNuzlocke}
                   onExit={() => setScreen('main')}
                   onDecide={decide}
                   onOpenSettings={() => setSettingsOpen(true)}
@@ -753,7 +882,6 @@ const Main = () => {
             bosses={bosses}
             nuzlockeLocked={nuzlockeLocked}
             onChange={(patch) => dispatch({ type: 'SET_SETTINGS', patch })}
-            onPauseNuzlocke={togglePauseNuzlocke}
             onAbandonNuzlocke={abandonNuzlocke}
             onClose={() => setSettingsOpen(false)}
           />
@@ -851,6 +979,8 @@ const Main = () => {
                 revealing={view?.boss == null}
                 showChallenge={false}
                 deactivated={view?.gearless}
+                extras={view?.extras ?? undefined}
+                pendingExtras={view?.pendingExtras}
                 style={{ width: '100%' }}
               />
             ) : (
@@ -940,15 +1070,27 @@ const Main = () => {
                   boss={state.boss}
                   hardMode={state.hardMode}
                   objective={
-                    state.boss ? bossObjective(state.boss.name, loadoutValue(state.loadout)) : null
+                    state.boss
+                      ? bossObjective(
+                          state.boss.name,
+                          // Wave-based fights scale the objective with the
+                          // tier-point score (best of the two setups), not
+                          // the gp value of the kit.
+                          state.boss.tags.includes('minigame') && state.squad
+                            ? (Math.max(...state.squad.map((l) => gearScore(l.loadout))) -
+                                GEAR_SCORE_MIN) /
+                              (GEAR_SCORE_MAX - GEAR_SCORE_MIN)
+                            : loadoutValue(state.loadout) / VALUE_CAP,
+                        )
+                      : null
                   }
                 />
                 <ChallengePanel challenge={state.challenge} />
               </div>
             </RsPanel>
             <div className="squad">
-              {state.squad.map(({ style, loadout }, lane) => (
-                <RsPanel key={style} title={STYLE_LABEL[style]} className="squadPanel">
+              {state.squad.map(({ label, loadout }, lane) => (
+                <RsPanel key={label} title={label} className="squadPanel">
                   <div className="gearStack">
                     {/* data-lane scopes the reroll card's flight target to this
                         panel; the three lanes share every data-slot name. */}
@@ -973,8 +1115,8 @@ const Main = () => {
                     onClick={() => settleRun(currentRunId, 'cleared')}
                   >
                     {history.find((r) => r.id === currentRunId)?.outcome === 'cleared'
-                      ? '✓ CLEARED'
-                      : 'CLEARED'}
+                      ? '✓ COMPLETED'
+                      : 'COMPLETED'}
                   </RsButton>
                   <RsButton
                     variant="danger"
@@ -1014,6 +1156,7 @@ const Main = () => {
             hardMode={state.hardMode}
             challenge={state.challenge}
             deactivated={isGauntletRun}
+            extras={state.extras?.map(({ weapon }) => ({ weapon }))}
             onSlotContextMenu={(slot, e) => openSlotMenu(slot, e)}
           />
           <div className="actions" data-solid="">
@@ -1024,8 +1167,8 @@ const Main = () => {
                   onClick={() => settleRun(currentRunId, 'cleared')}
                 >
                   {history.find((r) => r.id === currentRunId)?.outcome === 'cleared'
-                    ? '✓ CLEARED'
-                    : 'CLEARED'}
+                    ? '✓ COMPLETED'
+                    : 'COMPLETED'}
                 </RsButton>
                 <RsButton
                   variant="danger"

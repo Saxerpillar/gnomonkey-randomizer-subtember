@@ -8,6 +8,9 @@
   border-radius: 4px;
   box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.4);
   min-width: 190px;
+  /* Never outgrow its half of the gear row — the extra-weapon names would
+     otherwise blow the panel up and push the skeleton below the stats. */
+  max-width: 100%;
 }
 
 .header {
@@ -43,4 +46,66 @@
   display: flex;
   flex-direction: column;
   gap: 1px;
+}
+
+/* The two post-reveal extra weapons, kept compact so the panel's height stays
+   put: one tight row per weapon, ammo riding along. */
+.extras {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.extra {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 19px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--gold-bright);
+  text-shadow: 1px 1px 0 #000;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.extraIcon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex: none;
+}
+
+.extraName {
+  /* allow the ellipsis to bite when the panel is capped */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.extraAmmoIcon {
+  margin-left: 6px;
+}
+
+.extraAmmo {
+  color: var(--text-muted);
+}
+
+.extraPending {
+  animation: pendingPulse 1.2s ease-in-out infinite;
+}
+
+.extraGhost {
+  color: var(--text-muted);
+  font-family: var(--font-bold);
+}
+
+@keyframes pendingPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
 }

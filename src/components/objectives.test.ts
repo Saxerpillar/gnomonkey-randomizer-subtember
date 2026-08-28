@@ -1,7 +1,38 @@
 import { describe, expect, it } from 'vitest';
-import { hardModeLabel } from './objectives';
+import { bossObjective, hardModeLabel } from './objectives';
 
 const boss = (name: string, tags: string[] = []) => ({ name, tags });
+
+describe('bossObjective', () => {
+  it('scales the depth linearly with the power lever', () => {
+    expect(bossObjective('Fortis Colosseum', 0)).toBe('Complete wave 4');
+    expect(bossObjective('Fortis Colosseum', 0.25)).toBe('Complete wave 6');
+  });
+
+  it('names Sol Heredit from wave 9 up', () => {
+    expect(bossObjective('Fortis Colosseum', 0.5)).toBe('Complete wave 8');
+    expect(bossObjective('Fortis Colosseum', 0.625)).toBe('Defeat Sol Heredit'); // wave 9
+    expect(bossObjective('Fortis Colosseum', 1)).toBe('Defeat Sol Heredit'); // 12
+  });
+
+  it('names TzKal-Zuk from wave 58 up', () => {
+    expect(bossObjective('The Inferno', 0.5)).toBe('Complete wave 44');
+    expect(bossObjective('The Inferno', 0.784)).toBe('Defeat TzKal-Zuk'); // wave 58
+    expect(bossObjective('The Inferno', 1)).toBe('Defeat TzKal-Zuk'); // 69
+  });
+
+  it('names TzTok-Jad from wave 45 up', () => {
+    expect(bossObjective('TzTok-Jad', 0.5)).toBe('Complete wave 36');
+    expect(bossObjective('TzTok-Jad', 0.674)).toBe('Defeat TzTok-Jad'); // wave 45
+    expect(bossObjective('TzTok-Jad', 1)).toBe('Defeat TzTok-Jad'); // 63
+  });
+
+  it('leaves other objectives as plain lines', () => {
+    expect(bossObjective('Doom of Mokhaiotl', 0)).toBe('Complete delve 4');
+    expect(bossObjective('Doom of Mokhaiotl', 1)).toBe('Complete delve 16');
+    expect(bossObjective('Some boss', 1)).toBeNull();
+  });
+});
 
 describe('hardModeLabel', () => {
   it('uses each raid’s own word for its upgraded version', () => {

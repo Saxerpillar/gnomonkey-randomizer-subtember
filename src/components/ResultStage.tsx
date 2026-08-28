@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { asset } from '../asset';
-import { loadoutValue } from '../engine/roll';
-import type { Loadout, Slot } from '../engine/types';
+import { gearScore, GEAR_SCORE_MAX_DOOM, GEAR_SCORE_MIN, loadoutValue } from '../engine/roll';
+import { emptyLoadout, type Item, type Loadout, type Slot } from '../engine/types';
 import { GpValue } from '../theme/GpValue';
 import { GnomePeek } from '../theme/GnomePeek';
 import { RsPanel } from '../theme/RsPanel';
@@ -10,7 +10,7 @@ import { BossPanel, ChallengePanel } from './BossPanel';
 import type { Challenge } from './challenges';
 import type { Boss } from './DataProvider';
 import { EquipmentPanel } from './EquipmentPanel';
-import { bossObjective } from './objectives';
+import { bossObjective, VALUE_CAP } from './objectives';
 
 /**
  * The two-panel "final info" layout: your gear on the left, your challenger on
@@ -34,6 +34,8 @@ export const ResultStage = ({
   challenge = null,
   showChallenge = true,
   deactivated = false,
+  extras,
+  pendingExtras,
   onSlotContextMenu,
   style,
 }: {
@@ -47,10 +49,24 @@ export const ResultStage = ({
   showChallenge?: boolean;
   /** Gauntlet runs take no gear in, so the skeleton stays powered down. */
   deactivated?: boolean;
+  /** Doom of Mokhaiotl: post-reveal extra weapons. */
+  extras?: { weapon: Item | null }[];
+  /** Extra-weapon slots whose card is currently up. */
+  pendingExtras?: number[];
   onSlotContextMenu?: (slot: Slot, e: React.MouseEvent) => void;
   style?: CSSProperties;
 }) => {
   const value = loadoutValue(loadout);
+  // Doom of Mokhaiotl's difficulty also counts its two extra weapons' power
+  // (each a doubled weapon, so +10 each at elite on top of the main kit).
+  const isDoom = boss?.name === 'Doom of Mokhaiotl';
+  const extraScore = (extras ?? []).reduce(
+    (sum, e) => sum + (e.weapon ? gearScore({ ...emptyLoadout(), weapon: e.weapon }) : 0),
+    0,
+  );
+  const progress = isDoom
+    ? (gearScore(loadout) + extraScore - GEAR_SCORE_MIN) / (GEAR_SCORE_MAX_DOOM - GEAR_SCORE_MIN)
+    : value / VALUE_CAP;
   return (
     <main className="columns" style={style}>
       <RsPanel
@@ -65,7 +81,7 @@ export const ResultStage = ({
               onSlotContextMenu={onSlotContextMenu ?? (() => {})}
               deactivated={deactivated}
             />
-            <BonusesPanel loadout={loadout} />
+            <BonusesPanel loadout={loadout} extras={extras} pendingExtras={pendingExtras} />
           </div>
           <div className="value">
             Loadout value: <GpValue gp={value} />
@@ -82,7 +98,7 @@ export const ResultStage = ({
             boss={boss}
             revealing={revealing}
             hardMode={hardMode}
-            objective={boss ? bossObjective(boss.name, value) : null}
+            objective={boss ? bossObjective(boss.name, progress) : null}
           />
           {showChallenge && <ChallengePanel challenge={challenge} />}
         </div>

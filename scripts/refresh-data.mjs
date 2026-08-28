@@ -157,8 +157,11 @@ const main = async () => {
   // drops skilling tools. Cutting them here also lets junk become a real
   // low-power BAND rather than a synonym for "unstatted", which is what makes
   // a target tier distribution reachable at all.
+  // EXCEPTION: ammo whose power rides on its weapon's passive (atlatl darts)
+  // has zero stats but is still required — keep it so launchers can roll ammo.
+  const keepZeroStat = new Set(curation.poolExclusions.keepZeroStat ?? []);
   const canonical = [...byName.values()];
-  let pool = canonical.filter((e) => powerOf(e) > 0);
+  let pool = canonical.filter((e) => powerOf(e) > 0 || keepZeroStat.has(e.name));
   console.log(
     `  ${kept.length} after exclusions, ${canonical.length} canonical, ` +
       `${pool.length} with combat stats (${canonical.length - pool.length} stat-less dropped)`,
@@ -253,16 +256,40 @@ const main = async () => {
     return order.map((tier) => ({ tier, upto: (acc += TIER_TARGET[tier]) }));
   })();
 
-  const tiers = new Map(); // id -> tier
-  for (const slot of SLOTS) {
-    const scored = pool
-      .filter((e) => e.slot === slot)
-      .map((e) => ({ e, p: powerOf(e) }))
-      .sort((a, b) => a.p - b.p);
+  // Weapons tier WITHIN their attack style, so a style isn't starved of
+  // strong/elite picks by the sheer volume of melee weapons. Keep in sync with
+  // STYLE_BY_CATEGORY in src/engine/roll.ts.
+  const STYLE_BY_CATEGORY = {
+    'Slash Sword': 'melee', 'Stab Sword': 'melee', '2h Sword': 'melee',
+    Blunt: 'melee', blunt: 'melee', Axe: 'melee', Spear: 'melee', Spiked: 'melee',
+    Claw: 'melee', Polearm: 'melee', Whip: 'melee', Bludgeon: 'melee', Scythe: 'melee',
+    Flail: 'melee', Partisan: 'melee', 'Multi-Melee': 'melee', Pickaxe: 'melee',
+    Bulwark: 'melee', Unarmed: 'melee',
+    Bow: 'ranged', Crossbow: 'ranged', Thrown: 'ranged', Chinchompas: 'ranged',
+    Gun: 'ranged', Blaster: 'ranged', Salamander: 'ranged',
+    Staff: 'magic', 'Bladed Staff': 'magic', 'Powered Staff': 'magic', Polestaff: 'magic',
+  };
+  const styleOf = (e) => (e.slot === 'weapon' ? STYLE_BY_CATEGORY[e.category] ?? null : null);
+
+  const assignBand = (group) => {
+    const scored = group.map((e) => ({ e, p: powerOf(e) })).sort((a, b) => a.p - b.p);
     scored.forEach((s, i) => {
       const pct = i / scored.length;
       tiers.set(s.e.id, (TIER_CUTS.find((c) => pct < c.upto) ?? TIER_CUTS.at(-1)).tier);
     });
+  };
+
+  const tiers = new Map(); // id -> tier
+  for (const slot of SLOTS) {
+    const slotItems = pool.filter((e) => e.slot === slot);
+    if (slot === 'weapon') {
+      for (const style of ['melee', 'ranged', 'magic']) {
+        assignBand(slotItems.filter((e) => styleOf(e) === style));
+      }
+      assignBand(slotItems.filter((e) => styleOf(e) == null));
+    } else {
+      assignBand(slotItems);
+    }
   }
   // Manual fixes for passive-power items the stat formula can't see.
   for (const e of pool) {

@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { asset } from '../asset';
 import { RsButton } from '../theme/RsButton';
 import { RsTooltip } from '../theme/RsTooltip';
@@ -14,6 +14,13 @@ const BackIcon = () => (
   </svg>
 );
 
+/** Material "edit": a pencil for renaming the run. */
+const PenIcon = () => (
+  <svg className={styles.penIcon} viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+  </svg>
+);
+
 /**
  * The dedicated Nuzlocke run-start screen.
  *
@@ -23,7 +30,7 @@ const BackIcon = () => (
  * fought until the pool is cleared, then the cycle silently starts over.
  *
  * The board is editable: clicking a boss cycles it not rolled -> completed ->
- * uncompleted -> not rolled, so a missed or mistaken mark can be fixed live.
+ * failed -> not rolled, so a missed or mistaken mark can be fixed live.
  * Once the run is underway the gameplay settings lock; Pause opens them without
  * losing the board, and Reset nuzlocke abandons the run.
  */
@@ -35,7 +42,7 @@ export const NuzlockeScreen = ({
   decideReady,
   onCycleBoss,
   onReset,
-  onTogglePause,
+  onRenameNuzlocke,
   onExit,
   onDecide,
   onOpenSettings,
@@ -49,7 +56,7 @@ export const NuzlockeScreen = ({
   decideReady: boolean;
   onCycleBoss: (name: string) => void;
   onReset: () => void;
-  onTogglePause: () => void;
+  onRenameNuzlocke: (id: string, name: string) => void;
   onExit: () => void;
   onDecide: () => void;
   onOpenSettings: () => void;
@@ -66,13 +73,23 @@ export const NuzlockeScreen = ({
   const cleared = available === 0;
   const clearedCount = pool.filter((b) => states[b.name] === 'completed').length;
   // A run exists once its first roll committed (its id was assigned); before
-  // that this is the NEW RUN screen.
+  // that this is the NEW NUZLOCKE screen.
   const runInProgress = nuzlocke.id != null;
+
+  // Inline rename of the run's title (the pen next to it).
+  const [renaming, setRenaming] = useState(false);
+  const [draft, setDraft] = useState(nuzlockeName ?? '');
+  const commitRename = () => {
+    const v = draft.trim();
+    if (v && nuzlocke.id) onRenameNuzlocke(nuzlocke.id, v);
+    setRenaming(false);
+  };
 
   // Same card treatment as the boss pool's icon view: names wrap to different
   // line counts, so every tile is sized to the tallest. The pass is forced
   // whenever the pool (settings) changes — the largest tile may have left or
-  // joined — and re-runs on genuine resizes via the observer.
+  // joined — and re-runs on genuine resizes via the observer. A shrinking pool
+  // widens the cards, so the art (and name) scale with them, capped.
   const boardRef = useRef<HTMLDivElement | null>(null);
   const lastWidth = useRef(0);
   useLayoutEffect(() => {
@@ -84,11 +101,28 @@ export const NuzlockeScreen = ({
       if (w === lastWidth.current) return;
       lastWidth.current = w;
       const tiles = Array.from(el.querySelectorAll<HTMLElement>('[data-tile]'));
-      let max = 0;
+      // Card width drives the art size: 84px cards keep the base 46px icon,
+      // growing toward the cap as the pool thins out. Scale FIRST so the
+      // height pass below measures the content at its final size.
+      const cardW = tiles.length > 0 ? tiles[0].offsetWidth : 0;
+      const imgSize = cardW
+        ? Math.min(92, Math.max(46, 46 + Math.round((cardW - 84) * 0.7)))
+        : 46;
+      const nameSize = cardW
+        ? Math.min(17, Math.max(14, 14 + Math.round((cardW - 84) * 0.045)))
+        : 14;
       for (const t of tiles) {
         t.style.height = '';
-        max = Math.max(max, t.offsetHeight);
+        const img = t.querySelector<HTMLImageElement>('img');
+        if (img) {
+          img.style.width = `${imgSize}px`;
+          img.style.height = `${imgSize}px`;
+        }
+        const name = t.querySelector<HTMLElement>('[data-name]');
+        if (name) name.style.fontSize = `${nameSize}px`;
       }
+      let max = 0;
+      for (const t of tiles) max = Math.max(max, t.offsetHeight);
       for (const t of tiles) t.style.height = `${max}px`;
     };
     equalize();
@@ -110,31 +144,54 @@ export const NuzlockeScreen = ({
         <BackIcon />
       </button>
       <div className={styles.corner} data-solid="">
-        {runInProgress && (
-          <button type="button" className={styles.cornerBtn} onClick={onTogglePause}>
-            {nuzlocke.paused ? 'Resume nuzlocke' : 'Pause nuzlocke'}
-          </button>
-        )}
         <button type="button" className={styles.reset} onClick={onReset}>
           Reset nuzlocke
         </button>
       </div>
       <div className={styles.head} data-solid="strict">
-        <span className={`${styles.tag} ${cleared ? styles.tagDone : ''}`}>
-          {cleared ? 'Nuzlocke completed!' : runInProgress ? 'Nuzlocke' : 'NEW RUN'}
-        </span>
+        {renaming ? (
+          <input
+            className={styles.renameInput}
+            value={draft}
+            autoFocus
+            onChange={(e) => setDraft(e.target.value)}
+            onBlur={() => commitRename()}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') commitRename();
+              if (e.key === 'Escape') setRenaming(false);
+            }}
+          />
+        ) : (
+          <span className={styles.tagRow}>
+            <span className={`${styles.tag} ${cleared ? styles.tagDone : ''}`}>
+              {cleared
+                ? 'Nuzlocke completed!'
+                : runInProgress
+                  ? (nuzlockeName ?? 'Nuzlocke')
+                  : 'NEW NUZLOCKE'}
+            </span>
+            {runInProgress && !cleared && (
+              <button
+                type="button"
+                className={styles.pen}
+                aria-label="Rename nuzlocke"
+                onClick={() => {
+                  setDraft(nuzlockeName ?? '');
+                  setRenaming(true);
+                }}
+              >
+                <PenIcon />
+              </button>
+            )}
+          </span>
+        )}
         <div className={styles.counter}>
           <span className={styles.counterNum}>{cleared ? clearedCount : available}</span>
           <span className={styles.counterDen}>/ {total}</span>
           <span className={styles.counterLabel}>
-            {cleared ? 'bosses cleared' : 'bosses left'}
+            {cleared ? 'bosses completed' : 'bosses left'}
           </span>
         </div>
-        {(nuzlockeName || nuzlocke.paused) && (
-          <span className={styles.runName}>
-            {nuzlocke.paused && nuzlockeName ? `${nuzlockeName} (paused)` : nuzlocke.paused ? 'Paused' : nuzlockeName}
-          </span>
-        )}
       </div>
       <div className={styles.board} data-solid="strict" ref={boardRef}>
         {sortedPool.map((b) => {
@@ -143,7 +200,7 @@ export const NuzlockeScreen = ({
             <RsTooltip
               key={b.name}
               content={
-                state == null ? b.name : `${b.name} (${state === 'completed' ? 'completed' : 'uncompleted'})`
+                state == null ? b.name : `${b.name} (${state === 'completed' ? 'completed' : 'failed'})`
               }
               className={styles.cellWrap}
             >
@@ -159,10 +216,12 @@ export const NuzlockeScreen = ({
                 {state === 'completed' && (
                   <span className={styles.mark} aria-hidden="true">✓</span>
                 )}
-                {state === 'uncompleted' && (
+                {state === 'failed' && (
                   <span className={styles.mark} aria-hidden="true">✗</span>
                 )}
-                <span className={styles.cellName}>{b.name}</span>
+                <span className={styles.cellName} data-name="">
+                  {b.name}
+                </span>
               </div>
             </RsTooltip>
           );

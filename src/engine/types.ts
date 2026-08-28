@@ -124,6 +124,13 @@ export interface RollSettings {
    * end and squeezes junk.
    */
   tierBias?: number;
+  /**
+   * The weapon must land at least this tier (mid and hard fights). The draw
+   * then follows the floor's split — decent floors at 50/35/15 across
+   * decent/strong/elite, strong floors at 75/25 — ignoring the usual weights
+   * and bias.
+   */
+  minWeaponTier?: Tier;
 }
 
 /**

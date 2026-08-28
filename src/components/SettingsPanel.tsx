@@ -233,14 +233,14 @@ const Toggle = ({
 );
 
 /** Settings behind the pre-roll "Settings" button. Once a nuzlocke's first
- *  roll commits, every gameplay-affecting control locks until the run is
- *  paused (settings editable, run kept) or abandoned (run ended). */
+ *  roll commits, every gameplay-affecting control locks while the Nuzlocke
+ *  view is open (leaving the view pauses the run and unlocks these; abandoning
+ *  ends it). */
 export const SettingsPanel = ({
   settings,
   bosses,
   nuzlockeLocked,
   onChange,
-  onPauseNuzlocke,
   onAbandonNuzlocke,
   onClose,
 }: {
@@ -248,7 +248,6 @@ export const SettingsPanel = ({
   bosses: readonly Boss[];
   nuzlockeLocked: boolean;
   onChange: (patch: Partial<Settings>) => void;
-  onPauseNuzlocke: () => void;
   onAbandonNuzlocke: () => void;
   onClose: () => void;
 }) => {
@@ -277,11 +276,10 @@ export const SettingsPanel = ({
           <div className={styles.locked}>
             <span className={styles.lockedTitle}>Nuzlocke in progress</span>
             <p className={styles.lockedText}>
-              Gameplay settings are locked for this run. Pause to edit them while
-              keeping the run, or abandon to end it.
+              Gameplay settings are locked for this run. Leave the Nuzlocke view to
+              edit them while keeping the run, or abandon to end it.
             </p>
             <div className={styles.lockedActions}>
-              <RsButton onClick={onPauseNuzlocke}>Pause nuzlocke</RsButton>
               <RsButton variant="danger" onClick={onAbandonNuzlocke}>
                 Abandon nuzlocke
               </RsButton>

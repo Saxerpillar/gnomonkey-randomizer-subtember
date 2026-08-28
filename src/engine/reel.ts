@@ -32,6 +32,11 @@ export const revealBeats = (): Slot[][] => [
  * Builds the slot-machine tape for a slot's roll: `fillers` random same-slot
  * items, then the winner, then a couple of decoy tails so the reel can wobble
  * past the winner before snapping back. `winnerIndex` marks the winner's slot.
+ *
+ * When the pool is too thin to fill the band with distinct items, the band
+ * LOOPS the available ones (repeated) so the reel still reads as a full spin.
+ * A single candidate (nothing but the winner) returns a one-row tape, which
+ * the reveal skips rather than rolling.
  */
 export interface Tape<T = Item> {
   items: T[];
@@ -51,8 +56,11 @@ export const buildTape = <T,>(
   decoys = 2,
 ): Tape<T> => {
   const others = shuffled(rng, candidates.filter((c) => c !== final));
-  const fill = others.slice(0, fillers);
-  const tail = others.slice(fillers, fillers + decoys);
+  if (others.length === 0) return { items: [final], winnerIndex: 0 };
+  // A thin pool loops its candidates to fill the band; the decoy tails pick up
+  // right after the fill ends (wrapping), so they stay distinct when possible.
+  const fill = Array.from({ length: fillers }, (_, i) => others[i % others.length]);
+  const tail = Array.from({ length: decoys }, (_, i) => others[(fillers + i) % others.length]);
   return { items: [...fill, final, ...tail], winnerIndex: fill.length };
 };
 

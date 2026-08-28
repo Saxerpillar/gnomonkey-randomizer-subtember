@@ -54,23 +54,6 @@
   display: block;
 }
 
-.cornerBtn {
-  font-family: var(--font-body);
-  font-size: 16px;
-  color: var(--orange);
-  background: linear-gradient(var(--panel-raised), var(--tile));
-  border: 2px solid var(--orange);
-  outline: 1px solid var(--border-dark);
-  border-radius: 3px;
-  padding: 5px 12px;
-  cursor: pointer;
-  text-shadow: var(--text-outline);
-}
-
-.cornerBtn:hover {
-  filter: brightness(1.25);
-}
-
 /* Solid like the app's other buttons, not a ghost link. */
 .reset {
   font-family: var(--font-body);
@@ -91,20 +74,60 @@
   color: #fff;
 }
 
-/* The run's name/paused state under the counter. */
-.runName {
-  font-family: var(--font-body);
-  font-size: 18px;
-  color: var(--text-muted);
-  text-shadow: var(--text-outline);
-}
-
 .tag {
   font-family: var(--font-title);
   font-size: 40px;
   letter-spacing: 4px;
   color: var(--red);
   text-shadow: var(--text-outline);
+}
+
+/* The title plus its rename pen, side by side. */
+.tagRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pen {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.pen:hover {
+  color: var(--gold-bright);
+  filter: drop-shadow(0 0 6px rgba(244, 208, 63, 0.5));
+}
+
+.penIcon {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+/* Inline title-rename field, sized to hold its own. */
+.renameInput {
+  font-family: var(--font-title);
+  font-size: 32px;
+  color: var(--gold-bright);
+  text-align: center;
+  text-shadow: var(--text-outline);
+  background: var(--tile);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 3px 12px;
+  letter-spacing: 2px;
+}
+
+.renameInput:focus {
+  outline: 1px solid var(--gold);
 }
 
 /* The header turns green once the whole pool is cleared. */
@@ -140,10 +163,12 @@
 }
 
 /* Every available boss as a card, like the boss pool's icon view: the portrait
-   with the name under it. */
+   with the name under it. auto-fit lets a thinning pool widen the cards up to
+   the 150px cap (the art scales with them in the layout effect). */
 .board {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(84px, 150px));
+  justify-content: center;
   gap: 6px;
   width: 100%;
   max-width: 880px;
@@ -192,17 +217,17 @@
 }
 
 /* Rolled: dimmed to a silhouette with a coloured wash for how it ended — green
-   for completed, red for uncompleted — over the grey, not grey alone. */
+   for completed, red for failed — over the grey, not grey alone. */
 .completed {
   border-color: var(--green);
 }
 
-.uncompleted {
+.failed {
   border-color: var(--red);
 }
 
 .completed img,
-.uncompleted img {
+.failed img {
   filter: grayscale(0.55) brightness(0.6);
 }
 
@@ -216,7 +241,7 @@
   background: rgba(70, 194, 70, 0.3);
 }
 
-.uncompleted .tint {
+.failed .tint {
   background: rgba(216, 67, 67, 0.3);
 }
 
@@ -235,7 +260,7 @@
   color: var(--green);
 }
 
-.uncompleted .mark {
+.failed .mark {
   color: var(--red);
 }
 

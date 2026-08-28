@@ -1,7 +1,25 @@
 import { describe, expect, it } from 'vitest';
-import { filterWeaponsFor, loadoutValue, roll, rerollSlot } from './roll';
+import {
+  filterWeaponsFor,
+  gearScore,
+  GEAR_SCORE_MAX,
+  GEAR_SCORE_MIN,
+  loadoutValue,
+  roll,
+  rerollSlot,
+} from './roll';
 import { mulberry32 } from './rng';
-import { costOf, SLOTS, type Item, type Loadout, type RollSettings, type Slot } from './types';
+import {
+  CORE_SLOTS,
+  costOf,
+  emptyLoadout,
+  SLOTS,
+  type Item,
+  type Loadout,
+  type RollSettings,
+  type Slot,
+  type Tier,
+} from './types';
 
 let nextId = 1;
 const zeroOff = () => ({ stab: 0, slash: 0, crush: 0, magic: 0, ranged: 0 });
@@ -312,6 +330,73 @@ describe('determinism', () => {
   });
 });
 
+describe('minWeaponTier', () => {
+  const tieredWeapons = () => [
+    ...Array.from({ length: 10 }, (_, i) => item('weapon', { name: `junk-${i}`, tier: 'junk' })),
+    ...Array.from({ length: 10 }, (_, i) => item('weapon', { name: `common-${i}`, tier: 'common' })),
+    ...Array.from({ length: 10 }, (_, i) => item('weapon', { name: `decent-${i}`, tier: 'decent' })),
+    ...Array.from({ length: 10 }, (_, i) => item('weapon', { name: `strong-${i}`, tier: 'strong' })),
+    ...Array.from({ length: 10 }, (_, i) => item('weapon', { name: `elite-${i}`, tier: 'elite' })),
+  ];
+
+  it('weapons never fall below the floor', () => {
+    for (const seed of seeds.slice(0, 100)) {
+      const out = roll(tieredWeapons(), settings({ minWeaponTier: 'decent' }), mulberry32(seed));
+      expect(out.weapon?.tier).not.toBe('junk');
+      expect(out.weapon?.tier).not.toBe('common');
+    }
+  });
+
+  it('a decent floor draws 50/35/15 across decent/strong/elite', () => {
+    const counts = new Map<string, number>();
+    for (let seed = 1; seed <= 900; seed++) {
+      const w = roll(tieredWeapons(), settings({ minWeaponTier: 'decent' }), mulberry32(seed))
+        .weapon!;
+      counts.set(w.tier, (counts.get(w.tier) ?? 0) + 1);
+    }
+    expect((counts.get('decent') ?? 0) / 900).toBeGreaterThan(0.44);
+    expect((counts.get('decent') ?? 0) / 900).toBeLessThan(0.56);
+    expect((counts.get('strong') ?? 0) / 900).toBeGreaterThan(0.29);
+    expect((counts.get('strong') ?? 0) / 900).toBeLessThan(0.41);
+    expect((counts.get('elite') ?? 0) / 900).toBeGreaterThan(0.09);
+    expect((counts.get('elite') ?? 0) / 900).toBeLessThan(0.21);
+  });
+
+  it('a strong floor excludes decent and draws 75/25 strong/elite', () => {
+    for (const seed of seeds.slice(0, 100)) {
+      const out = roll(tieredWeapons(), settings({ minWeaponTier: 'strong' }), mulberry32(seed));
+      expect(['junk', 'common', 'decent']).not.toContain(out.weapon?.tier);
+    }
+    const counts = new Map<string, number>();
+    for (let seed = 1; seed <= 900; seed++) {
+      const w = roll(tieredWeapons(), settings({ minWeaponTier: 'strong' }), mulberry32(seed))
+        .weapon!;
+      counts.set(w.tier, (counts.get(w.tier) ?? 0) + 1);
+    }
+    expect((counts.get('strong') ?? 0) / 900).toBeGreaterThan(0.68);
+    expect((counts.get('strong') ?? 0) / 900).toBeLessThan(0.82);
+    expect((counts.get('elite') ?? 0) / 900).toBeGreaterThan(0.18);
+    expect((counts.get('elite') ?? 0) / 900).toBeLessThan(0.32);
+  });
+
+  it('degrades to whatever is affordable when the floor is unreachable', () => {
+    const pool = [
+      item('weapon', { name: 'cheap junk', tier: 'junk', price: 100 }),
+      item('weapon', { name: 'pricey elite', tier: 'elite', price: 1_000_000 }),
+    ];
+    for (let seed = 1; seed <= 30; seed++) {
+      const out = roll(pool, settings({ budget: 500, minWeaponTier: 'decent' }), mulberry32(seed));
+      expect(out.weapon?.name).toBe('cheap junk');
+    }
+  });
+
+  it('leaves non-weapon slots untouched', () => {
+    const pool = [item('head', { name: 'junk hat', tier: 'junk' })];
+    const out = roll(pool, settings({ minWeaponTier: 'decent' }), mulberry32(1));
+    expect(out.head?.name).toBe('junk hat');
+  });
+});
+
 describe('loadoutValue', () => {
   it('counts all equipped tradeables', () => {
     const out = roll(
@@ -320,6 +405,31 @@ describe('loadoutValue', () => {
       mulberry32(1),
     );
     expect(loadoutValue(out)).toBe(5300);
+  });
+});
+
+describe('gearScore', () => {
+  const withTier = (slot: Slot, tier: Tier) => item(slot, { name: `${slot}-${tier}`, tier });
+
+  it('common-only kit scores the minimum', () => {
+    const l = emptyLoadout();
+    for (const s of CORE_SLOTS) l[s] = withTier(s, 'common');
+    expect(gearScore(l)).toBe(GEAR_SCORE_MIN);
+  });
+
+  it('all-elite kit with ammo scores the maximum', () => {
+    const l = emptyLoadout();
+    for (const s of CORE_SLOTS) l[s] = withTier(s, 'elite');
+    l.ammo = withTier('ammo', 'elite');
+    expect(gearScore(l)).toBe(GEAR_SCORE_MAX);
+  });
+
+  it('the weapon counts double', () => {
+    const l = emptyLoadout();
+    l.weapon = withTier('weapon', 'strong');
+    l.head = withTier('head', 'common');
+    // head 1 + weapon strong 3x2 = 6
+    expect(gearScore(l)).toBe(7);
   });
 });
 

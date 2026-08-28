@@ -40,6 +40,9 @@
       "^3rd Age "
     ],
     "ids": [],
+    "keepZeroStat": [
+      "Atlatl dart"
+    ],
     "questOnlyNames": [
       "'perfect' necklace",
       "'perfect' ring",

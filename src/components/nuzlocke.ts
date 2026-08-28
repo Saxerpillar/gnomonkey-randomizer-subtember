@@ -5,28 +5,26 @@ import type { Boss } from './DataProvider';
  * Nuzlocke boss selection.
  *
  * A boss is fought exactly once per cycle until the pool is exhausted, then the
- * cycle resets. The `repeatChance` slider trades that away: at 0% every roll is
- * a fresh boss; above 0%, each roll has that chance to land on one already
- * fought instead (which matters once the remaining pool is thin).
+ * cycle resets. Every roll draws a fresh boss — no repeat slider.
  *
  * State is tracked per boss, so the board can show how each fight ended and the
- * streamer can correct it by clicking: `not rolled` (absent), `completed`
- * (cleared) or `uncompleted` (failed). Only "not rolled" bosses are available.
+ * streamer can correct it by clicking: `not rolled` (absent), `completed` or
+ * `failed`. Only "not rolled" bosses are available.
  */
 
-export type BossRollState = 'completed' | 'uncompleted';
+export type BossRollState = 'completed' | 'failed';
 /** Boss name -> how that fight ended. Absent = not rolled. */
 export type BossStates = Record<string, BossRollState>;
 
 /**
- * The current nuzlocke run. `id` is null until the first roll commits; `paused`
- * unlocks the gameplay settings without losing the run.
+ * The current nuzlocke run. `id` is null until the first roll commits. The run
+ * is effectively paused by leaving the Nuzlocke view (which unlocks the
+ * gameplay settings) and resumed by entering it — no explicit flag needed.
  */
 export interface NuzlockeRun {
   states: BossStates;
   /** Stable id, used to group history runs and resolve a user-editable name. */
   id: string | null;
-  paused: boolean;
 }
 
 /** The default label for a nuzlocke before the streamer renames it. */

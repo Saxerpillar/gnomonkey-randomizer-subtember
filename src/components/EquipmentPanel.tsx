@@ -73,8 +73,16 @@ export const EquipmentPanel = ({
   <div className={`${styles.tab} ${deactivated ? styles.deactivated : ""}`}>
     {SLOTS.map((slot) => {
       if (visibleSlots && !visibleSlots.includes(slot)) {
-        // not yet revealed — a faint ghost marks where the tile will land
-        return <span key={slot} className={styles.ghost} style={{ gridArea: slot }} />;
+        // not yet revealed — a faint ghost marks where the tile will land.
+        // data-slot so reveal cards (e.g. Doom's extra ammo) can fly to it.
+        return (
+          <span
+            key={slot}
+            className={styles.ghost}
+            style={{ gridArea: slot }}
+            data-slot={slot}
+          />
+        );
       }
       return (
         <EquipSlot

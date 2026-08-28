@@ -15,12 +15,33 @@ export interface SquadReel {
 export type RevealData =
   | { key: string; kind: 'slot'; slot: Slot; item: Item; tier: Tier; candidates: Item[]; target: string }
   | { key: string; kind: 'squad'; slot: Slot; reels: SquadReel[]; target: string }
+  | {
+      key: string;
+      kind: 'extra';
+      reels: SquadReel[];
+      label: string;
+      target: string;
+      /** Flight destinations per reel: the extra slot, then the skeleton's
+       *  ammo slot when the weapon needs ammo. */
+      targets: (string | null)[];
+    }
   | { key: string; kind: 'boss'; boss: Boss; candidates: Boss[]; hardMode: boolean; target: string };
 
 /** A raid lane: a style-forced setup that assembles alongside the others. */
 export interface SquadLane {
   label: string;
   loadout: Loadout;
+}
+
+/** A post-reveal extra weapon (Doom of Mokhaiotl): the weapon plus its ammo,
+ *  rolled after the boss and revealed last. */
+export interface ExtraWeapon {
+  weapon: Item;
+  ammo: Item | null;
+  /** Style-filtered weapon pool for the reveal reel. */
+  candidates: Item[];
+  /** Compatible ammo pool, for the two-column ammo reel. */
+  ammoCandidates: Item[];
 }
 
 export interface CeremonyView {
@@ -36,11 +57,24 @@ export interface CeremonyView {
   gearless: boolean;
   /** Raids: one settled map per lane, filled concurrently. */
   squad: { label: string; settled: Partial<Record<Slot, Item>> }[] | null;
+  /** Doom of Mokhaiotl: extra weapons that land AFTER the boss reveal. Their
+   *  ammo (if any) settles into the skeleton's ammo slot instead. */
+  extras: { weapon: Item | null }[] | null;
+  /** Extra-weapon slots whose card is currently up. */
+  pendingExtras: number[];
 }
 
 type RevealStep =
   | { kind: 'slot'; slot: Slot; item: Item }
   | { kind: 'squad'; slot: Slot; items: (Item | null)[] }
+  | {
+      kind: 'extra';
+      index: number;
+      item: Item;
+      ammo: Item | null;
+      candidates: Item[];
+      ammoCandidates: Item[];
+    }
   | { kind: 'boss'; item: Boss };
 
 // Beat timing (ms). The per-card duration lives in RevealCard — the full tick
@@ -54,6 +88,7 @@ const buildQueue = (
   boss: Boss,
   gearless: boolean,
   squad: SquadLane[] | null,
+  extras: ExtraWeapon[] | null,
 ): RevealStep[] => {
   const steps: RevealStep[] = [];
   if (squad) {
@@ -66,11 +101,25 @@ const buildQueue = (
   } else if (!gearless) {
     // Gauntlet: no gear goes in, so there is nothing to roll — straight to the boss.
     for (const slot of revealBeats().flat()) {
+      // The ammo beat belongs to the extra weapons when Doom's extras exist
+      // (their ammo settles into this slot after the boss reveal).
+      if (extras && slot === 'ammo') continue;
       const item = loadout[slot];
       if (item) steps.push({ kind: 'slot', slot, item });
     }
   }
   steps.push({ kind: 'boss', item: boss });
+  // Doom's extra weapons land after the boss is revealed, one by one.
+  extras?.forEach((e, index) => {
+    steps.push({
+      kind: 'extra',
+      index,
+      item: e.weapon,
+      ammo: e.ammo,
+      candidates: e.candidates,
+      ammoCandidates: e.ammoCandidates,
+    });
+  });
   return steps;
 };
 
@@ -134,6 +183,39 @@ export const useCeremony = (items: Item[]) => {
         candidates: bySlot.get(step.slot) ?? [],
         target: `[data-slot="${step.slot}"]`,
       });
+    } else if (step.kind === 'extra') {
+      setView((v) => (v ? { ...v, pendingExtras: [step.index] } : v));
+      // Two columns side by side: the weapon and (when it needs one) the ammo
+      // reel, so the ammo is seen to be rolled with the weapon.
+      const reels: SquadReel[] = [
+        {
+          lane: 0,
+          label: 'Weapon',
+          item: step.item,
+          tier: effectiveTier(step.item),
+          candidates: step.candidates,
+        },
+      ];
+      if (step.ammo) {
+        reels.push({
+          lane: 1,
+          label: 'Ammo',
+          item: step.ammo,
+          tier: effectiveTier(step.ammo),
+          candidates: step.ammoCandidates,
+        });
+      }
+      setReveal({
+        key: `extra-${step.index}-${step.item.id}`,
+        kind: 'extra',
+        reels,
+        label: 'Extra weapon',
+        target: `[data-extra="${step.index}"]`,
+        targets: [
+          `[data-extra="${step.index}"]`,
+          step.ammo ? '[data-slot="ammo"]' : null,
+        ],
+      });
     } else if (step.kind === 'squad') {
       setView((v) => (v ? { ...v, pending: [step.slot] } : v));
       const reels: SquadReel[] = [];
@@ -165,6 +247,22 @@ export const useCeremony = (items: Item[]) => {
     indexRef.current += 1;
     if (step?.kind === 'slot') {
       setView((v) => (v ? { ...v, settled: { ...v.settled, [step.slot]: step.item }, pending: [] } : v));
+    } else if (step?.kind === 'extra') {
+      setView((v) =>
+        v
+          ? {
+              ...v,
+              pendingExtras: [],
+              // The weapon lands in its extra slot; the ammo lands in the
+              // skeleton's ammo slot.
+              settled: step.ammo ? { ...v.settled, ammo: step.ammo } : v.settled,
+              extras:
+                v.extras?.map((e, i) =>
+                  i === step.index ? { weapon: step.item } : e,
+                ) ?? null,
+            }
+          : v,
+      );
     } else if (step?.kind === 'squad') {
       setView((v) =>
         v
@@ -195,6 +293,7 @@ export const useCeremony = (items: Item[]) => {
     hardMode = false,
     gearless = false,
     squad: SquadLane[] | null = null,
+    extras: ExtraWeapon[] | null = null,
   ) => {
     clearTimers();
     onDoneRef.current = onDone;
@@ -202,7 +301,7 @@ export const useCeremony = (items: Item[]) => {
     bossPoolRef.current = bossPool.length ? bossPool : [boss];
     hardModeRef.current = hardMode;
     squadRef.current = squad;
-    queueRef.current = buildQueue(loadout, boss, gearless, squad);
+    queueRef.current = buildQueue(loadout, boss, gearless, squad, extras);
     indexRef.current = 0;
 
     setView({
@@ -212,6 +311,8 @@ export const useCeremony = (items: Item[]) => {
       boss: null,
       gearless,
       squad: squad ? squad.map((l) => ({ label: l.label, settled: {} })) : null,
+      extras: extras ? extras.map(() => ({ weapon: null })) : null,
+      pendingExtras: [],
     });
     setReveal(null);
     schedule(advance, SLOTS_START_MS);

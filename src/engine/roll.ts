@@ -34,10 +34,25 @@ export const DEFAULT_TIER_WEIGHTS: Record<Tier, number> = {
   elite: 5,
 };
 
+/** Weapon-floor tier splits, keyed by the floor set from the boss's
+ *  difficulty: medium floors at decent (50/35/15), hard at strong (75/25). */
+const FLOOR_WEIGHTS: Record<Tier, Record<Tier, number>> = {
+  decent: { junk: 0, common: 0, decent: 50, strong: 35, elite: 15 },
+  strong: { junk: 0, common: 0, decent: 0, strong: 75, elite: 25 },
+  junk: { junk: 0, common: 0, decent: 0, strong: 0, elite: 0 },
+  common: { junk: 0, common: 0, decent: 0, strong: 0, elite: 0 },
+  elite: { junk: 0, common: 0, decent: 0, strong: 0, elite: 0 },
+};
+
 /**
  * Tier-then-item sampling for one slot: weighted tier pick over the tiers that
  * actually have affordable candidates, then uniform within that tier. Returns
  * null when nothing is affordable (the slot stays empty by design).
+ *
+ * `minTier` (weapons on mid/hard fights): candidates below it are out, and the
+ * draw across the remaining upper tiers follows the floor's split. When
+ * nothing affordable reaches the floor, the pick degrades to whatever is
+ * affordable rather than leaving the slot empty.
  */
 const pickForSlot = (
   slot: Slot,
@@ -45,9 +60,17 @@ const pickForSlot = (
   remaining: number,
   rng: Rng,
   tierBias = 1,
+  minTier?: Tier,
 ): Item | null => {
   const affordable = candidates.filter((i) => costOf(i) <= remaining);
   if (affordable.length === 0) return null;
+
+  const minRank = minTier != null ? TIERS.indexOf(minTier) : -1;
+  const eligible =
+    slot === 'weapon' && minRank >= 0
+      ? affordable.filter((i) => TIERS.indexOf(i.tier ?? 'common') >= minRank)
+      : affordable;
+  const pool = eligible.length > 0 ? eligible : affordable;
 
   const base = slot === 'weapon' ? WEAPON_TIER_WEIGHTS : DEFAULT_TIER_WEIGHTS;
   // Compounding up the ladder: junk is untouched, elite gets bias^4. That keeps
@@ -59,17 +82,21 @@ const pickForSlot = (
       : (Object.fromEntries(
           TIERS.map((t, rank) => [t, base[t] * tierBias ** rank]),
         ) as Record<Tier, number>);
+  // A weapon floor replaces the weighted draw with its own split.
+  const floorWeights = minTier != null ? FLOOR_WEIGHTS[minTier] : undefined;
+  const finalWeights =
+    floorWeights != null && pool === eligible ? floorWeights : weights;
   const byTier = new Map<Tier, Item[]>();
-  for (const i of affordable) {
+  for (const i of pool) {
     const t = i.tier ?? 'common';
     byTier.set(t, [...(byTier.get(t) ?? []), i]);
   }
   const present = TIERS.filter((t) => byTier.has(t));
-  const total = present.reduce((s, t) => s + weights[t], 0);
+  const total = present.reduce((s, t) => s + finalWeights[t], 0);
   let r = rng() * total;
   let chosen = present[present.length - 1];
   for (const t of present) {
-    r -= weights[t];
+    r -= finalWeights[t];
     if (r < 0) {
       chosen = t;
       break;
@@ -176,7 +203,14 @@ export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout =>
 
   const rollSlot = (slot: Slot, candidates: Item[]): void => {
     const owed = floored.get(slot);
-    if (owed) {
+    // A weapon floor below the minimum is overruled by it (a hard fight never
+    // gets a junk weapon just because a floor asked for one).
+    const floorApplies =
+      owed != null &&
+      (slot !== 'weapon' ||
+        settings.minWeaponTier == null ||
+        TIERS.indexOf(owed) >= TIERS.indexOf(settings.minWeaponTier));
+    if (floorApplies) {
       const atTier = candidates.filter((i) => (i.tier ?? 'common') === owed);
       if (atTier.length) {
         // Prefer one we can actually afford; overspend only when the tier has
@@ -192,7 +226,14 @@ export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout =>
       // This slot has nothing at that tier at all; fall through to a normal roll
       // rather than leaving it empty.
     }
-    const item = pickForSlot(slot, candidates, remaining, rng, tierBias);
+    const item = pickForSlot(
+      slot,
+      candidates,
+      remaining,
+      rng,
+      tierBias,
+      slot === 'weapon' ? settings.minWeaponTier : undefined,
+    );
     if (!item) return; // stays empty by design
     loadout[slot] = item;
     remaining -= costOf(item);
@@ -255,7 +296,14 @@ export const rerollSlot = (
   let candidates = bySlot.get(slot)!;
   if (slot === 'ammo') candidates = ammoCandidatesFor(loadout.weapon, candidates);
 
-  const rolled = pickForSlot(slot, candidates, remaining, rng, settings.tierBias);
+  const rolled = pickForSlot(
+    slot,
+    candidates,
+    remaining,
+    rng,
+    settings.tierBias,
+    slot === 'weapon' ? settings.minWeaponTier : undefined,
+  );
   if (!rolled) return loadout; // nothing affordable/valid — leave it as it was
   const item = slot === 'weapon' ? withPoison(rolled, rng) : rolled;
 
@@ -277,6 +325,34 @@ export const loadoutValue = (loadout: Loadout): number =>
     const item = loadout[s];
     return sum + (item && item.tradeable ? (item.price ?? 0) : 0);
   }, 0);
+
+/**
+ * Tier-point score of a loadout, used for wave-based encounters where gear
+ * VALUE is meaningless (armour costs don't track survival).
+ *
+ * junk 0 / common 1 / decent 2 / strong 3 / elite 5, over the nine core slots
+ * plus ammo; the weapon counts double. A common-only kit scores the minimum
+ * {@link GEAR_SCORE_MIN} and an all-elite kit the maximum
+ * {@link GEAR_SCORE_MAX} — the objective power lever scales linearly between.
+ */
+export const GEAR_SCORE_MIN = 10;
+export const GEAR_SCORE_MAX = 55;
+/** Doom of Mokhaiotl's ceiling: the main kit at max (55) plus its two extra
+ *  weapons at elite (a doubled weapon, +10 each). */
+export const GEAR_SCORE_MAX_DOOM = GEAR_SCORE_MAX + 20;
+export const gearScore = (loadout: Loadout): number => {
+  const POINTS: Record<Tier, number> = { junk: 0, common: 1, decent: 2, strong: 3, elite: 5 };
+  let score = 0;
+  for (const s of CORE_SLOTS) {
+    const item = loadout[s];
+    if (!item) continue;
+    const p = POINTS[item.tier] ?? 0;
+    score += s === 'weapon' ? p * 2 : p;
+  }
+  const ammo = loadout.ammo;
+  if (ammo) score += POINTS[ammo.tier] ?? 0;
+  return score;
+};
 
 /** Combat style a weapon category belongs to, for style-forced rolls (raids). */
 export type Style = 'melee' | 'ranged' | 'magic';

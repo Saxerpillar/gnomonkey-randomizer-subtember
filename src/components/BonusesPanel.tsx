@@ -1,11 +1,23 @@
+import { asset } from '../asset';
 import { loadoutBonuses, speedSeconds } from '../engine/bonuses';
-import type { Loadout } from '../engine/types';
+import type { Item, Loadout } from '../engine/types';
 import styles from './BonusesPanel.module.css';
 
 const sign = (n: number) => `${n >= 0 ? '+' : ''}${n}`;
 
-/** In-game "Equip Your Character" style stats summary for the current loadout. */
-export const BonusesPanel = ({ loadout }: { loadout: Loadout }) => {
+/** In-game "Equip Your Character" style stats summary for the current loadout.
+ *  Doom of Mokhaiotl also hands out two post-reveal extra weapons, which live
+ *  here under the speed readout. Their ammo sits in the gear skeleton's ammo
+ *  slot instead. */
+export const BonusesPanel = ({
+  loadout,
+  extras,
+  pendingExtras,
+}: {
+  loadout: Loadout;
+  extras?: { weapon: Item | null }[];
+  pendingExtras?: number[];
+}) => {
   const b = loadoutBonuses(loadout);
   return (
     <div className={styles.panel}>
@@ -39,6 +51,33 @@ export const BonusesPanel = ({ loadout }: { loadout: Loadout }) => {
             <span>
               Base: {speedSeconds(b.speedTicks)} ({b.speedTicks} ticks)
             </span>
+          </div>
+        </>
+      )}
+      {extras != null && extras.length > 0 && (
+        <>
+          <h3 className={styles.header}>Extra weapons</h3>
+          <div className={styles.extras}>
+            {extras.map((e, i) => (
+              <div
+                key={i}
+                className={`${styles.extra} ${pendingExtras?.includes(i) ? styles.extraPending : ''}`}
+                data-extra={i}
+              >
+                {e.weapon ? (
+                  <>
+                    <img
+                      className={styles.extraIcon}
+                      src={asset(`img/items/${e.weapon.icon}`)}
+                      alt=""
+                    />
+                    <span className={styles.extraName}>{e.weapon.name}</span>
+                  </>
+                ) : (
+                  <span className={styles.extraGhost}>?</span>
+                )}
+              </div>
+            ))}
           </div>
         </>
       )}

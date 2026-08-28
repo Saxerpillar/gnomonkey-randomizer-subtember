@@ -35,10 +35,29 @@ describe('buildTape', () => {
     const final = item('head', 'winner');
     const pool = [item('head'), item('head'), item('head'), item('head'), item('head'), item('head')];
     const { items, winnerIndex } = buildTape([...pool, final], final, mulberry32(3), 4, 2);
-    expect(items[winnerIndex]).toBe(final);
-    expect(items.slice(0, winnerIndex)).not.toContain(final);
-    expect(items.length).toBeLessThanOrEqual(7);
-    expect(items.length).toBeGreaterThanOrEqual(5);
+    expect(winnerIndex).toBe(4);
+    expect(items[4]).toBe(final);
+    expect(items.slice(0, 4)).toHaveLength(4);
+    expect(items.slice(5)).toHaveLength(2);
+    expect(new Set(items).size).toBe(pool.length + 1); // all distinct
+  });
+
+  it('loops the band when the pool is thinner than the reel', () => {
+    const final = item('head', 'winner');
+    const others = [item('head', 'a'), item('head', 'b')];
+    const { items, winnerIndex } = buildTape([...others, final], final, mulberry32(5), 26, 2);
+    expect(winnerIndex).toBe(26);
+    expect(items).toHaveLength(26 + 1 + 2);
+    // The band repeats the same two fillers, never the winner.
+    expect(new Set(items.slice(0, 26))).toEqual(new Set(others));
+    expect(items[26]).toBe(final);
+  });
+
+  it('a single candidate skips the reel entirely', () => {
+    const final = item('head', 'only');
+    const { items, winnerIndex } = buildTape([final], final, mulberry32(1), 26, 2);
+    expect(items).toEqual([final]);
+    expect(winnerIndex).toBe(0);
   });
 
   it('is deterministic for a given seed', () => {

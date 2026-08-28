@@ -62,10 +62,14 @@ export const RevealCard = ({
   const [row, setRow] = useState(0);
   const [motion, setMotion] = useState({ ms: 0, ease: 'linear' });
   const [minimize, setMinimize] = useState<string>();
+  /** Per-lane flight transforms for the extra-weapon reveal (weapon -> extra
+   *  slot, ammo -> the skeleton's ammo slot). */
+  const [laneTransforms, setLaneTransforms] = useState<Record<number, string>>({});
   const [landed, setLanded] = useState(false);
   const [landedTier, setLandedTier] = useState<Tier | null>(null);
   const [stamped, setStamped] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const laneRefs = useRef<(HTMLDivElement | null)[]>([]);
   const onDoneRef = useRef(onDone);
   const onLandRef = useRef(onLand);
   onDoneRef.current = onDone;
@@ -83,7 +87,7 @@ export const RevealCard = ({
       if (data.candidates.length === 0) return null;
       return buildTape(data.candidates, data.item, mulberry32(randomSeed()), FILLERS, DECOYS);
     }
-    if (data.kind === 'squad') {
+    if (data.kind === 'squad' || data.kind === 'extra') {
       const first = data.reels[0];
       if (!first || first.candidates.length === 0) return null;
       return buildTape(first.candidates, first.item, mulberry32(randomSeed()), FILLERS, DECOYS);
@@ -95,10 +99,11 @@ export const RevealCard = ({
   /**
    * Raid lanes: one tape each, all built with the SAME filler count so every
    * winner sits at the same index — that lets all three share one row offset
-   * and land on the same beat.
+   * and land on the same beat. The extra-weapon reveal uses the same lanes
+   * (weapon + ammo) side by side.
    */
   const squadTapes = useMemo(() => {
-    if (data.kind !== 'squad') return null;
+    if (data.kind !== 'squad' && data.kind !== 'extra') return null;
     return data.reels.map((r) =>
       r.candidates.length === 0
         ? { items: [r.item], winnerIndex: 0 }
@@ -115,7 +120,11 @@ export const RevealCard = ({
     if (!landed) return;
     const tier = data.kind === 'slot' ? data.tier : null;
     const squadBest =
-      data.kind === 'squad' ? (data.reels.some((r) => r.tier === 'elite') ? 'elite' : null) : null;
+      data.kind === 'squad' || data.kind === 'extra'
+        ? data.reels.some((r) => r.tier === 'elite')
+          ? 'elite'
+          : null
+        : null;
     if (tier) setLandedTier(tier);
     if (!muted) playThud();
     if ((tier === 'elite' || data.kind === 'boss') && !muted) playFanfare();
@@ -140,6 +149,27 @@ export const RevealCard = ({
       if (data.kind === 'boss') setLanded(true);
       if (data.kind === 'squad') {
         // Three destinations — fade in place instead of flying to one slot.
+        setPhase('minimize');
+        return;
+      }
+      if (data.kind === 'extra') {
+        // Each lane flies to its own destination: the weapon into its extra
+        // slot, the ammo into the gear skeleton's ammo slot.
+        const next: Record<number, string> = {};
+        data.reels.forEach((reel, i) => {
+          const lane = laneRefs.current[reel.lane];
+          const dest = data.targets[i];
+          const el = dest ? document.querySelector(dest) : null;
+          if (lane && el) {
+            const lr = lane.getBoundingClientRect();
+            const tr = el.getBoundingClientRect();
+            const scale = Math.max(0.05, tr.width / lr.width);
+            const dx = tr.left + tr.width / 2 - (lr.left + lr.width / 2);
+            const dy = tr.top + tr.height / 2 - (lr.top + lr.height / 2);
+            next[reel.lane] = `translate(${dx}px, ${dy}px) scale(${scale})`;
+          }
+        });
+        setLaneTransforms(next);
         setPhase('minimize');
         return;
       }
@@ -212,7 +242,11 @@ export const RevealCard = ({
     };
     const settle = () => {
       setLanded(true);
-      setPhase(data.kind === 'boss' || data.kind === 'squad' ? 'reveal' : 'tooltip');
+      setPhase(
+        data.kind === 'boss' || data.kind === 'squad' || data.kind === 'extra'
+          ? 'reveal'
+          : 'tooltip',
+      );
       // A hard-mode fight shows the normal boss first, then stamps HARD MODE
       // after a beat — so the card lingers long enough to read both.
       const stampWait = data.kind === 'boss' && data.hardMode ? HARD_MODE : 0;
@@ -281,8 +315,15 @@ export const RevealCard = ({
 
   const isSlot = data.kind === 'slot';
   const isSquad = data.kind === 'squad';
+  const isExtra = data.kind === 'extra';
   const isBoss = data.kind === 'boss';
-  const title = isSlot ? data.item.name : isBoss ? data.boss.name : SLOT_LABEL[data.slot];
+  const title = isSlot
+    ? data.item.name
+    : isBoss
+      ? data.boss.name
+      : isExtra
+        ? data.reels[0]?.item.name ?? ''
+        : SLOT_LABEL[data.slot];
   const icon = isBoss ? asset(`img/bosses/${encodeURIComponent(data.boss.image)}`) : '';
   const burstClass = isBoss
     ? landed
@@ -323,7 +364,7 @@ export const RevealCard = ({
         style={phase === 'minimize' && minimize ? { transform: minimize } : undefined}
       >
         {/* Perched on top of the roulette for the length of an item roll. */}
-        {(isSlot || isSquad) && phase === 'roll' && (
+        {(isSlot || isSquad || isExtra) && phase === 'roll' && (
           <img
             className={styles.roulettePet}
             src={asset(`img/emotes/${EMOTES.roulette.file}`)}
@@ -332,9 +373,11 @@ export const RevealCard = ({
           />
         )}
         {burstClass && <span className={`${styles.burst} ${burstClass}`} />}
-        {isSquad && phase === 'roll' && squadTapes && (
+        {(isSquad || isExtra) && phase === 'roll' && squadTapes && (
           <div className={styles.squadWrap}>
-            <span className={styles.slotLabel}>{SLOT_LABEL[data.slot]}</span>
+            <span className={styles.slotLabel}>
+              {isExtra ? data.label : SLOT_LABEL[data.slot]}
+            </span>
             <div className={styles.squadRow}>
               {data.reels.map((reel, i) => (
                 <div key={reel.lane} className={styles.squadLane}>
@@ -363,14 +406,26 @@ export const RevealCard = ({
             </div>
           </div>
         )}
-        {isSquad && phase !== 'roll' && (
+        {(isSquad || isExtra) && phase !== 'roll' && (
           <div className={styles.squadWrap}>
-            <span className={styles.slotLabel}>{SLOT_LABEL[data.slot]}</span>
+            <span className={styles.slotLabel}>
+              {isExtra ? data.label : SLOT_LABEL[data.slot]}
+            </span>
             <div className={styles.squadRow}>
               {data.reels.map((reel) => (
                 <div
                   key={reel.lane}
-                  className={`${styles.squadResult} ${styles[`card${capitalize(reel.tier)}`]}`}
+                  ref={(el) => {
+                    laneRefs.current[reel.lane] = el;
+                  }}
+                  className={`${styles.squadResult} ${styles[`card${capitalize(reel.tier)}`]} ${
+                    isExtra && phase === 'minimize' ? styles.laneFly : ''
+                  }`}
+                  style={
+                    isExtra && phase === 'minimize' && laneTransforms[reel.lane]
+                      ? { transform: laneTransforms[reel.lane] }
+                      : undefined
+                  }
                 >
                   <span className={styles.laneLabel}>{reel.label}</span>
                   <img
@@ -385,7 +440,7 @@ export const RevealCard = ({
             </div>
           </div>
         )}
-        {!isSquad && phase === 'roll' && tape && (
+        {!isSquad && !isExtra && phase === 'roll' && tape && (
           <div className={styles.tapeWrap}>
             <span className={styles.slotLabel}>{isSlot ? SLOT_LABEL[data.slot] : 'Your fate'}</span>
             <div className={`${styles.tapeWindow} ${isSlot ? '' : styles.tapeWindowBoss}`}>

@@ -3066,7 +3066,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 6,
   "offensive": {
    "stab": 12,
@@ -3615,7 +3615,7 @@
   "icon": "23309.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -3703,7 +3703,7 @@
   "icon": "1706.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 10,
    "slash": 10,
@@ -3733,7 +3733,7 @@
   "icon": "10360.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 10,
    "slash": 10,
@@ -3937,7 +3937,7 @@
   "icon": "12851.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 10,
    "slash": 10,
@@ -4880,7 +4880,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 4,
   "offensive": {
    "stab": 10,
@@ -5211,7 +5211,7 @@
   "icon": "29806.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "elite",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -5888,7 +5888,7 @@
   "category": "Crossbow",
   "requiredAmmo": "bolt",
   "ammoMaxTier": 8,
-  "tier": "common",
+  "tier": "decent",
   "speed": 6,
   "offensive": {
    "stab": 0,
@@ -6623,7 +6623,7 @@
   "icon": "11836.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -7576,7 +7576,7 @@
   "icon": "11014.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -7966,7 +7966,7 @@
   "ammoClass": "ogre",
   "ammoTier": 0,
   "ammoExclusive": true,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -10196,7 +10196,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Slash Sword",
-  "tier": "elite",
+  "tier": "strong",
   "speed": 4,
   "offensive": {
    "stab": 55,
@@ -10535,7 +10535,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 30,
@@ -11334,7 +11334,7 @@
   "tradeable": true,
   "twoHanded": true,
   "category": "Bladed Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 5,
   "offensive": {
    "stab": 70,
@@ -12149,7 +12149,7 @@
   "icon": "22986.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 10,
    "slash": 10,
@@ -12468,7 +12468,7 @@
   "icon": "22951.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 3,
    "slash": 0,
@@ -12497,7 +12497,7 @@
   "icon": "20140.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -12526,7 +12526,7 @@
   "icon": "23037.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -13239,7 +13239,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Axe",
-  "tier": "common",
+  "tier": "junk",
   "speed": 6,
   "offensive": {
    "stab": -2,
@@ -14730,7 +14730,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Blunt",
-  "tier": "common",
+  "tier": "junk",
   "speed": 6,
   "offensive": {
    "stab": -4,
@@ -14881,7 +14881,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 10,
@@ -15652,7 +15652,7 @@
   "icon": "19689.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -16278,7 +16278,7 @@
   "tradeable": true,
   "twoHanded": true,
   "category": "Spiked",
-  "tier": "strong",
+  "tier": "decent",
   "speed": 4,
   "offensive": {
    "stab": 0,
@@ -16795,7 +16795,7 @@
   "tradeable": false,
   "twoHanded": true,
   "category": "Bow",
-  "tier": "elite",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 0,
@@ -16826,7 +16826,7 @@
   "tradeable": false,
   "twoHanded": true,
   "category": "Bow",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 0,
@@ -17736,7 +17736,7 @@
   "icon": "27713.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "elite",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -18071,7 +18071,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Powered Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 4,
   "offensive": {
    "stab": 0,
@@ -18366,7 +18366,7 @@
   "category": "Bow",
   "requiredAmmo": "arrow",
   "ammoMaxTier": 8,
-  "tier": "common",
+  "tier": "decent",
   "speed": 9,
   "offensive": {
    "stab": 0,
@@ -18399,7 +18399,7 @@
   "category": "Bow",
   "requiredAmmo": "arrow",
   "ammoMaxTier": 8,
-  "tier": "common",
+  "tier": "decent",
   "speed": 9,
   "offensive": {
    "stab": 0,
@@ -19434,7 +19434,7 @@
   "icon": "4512.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -19463,7 +19463,7 @@
   "icon": "4072.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -20164,7 +20164,7 @@
   "tradeable": true,
   "twoHanded": true,
   "category": "2h Sword",
-  "tier": "elite",
+  "tier": "strong",
   "speed": 7,
   "offensive": {
    "stab": -4,
@@ -20512,7 +20512,7 @@
   "icon": "11840.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "elite",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -20542,7 +20542,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Polestaff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 40,
@@ -20635,7 +20635,7 @@
   "category": "Crossbow",
   "requiredAmmo": "bolt",
   "ammoMaxTier": 8,
-  "tier": "common",
+  "tier": "decent",
   "speed": 6,
   "offensive": {
    "stab": 0,
@@ -20716,7 +20716,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
-  "tier": "common",
+  "tier": "decent",
   "speed": 3,
   "poison": [
    {
@@ -20884,7 +20884,7 @@
   "icon": "7461.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "elite",
   "offensive": {
    "stab": 9,
    "slash": 9,
@@ -20914,7 +20914,7 @@
   "tradeable": true,
   "twoHanded": true,
   "category": "Polearm",
-  "tier": "elite",
+  "tier": "strong",
   "speed": 7,
   "offensive": {
    "stab": 70,
@@ -20977,7 +20977,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Spear",
-  "tier": "strong",
+  "tier": "decent",
   "speed": 4,
   "poison": [
    {
@@ -21027,7 +21027,7 @@
   "category": "Crossbow",
   "requiredAmmo": "bolt",
   "ammoMaxTier": 8,
-  "tier": "common",
+  "tier": "decent",
   "speed": 6,
   "offensive": {
    "stab": 0,
@@ -21282,7 +21282,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
-  "tier": "common",
+  "tier": "decent",
   "speed": 3,
   "poison": [
    {
@@ -21361,7 +21361,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Spiked",
-  "tier": "strong",
+  "tier": "decent",
   "speed": 4,
   "offensive": {
    "stab": 40,
@@ -21571,7 +21571,7 @@
   "tradeable": true,
   "twoHanded": true,
   "category": "Spear",
-  "tier": "strong",
+  "tier": "decent",
   "speed": 4,
   "poison": [
    {
@@ -21648,7 +21648,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Stab Sword",
-  "tier": "strong",
+  "tier": "decent",
   "speed": 4,
   "offensive": {
    "stab": 65,
@@ -21740,7 +21740,7 @@
   "icon": "22111.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 10,
    "slash": 10,
@@ -21891,7 +21891,7 @@
   "icon": "24043.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -22069,7 +22069,7 @@
   "icon": "24040.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -22495,7 +22495,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 6,
   "offensive": {
    "stab": 12,
@@ -22669,6 +22669,37 @@
   }
  },
  {
+  "id": 28991,
+  "name": "Atlatl dart",
+  "slot": "ammo",
+  "icon": "28991.png",
+  "tradeable": true,
+  "twoHanded": false,
+  "ammoClass": "atlatl",
+  "ammoExclusive": true,
+  "tier": "junk",
+  "offensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "defensive": {
+   "stab": 0,
+   "slash": 0,
+   "crush": 0,
+   "magic": 0,
+   "ranged": 0
+  },
+  "bonuses": {
+   "str": 0,
+   "ranged_str": 0,
+   "magic_str": 0,
+   "prayer": 0
+  }
+ },
+ {
   "id": 29000,
   "name": "Eclipse atlatl",
   "slot": "weapon",
@@ -22828,7 +22859,7 @@
   "icon": "20595.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -23697,7 +23728,7 @@
   "icon": "7399.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -24141,7 +24172,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Stab Sword",
-  "tier": "decent",
+  "tier": "common",
   "speed": 3,
   "offensive": {
    "stab": 60,
@@ -25377,7 +25408,7 @@
   "icon": "13132.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -25406,7 +25437,7 @@
   "icon": "3758.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -26060,7 +26091,7 @@
   "icon": "12391.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -26205,7 +26236,7 @@
   "icon": "23261.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -26323,7 +26354,7 @@
   "icon": "20146.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -26826,7 +26857,7 @@
   "icon": "10047.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -26913,7 +26944,7 @@
   "icon": "21643.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "elite",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -27061,7 +27092,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Slash Sword",
-  "tier": "strong",
+  "tier": "decent",
   "speed": 5,
   "offensive": {
    "stab": 56,
@@ -28353,7 +28384,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "common",
+  "tier": "decent",
   "speed": 5,
   "offensive": {
    "stab": 7,
@@ -30372,7 +30403,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 6,
   "offensive": {
    "stab": 0,
@@ -30682,7 +30713,7 @@
   "icon": "1580.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -33513,7 +33544,7 @@
   "tradeable": false,
   "twoHanded": true,
   "category": "Thrown",
-  "tier": "junk",
+  "tier": "common",
   "speed": 3,
   "offensive": {
    "stab": 0,
@@ -33544,7 +33575,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 24,
@@ -34081,7 +34112,7 @@
   "twoHanded": true,
   "category": "Crossbow",
   "requiredAmmo": "boltrack",
-  "tier": "common",
+  "tier": "decent",
   "speed": 4,
   "offensive": {
    "stab": 0,
@@ -34528,7 +34559,7 @@
   "category": "Crossbow",
   "requiredAmmo": "bolt",
   "ammoMaxTier": 8,
-  "tier": "decent",
+  "tier": "strong",
   "speed": 6,
   "offensive": {
    "stab": 0,
@@ -35722,7 +35753,7 @@
   "icon": "9104.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -36245,7 +36276,7 @@
   "icon": "28313.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "elite",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -39566,7 +39597,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Thrown",
-  "tier": "elite",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 0,
@@ -39891,7 +39922,7 @@
   "icon": "4097.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -39920,7 +39951,7 @@
   "icon": "4107.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -40070,7 +40101,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 10,
@@ -40333,7 +40364,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 10,
@@ -40364,7 +40395,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 10,
@@ -40395,7 +40426,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 10,
@@ -40658,7 +40689,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 10,
@@ -40689,7 +40720,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 10,
@@ -40720,7 +40751,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 10,
@@ -40811,7 +40842,7 @@
   "category": "Bow",
   "requiredAmmo": "arrow",
   "ammoMaxTier": 8,
-  "tier": "common",
+  "tier": "decent",
   "speed": 4,
   "offensive": {
    "stab": 0,
@@ -41468,7 +41499,7 @@
   "icon": "21304.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -43059,7 +43090,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 5,
   "offensive": {
    "stab": 10,
@@ -43651,7 +43682,7 @@
   "icon": "2577.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -43739,7 +43770,7 @@
   "icon": "23249.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -43949,7 +43980,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Chinchompas",
-  "tier": "common",
+  "tier": "decent",
   "speed": 4,
   "offensive": {
    "stab": 0,
@@ -44509,7 +44540,7 @@
   "icon": "22266.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -45504,7 +45535,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Axe",
-  "tier": "strong",
+  "tier": "decent",
   "speed": 6,
   "offensive": {
    "stab": -2,
@@ -45534,7 +45565,7 @@
   "icon": "4131.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -45689,7 +45720,7 @@
   "category": "Crossbow",
   "requiredAmmo": "bolt",
   "ammoMaxTier": 7,
-  "tier": "common",
+  "tier": "decent",
   "speed": 6,
   "offensive": {
    "stab": 0,
@@ -46904,7 +46935,7 @@
   "icon": "2621.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -46933,7 +46964,7 @@
   "icon": "2629.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -46964,7 +46995,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
-  "tier": "common",
+  "tier": "decent",
   "speed": 3,
   "poison": [
    {
@@ -47570,7 +47601,7 @@
   "icon": "7336.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -47599,7 +47630,7 @@
   "icon": "7342.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -47628,7 +47659,7 @@
   "icon": "7348.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -47657,7 +47688,7 @@
   "icon": "7354.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "strong",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -47856,7 +47887,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Blunt",
-  "tier": "strong",
+  "tier": "decent",
   "speed": 6,
   "offensive": {
    "stab": -4,
@@ -48044,7 +48075,7 @@
   "icon": "10552.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -48339,7 +48370,7 @@
   "icon": "20047.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -48906,7 +48937,7 @@
   "icon": "10390.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -48936,7 +48967,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "common",
+  "tier": "decent",
   "speed": 5,
   "offensive": {
    "stab": 7,
@@ -49499,7 +49530,7 @@
   "tradeable": false,
   "twoHanded": true,
   "category": "2h Sword",
-  "tier": "elite",
+  "tier": "strong",
   "speed": 4,
   "offensive": {
    "stab": 0,
@@ -49937,7 +49968,7 @@
   "icon": "6731.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -50086,7 +50117,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 4,
   "offensive": {
    "stab": 20,
@@ -50148,7 +50179,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 5,
   "offensive": {
    "stab": 0,
@@ -50499,7 +50530,7 @@
   "icon": "13377.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -51674,7 +51705,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 4,
   "offensive": {
    "stab": 20,
@@ -52411,7 +52442,7 @@
   "icon": "3393.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -52621,7 +52652,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Bladed Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 4,
   "offensive": {
    "stab": 55,
@@ -52745,7 +52776,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Bladed Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 4,
   "offensive": {
    "stab": 55,
@@ -52776,7 +52807,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Bladed Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 4,
   "offensive": {
    "stab": 55,
@@ -53804,7 +53835,7 @@
   "icon": "20178.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -54596,7 +54627,7 @@
   "icon": "1193.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -54685,7 +54716,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
-  "tier": "junk",
+  "tier": "common",
   "speed": 3,
   "poison": [
    {
@@ -55115,7 +55146,7 @@
   "icon": "30895.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -57900,7 +57931,7 @@
   "icon": "6524.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "elite",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -57930,7 +57961,7 @@
   "tradeable": true,
   "twoHanded": true,
   "category": "Staff",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 6,
   "offensive": {
    "stab": 15,
@@ -58023,7 +58054,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Thrown",
-  "tier": "decent",
+  "tier": "strong",
   "speed": 4,
   "offensive": {
    "stab": 0,
@@ -58603,7 +58634,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Bladed Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 4,
   "offensive": {
    "stab": 55,
@@ -58884,7 +58915,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Powered Staff",
-  "tier": "junk",
+  "tier": "common",
   "speed": 4,
   "offensive": {
    "stab": 0,
@@ -58916,7 +58947,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Powered Staff",
-  "tier": "junk",
+  "tier": "common",
   "speed": 4,
   "offensive": {
    "stab": 0,
@@ -59478,7 +59509,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Blunt",
-  "tier": "strong",
+  "tier": "decent",
   "speed": 5,
   "offensive": {
    "stab": -4,
@@ -59951,7 +59982,7 @@
   "icon": "24266.png",
   "tradeable": false,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -63140,7 +63171,7 @@
   "icon": "2914.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "junk",
+  "tier": "common",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -63558,7 +63589,7 @@
   "icon": "10374.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "decent",
+  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -63588,7 +63619,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "common",
+  "tier": "decent",
   "speed": 5,
   "offensive": {
    "stab": 7,
@@ -63853,7 +63884,7 @@
   "icon": "10456.png",
   "tradeable": true,
   "twoHanded": false,
-  "tier": "common",
+  "tier": "decent",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -64448,7 +64479,7 @@
   "tradeable": true,
   "twoHanded": false,
   "category": "Blunt",
-  "tier": "common",
+  "tier": "junk",
   "speed": 6,
   "offensive": {
    "stab": -4,
@@ -64599,7 +64630,7 @@
   "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
-  "tier": "strong",
+  "tier": "elite",
   "speed": 5,
   "offensive": {
    "stab": 13,
