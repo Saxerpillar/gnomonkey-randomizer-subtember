@@ -3,6 +3,7 @@
 // classifications present, icons on disk, bosses well-formed.
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { styleOf } from './roll';
 import { SLOTS } from './types';
 
 const load = (f: string) => JSON.parse(readFileSync(`public/data/${f}`, 'utf8'));
@@ -88,6 +89,26 @@ describe('generated bosses.json', () => {
       expect(typeof b.name).toBe('string');
       expect(Array.isArray(b.tags)).toBe(true);
       expect(files.has(b.image)).toBe(true);
+    }
+  });
+
+  it('boss weapon rules name real melee weapons, and only under a no-melee rule', () => {
+    const bosses = load('bosses.json') as {
+      name: string;
+      noMeleeWeapons?: boolean;
+      meleeExceptions?: string[];
+    }[];
+    const weapons = (load('equipment.json') as { name: string; slot: string; category?: string }[]).filter(
+      (i) => i.slot === 'weapon',
+    );
+    for (const b of bosses) {
+      const exceptions = b.meleeExceptions ?? [];
+      if (exceptions.length > 0) expect(b.noMeleeWeapons).toBe(true);
+      for (const name of exceptions) {
+        const found = weapons.find((w) => w.name === name);
+        expect(found, `${b.name} exception "${name}" is not a weapon`).toBeDefined();
+        if (found) expect(styleOf(found)).toBe('melee');
+      }
     }
   });
 });

@@ -40,6 +40,11 @@ export interface Settings {
    */
   tierFloors: Partial<Record<Tier, number>>;
 
+  /** Nuzlocke: rolls avoid repeating a boss until the whole pool is fought. */
+  nuzlocke: boolean;
+  /** 0..1 chance a roll lands on an already-fought boss (0 = never repeat). */
+  nuzlockeRepeat: number;
+
   // ---- debug (all inert by default; hidden unless debugMode is on) ----
   /** Master switch: reveals the debug controls in Settings. */
   debugMode: boolean;
@@ -128,6 +133,8 @@ export const DEFAULT_SETTINGS: Settings = {
   removeFlashbangs: false,
   volume: 1,
   tierFloors: {},
+  nuzlocke: false,
+  nuzlockeRepeat: 0,
   debugMode: false,
   forceBoss: 'off',
   forceTier: 'off',

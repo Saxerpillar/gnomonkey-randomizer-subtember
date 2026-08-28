@@ -29,6 +29,8 @@ import {
 import { DataProvider, useGameData, type Boss } from './components/DataProvider';
 import { EquipmentPanel } from './components/EquipmentPanel';
 import { bossObjective, hardModeLabel } from './components/objectives';
+import { rollNuzlockeBoss } from './components/nuzlocke';
+import { NuzlockeScreen } from './components/NuzlockeScreen';
 import { PreRollScreen } from './components/PreRollScreen';
 import { ResultStage } from './components/ResultStage';
 import { RevealCard, type LandingImpact } from './components/RevealCard';
@@ -46,7 +48,15 @@ import { useCeremony, type RevealData } from './components/useCeremony';
 import { ValueCounter } from './components/ValueCounter';
 import { parseBudget } from './engine/parse';
 import { mulberry32, pick, randomSeed } from './engine/rng';
-import { loadoutValue, roll, rerollSlot, rollForStyle, styleOf, type Style } from './engine/roll';
+import {
+  filterWeaponsFor,
+  loadoutValue,
+  roll,
+  rerollSlot,
+  rollForStyle,
+  styleOf,
+  type Style,
+} from './engine/roll';
 import { sortSquadByStyle } from './engine/squadSort';
 import { emptyLoadout, SLOTS, type Item, type Loadout, type Slot } from './engine/types';
 import { GpValue } from './theme/GpValue';
@@ -243,12 +253,24 @@ const Main = () => {
   } | null>(null);
   const { view, reveal, start: startCeremony, onRevealDone } = useCeremony(items);
 
+  /** Nuzlocke progress: boss names fought since the current pool cycle began.
+   *  Persisted in the settings blob (not the history log) so a corrupt run log
+   *  cannot take the pool down with it. */
+  const [usedBosses, setUsedBosses] = useState<string[]>(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+      return Array.isArray(saved.nuzlocke) ? saved.nuzlocke : [];
+    } catch {
+      return [];
+    }
+  });
+
   useEffect(() => {
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify({ locks: state.locks, settings: state.settings }),
+      JSON.stringify({ locks: state.locks, settings: state.settings, nuzlocke: usedBosses }),
     );
-  }, [state.locks, state.settings]);
+  }, [state.locks, state.settings, usedBosses]);
 
   // The browser context menu never shows anywhere in the app: any right-click
   // a component didn't claim opens the bare OSRS menu (Choose Option + Cancel).
@@ -291,6 +313,15 @@ const Main = () => {
     return { ok: true, gp: effectiveBudget(normal.gp, wildy.gp, true) };
   };
 
+  /**
+   * The weapon-pool restriction for a fight, or null when it takes any weapon.
+   * `filterWeaponsFor` drops every melee weapon, keeping only the named
+   * exceptions — Kraken takes none at all, Zulrah and Kree'arra keep only the
+   * Noxious halberd.
+   */
+  const bossWeaponRule = (b: Boss | null) =>
+    b?.noMeleeWeapons ? { noMelee: true, meleeExceptions: b.meleeExceptions ?? [] } : null;
+
   /** Reroll a single slot, leaving the rest of the loadout alone. */
   const rerollOneSlot = (slot: Slot) => {
     const { settings } = state;
@@ -299,9 +330,10 @@ const Main = () => {
     const parsed = budgetFor(isWildy);
     if (!parsed.ok) return;
     const allowUntradeables = isWildy ? false : settings.allowUntradeables;
+    const pool = filterWeaponsFor(items, bossWeaponRule(state.boss));
     const rng = mulberry32(randomSeed());
     const loadout = rerollSlot(
-      items,
+      pool,
       state.loadout,
       slot,
       { budget: parsed.gp, allowUntradeables, locks: state.locks },
@@ -352,7 +384,10 @@ const Main = () => {
     if (!parsed.ok) return;
     const allowUntradeables = isWildy ? false : settings.allowUntradeables;
     const rng = mulberry32(randomSeed());
-    const styled = items.filter((i) => i.slot !== 'weapon' || styleOf(i) === entry.style);
+    const styled = filterWeaponsFor(
+      items.filter((i) => i.slot !== 'weapon' || styleOf(i) === entry.style),
+      bossWeaponRule(state.boss),
+    );
     const loadout = rerollSlot(
       styled,
       entry.loadout,
@@ -408,7 +443,20 @@ const Main = () => {
     const pool = filterBossPool(bosses, settings);
     if (pool.length === 0) return;
     gambaFired.current = false;
-    const boss = pick(mulberry32(randomSeed()), pool);
+    // Nuzlocke: the boss comes from the pool of unfought bosses (or a repeat,
+    // at the configured %), and is recorded as fought when the run commits.
+    // An exhausted pool auto-resets — `rollNuzlockeBoss` starts a fresh cycle.
+    const bossRng = mulberry32(randomSeed());
+    let boss: Boss;
+    let usedNext: string[];
+    if (settings.nuzlocke) {
+      const r = rollNuzlockeBoss(pool, usedBosses, settings.nuzlockeRepeat, bossRng);
+      boss = r.boss;
+      usedNext = r.used;
+    } else {
+      boss = pick(bossRng, pool);
+      usedNext = usedBosses;
+    }
     // Gauntlet runs take no gear in at all: no gear roll, and a guaranteed
     // challenge drawn from that boss's own pool.
     const isGauntlet = boss.tags.includes('gauntlet');
@@ -438,6 +486,8 @@ const Main = () => {
       settings.debugMode && settings.forceTier !== 'off'
         ? items.filter((i) => i.tier === settings.forceTier)
         : items;
+    // A fight that refuses melee weapons gets its pool filtered before the roll.
+    const bossPool = filterWeaponsFor(rollPool, bossWeaponRule(boss));
     const rng = mulberry32(randomSeed());
     // Some fights only make sense with one style — the Leviathan is ranged,
     // the Whisperer magic — so their weapon roll is forced the same way a
@@ -445,8 +495,8 @@ const Main = () => {
     const loadout = isGauntlet
       ? emptyLoadout()
       : boss.style
-        ? rollForStyle(rollPool, boss.style, rollSettings, rng)
-        : roll(rollPool, rollSettings, rng);
+        ? rollForStyle(bossPool, boss.style, rollSettings, rng)
+        : roll(bossPool, rollSettings, rng);
 
     // A boss with a hard-mode variant is upgraded on a coin flip; the ceremony
     // reveals the normal fight first, then stamps HARD MODE after a beat.
@@ -468,7 +518,7 @@ const Main = () => {
         ? sortSquadByStyle(
             (['melee', 'ranged', 'magic'] as const).map((style) => ({
               style,
-              loadout: rollForStyle(rollPool, style, rollSettings, mulberry32(randomSeed())),
+              loadout: rollForStyle(bossPool, style, rollSettings, mulberry32(randomSeed())),
             })),
           )
         : null;
@@ -484,6 +534,9 @@ const Main = () => {
     squad?.forEach((s) => preload(s.loadout));
 
     const commit = () => {
+      // The boss counts as fought the moment the run commits, not when it was
+      // rolled, so an aborted ceremony never consumes it.
+      setUsedBosses(usedNext);
       // Recorded from what was actually rolled, denormalised, so a later data
       // refresh cannot rewrite what happened.
       const gearOf = (l: Loadout): HistoryGear[] =>
@@ -560,15 +613,33 @@ const Main = () => {
           <div className="app">
             <div className="hero">
               <TitleBanner />
-              <PreRollScreen
-                decideReady={decideReady}
-                updateReady={
-                  updateReady || (state.settings.debugMode && state.settings.forceUpdatePrompt)
-                }
-                onDecide={decide}
-                onOpenSettings={() => setSettingsOpen(true)}
-                onOpenHistory={() => setHistoryOpen(true)}
-              />
+              {/* Nuzlocke replaces the plain hero with its own run-start screen:
+                  the boss board, the pool counter and the repeat slider. */}
+              {state.settings.nuzlocke ? (
+                <NuzlockeScreen
+                  bosses={bosses}
+                  settings={state.settings}
+                  usedBosses={usedBosses}
+                  decideReady={decideReady}
+                  updateReady={
+                    updateReady || (state.settings.debugMode && state.settings.forceUpdatePrompt)
+                  }
+                  onChange={(patch) => dispatch({ type: 'SET_SETTINGS', patch })}
+                  onDecide={decide}
+                  onOpenSettings={() => setSettingsOpen(true)}
+                  onOpenHistory={() => setHistoryOpen(true)}
+                />
+              ) : (
+                <PreRollScreen
+                  decideReady={decideReady}
+                  updateReady={
+                    updateReady || (state.settings.debugMode && state.settings.forceUpdatePrompt)
+                  }
+                  onDecide={decide}
+                  onOpenSettings={() => setSettingsOpen(true)}
+                  onOpenHistory={() => setHistoryOpen(true)}
+                />
+              )}
             </div>
           </div>
         </FitScreen>

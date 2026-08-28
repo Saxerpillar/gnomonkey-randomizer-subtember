@@ -401,7 +401,14 @@ const main = async () => {
   await writeJsonAtomic(path.join(ROOT, 'public/data/spells.json'), appSpells);
   await writeJsonAtomic(
     path.join(ROOT, 'public/data/bosses.json'),
-    bosses.map((b) => ({ name: b.name, image: b.image, tags: b.tags, ...(b.style ? { style: b.style } : {}) })),
+    bosses.map((b) => ({
+      name: b.name,
+      image: b.image,
+      tags: b.tags,
+      ...(b.style ? { style: b.style } : {}),
+      ...(b.noMeleeWeapons ? { noMeleeWeapons: b.noMeleeWeapons } : {}),
+      ...(b.meleeExceptions?.length ? { meleeExceptions: b.meleeExceptions } : {}),
+    })),
   );
 
   const weapons = appItems.filter((i) => i.slot === 'weapon');

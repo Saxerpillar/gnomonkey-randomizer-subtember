@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { loadoutValue, roll, rerollSlot } from './roll';
+import { filterWeaponsFor, loadoutValue, roll, rerollSlot } from './roll';
 import { mulberry32 } from './rng';
 import { costOf, SLOTS, type Item, type Loadout, type RollSettings, type Slot } from './types';
 
@@ -340,5 +340,31 @@ describe('loadoutValue', () => {
     const locked = item('body', { price: 5000 });
     const out = roll([item('head', { price: 300 })], settings({ locks: { body: locked } }), mulberry32(1));
     expect(loadoutValue(out)).toBe(5300);
+  });
+});
+
+describe('filterWeaponsFor', () => {
+  const pool = (): Item[] => [
+    item('weapon', { name: 'sword', category: 'Slash Sword' }),
+    item('weapon', { name: 'bow', category: 'Bow', requiredAmmo: 'arrow' }),
+    item('weapon', { name: 'staff', category: 'Staff' }),
+    item('weapon', { name: 'halberd', category: 'Polearm' }),
+    item('body', { name: 'armour' }),
+  ];
+
+  it('no rule leaves the pool unchanged', () => {
+    const p = pool();
+    expect(filterWeaponsFor(p, null)).toBe(p);
+    expect(filterWeaponsFor(p, {})).toBe(p);
+  });
+
+  it('noMelee drops every melee weapon, keeping the rest', () => {
+    const out = filterWeaponsFor(pool(), { noMelee: true });
+    expect(out.map((i) => i.name).sort()).toEqual(['armour', 'bow', 'staff']);
+  });
+
+  it('keeps the named melee exceptions (Zulrah / Kree\'arra rule)', () => {
+    const out = filterWeaponsFor(pool(), { noMelee: true, meleeExceptions: ['halberd'] });
+    expect(out.map((i) => i.name).sort()).toEqual(['armour', 'bow', 'halberd', 'staff']);
   });
 });

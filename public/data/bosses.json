@@ -226,6 +226,7 @@
  {
   "name": "Kraken",
   "image": "Kraken.png",
+  "noMeleeWeapons": true,
   "tags": [
    "slayer",
    "easy"
@@ -234,6 +235,10 @@
  {
   "name": "Kree'arra",
   "image": "Kree'arra.png",
+  "noMeleeWeapons": true,
+  "meleeExceptions": [
+   "Noxious halberd"
+  ],
   "tags": [
    "gwd",
    "mid"
@@ -439,6 +444,10 @@
  {
   "name": "Zulrah",
   "image": "Zulrah (magma).png",
+  "noMeleeWeapons": true,
+  "meleeExceptions": [
+   "Noxious halberd"
+  ],
   "tags": [
    "mid"
   ]

@@ -100,41 +100,58 @@ const TierFloors = ({
   floors: Partial<Record<Tier, number>>;
   onChange: (floors: Partial<Record<Tier, number>>) => void;
 }) => {
+  // Collapsed by default: the panel is long, and the floors are an advanced
+  // mitigation rather than something set on every run.
+  const [open, setOpen] = useState(false);
   const free = freeFloorSlots(floors);
   const set = (tier: Tier, n: number) => onChange({ ...floors, [tier]: n });
   return (
     <div className={styles.floors}>
-      <span className={styles.floorsTitle}>Minimum gear quality</span>
-      {[...TIERS].reverse().map((tier) => {
-        const n = floors[tier] ?? 0;
-        return (
-          <div key={tier} className={styles.floorRow}>
-            <span className={styles.floorLabel}>{tier.charAt(0).toUpperCase() + tier.slice(1)}</span>
-            <button
-              type="button"
-              className={styles.floorStep}
-              disabled={n === 0}
-              aria-label={`One fewer ${tier}`}
-              onClick={() => set(tier, n - 1)}
-            >
-              −
-            </button>
-            <span className={styles.floorCount}>{n}</span>
-            <button
-              type="button"
-              className={styles.floorStep}
-              disabled={free === 0}
-              aria-label={`One more ${tier}`}
-              onClick={() => set(tier, n + 1)}
-            >
-              +
-            </button>
-          </div>
-        );
-      })}
-      <span className={styles.floorsFree}>
-        {free} of {CORE_SLOTS.length} slots left to chance
-      </span>
+      <button
+        type="button"
+        className={styles.floorsHead}
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+      >
+        <span className={styles.floorsTitle}>Minimum gear quality</span>
+        <span className={styles.chevron}>{open ? '▾' : '▸'}</span>
+      </button>
+      {open && (
+        <div className={styles.floorsBody}>
+          {[...TIERS].reverse().map((tier) => {
+            const n = floors[tier] ?? 0;
+            return (
+              <div key={tier} className={styles.floorRow}>
+                <span className={styles.floorLabel}>
+                  {tier.charAt(0).toUpperCase() + tier.slice(1)}
+                </span>
+                <button
+                  type="button"
+                  className={styles.floorStep}
+                  disabled={n === 0}
+                  aria-label={`One fewer ${tier}`}
+                  onClick={() => set(tier, n - 1)}
+                >
+                  −
+                </button>
+                <span className={styles.floorCount}>{n}</span>
+                <button
+                  type="button"
+                  className={styles.floorStep}
+                  disabled={free === 0}
+                  aria-label={`One more ${tier}`}
+                  onClick={() => set(tier, n + 1)}
+                >
+                  +
+                </button>
+              </div>
+            );
+          })}
+          <span className={styles.floorsFree}>
+            {free} of {CORE_SLOTS.length} slots left to chance
+          </span>
+        </div>
+      )}
     </div>
   );
 };
@@ -244,16 +261,24 @@ export const SettingsPanel = ({
             }}
           />
         ))}
-        <button
-          type="button"
-          className={styles.manage}
-          onClick={() => setManagingPool(true)}
-        >
-          Manage boss pool
-          {settings.excludedBosses.length > 0 && (
-            <span className={styles.manageCount}>{settings.excludedBosses.length} off</span>
-          )}
-        </button>
+        <div className={styles.viewRow}>
+          <Toggle
+            label="Nuzlocke mode"
+            checked={settings.nuzlocke}
+            onChange={(v) => onChange({ nuzlocke: v })}
+          />
+          <button
+            type="button"
+            className={styles.manage}
+            onClick={() => setManagingPool(true)}
+          >
+            <img className={styles.manageIcon} src={asset('img/ui/skull.png')} alt="" />
+            Manage boss pool
+            {settings.excludedBosses.length > 0 && (
+              <span className={styles.manageCount}>{settings.excludedBosses.length} off</span>
+            )}
+          </button>
+        </div>
         <Toggle
           label="Mute sounds"
           checked={settings.muteSounds}

@@ -338,6 +338,25 @@ export const styleOf = (item: Item): Style | null =>
   item.category ? (STYLE_BY_CATEGORY[item.category] ?? null) : null;
 
 /**
+ * Restrict a pool's weapons to what a boss permits: any non-melee weapon stays,
+ * plus the named melee exceptions. Armour is untouched. Returns the pool
+ * unchanged when there is no rule (`null`, or `noMelee` falsy).
+ *
+ * Drives the "this fight never takes a melee weapon" rules: Kraken allows none
+ * at all; Zulrah and Kree'arra keep only the Noxious halberd.
+ */
+export const filterWeaponsFor = (
+  pool: Item[],
+  rule: { noMelee?: boolean; meleeExceptions?: string[] } | null,
+): Item[] => {
+  if (!rule?.noMelee) return pool;
+  const exceptions = rule.meleeExceptions ?? [];
+  return pool.filter(
+    (i) => i.slot !== 'weapon' || styleOf(i) !== 'melee' || exceptions.includes(i.name),
+  );
+};
+
+/**
  * Roll a loadout whose weapon is forced to a combat style — raids hand the
  * team one setup per style. Everything else (budget, tiers, ammo, 2h/shield)
  * behaves exactly as a normal roll.

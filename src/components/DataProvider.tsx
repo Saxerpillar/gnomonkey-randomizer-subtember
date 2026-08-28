@@ -12,6 +12,12 @@ export interface Boss {
   /** Fights that only make sense with one combat style, e.g. the Leviathan's
    *  ranged-only phases. Forces the weapon roll when set. */
   style?: Style;
+  /** Fights that never roll a melee weapon (Kraken). When `meleeExceptions` is
+   *  present, only those melee weapons stay (Zulrah and Kree'arra keep the
+   *  Noxious halberd). */
+  noMeleeWeapons?: boolean;
+  /** Melee weapons still eligible despite `noMeleeWeapons`. */
+  meleeExceptions?: string[];
 }
 
 export interface GameData {
