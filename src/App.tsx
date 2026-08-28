@@ -29,7 +29,7 @@ import {
 import { DataProvider, useGameData, type Boss } from './components/DataProvider';
 import { EquipmentPanel } from './components/EquipmentPanel';
 import { bossObjective, hardModeLabel } from './components/objectives';
-import { rollNuzlockeBoss } from './components/nuzlocke';
+import { rollNuzlockeBoss, type BossStates } from './components/nuzlocke';
 import { NuzlockeScreen } from './components/NuzlockeScreen';
 import { PreRollScreen } from './components/PreRollScreen';
 import { ResultStage } from './components/ResultStage';
@@ -220,7 +220,29 @@ const Main = () => {
 
   useEffect(() => saveHistory(history), [history]);
 
-  const markRun = (id: string, outcome: Outcome) => setHistory((h) => markOutcome(h, id, outcome));
+  const markRun = (id: string, outcome: Outcome) => {
+    setHistory((h) => markOutcome(h, id, outcome));
+    // Reflect the fight's outcome on the Nuzlocke board: cleared -> ✓, failed -> ✗.
+    const run = history.find((r) => r.id === id);
+    if (run?.boss && state.settings.nuzlocke) {
+      setBossStates((s) => ({
+        ...s,
+        [run.boss]: outcome === 'cleared' ? 'completed' : 'uncompleted',
+      }));
+    }
+  };
+  // Clicking a boss on the Nuzlocke board cycles it: not rolled -> completed ->
+  // uncompleted -> not rolled, so a missed or mistaken mark can be fixed live.
+  const cycleBoss = (name: string) => {
+    setBossStates((s) => {
+      if (!(name in s)) return { ...s, [name]: 'completed' };
+      if (s[name] === 'completed') return { ...s, [name]: 'uncompleted' };
+      const next = { ...s };
+      delete next[name];
+      return next;
+    });
+  };
+  const resetNuzlocke = () => setBossStates({});
   // Marking a run's outcome is the way home too: clicking the button you
   // already marked (the one now showing its check/x) returns to pre-roll.
   const settleRun = (id: string, outcome: Outcome) => {
@@ -253,24 +275,28 @@ const Main = () => {
   } | null>(null);
   const { view, reveal, start: startCeremony, onRevealDone } = useCeremony(items);
 
-  /** Nuzlocke progress: boss names fought since the current pool cycle began.
-   *  Persisted in the settings blob (not the history log) so a corrupt run log
-   *  cannot take the pool down with it. */
-  const [usedBosses, setUsedBosses] = useState<string[]>(() => {
+  /** Nuzlocke progress: per-boss fight outcome for the current pool cycle.
+   *  Absent = not rolled yet. Persisted in the settings blob (not the history
+   *  log) so a corrupt run log cannot take the pool down with it. */
+  const [bossStates, setBossStates] = useState<BossStates>(() => {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
-      return Array.isArray(saved.nuzlocke) ? saved.nuzlocke : [];
+      const raw = saved.nuzlocke;
+      if (raw == null) return {};
+      // v1 stored a bare list of fought names; promote them to a state map.
+      if (Array.isArray(raw)) return Object.fromEntries(raw.map((n: string) => [n, 'completed']));
+      return raw as BossStates;
     } catch {
-      return [];
+      return {};
     }
   });
 
   useEffect(() => {
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify({ locks: state.locks, settings: state.settings, nuzlocke: usedBosses }),
+      JSON.stringify({ locks: state.locks, settings: state.settings, nuzlocke: bossStates }),
     );
-  }, [state.locks, state.settings, usedBosses]);
+  }, [state.locks, state.settings, bossStates]);
 
   // The browser context menu never shows anywhere in the app: any right-click
   // a component didn't claim opens the bare OSRS menu (Choose Option + Cancel).
@@ -448,14 +474,14 @@ const Main = () => {
     // An exhausted pool auto-resets — `rollNuzlockeBoss` starts a fresh cycle.
     const bossRng = mulberry32(randomSeed());
     let boss: Boss;
-    let usedNext: string[];
+    let statesNext: BossStates;
     if (settings.nuzlocke) {
-      const r = rollNuzlockeBoss(pool, usedBosses, settings.nuzlockeRepeat, bossRng);
+      const r = rollNuzlockeBoss(pool, bossStates, settings.nuzlockeRepeat, bossRng);
       boss = r.boss;
-      usedNext = r.used;
+      statesNext = r.states;
     } else {
       boss = pick(bossRng, pool);
-      usedNext = usedBosses;
+      statesNext = bossStates;
     }
     // Gauntlet runs take no gear in at all: no gear roll, and a guaranteed
     // challenge drawn from that boss's own pool.
@@ -536,7 +562,7 @@ const Main = () => {
     const commit = () => {
       // The boss counts as fought the moment the run commits, not when it was
       // rolled, so an aborted ceremony never consumes it.
-      setUsedBosses(usedNext);
+      setBossStates(statesNext);
       // Recorded from what was actually rolled, denormalised, so a later data
       // refresh cannot rewrite what happened.
       const gearOf = (l: Loadout): HistoryGear[] =>
@@ -619,12 +645,14 @@ const Main = () => {
                 <NuzlockeScreen
                   bosses={bosses}
                   settings={state.settings}
-                  usedBosses={usedBosses}
+                  bossStates={bossStates}
                   decideReady={decideReady}
                   updateReady={
                     updateReady || (state.settings.debugMode && state.settings.forceUpdatePrompt)
                   }
                   onChange={(patch) => dispatch({ type: 'SET_SETTINGS', patch })}
+                  onCycleBoss={cycleBoss}
+                  onReset={resetNuzlocke}
                   onDecide={decide}
                   onOpenSettings={() => setSettingsOpen(true)}
                   onOpenHistory={() => setHistoryOpen(true)}

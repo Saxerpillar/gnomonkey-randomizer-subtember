@@ -1,9 +1,34 @@
 .screen {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
   width: 100%;
+}
+
+/* Pinned to the corner so it is always the same place and never shifts the
+   board below it. Solid like the app's other buttons, not a ghost link. */
+.reset {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--red);
+  background: linear-gradient(var(--panel-raised), var(--tile));
+  border: 2px solid var(--red);
+  outline: 1px solid var(--border-dark);
+  border-radius: 3px;
+  padding: 5px 12px;
+  cursor: pointer;
+  text-shadow: var(--text-outline);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.reset:hover {
+  filter: brightness(1.25);
+  color: #fff;
 }
 
 /* Nuzlocke tag + the pool counter, pinned above the board. */
@@ -69,6 +94,12 @@
   background: var(--tile);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 1px 2px rgba(0, 0, 0, 0.4);
   overflow: hidden;
+  cursor: pointer;
+  transition: border-color 80ms, filter 80ms;
+}
+
+.cell:hover {
+  border-color: var(--gold);
 }
 
 .cell img {
@@ -77,23 +108,55 @@
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.6));
+  pointer-events: none;
 }
 
-/* Fought: dimmed to a silhouette with the red cross over it. */
-.fought {
+/* Rolled: dimmed to a silhouette with a coloured wash for how it ended — green
+   for completed, red for uncompleted — over the grey, not grey alone. */
+.completed {
+  border-color: var(--green);
+}
+
+.uncompleted {
   border-color: var(--red);
-  filter: grayscale(1) brightness(0.5);
 }
 
-.foughtX {
+.completed img,
+.uncompleted img {
+  filter: grayscale(0.55) brightness(0.6);
+}
+
+.tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.completed .tint {
+  background: rgba(70, 194, 70, 0.3);
+}
+
+.uncompleted .tint {
+  background: rgba(216, 67, 67, 0.3);
+}
+
+.mark {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
   font-family: var(--font-bold);
   font-size: 26px;
-  color: var(--red);
   text-shadow: var(--text-outline);
+  pointer-events: none;
+}
+
+.completed .mark {
+  color: var(--green);
+}
+
+.uncompleted .mark {
+  color: var(--red);
 }
 
 .cleared {

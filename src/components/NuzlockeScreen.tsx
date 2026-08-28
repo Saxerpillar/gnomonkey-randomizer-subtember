@@ -3,7 +3,7 @@ import { RsButton } from '../theme/RsButton';
 import { RsTooltip } from '../theme/RsTooltip';
 import { GnomePeek } from '../theme/GnomePeek';
 import type { Boss } from './DataProvider';
-import { unusedBosses } from './nuzlocke';
+import { availableBosses, type BossStates } from './nuzlocke';
 import { filterBossPool, type Settings } from './settings';
 import { UpdatePrompt } from './UpdatePrompt';
 import styles from './NuzlockeScreen.module.css';
@@ -17,35 +17,52 @@ import styles from './NuzlockeScreen.module.css';
  * you haven't fought until the pool is cleared, then the cycle silently starts
  * over; the repeat slider trades that away when a thin pool would otherwise
  * force the same handful of fights.
+ *
+ * The board is editable: clicking a boss cycles it not rolled -> completed ->
+ * uncompleted -> not rolled, so a missed or mistaken mark can be fixed live,
+ * and the whole pool can be reset in one click.
  */
 export const NuzlockeScreen = ({
   bosses,
   settings,
-  usedBosses,
+  bossStates,
   decideReady,
   updateReady = false,
   onChange,
+  onCycleBoss,
+  onReset,
   onDecide,
   onOpenSettings,
   onOpenHistory,
 }: {
   bosses: readonly Boss[];
   settings: Settings;
-  usedBosses: readonly string[];
+  bossStates: BossStates;
   decideReady: boolean;
   updateReady?: boolean;
   onChange: (patch: Partial<Settings>) => void;
+  onCycleBoss: (name: string) => void;
+  onReset: () => void;
   onDecide: () => void;
   onOpenSettings: () => void;
   onOpenHistory: () => void;
 }) => {
   const pool = filterBossPool(bosses, settings);
+  // Alphabetical by the boss's CURRENT name — a rename (Great Olm ->
+  // Chambers of Xeric) must move the tile with it, not leave it in its old
+  // data-file position.
+  const sortedPool = [...pool].sort((a, b) => a.name.localeCompare(b.name));
   const total = pool.length;
-  const available = unusedBosses(pool, usedBosses).length;
+  const available = availableBosses(pool, bossStates).length;
   const cleared = available === 0;
   const pct = Math.round(settings.nuzlockeRepeat * 100);
   return (
     <div className={styles.screen}>
+      {/* Pinned top-right so it never moves the board, and always rendered —
+          the only condition for it being here is the Nuzlocke screen itself. */}
+      <button type="button" className={styles.reset} data-solid="" onClick={onReset}>
+        Reset nuzlocke
+      </button>
       <header className={styles.header} data-solid="strict">
         <span className={styles.tag}>Nuzlocke</span>
         <div className={styles.counter}>
@@ -54,18 +71,33 @@ export const NuzlockeScreen = ({
           <span className={styles.counterLabel}>bosses left</span>
         </div>
       </header>
-      <div className={styles.board}>
-        {pool.map((b) => {
-          const fought = usedBosses.includes(b.name);
+      <div className={styles.board} data-solid="strict">
+        {sortedPool.map((b) => {
+          const state = bossStates[b.name];
           return (
             <RsTooltip
               key={b.name}
-              content={fought ? `${b.name} — fought` : b.name}
+              content={
+                state == null
+                  ? b.name
+                  : `${b.name} — ${state === 'completed' ? 'completed' : 'uncompleted'}`
+              }
               className={styles.cellWrap}
             >
-              <div className={`${styles.cell} ${fought ? styles.fought : ''}`}>
+              <div
+                className={`${styles.cell} ${state != null ? styles[state] : ''}`}
+                role="button"
+                aria-label={`${b.name} — ${state ?? 'not rolled'}`}
+                onClick={() => onCycleBoss(b.name)}
+              >
                 <img src={asset(`img/bosses/${b.image}`)} alt="" draggable={false} />
-                {fought && <span className={styles.foughtX} aria-hidden="true">✗</span>}
+                {state != null && <span className={styles.tint} aria-hidden="true" />}
+                {state === 'completed' && (
+                  <span className={styles.mark} aria-hidden="true">✓</span>
+                )}
+                {state === 'uncompleted' && (
+                  <span className={styles.mark} aria-hidden="true">✗</span>
+                )}
               </div>
             </RsTooltip>
           );
