@@ -28,8 +28,8 @@ const OBJECTIVES: Record<string, ObjectiveSpec> = {
  */
 const HARD_MODE_NAME: Record<string, string> = {
   'Tombs of Amascut': 'EXPERT MODE',
-  // Chambers of Xeric is stored under its boss, Great Olm.
-  'Great Olm': 'CHALLENGE MODE',
+  // Chambers of Xeric is the raid; the Olm is the fight.
+  'Chambers of Xeric': 'CHALLENGE MODE',
 };
 
 export const hardModeLabel = (boss: { name: string; tags: string[] } | null): string => {

@@ -1,7 +1,6 @@
 import type { CSSProperties } from 'react';
 import { asset } from '../asset';
 import { loadoutValue } from '../engine/roll';
-import type { Spell } from '../engine/spell';
 import type { Item, Loadout, Slot } from '../engine/types';
 import { GpValue } from '../theme/GpValue';
 import { GnomePeek } from '../theme/GnomePeek';
@@ -12,7 +11,6 @@ import type { Challenge } from './challenges';
 import type { Boss } from './DataProvider';
 import { EquipmentPanel } from './EquipmentPanel';
 import { bossObjective } from './objectives';
-import { SpellBadge } from './SpellBadge';
 
 /**
  * The two-panel "final info" layout: your gear on the left, your challenger on
@@ -31,7 +29,6 @@ import { SpellBadge } from './SpellBadge';
 export const ResultStage = ({
   loadout,
   locks,
-  spell,
   boss,
   hardMode = false,
   revealing = false,
@@ -44,7 +41,6 @@ export const ResultStage = ({
 }: {
   loadout: Loadout;
   locks: Partial<Record<Slot, Item>>;
-  spell: Spell | null;
   boss: Boss | null;
   hardMode?: boolean;
   /** Draw the boss stage's "?" placeholder — the reveal has not landed yet. */
@@ -77,7 +73,6 @@ export const ResultStage = ({
             />
             <BonusesPanel loadout={loadout} />
           </div>
-          <SpellBadge weapon={loadout.weapon} spell={spell} />
           <div className="value">
             Loadout value: <GpValue gp={value} />
           </div>

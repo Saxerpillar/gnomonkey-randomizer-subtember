@@ -6,8 +6,7 @@ const boss = (name: string, tags: string[] = []) => ({ name, tags });
 describe('hardModeLabel', () => {
   it('uses each raid’s own word for its upgraded version', () => {
     expect(hardModeLabel(boss('Tombs of Amascut', ['raid', 'hard mode']))).toBe('EXPERT MODE');
-    // Chambers of Xeric is stored under its boss.
-    expect(hardModeLabel(boss('Great Olm', ['raid', 'hard mode']))).toBe('CHALLENGE MODE');
+    expect(hardModeLabel(boss('Chambers of Xeric', ['raid', 'hard mode']))).toBe('CHALLENGE MODE');
   });
 
   it('calls the Desert Treasure II bosses awakened', () => {

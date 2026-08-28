@@ -47,7 +47,6 @@ import { ValueCounter } from './components/ValueCounter';
 import { parseBudget } from './engine/parse';
 import { mulberry32, pick, randomSeed } from './engine/rng';
 import { loadoutValue, roll, rerollSlot, rollForStyle, styleOf, type Style } from './engine/roll';
-import { rollSpell, type Spell } from './engine/spell';
 import { sortSquadByStyle } from './engine/squadSort';
 import { emptyLoadout, SLOTS, type Item, type Loadout, type Slot } from './engine/types';
 import { GpValue } from './theme/GpValue';
@@ -59,7 +58,6 @@ interface State {
   loadout: Loadout;
   locks: Partial<Record<Slot, Item>>;
   boss: Boss | null;
-  spell: Spell | null;
   challenge: Challenge | null;
   /** The rolled fight is the hard-mode variant. */
   hardMode: boolean;
@@ -71,13 +69,13 @@ interface State {
 type Phase = 'pre-roll' | 'ceremony' | 'result';
 
 type Action =
-  | { type: 'SET_LOADOUT'; loadout: Loadout; spell: Spell | null }
+  | { type: 'SET_LOADOUT'; loadout: Loadout }
   | { type: 'SET_BOSS'; boss: Boss; hardMode: boolean }
   | { type: 'SET_CHALLENGE'; challenge: Challenge | null }
   | { type: 'SET_SQUAD'; squad: { style: Style; loadout: Loadout }[] | null }
   | { type: 'TOGGLE_LOCK'; slot: Slot }
   | { type: 'REMOVE_ITEM'; slot: Slot }
-  | { type: 'REROLL_SLOT'; slot: Slot; loadout: Loadout; spell: Spell | null }
+  | { type: 'REROLL_SLOT'; slot: Slot; loadout: Loadout }
   | { type: 'REROLL_SQUAD_SLOT'; lane: number; loadout: Loadout }
   | { type: 'REMOVE_SQUAD_ITEM'; lane: number; slot: Slot }
   | { type: 'SET_SETTINGS'; patch: Partial<Settings> };
@@ -96,7 +94,6 @@ const initialState = (): State => {
     loadout: emptyLoadout(),
     locks: {},
     boss: null,
-    spell: null,
     challenge: null,
     hardMode: false,
     squad: null,
@@ -121,15 +118,14 @@ const initialState = (): State => {
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'SET_LOADOUT':
-      return { ...state, loadout: action.loadout, spell: action.spell };
+      return { ...state, loadout: action.loadout };
     case 'SET_BOSS':
       return { ...state, boss: action.boss, hardMode: action.hardMode };
     case 'SET_CHALLENGE':
       return { ...state, challenge: action.challenge };
     case 'SET_SQUAD':
       return { ...state, squad: action.squad };
-    // Raid lanes are independent setups, so they carry no locks and no spell —
-    // only the lane's own loadout changes.
+    // Raid lanes are independent setups, so only the lane's own loadout changes.
     case 'REROLL_SQUAD_SLOT':
       return {
         ...state,
@@ -165,16 +161,10 @@ const reducer = (state: State, action: Action): State => {
       const loadout = { ...state.loadout, [slot]: null };
       const locks = { ...state.locks };
       delete locks[slot];
-      // Removing the weapon removes the spell that went with it.
-      return {
-        ...state,
-        loadout,
-        locks,
-        spell: slot === 'weapon' ? null : state.spell,
-      };
+      return { ...state, loadout, locks };
     }
     case 'REROLL_SLOT': {
-      const { slot, loadout, spell } = action;
+      const { slot, loadout } = action;
       const locks = { ...state.locks };
       // A locked slot stays locked — onto whatever it just rolled.
       if (locks[slot]) {
@@ -185,13 +175,13 @@ const reducer = (state: State, action: Action): State => {
       // A new 2h can clear the shield/ammo under an existing lock.
       if (!loadout.shield) delete locks.shield;
       if (!loadout.ammo) delete locks.ammo;
-      return { ...state, loadout, locks, spell };
+      return { ...state, loadout, locks };
     }
   }
 };
 
 const Main = () => {
-  const { items, bosses, spells } = useGameData();
+  const { items, bosses } = useGameData();
   const [state, dispatch] = useReducer(reducer, undefined, initialState);
   const [phase, setPhase] = useState<Phase>('pre-roll');
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -221,6 +211,15 @@ const Main = () => {
   useEffect(() => saveHistory(history), [history]);
 
   const markRun = (id: string, outcome: Outcome) => setHistory((h) => markOutcome(h, id, outcome));
+  // Marking a run's outcome is the way home too: clicking the button you
+  // already marked (the one now showing its check/x) returns to pre-roll.
+  const settleRun = (id: string, outcome: Outcome) => {
+    if (history.find((r) => r.id === id)?.outcome === outcome) {
+      setPhase('pre-roll');
+      return;
+    }
+    markRun(id, outcome);
+  };
   // Queued on the host above every screen, so a stinger is never cut short by
   // the ceremony handing over to the result view.
   const queueStinger = useStinger();
@@ -238,7 +237,6 @@ const Main = () => {
   const [rerolling, setRerolling] = useState<{
     reveal: RevealData;
     loadout: Loadout;
-    spell: Spell | null;
     slot: Slot;
     /** Set when the reroll belongs to a raid lane rather than the main loadout. */
     lane?: number;
@@ -309,24 +307,22 @@ const Main = () => {
       { budget: parsed.gp, allowUntradeables, locks: state.locks },
       rng,
     );
-    const spell = slot === 'weapon' ? rollSpell(loadout.weapon, spells, rng) : state.spell;
     const rolled = loadout[slot];
     if (!rolled) {
       // Nothing affordable/valid — nothing to show, just apply the (unchanged) result.
-      dispatch({ type: 'REROLL_SLOT', slot, loadout, spell });
+      dispatch({ type: 'REROLL_SLOT', slot, loadout });
       return;
     }
     new Image().src = asset(`img/items/${rolled.icon}`);
 
     if (settings.skipAnimations) {
-      dispatch({ type: 'REROLL_SLOT', slot, loadout, spell });
+      dispatch({ type: 'REROLL_SLOT', slot, loadout });
       return;
     }
     unlockAudio();
     setRerolling({
       slot,
       loadout,
-      spell,
       reveal: {
         key: `reroll-${slot}-${rolled.id}-${Date.now()}`,
         kind: 'slot',
@@ -375,7 +371,6 @@ const Main = () => {
       lane,
       slot,
       loadout,
-      spell: null,
       reveal: {
         key: `reroll-${lane}-${slot}-${rolled.id}-${Date.now()}`,
         kind: 'slot',
@@ -452,7 +447,6 @@ const Main = () => {
       : boss.style
         ? rollForStyle(rollPool, boss.style, rollSettings, rng)
         : roll(rollPool, rollSettings, rng);
-    const spell = isGauntlet ? null : rollSpell(loadout.weapon, spells, rng);
 
     // A boss with a hard-mode variant is upgraded on a coin flip; the ceremony
     // reveals the normal fight first, then stamps HARD MODE after a beat.
@@ -516,7 +510,7 @@ const Main = () => {
       );
       setCurrentRunId(runId);
 
-      dispatch({ type: 'SET_LOADOUT', loadout, spell });
+      dispatch({ type: 'SET_LOADOUT', loadout });
       dispatch({ type: 'SET_BOSS', boss, hardMode });
       dispatch({ type: 'SET_CHALLENGE', challenge });
       dispatch({ type: 'SET_SQUAD', squad });
@@ -650,7 +644,6 @@ const Main = () => {
             type: 'REROLL_SLOT',
             slot: rerolling.slot,
             loadout: rerolling.loadout,
-            spell: rerolling.spell,
           });
         }
         setRerolling(null);
@@ -682,7 +675,6 @@ const Main = () => {
               <ResultStage
                 loadout={displayLoadout}
                 locks={state.locks}
-                spell={null}
                 boss={view?.boss ?? null}
                 revealing={view?.boss == null}
                 showChallenge={false}
@@ -810,21 +802,24 @@ const Main = () => {
             <div className="actions" data-solid="">
               {currentRunId && (
                 <>
-                  <RsButton onClick={() => markRun(currentRunId, 'cleared')}>
+                  <RsButton
+                    variant="success"
+                    onClick={() => settleRun(currentRunId, 'cleared')}
+                  >
                     {history.find((r) => r.id === currentRunId)?.outcome === 'cleared'
                       ? '✓ CLEARED'
                       : 'CLEARED'}
                   </RsButton>
-                  <RsButton onClick={() => markRun(currentRunId, 'failed')}>
+                  <RsButton
+                    variant="danger"
+                    onClick={() => settleRun(currentRunId, 'failed')}
+                  >
                     {history.find((r) => r.id === currentRunId)?.outcome === 'failed'
                       ? '✗ FAILED'
                       : 'FAILED'}
                   </RsButton>
                 </>
               )}
-              <RsButton variant="primary" onClick={() => setPhase('pre-roll')}>
-                NEW CHALLENGE
-              </RsButton>
             </div>
           </div>
         </FitScreen>
@@ -850,7 +845,6 @@ const Main = () => {
           <ResultStage
             loadout={state.loadout}
             locks={state.locks}
-            spell={state.spell}
             boss={state.boss}
             hardMode={state.hardMode}
             challenge={state.challenge}
@@ -861,21 +855,24 @@ const Main = () => {
           <div className="actions" data-solid="">
             {currentRunId && (
               <>
-                <RsButton onClick={() => markRun(currentRunId, 'cleared')}>
+                <RsButton
+                  variant="success"
+                  onClick={() => settleRun(currentRunId, 'cleared')}
+                >
                   {history.find((r) => r.id === currentRunId)?.outcome === 'cleared'
                     ? '✓ CLEARED'
                     : 'CLEARED'}
                 </RsButton>
-                <RsButton onClick={() => markRun(currentRunId, 'failed')}>
+                <RsButton
+                  variant="danger"
+                  onClick={() => settleRun(currentRunId, 'failed')}
+                >
                   {history.find((r) => r.id === currentRunId)?.outcome === 'failed'
                     ? '✗ FAILED'
                     : 'FAILED'}
                 </RsButton>
               </>
             )}
-            <RsButton variant="primary" onClick={() => setPhase('pre-roll')}>
-              NEW CHALLENGE
-            </RsButton>
           </div>
         </div>
       </FitScreen>
