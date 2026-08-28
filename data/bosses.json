@@ -39,6 +39,22 @@
     ]
   },
   {
+    "name": "Barrows",
+    "image": "Barrows.png",
+    "tags": [
+      "minigame",
+      "easy"
+    ]
+  },
+  {
+    "name": "Brutus",
+    "image": "Brutus.png",
+    "tags": [
+      "hard mode",
+      "easy"
+    ]
+  },
+  {
     "name": "Bryophyta",
     "image": "Bryophyta.png",
     "tags": [
@@ -159,6 +175,15 @@
     ]
   },
   {
+    "name": "Galvek",
+    "image": "Galvek.png",
+    "noMeleeWeapons": true,
+    "tags": [
+      "quest",
+      "mid"
+    ]
+  },
+  {
     "name": "General Graardor",
     "image": "General Graardor.png",
     "tags": [
@@ -182,6 +207,14 @@
       "raid",
       "hard",
       "hard mode"
+    ]
+  },
+  {
+    "name": "Glough",
+    "image": "Glough (monster).png",
+    "tags": [
+      "quest",
+      "mid"
     ]
   },
   {
@@ -245,6 +278,21 @@
     ]
   },
   {
+    "name": "Mad Angel",
+    "image": "Mad Angel.png",
+    "tags": [
+      "easy"
+    ]
+  },
+  {
+    "name": "Maggot King",
+    "image": "Maggot King.png",
+    "noMeleeWeapons": true,
+    "tags": [
+      "hard"
+    ]
+  },
+  {
     "name": "Mimic",
     "image": "The Mimic.png",
     "tags": [
@@ -304,6 +352,14 @@
     "tags": [
       "solo/group",
       "easy"
+    ]
+  },
+  {
+    "name": "Fragment of Seren",
+    "image": "Fragment of Seren.png",
+    "tags": [
+      "quest",
+      "mid"
     ]
   },
   {

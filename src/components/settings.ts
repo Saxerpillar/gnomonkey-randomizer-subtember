@@ -1,7 +1,7 @@
 import type { Boss } from './DataProvider';
 import { CORE_SLOTS, TIERS, type Tier } from '../engine/types';
 
-export const POOL_TAGS = ['gwd', 'dt2', 'raid', 'minigame', 'delve'] as const;
+export const POOL_TAGS = ['gwd', 'dt2', 'raid', 'minigame', 'delve', 'quest'] as const;
 export type PoolTag = (typeof POOL_TAGS)[number];
 
 export const POOL_LABEL: Record<PoolTag, string> = {
@@ -10,6 +10,7 @@ export const POOL_LABEL: Record<PoolTag, string> = {
   raid: 'Include Raids',
   minigame: 'Wave-based encounters',
   delve: 'Doom of Mokhaiotl',
+  quest: 'Quest bosses',
 };
 
 /** Persisted challenge settings, editable from the pre-roll Settings button. */
