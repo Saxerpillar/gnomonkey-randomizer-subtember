@@ -12,6 +12,7 @@ import {
   appendRun,
   loadHistory,
   markOutcome,
+  removeRun,
   saveHistory,
   type HistoryEntry,
   type HistoryGear,
@@ -29,13 +30,19 @@ import {
 import { DataProvider, useGameData, type Boss } from './components/DataProvider';
 import { EquipmentPanel } from './components/EquipmentPanel';
 import { bossObjective, hardModeLabel } from './components/objectives';
-import { rollNuzlockeBoss, type BossStates } from './components/nuzlocke';
+import {
+  nuzlockeLabel,
+  rollNuzlockeBoss,
+  type BossStates,
+  type NuzlockeRun,
+} from './components/nuzlocke';
 import { NuzlockeScreen } from './components/NuzlockeScreen';
 import { PreRollScreen } from './components/PreRollScreen';
 import { ResultStage } from './components/ResultStage';
 import { RevealCard, type LandingImpact } from './components/RevealCard';
 import { SettingsPanel } from './components/SettingsPanel';
 import { slotMenuEntries } from './components/slotMenu';
+import { UpdatePrompt } from './components/UpdatePrompt';
 import {
   DEFAULT_SETTINGS,
   filterBossPool,
@@ -58,7 +65,7 @@ import {
   type Style,
 } from './engine/roll';
 import { sortSquadByStyle } from './engine/squadSort';
-import { emptyLoadout, SLOTS, type Item, type Loadout, type Slot } from './engine/types';
+import { emptyLoadout, SLOTS, type Loadout, type Slot } from './engine/types';
 import { GpValue } from './theme/GpValue';
 import { RsButton } from './theme/RsButton';
 import { RsContextMenu, type MenuEntry } from './theme/RsContextMenu';
@@ -66,7 +73,6 @@ import { RsPanel } from './theme/RsPanel';
 
 interface State {
   loadout: Loadout;
-  locks: Partial<Record<Slot, Item>>;
   boss: Boss | null;
   challenge: Challenge | null;
   /** The rolled fight is the hard-mode variant. */
@@ -83,7 +89,6 @@ type Action =
   | { type: 'SET_BOSS'; boss: Boss; hardMode: boolean }
   | { type: 'SET_CHALLENGE'; challenge: Challenge | null }
   | { type: 'SET_SQUAD'; squad: { style: Style; loadout: Loadout }[] | null }
-  | { type: 'TOGGLE_LOCK'; slot: Slot }
   | { type: 'REMOVE_ITEM'; slot: Slot }
   | { type: 'REROLL_SLOT'; slot: Slot; loadout: Loadout }
   | { type: 'REROLL_SQUAD_SLOT'; lane: number; loadout: Loadout }
@@ -102,7 +107,6 @@ const STYLE_LABEL: Record<Style, string> = {
 const initialState = (): State => {
   const base: State = {
     loadout: emptyLoadout(),
-    locks: {},
     boss: null,
     challenge: null,
     hardMode: false,
@@ -111,13 +115,8 @@ const initialState = (): State => {
   };
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
-    const locks = (saved.locks ?? {}) as State['locks'];
-    const loadout = { ...base.loadout };
-    for (const [slot, item] of Object.entries(locks)) loadout[slot as Slot] = item as Item;
     return {
       ...base,
-      loadout,
-      locks,
       settings: mergeSettings(saved.settings),
     };
   } catch {
@@ -156,36 +155,12 @@ const reducer = (state: State, action: Action): State => {
       };
     case 'SET_SETTINGS':
       return { ...state, settings: { ...state.settings, ...action.patch } };
-    case 'TOGGLE_LOCK': {
-      const { slot } = action;
-      const locks = { ...state.locks };
-      if (locks[slot]) {
-        delete locks[slot];
-      } else if (state.loadout[slot]) {
-        locks[slot] = state.loadout[slot];
-      }
-      return { ...state, locks };
-    }
     case 'REMOVE_ITEM': {
-      const { slot } = action;
-      const loadout = { ...state.loadout, [slot]: null };
-      const locks = { ...state.locks };
-      delete locks[slot];
-      return { ...state, loadout, locks };
+      const loadout = { ...state.loadout, [action.slot]: null };
+      return { ...state, loadout };
     }
     case 'REROLL_SLOT': {
-      const { slot, loadout } = action;
-      const locks = { ...state.locks };
-      // A locked slot stays locked — onto whatever it just rolled.
-      if (locks[slot]) {
-        const item = loadout[slot];
-        if (item) locks[slot] = item;
-        else delete locks[slot];
-      }
-      // A new 2h can clear the shield/ammo under an existing lock.
-      if (!loadout.shield) delete locks.shield;
-      if (!loadout.ammo) delete locks.ammo;
-      return { ...state, loadout, locks };
+      return { ...state, loadout: action.loadout };
     }
   }
 };
@@ -194,6 +169,9 @@ const Main = () => {
   const { items, bosses } = useGameData();
   const [state, dispatch] = useReducer(reducer, undefined, initialState);
   const [phase, setPhase] = useState<Phase>('pre-roll');
+  /** Which run-start screen the pre-roll phase shows: the freeplay hero or the
+   *  Nuzlocke run screen. */
+  const [screen, setScreen] = useState<'main' | 'nuzlocke'>('main');
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [shaking, setShaking] = useState(false);
   // Warm every reel asset while the pre-roll screen is idle, so nothing pops
@@ -224,25 +202,35 @@ const Main = () => {
     setHistory((h) => markOutcome(h, id, outcome));
     // Reflect the fight's outcome on the Nuzlocke board: cleared -> ✓, failed -> ✗.
     const run = history.find((r) => r.id === id);
-    if (run?.boss && state.settings.nuzlocke) {
-      setBossStates((s) => ({
-        ...s,
-        [run.boss]: outcome === 'cleared' ? 'completed' : 'uncompleted',
+    if (run?.boss && run.nuzlockeId) {
+      setNuzlocke((n) => ({
+        ...n,
+        states: {
+          ...n.states,
+          [run.boss]: outcome === 'cleared' ? 'completed' : 'uncompleted',
+        },
       }));
     }
   };
+  const deleteRun = (id: string) => setHistory((h) => removeRun(h, id));
   // Clicking a boss on the Nuzlocke board cycles it: not rolled -> completed ->
   // uncompleted -> not rolled, so a missed or mistaken mark can be fixed live.
   const cycleBoss = (name: string) => {
-    setBossStates((s) => {
-      if (!(name in s)) return { ...s, [name]: 'completed' };
-      if (s[name] === 'completed') return { ...s, [name]: 'uncompleted' };
+    setNuzlocke((n) => {
+      const s = n.states;
+      if (!(name in s)) return { ...n, states: { ...s, [name]: 'completed' } };
+      if (s[name] === 'completed') return { ...n, states: { ...s, [name]: 'uncompleted' } };
       const next = { ...s };
       delete next[name];
-      return next;
+      return { ...n, states: next };
     });
   };
-  const resetNuzlocke = () => setBossStates({});
+  // Abandon the current run: clear the board and start over (names of past
+  // nuzlockes are kept, since history still groups by them).
+  const abandonNuzlocke = () => setNuzlocke({ states: {}, id: null, paused: false });
+  const togglePauseNuzlocke = () => setNuzlocke((n) => ({ ...n, paused: !n.paused }));
+  const renameNuzlocke = (id: string, name: string) =>
+    setNuzlockeNames((m) => ({ ...m, [id]: name }));
   // Marking a run's outcome is the way home too: clicking the button you
   // already marked (the one now showing its check/x) returns to pre-roll.
   const settleRun = (id: string, outcome: Outcome) => {
@@ -275,28 +263,73 @@ const Main = () => {
   } | null>(null);
   const { view, reveal, start: startCeremony, onRevealDone } = useCeremony(items);
 
-  /** Nuzlocke progress: per-boss fight outcome for the current pool cycle.
-   *  Absent = not rolled yet. Persisted in the settings blob (not the history
-   *  log) so a corrupt run log cannot take the pool down with it. */
-  const [bossStates, setBossStates] = useState<BossStates>(() => {
+  /** Nuzlocke progress: per-boss fight outcome for the current pool cycle,
+   *  the run's stable id, and whether it is paused (settings unlocked). The
+   *  states blob is kept out of the history log so a corrupt run log cannot
+   *  take the pool down with it, and vice versa. */
+  const [nuzlocke, setNuzlocke] = useState<NuzlockeRun>(() => {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
       const raw = saved.nuzlocke;
-      if (raw == null) return {};
-      // v1 stored a bare list of fought names; promote them to a state map.
-      if (Array.isArray(raw)) return Object.fromEntries(raw.map((n: string) => [n, 'completed']));
-      return raw as BossStates;
+      if (raw == null) return { states: {}, id: null, paused: false };
+      // v1 stored a bare list of fought names; v2 a states map. Both promote
+      // to a run with no id, which is assigned on the next committed roll.
+      if (Array.isArray(raw))
+        return {
+          states: Object.fromEntries(raw.map((n: string) => [n, 'completed'])),
+          id: null,
+          paused: false,
+        };
+      if (typeof raw === 'object' && 'states' in (raw as object)) return raw as NuzlockeRun;
+      return { states: raw as BossStates, id: null, paused: false };
+    } catch {
+      return { states: {}, id: null, paused: false };
+    }
+  });
+  /** User-renamed nuzlocke labels, keyed by run id. */
+  const [nuzlockeNames, setNuzlockeNames] = useState<Record<string, string>>(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+      return typeof saved.nuzlockeNames === 'object' && saved.nuzlockeNames != null
+        ? (saved.nuzlockeNames as Record<string, string>)
+        : {};
     } catch {
       return {};
     }
   });
+  /** Next nuzlocke sequence number, so default names count up. */
+  const [nuzlockeSeq, setNuzlockeSeq] = useState<number>(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+      return typeof saved.nuzlockeSeq === 'number' ? saved.nuzlockeSeq : 0;
+    } catch {
+      return 0;
+    }
+  });
+
+  // Once a nuzlocke's first roll commits, the gameplay settings are locked in
+  // until the run is paused or abandoned.
+  const nuzlockeLocked = nuzlocke.id != null && !nuzlocke.paused;
+
+  // A locked nuzlocke is no place for debug rigging: rather than sitting
+  // disabled-but-on, debug mode switches itself off (pause to re-enable).
+  useEffect(() => {
+    if (nuzlockeLocked && state.settings.debugMode) {
+      dispatch({ type: 'SET_SETTINGS', patch: { debugMode: false } });
+    }
+  }, [nuzlockeLocked, state.settings.debugMode]);
 
   useEffect(() => {
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify({ locks: state.locks, settings: state.settings, nuzlocke: bossStates }),
+      JSON.stringify({
+        settings: state.settings,
+        nuzlocke,
+        nuzlockeNames,
+        nuzlockeSeq,
+      }),
     );
-  }, [state.locks, state.settings, bossStates]);
+  }, [state.settings, nuzlocke, nuzlockeNames, nuzlockeSeq]);
 
   // The browser context menu never shows anywhere in the app: any right-click
   // a component didn't claim opens the bare OSRS menu (Choose Option + Cancel).
@@ -362,7 +395,7 @@ const Main = () => {
       pool,
       state.loadout,
       slot,
-      { budget: parsed.gp, allowUntradeables, locks: state.locks },
+      { budget: parsed.gp, allowUntradeables },
       rng,
     );
     const rolled = loadout[slot];
@@ -418,7 +451,7 @@ const Main = () => {
       styled,
       entry.loadout,
       slot,
-      { budget: parsed.gp, allowUntradeables, locks: {} },
+      { budget: parsed.gp, allowUntradeables },
       rng,
     );
     const rolled = loadout[slot];
@@ -466,6 +499,9 @@ const Main = () => {
 
   const decide = () => {
     const { settings } = state;
+    // The DECIDE button on the Nuzlocke screen rolls a nuzlocke; the hero's
+    // rolls freeplay.
+    const isNuzlocke = screen === 'nuzlocke';
     const pool = filterBossPool(bosses, settings);
     if (pool.length === 0) return;
     gambaFired.current = false;
@@ -475,21 +511,28 @@ const Main = () => {
     const bossRng = mulberry32(randomSeed());
     let boss: Boss;
     let statesNext: BossStates;
-    if (settings.nuzlocke) {
-      const r = rollNuzlockeBoss(pool, bossStates, settings.nuzlockeRepeat, bossRng);
+    if (isNuzlocke) {
+      const r = rollNuzlockeBoss(pool, nuzlocke.states, 0, bossRng);
       boss = r.boss;
       statesNext = r.states;
     } else {
       boss = pick(bossRng, pool);
-      statesNext = bossStates;
+      statesNext = nuzlocke.states;
     }
     // Gauntlet runs take no gear in at all: no gear roll, and a guaranteed
     // challenge drawn from that boss's own pool.
     const isGauntlet = boss.tags.includes('gauntlet');
     const forceChallenge = settings.debugMode ? settings.forceChallenge : 'off';
+    // Raids are a team's whole run, not a single timed fight: they never draw
+    // the countdown challenge.
     const challenge = isGauntlet
       ? rollGauntletChallenge(mulberry32(randomSeed()), boss.name)
-      : rollChallenge(mulberry32(randomSeed()), difficultyOf(boss.tags), forceChallenge);
+      : rollChallenge(
+          mulberry32(randomSeed()),
+          difficultyOf(boss.tags),
+          forceChallenge,
+          !boss.tags.includes('raid'),
+        );
     const isWildy = boss.tags.includes('wildy');
     const parsed = budgetFor(isWildy);
     if (!parsed.ok) return;
@@ -501,7 +544,6 @@ const Main = () => {
     const rollSettings = {
       budget: debugIgnoreBudget ? null : parsed.gp,
       allowUntradeables,
-      locks: state.locks,
       // rollForStyle calls roll() once per lane, so a raid satisfies the floors
       // per skeleton rather than pooling them across the team.
       tierFloors: settings.tierFloors,
@@ -533,6 +575,7 @@ const Main = () => {
       challenge != null && (debug && settings.forceHardModeEmote ? true : Math.random() < 0.5);
     const hardMode =
       boss.tags.includes('hard mode') &&
+      !settings.normalOnlyBosses.includes(boss.name) &&
       (debug && settings.forceHardMode ? true : mulberry32(randomSeed())() < 0.5);
 
     // Raids send a team: one style-forced setup each for melee, ranged, magic.
@@ -562,7 +605,16 @@ const Main = () => {
     const commit = () => {
       // The boss counts as fought the moment the run commits, not when it was
       // rolled, so an aborted ceremony never consumes it.
-      setBossStates(statesNext);
+      // A nuzlocke's first commit assigns its id, which groups the history.
+      let runNuzlockeId: string | null = null;
+      if (isNuzlocke) {
+        runNuzlockeId = nuzlocke.id ?? String(nuzlockeSeq + 1);
+        if (nuzlocke.id == null) {
+          setNuzlockeSeq((s) => s + 1);
+          setNuzlockeNames((m) => ({ ...m, [runNuzlockeId!]: nuzlockeLabel(runNuzlockeId!) }));
+        }
+      }
+      setNuzlocke((n) => ({ ...n, states: statesNext, id: runNuzlockeId ?? n.id }));
       // Recorded from what was actually rolled, denormalised, so a later data
       // refresh cannot rewrite what happened.
       const gearOf = (l: Loadout): HistoryGear[] =>
@@ -579,6 +631,7 @@ const Main = () => {
           bossImage: boss.image,
           hardModeLabel: hardMode ? hardModeLabel(boss) : null,
           challenge: challenge?.text ?? null,
+          nuzlockeId: runNuzlockeId,
           // A raid's roll is all three setups, so the log carries all three.
           value: squad
             ? squad.reduce((sum, lane) => sum + loadoutValue(lane.loadout), 0)
@@ -611,7 +664,6 @@ const Main = () => {
     startCeremony(
       loadout,
       boss,
-      isGauntlet ? {} : state.locks,
       commit,
       undefined,
       pool,
@@ -630,6 +682,11 @@ const Main = () => {
   const wildyOk = parseBudget(state.settings.wildyBudgetText).ok;
   const poolOk = filterBossPool(bosses, state.settings).length > 0;
   const decideReady = normalOk && (state.settings.excludeWildy || wildyOk) && poolOk;
+  // The new-build prompt is in-flow under the CTA on the plain hero, but the
+  // Nuzlocke screen is too tall to leave it in the column, so there it is
+  // pinned outside FitScreen instead (see the render below).
+  const updatePrompt =
+    updateReady || (state.settings.debugMode && state.settings.forceUpdatePrompt);
 
   if (phase === 'pre-roll') {
     return (
@@ -639,20 +696,21 @@ const Main = () => {
           <div className="app">
             <div className="hero">
               <TitleBanner />
-              {/* Nuzlocke replaces the plain hero with its own run-start screen:
-                  the boss board, the pool counter and the repeat slider. */}
-              {state.settings.nuzlocke ? (
+              {/* The Nuzlocke screen is entered from the hero's "Nuzlocke mode"
+                  button; it shows a fresh board until the first roll commits. */}
+              {screen === 'nuzlocke' ? (
                 <NuzlockeScreen
                   bosses={bosses}
                   settings={state.settings}
-                  bossStates={bossStates}
-                  decideReady={decideReady}
-                  updateReady={
-                    updateReady || (state.settings.debugMode && state.settings.forceUpdatePrompt)
+                  nuzlocke={nuzlocke}
+                  nuzlockeName={
+                    nuzlocke.id ? (nuzlockeNames[nuzlocke.id] ?? nuzlockeLabel(nuzlocke.id)) : null
                   }
-                  onChange={(patch) => dispatch({ type: 'SET_SETTINGS', patch })}
+                  decideReady={decideReady}
                   onCycleBoss={cycleBoss}
-                  onReset={resetNuzlocke}
+                  onReset={abandonNuzlocke}
+                  onTogglePause={togglePauseNuzlocke}
+                  onExit={() => setScreen('main')}
                   onDecide={decide}
                   onOpenSettings={() => setSettingsOpen(true)}
                   onOpenHistory={() => setHistoryOpen(true)}
@@ -660,10 +718,9 @@ const Main = () => {
               ) : (
                 <PreRollScreen
                   decideReady={decideReady}
-                  updateReady={
-                    updateReady || (state.settings.debugMode && state.settings.forceUpdatePrompt)
-                  }
+                  updateReady={updatePrompt}
                   onDecide={decide}
+                  onOpenNuzlocke={() => setScreen('nuzlocke')}
                   onOpenSettings={() => setSettingsOpen(true)}
                   onOpenHistory={() => setHistoryOpen(true)}
                 />
@@ -673,14 +730,31 @@ const Main = () => {
         </FitScreen>
         {/* Fixed overlays live outside FitScreen: inside a scaled element they
             would anchor to it rather than to the viewport. */}
+        {screen === 'nuzlocke' && updatePrompt && (
+          <div className="updatePin" data-solid="">
+            <UpdatePrompt />
+          </div>
+        )}
+        {/* Fixed overlays live outside FitScreen: inside a scaled element they
+            would anchor to it rather than to the viewport. */}
         {historyOpen && (
-          <HistoryPanel history={history} onMark={markRun} onClose={() => setHistoryOpen(false)} />
+          <HistoryPanel
+            history={history}
+            nuzlockeNames={nuzlockeNames}
+            onMark={markRun}
+            onDelete={deleteRun}
+            onRenameNuzlocke={renameNuzlocke}
+            onClose={() => setHistoryOpen(false)}
+          />
         )}
         {settingsOpen && (
           <SettingsPanel
             settings={state.settings}
             bosses={bosses}
+            nuzlockeLocked={nuzlockeLocked}
             onChange={(patch) => dispatch({ type: 'SET_SETTINGS', patch })}
+            onPauseNuzlocke={togglePauseNuzlocke}
+            onAbandonNuzlocke={abandonNuzlocke}
             onClose={() => setSettingsOpen(false)}
           />
         )}
@@ -773,7 +847,6 @@ const Main = () => {
             {view?.bossStage && !view?.squad ? (
               <ResultStage
                 loadout={displayLoadout}
-                locks={state.locks}
                 boss={view?.boss ?? null}
                 revealing={view?.boss == null}
                 showChallenge={false}
@@ -797,10 +870,8 @@ const Main = () => {
                           <span className="squadStageLabel">{lane.label}</span>
                           <EquipmentPanel
                             loadout={laneLoadout}
-                            locks={{}}
                             pendingSlots={view.pending}
                             visibleSlots={laneVisible}
-                            onToggleLock={() => {}}
                             onSlotContextMenu={() => {}}
                           />
                         </div>
@@ -811,10 +882,8 @@ const Main = () => {
                   <div data-gear-anchor="">
                     <EquipmentPanel
                       loadout={displayLoadout}
-                      locks={state.locks}
                       pendingSlots={view?.pending}
                       visibleSlots={view?.gearless ? undefined : visibleSlots}
-                      onToggleLock={() => {}}
                       onSlotContextMenu={() => {}}
                       deactivated={view?.gearless}
                     />
@@ -886,8 +955,6 @@ const Main = () => {
                     <div data-lane={lane}>
                       <EquipmentPanel
                         loadout={loadout}
-                        locks={{}}
-                        onToggleLock={() => {}}
                         onSlotContextMenu={(slot, e) => openSquadSlotMenu(lane, slot, e)}
                       />
                     </div>
@@ -943,12 +1010,10 @@ const Main = () => {
           <TitleBanner />
           <ResultStage
             loadout={state.loadout}
-            locks={state.locks}
             boss={state.boss}
             hardMode={state.hardMode}
             challenge={state.challenge}
             deactivated={isGauntletRun}
-            onToggleLock={(slot) => dispatch({ type: 'TOGGLE_LOCK', slot })}
             onSlotContextMenu={(slot, e) => openSlotMenu(slot, e)}
           />
           <div className="actions" data-solid="">

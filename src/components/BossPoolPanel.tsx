@@ -1,8 +1,15 @@
+import { useLayoutEffect, useRef, useState } from 'react';
+import { asset } from '../asset';
 import { RsButton } from '../theme/RsButton';
 import { RsPanel } from '../theme/RsPanel';
+import { RsTooltip } from '../theme/RsTooltip';
 import { difficultyOf, type Difficulty } from './challenges';
 import type { Boss } from './DataProvider';
-import { blockedByGroupRule, type Settings } from './settings';
+import {
+  blockedByGroupRule,
+  type PoolTag,
+  type Settings,
+} from './settings';
 import styles from './BossPoolPanel.module.css';
 
 const GROUPS: { key: Difficulty; label: string }[] = [
@@ -11,17 +18,44 @@ const GROUPS: { key: Difficulty; label: string }[] = [
   { key: 'hard', label: 'Hard' },
 ];
 
+/** The group-level toggles that shape the pool, shown above the bosses. */
+const GROUP_TOGGLES: { key: 'wildy' | 'slayer' | 'sporadic' | PoolTag; label: string }[] = [
+  { key: 'wildy', label: 'Wilderness' },
+  { key: 'slayer', label: 'Slayer' },
+  { key: 'sporadic', label: 'Sporadic' },
+  { key: 'gwd', label: 'GWD' },
+  { key: 'dt2', label: 'DT2' },
+  { key: 'raid', label: 'Raids' },
+  { key: 'minigame', label: 'Wave-based' },
+  { key: 'quest', label: 'Quest' },
+];
+
+/** Whether a boss can roll its hard-mode variant (its "Hard mode" button). */
+const hardModeEligible = (boss: Boss, settings: Settings): boolean =>
+  !settings.normalOnlyBosses.includes(boss.name);
+
+/** Material "view list": three stacked rows. */
+const ListIcon = () => (
+  <svg className={styles.viewIcon} viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M3 14h4v-4H3v4zm0 5h4v-4H3v4zM3 9h4V5H3v4zm5 5h13v-4H8v4zm0 5h13v-4H8v4zM8 5v4h13V5H8z" />
+  </svg>
+);
+
+/** Material "grid view": four panes. */
+const GridIcon = () => (
+  <svg className={styles.viewIcon} viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M3 3v8h8V3H3zm6 6H5V5h4v4zm-6 4v8h8v-8H3zm6 6H5v-4h4v4zm4-16v8h8V3h-8zm6 6h-4V5h4v4zm-6 4v8h8v-8h-8zm6 6h-4v-4h4v4z" />
+  </svg>
+);
+
 /**
- * Per-boss on/off, grouped by the difficulty tag every boss carries.
+ * The per-boss pool manager: which fights are in, which stay out, and whether
+ * a fight's hard-mode variant may roll.
  *
- * Sits on top of Settings rather than inside it: 55 bosses is far more than the
- * settings list can hold without burying everything below it.
- *
- * A boss can be ticked here and still not roll, because the group toggles
- * (slayer, sporadic, wilderness, pool tags) apply on top. Rather than hide that
- * or silently untick the box, each affected row says which setting is holding
- * it out — the reason comes from the same helper `filterBossPool` uses, so the
- * two cannot disagree.
+ * Everything that shapes the pool lives here — the group toggles (wilderness,
+ * slayer, sporadic, and the tagged pools) plus per-boss on/off. Two views: the
+ * list, grouped by difficulty with a reason for anything a group toggle is
+ * holding out, and an icon grid that reads like the Nuzlocke board.
  */
 export const BossPoolPanel = ({
   bosses,
@@ -34,7 +68,37 @@ export const BossPoolPanel = ({
   onChange: (patch: Partial<Settings>) => void;
   onClose: () => void;
 }) => {
+  const [view, setView] = useState<'list' | 'icons'>('list');
   const excluded = new Set(settings.excludedBosses);
+
+  // Icon view: names wrap to different line counts, which would give cards
+  // ragged heights. Measure once per layout and size every tile to the
+  // tallest, so the grid reads as a uniform board. Guarded by the grid's
+  // width: toggling a boss re-renders but must not touch heights (or the
+  // scroll position) — only a real resize does.
+  const gridRef = useRef<HTMLDivElement | null>(null);
+  const lastGridWidth = useRef(0);
+  useLayoutEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+    lastGridWidth.current = 0; // full pass when the view changes
+    const equalize = () => {
+      const w = el.offsetWidth;
+      if (w === lastGridWidth.current) return;
+      lastGridWidth.current = w;
+      const tiles = Array.from(el.querySelectorAll<HTMLElement>('[data-tile]'));
+      let max = 0;
+      for (const t of tiles) {
+        t.style.height = '';
+        max = Math.max(max, t.offsetHeight);
+      }
+      for (const t of tiles) t.style.height = `${max}px`;
+    };
+    equalize();
+    const ro = new ResizeObserver(equalize);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [view, bosses]);
 
   const setExcluded = (next: Set<string>) => onChange({ excludedBosses: [...next] });
 
@@ -54,56 +118,215 @@ export const BossPoolPanel = ({
     setExcluded(next);
   };
 
+  const groupOn = (key: (typeof GROUP_TOGGLES)[number]['key']): boolean => {
+    switch (key) {
+      case 'wildy':
+        return !settings.excludeWildy;
+      case 'slayer':
+        return settings.slayerBosses;
+      case 'sporadic':
+        return settings.sporadicBosses;
+      default:
+        return !settings.excludedPools.includes(key as PoolTag);
+    }
+  };
+
+  const toggleGroup = (key: (typeof GROUP_TOGGLES)[number]['key'], on: boolean) => {
+    switch (key) {
+      case 'wildy':
+        return onChange({ excludeWildy: !on });
+      case 'slayer':
+        return onChange({ slayerBosses: on });
+      case 'sporadic':
+        return onChange({ sporadicBosses: on });
+      default: {
+        const excludedPools = settings.excludedPools.filter((p) => p !== key);
+        if (!on) excludedPools.push(key as PoolTag);
+        return onChange({ excludedPools });
+      }
+    }
+  };
+
+  const toggleHardMode = (name: string) => {
+    const on = !settings.normalOnlyBosses.includes(name);
+    onChange({
+      normalOnlyBosses: on
+        ? [...settings.normalOnlyBosses, name]
+        : settings.normalOnlyBosses.filter((n) => n !== name),
+    });
+  };
+
+  const sorted = [...bosses].sort((a, b) => a.name.localeCompare(b.name));
+
+  /** Hard-mode toggle for a list row. Always occupies its fixed-width slot so
+   *  rows line up; the slot renders empty for bosses without a hard mode. */
+  const HardModeSlot = ({ boss }: { boss: Boss }) => {
+    if (!boss.tags.includes('hard mode')) return <span className={styles.hmSlot} />;
+    const on = hardModeEligible(boss, settings);
+    return (
+      <RsTooltip
+        content={on ? 'Hard mode eligible' : 'Normal mode only'}
+        className={styles.hmWrap}
+      >
+        <button
+          type="button"
+          className={`${styles.hm} ${on ? styles.hmOn : ''}`}
+          onClick={(e) => {
+            // Nested in the row's <label>, which would otherwise treat the
+            // click as a boss on/off toggle.
+            e.preventDefault();
+            toggleHardMode(boss.name);
+          }}
+          aria-pressed={on}
+        >
+          {on ? 'Hard' : 'Normal'}
+        </button>
+      </RsTooltip>
+    );
+  };
+
+  /** Hard-mode chip overlaid on a tile's corner in icon view, so tiles stay a
+   *  uniform size and the grid rows never gap. */
+  const HardModeChip = ({ boss }: { boss: Boss }) => {
+    if (!boss.tags.includes('hard mode')) return null;
+    const on = hardModeEligible(boss, settings);
+    return (
+      <RsTooltip
+        content={on ? 'Hard mode eligible' : 'Normal mode only'}
+        className={styles.hmChipWrap}
+      >
+        <button
+          type="button"
+          className={`${styles.hmChip} ${on ? styles.hmChipOn : ''}`}
+          onClick={() => toggleHardMode(boss.name)}
+          aria-pressed={on}
+        >
+          {on ? 'Hard' : 'Normal'}
+        </button>
+      </RsTooltip>
+    );
+  };
+
   return (
     <div className={styles.backdrop} onClick={(e) => e.target === e.currentTarget && onClose()}>
       <RsPanel title="Boss pool" className={styles.panel} bodyClassName={styles.panelBody}>
         <div className={styles.body}>
-          {GROUPS.map(({ key, label }) => {
-            const group = bosses
-              .filter((b) => difficultyOf(b.tags) === key)
-              .slice()
-              .sort((a, b) => a.name.localeCompare(b.name));
-            const on = group.filter((b) => !excluded.has(b.name)).length;
-            return (
-              <div key={key} className={styles.group}>
-                <div className={styles.groupHead}>
-                  <span className={styles.groupTitle}>{label}</span>
-                  <span className={styles.groupCount}>
-                    {on}/{group.length}
-                  </span>
+          <div className={styles.toolbar}>
+            <div className={styles.viewSwitch}>
+              <button
+                type="button"
+                className={`${styles.viewBtn} ${view === 'list' ? styles.viewOn : ''}`}
+                onClick={() => setView('list')}
+                aria-pressed={view === 'list'}
+              >
+                <ListIcon />
+                List
+              </button>
+              <button
+                type="button"
+                className={`${styles.viewBtn} ${view === 'icons' ? styles.viewOn : ''}`}
+                onClick={() => setView('icons')}
+                aria-pressed={view === 'icons'}
+              >
+                <GridIcon />
+                Icons
+              </button>
+            </div>
+            <div className={styles.groupToggles}>
+              {GROUP_TOGGLES.map((g) => {
+                const on = groupOn(g.key);
+                return (
                   <button
+                    key={g.key}
                     type="button"
-                    className={styles.bulk}
-                    onClick={() => setGroup(group, true)}
+                    className={`${styles.groupToggle} ${on ? styles.groupOn : ''}`}
+                    onClick={() => toggleGroup(g.key, !on)}
+                    aria-pressed={on}
                   >
-                    All
+                    {g.label}
                   </button>
-                  <button
-                    type="button"
-                    className={styles.bulk}
-                    onClick={() => setGroup(group, false)}
-                  >
-                    None
-                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {view === 'list' ? (
+            GROUPS.map(({ key, label }) => {
+              const group = bosses
+                .filter((b) => difficultyOf(b.tags) === key)
+                .slice()
+                .sort((a, b) => a.name.localeCompare(b.name));
+              const on = group.filter((b) => !excluded.has(b.name)).length;
+              return (
+                <div key={key} className={styles.group}>
+                  <div className={styles.groupHead}>
+                    <span className={styles.groupTitle}>{label}</span>
+                    <span className={styles.groupCount}>
+                      {on}/{group.length}
+                    </span>
+                    <button type="button" className={styles.bulk} onClick={() => setGroup(group, true)}>
+                      All
+                    </button>
+                    <button type="button" className={styles.bulk} onClick={() => setGroup(group, false)}>
+                      None
+                    </button>
+                  </div>
+                  {group.map((b) => {
+                    const blocked = blockedByGroupRule(b, settings);
+                    return (
+                      <label
+                        key={b.name}
+                        className={`${styles.boss} ${blocked ? styles.bossBlocked : ''}`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={!excluded.has(b.name)}
+                          onChange={() => toggle(b.name)}
+                        />
+                        <span className={styles.checkbox} aria-hidden="true" />
+                        <span className={styles.bossName}>{b.name}</span>
+                        <HardModeSlot boss={b} />
+                        {blocked && <span className={styles.blocked}>{blocked}</span>}
+                      </label>
+                    );
+                  })}
                 </div>
-                {group.map((b) => {
-                  const blocked = blockedByGroupRule(b, settings);
-                  return (
-                    <label key={b.name} className={styles.boss}>
-                      <input
-                        type="checkbox"
-                        checked={!excluded.has(b.name)}
-                        onChange={() => toggle(b.name)}
-                      />
-                      <span className={styles.checkbox} aria-hidden="true" />
-                      <span className={styles.bossName}>{b.name}</span>
-                      {blocked && <span className={styles.blocked}>{blocked}</span>}
-                    </label>
-                  );
-                })}
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <div className={styles.grid} ref={gridRef}>
+              {sorted.map((b) => {
+                const off = excluded.has(b.name);
+                const blocked = blockedByGroupRule(b, settings);
+                return (
+                  <div key={b.name} className={styles.tileWrap}>
+                    <RsTooltip
+                      content={
+                        blocked
+                          ? `${b.name} (${blocked})`
+                          : off
+                            ? `${b.name} (off)`
+                            : b.name
+                      }
+                      className={styles.tile}
+                    >
+                      <button
+                        type="button"
+                        className={`${styles.tileBtn} ${off || blocked ? styles.tileOff : ''}`}
+                        onClick={() => toggle(b.name)}
+                        aria-pressed={!off}
+                        data-tile=""
+                      >
+                        <img src={asset(`img/bosses/${encodeURIComponent(b.image)}`)} alt="" draggable={false} />
+                        <span className={styles.tileName}>{b.name}</span>
+                      </button>
+                    </RsTooltip>
+                    <HardModeChip boss={b} />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
         <RsButton variant="primary" onClick={onClose}>
           Done

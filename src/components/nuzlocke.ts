@@ -18,6 +18,20 @@ export type BossRollState = 'completed' | 'uncompleted';
 /** Boss name -> how that fight ended. Absent = not rolled. */
 export type BossStates = Record<string, BossRollState>;
 
+/**
+ * The current nuzlocke run. `id` is null until the first roll commits; `paused`
+ * unlocks the gameplay settings without losing the run.
+ */
+export interface NuzlockeRun {
+  states: BossStates;
+  /** Stable id, used to group history runs and resolve a user-editable name. */
+  id: string | null;
+  paused: boolean;
+}
+
+/** The default label for a nuzlocke before the streamer renames it. */
+export const nuzlockeLabel = (id: string): string => `Nuzlocke ${id}`;
+
 /** The bosses still eligible this cycle: the pool minus anything already rolled. */
 export const availableBosses = (pool: readonly Boss[], states: BossStates): Boss[] =>
   pool.filter((b) => !(b.name in states));

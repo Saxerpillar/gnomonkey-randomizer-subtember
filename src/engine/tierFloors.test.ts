@@ -44,7 +44,6 @@ const fullPool = (): Item[] =>
 const settings = (over: Partial<RollSettings> = {}): RollSettings => ({
   budget: null,
   allowUntradeables: false,
-  locks: {},
   ...over,
 });
 
@@ -57,31 +56,23 @@ describe('assignTierFloors', () => {
   for (const i of fullPool()) bySlot.set(i.slot, [...(bySlot.get(i.slot) ?? []), i]);
 
   it('claims exactly as many slots as asked for', () => {
-    const assigned = assignTierFloors({ elite: 3 }, bySlot, {}, mulberry32(1));
+    const assigned = assignTierFloors({ elite: 3 }, bySlot, mulberry32(1));
     expect([...assigned.values()].filter((t) => t === 'elite')).toHaveLength(3);
   });
 
   it('never assigns the same slot twice', () => {
-    const assigned = assignTierFloors({ elite: 3, strong: 3, decent: 3 }, bySlot, {}, mulberry32(7));
+    const assigned = assignTierFloors({ elite: 3, strong: 3, decent: 3 }, bySlot, mulberry32(7));
     expect(assigned.size).toBe(9);
     expect(new Set(assigned.keys()).size).toBe(9);
   });
 
-  it('leaves locked slots alone — they already hold what they hold', () => {
-    const locks = { head: item('head'), cape: item('cape') };
-    const assigned = assignTierFloors({ elite: 9 }, bySlot, locks, mulberry32(3));
-    expect(assigned.has('head')).toBe(false);
-    expect(assigned.has('cape')).toBe(false);
-    expect(assigned.size).toBe(CORE_SLOTS.length - 2);
-  });
-
   it('degrades instead of failing when asked for more than exists', () => {
-    const assigned = assignTierFloors({ elite: 99 }, bySlot, {}, mulberry32(5));
+    const assigned = assignTierFloors({ elite: 99 }, bySlot, mulberry32(5));
     expect(assigned.size).toBe(CORE_SLOTS.length);
   });
 
   it('never touches shield or ammo — neither is guaranteed to fill', () => {
-    const assigned = assignTierFloors({ elite: 9 }, bySlot, {}, mulberry32(9));
+    const assigned = assignTierFloors({ elite: 9 }, bySlot, mulberry32(9));
     expect(assigned.has('shield')).toBe(false);
     expect(assigned.has('ammo')).toBe(false);
   });

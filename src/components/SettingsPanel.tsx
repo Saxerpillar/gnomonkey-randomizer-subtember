@@ -9,9 +9,7 @@ import {
   FORCE_CHALLENGE_LABEL,
   FORCE_CHALLENGE_OPTIONS,
   FORCE_TIER_OPTIONS,
-  POOL_LABEL,
   freeFloorSlots,
-  POOL_TAGS,
   type ForceBoss,
   type ForceChallenge,
   type Settings,
@@ -29,11 +27,13 @@ const BudgetField = ({
   value,
   onChange,
   placeholder = 'e.g. 10k/1m/100m/1b',
+  disabled = false,
 }: {
   label: string;
   value: string;
   onChange: (text: string) => void;
   placeholder?: string;
+  disabled?: boolean;
 }) => {
   const parsed = parseBudget(value);
   // While the input is focused you edit the raw text; on blur it previews the
@@ -41,7 +41,7 @@ const BudgetField = ({
   const [editing, setEditing] = useState(false);
   const display = !editing && parsed.ok && parsed.gp != null ? formatGp(parsed.gp) : value;
   return (
-    <label className={styles.field}>
+    <label className={`${styles.field} ${disabled ? styles.dim : ''}`}>
       <span>{label}</span>
       <span className={styles.budgetWrap}>
         <img className={styles.coins} src={asset('img/coins.png')} alt="" />
@@ -49,6 +49,7 @@ const BudgetField = ({
           className={`${styles.budget} ${parsed.ok ? (parsed.gp != null ? styles[gpTier(parsed.gp)] : '') : styles.invalid}`}
           value={display}
           placeholder={placeholder}
+          disabled={disabled}
           onChange={(e) => onChange(groupDigits(e.target.value))}
           onFocus={() => setEditing(true)}
           onBlur={() => setEditing(false)}
@@ -64,16 +65,23 @@ const Choice = <T extends string>({
   options,
   labelOf,
   onChange,
+  disabled = false,
 }: {
   label: string;
   value: T;
   options: readonly T[];
   labelOf?: (v: T) => string;
   onChange: (value: T) => void;
+  disabled?: boolean;
 }) => (
-  <label className={styles.field}>
+  <label className={`${styles.field} ${disabled ? styles.dim : ''}`}>
     <span>{label}</span>
-    <select className={styles.select} value={value} onChange={(e) => onChange(e.target.value as T)}>
+    <select
+      className={styles.select}
+      value={value}
+      disabled={disabled}
+      onChange={(e) => onChange(e.target.value as T)}
+    >
       {options.map((o) => (
         <option key={o} value={o}>
           {labelOf ? labelOf(o) : o}
@@ -95,10 +103,16 @@ const Choice = <T extends string>({
  */
 const TierFloors = ({
   floors,
+  allowUntradeables,
+  onToggleUntradeables,
   onChange,
+  disabled = false,
 }: {
   floors: Partial<Record<Tier, number>>;
+  allowUntradeables: boolean;
+  onToggleUntradeables: (v: boolean) => void;
   onChange: (floors: Partial<Record<Tier, number>>) => void;
+  disabled?: boolean;
 }) => {
   // Collapsed by default: the panel is long, and the floors are an advanced
   // mitigation rather than something set on every run.
@@ -106,14 +120,14 @@ const TierFloors = ({
   const free = freeFloorSlots(floors);
   const set = (tier: Tier, n: number) => onChange({ ...floors, [tier]: n });
   return (
-    <div className={styles.floors}>
+    <div className={`${styles.floors} ${disabled ? styles.dim : ''}`}>
       <button
         type="button"
         className={styles.floorsHead}
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
       >
-        <span className={styles.floorsTitle}>Minimum gear quality</span>
+        <span className={styles.floorsTitle}>Gear quality</span>
         <span className={styles.chevron}>{open ? '▾' : '▸'}</span>
       </button>
       {open && (
@@ -128,17 +142,20 @@ const TierFloors = ({
                 <button
                   type="button"
                   className={styles.floorStep}
-                  disabled={n === 0}
+                  disabled={disabled || n === 0}
                   aria-label={`One fewer ${tier}`}
                   onClick={() => set(tier, n - 1)}
                 >
                   −
                 </button>
-                <span className={styles.floorCount}>{n}</span>
+                {/* 0 reads as "Random": the tier is left entirely to chance. */}
+                <span className={`${styles.floorCount} ${n === 0 ? styles.floorRandom : ''}`}>
+                  {n === 0 ? 'Random' : n}
+                </span>
                 <button
                   type="button"
                   className={styles.floorStep}
-                  disabled={free === 0}
+                  disabled={disabled || free === 0}
                   aria-label={`One more ${tier}`}
                   onClick={() => set(tier, n + 1)}
                 >
@@ -150,6 +167,14 @@ const TierFloors = ({
           <span className={styles.floorsFree}>
             {free} of {CORE_SLOTS.length} slots left to chance
           </span>
+          <div className={styles.floorsUntradeables}>
+            <Toggle
+              label="Allow untradeables"
+              checked={allowUntradeables}
+              onChange={onToggleUntradeables}
+              disabled={disabled}
+            />
+          </div>
         </div>
       )}
     </div>
@@ -161,12 +186,14 @@ const Slider = ({
   label,
   value,
   onChange,
+  disabled = false,
 }: {
   label: string;
   value: number;
   onChange: (value: number) => void;
+  disabled?: boolean;
 }) => (
-  <label className={styles.field}>
+  <label className={`${styles.field} ${disabled ? styles.dim : ''}`}>
     <span>{label}</span>
     <input
       className={styles.slider}
@@ -175,6 +202,7 @@ const Slider = ({
       max={100}
       step={5}
       value={Math.round(value * 100)}
+      disabled={disabled}
       onChange={(e) => onChange(Number(e.target.value) / 100)}
     />
     <span className={styles.sliderValue}>{Math.round(value * 100)}%</span>
@@ -185,29 +213,43 @@ const Toggle = ({
   label,
   checked,
   onChange,
+  disabled = false,
 }: {
   label: string;
   checked: boolean;
   onChange: (value: boolean) => void;
+  disabled?: boolean;
 }) => (
-  <label className={styles.toggle}>
-    <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} />
+  <label className={`${styles.toggle} ${disabled ? styles.dim : ''}`}>
+    <input
+      type="checkbox"
+      checked={checked}
+      disabled={disabled}
+      onChange={(e) => onChange(e.target.checked)}
+    />
     <span className={styles.checkbox} aria-hidden="true" />
     <span>{label}</span>
   </label>
 );
 
-/** Settings behind the pre-roll "Settings" button: budget, wildy budget, and
- *  the challenge/presentation toggles. Persisted through App's reducer. */
+/** Settings behind the pre-roll "Settings" button. Once a nuzlocke's first
+ *  roll commits, every gameplay-affecting control locks until the run is
+ *  paused (settings editable, run kept) or abandoned (run ended). */
 export const SettingsPanel = ({
   settings,
   bosses,
+  nuzlockeLocked,
   onChange,
+  onPauseNuzlocke,
+  onAbandonNuzlocke,
   onClose,
 }: {
   settings: Settings;
   bosses: readonly Boss[];
+  nuzlockeLocked: boolean;
   onChange: (patch: Partial<Settings>) => void;
+  onPauseNuzlocke: () => void;
+  onAbandonNuzlocke: () => void;
   onClose: () => void;
 }) => {
   // The pool manager opens over the top of Settings rather than replacing it,
@@ -217,59 +259,11 @@ export const SettingsPanel = ({
   <div className={styles.backdrop} onClick={(e) => e.target === e.currentTarget && onClose()}>
     <RsPanel title="Settings" className={styles.panel} bodyClassName={styles.panelBody}>
       <div className={styles.body}>
-        <BudgetField
-          label="Budget"
-          value={settings.budgetText}
-          onChange={(t) => onChange({ budgetText: t })}
-        />
-        <BudgetField
-          label="Wildy budget"
-          value={settings.wildyBudgetText}
-          onChange={(t) => onChange({ wildyBudgetText: t })}
-          placeholder="default 1m"
-        />
-        <TierFloors floors={settings.tierFloors} onChange={(f) => onChange({ tierFloors: f })} />
-        <Toggle
-          label="Allow untradeables (cost 0)"
-          checked={settings.allowUntradeables}
-          onChange={(v) => onChange({ allowUntradeables: v })}
-        />
-        <Toggle
-          label="Exclude wilderness bosses"
-          checked={settings.excludeWildy}
-          onChange={(v) => onChange({ excludeWildy: v })}
-        />
-        <Toggle
-          label="Slayer bosses"
-          checked={settings.slayerBosses}
-          onChange={(v) => onChange({ slayerBosses: v })}
-        />
-        <Toggle
-          label="Sporadic bosses"
-          checked={settings.sporadicBosses}
-          onChange={(v) => onChange({ sporadicBosses: v })}
-        />
-        {POOL_TAGS.map((tag) => (
-          <Toggle
-            key={tag}
-            label={POOL_LABEL[tag]}
-            checked={!settings.excludedPools.includes(tag)}
-            onChange={(v) => {
-              const excluded = settings.excludedPools.filter((p) => p !== tag);
-              if (!v) excluded.push(tag);
-              onChange({ excludedPools: excluded });
-            }}
-          />
-        ))}
         <div className={styles.viewRow}>
-          <Toggle
-            label="Nuzlocke mode"
-            checked={settings.nuzlocke}
-            onChange={(v) => onChange({ nuzlocke: v })}
-          />
           <button
             type="button"
             className={styles.manage}
+            disabled={nuzlockeLocked}
             onClick={() => setManagingPool(true)}
           >
             <img className={styles.manageIcon} src={asset('img/ui/skull.png')} alt="" />
@@ -279,6 +273,41 @@ export const SettingsPanel = ({
             )}
           </button>
         </div>
+        {nuzlockeLocked && (
+          <div className={styles.locked}>
+            <span className={styles.lockedTitle}>Nuzlocke in progress</span>
+            <p className={styles.lockedText}>
+              Gameplay settings are locked for this run. Pause to edit them while
+              keeping the run, or abandon to end it.
+            </p>
+            <div className={styles.lockedActions}>
+              <RsButton onClick={onPauseNuzlocke}>Pause nuzlocke</RsButton>
+              <RsButton variant="danger" onClick={onAbandonNuzlocke}>
+                Abandon nuzlocke
+              </RsButton>
+            </div>
+          </div>
+        )}
+        <BudgetField
+          label="Budget"
+          value={settings.budgetText}
+          onChange={(t) => onChange({ budgetText: t })}
+          disabled={nuzlockeLocked}
+        />
+        <BudgetField
+          label="Wildy budget"
+          value={settings.wildyBudgetText}
+          onChange={(t) => onChange({ wildyBudgetText: t })}
+          placeholder="default 1m"
+          disabled={nuzlockeLocked}
+        />
+        <TierFloors
+          floors={settings.tierFloors}
+          allowUntradeables={settings.allowUntradeables}
+          onToggleUntradeables={(v) => onChange({ allowUntradeables: v })}
+          onChange={(f) => onChange({ tierFloors: f })}
+          disabled={nuzlockeLocked}
+        />
         <Toggle
           label="Mute sounds"
           checked={settings.muteSounds}
@@ -312,6 +341,7 @@ export const SettingsPanel = ({
           label="Debug mode"
           checked={settings.debugMode}
           onChange={(v) => onChange({ debugMode: v })}
+          disabled={nuzlockeLocked}
         />
         {settings.debugMode && (
           <div className={styles.debug}>
@@ -322,6 +352,7 @@ export const SettingsPanel = ({
               options={FORCE_BOSS_OPTIONS}
               labelOf={(o) => FORCE_BOSS_LABEL[o as ForceBoss]}
               onChange={(v) => onChange({ forceBoss: v })}
+              disabled={nuzlockeLocked}
             />
             <Choice
               label="Force item tier"
@@ -329,6 +360,7 @@ export const SettingsPanel = ({
               options={FORCE_TIER_OPTIONS}
               labelOf={(o) => o.charAt(0).toUpperCase() + o.slice(1)}
               onChange={(v) => onChange({ forceTier: v as Tier | 'off' })}
+              disabled={nuzlockeLocked}
             />
             <Choice
               label="Force challenge"
@@ -336,36 +368,43 @@ export const SettingsPanel = ({
               options={FORCE_CHALLENGE_OPTIONS}
               labelOf={(o) => FORCE_CHALLENGE_LABEL[o as ForceChallenge]}
               onChange={(v) => onChange({ forceChallenge: v as ForceChallenge })}
+              disabled={nuzlockeLocked}
             />
             <Toggle
               label="Always hard mode"
               checked={settings.forceHardMode}
               onChange={(v) => onChange({ forceHardMode: v })}
+              disabled={nuzlockeLocked}
             />
             <Toggle
               label="Ignore budget"
               checked={settings.ignoreBudget}
               onChange={(v) => onChange({ ignoreBudget: v })}
+              disabled={nuzlockeLocked}
             />
             <Toggle
               label="Always flashbang (elite)"
               checked={settings.forceFlashbang}
               onChange={(v) => onChange({ forceFlashbang: v })}
+              disabled={nuzlockeLocked}
             />
             <Toggle
               label="Always GAMBA"
               checked={settings.forceGamba}
               onChange={(v) => onChange({ forceGamba: v })}
+              disabled={nuzlockeLocked}
             />
             <Toggle
               label="Show update prompt"
               checked={settings.forceUpdatePrompt}
               onChange={(v) => onChange({ forceUpdatePrompt: v })}
+              disabled={nuzlockeLocked}
             />
             <Toggle
               label="Always AHHHH emote"
               checked={settings.forceHardModeEmote}
               onChange={(v) => onChange({ forceHardModeEmote: v })}
+              disabled={nuzlockeLocked}
             />
           </div>
         )}
@@ -385,6 +424,3 @@ export const SettingsPanel = ({
   </div>
   );
 };
-
-
-

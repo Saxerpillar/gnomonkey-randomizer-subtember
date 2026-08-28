@@ -158,7 +158,7 @@ const main = async () => {
   // low-power BAND rather than a synonym for "unstatted", which is what makes
   // a target tier distribution reachable at all.
   const canonical = [...byName.values()];
-  const pool = canonical.filter((e) => powerOf(e) > 0);
+  let pool = canonical.filter((e) => powerOf(e) > 0);
   console.log(
     `  ${kept.length} after exclusions, ${canonical.length} canonical, ` +
       `${pool.length} with combat stats (${canonical.length - pool.length} stat-less dropped)`,
@@ -169,6 +169,17 @@ const main = async () => {
   const mapping = await fetchJson(`${PRICES_API}/mapping`);
   const latest = (await fetchJson(`${PRICES_API}/latest`)).data;
   const tradeableIds = new Set(mapping.map((m) => m.id));
+
+  // An untradeable that duplicates a tradeable variant (ornament kits, imbues,
+  // charged cosmetics — same item, different label) only exists to undercut
+  // the budget: it rolls for 0 gp where its twin costs the GE price. Drop it.
+  const variantBase = (name) =>
+    name.replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+  const tradeableBases = new Set();
+  for (const e of pool) if (tradeableIds.has(e.id)) tradeableBases.add(variantBase(e.name));
+  const poolBefore = pool.length;
+  pool = pool.filter((e) => tradeableIds.has(e.id) || !tradeableBases.has(variantBase(e.name)));
+  console.log(`  ${poolBefore - pool.length} untradeable duplicates of tradeable variants dropped`);
 
   const prices = {};
   for (const item of pool) {

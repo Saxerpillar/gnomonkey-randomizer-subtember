@@ -12,8 +12,10 @@
 .panel {
   width: 100%;
   max-width: 560px;
-  /* A log is a list; it scrolls, like the boss pool manager. */
-  max-height: calc(100dvh - 48px);
+  /* A log is a list; it scrolls, like the boss pool manager. Fixed height on
+     purpose: a page with few runs must not shrink the panel and move the
+     Prev/Next row — the list area flexes instead. */
+  height: calc(100dvh - 48px);
   min-height: 0;
 }
 
@@ -81,6 +83,97 @@
   padding: 14px 2px;
 }
 
+/* Runs group under their nuzlocke; the badge is the group header. */
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 8px;
+  background: var(--panel);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--gold);
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.badge:hover {
+  background: var(--tile-hover);
+}
+
+.badgeName {
+  flex: 1;
+  font-family: var(--font-bold);
+  font-size: 17px;
+  color: var(--gold-bright);
+  text-shadow: var(--text-outline);
+}
+
+.badgeChevron {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.groupDetail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.renameField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.renameField > span {
+  font-family: var(--font-small);
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.renameInput {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text);
+  background: var(--tile);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 4px 8px;
+  width: 170px;
+}
+
+.renameInput:focus {
+  outline: 1px solid var(--gold);
+}
+
+.groupDate {
+  font-family: var(--font-small);
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.freeplay {
+  margin-top: 4px;
+  font-family: var(--font-bold);
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-shadow: var(--text-outline);
+}
+
 .run {
   display: flex;
   align-items: flex-start;
@@ -129,7 +222,7 @@
 
 .hard {
   font-family: var(--font-small);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--red);
 }
 
@@ -150,7 +243,7 @@
 .at {
   color: var(--text-muted);
   font-family: var(--font-small);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 /* Wraps rather than scrolls: eleven small sprites is a glanceable summary of
@@ -168,9 +261,10 @@
   object-fit: contain;
 }
 
+/* Outcome marks + delete, one row: trash, failed mark, cleared mark. */
 .marks {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   gap: 4px;
   flex: none;
 }
@@ -199,4 +293,84 @@
 .markOff {
   color: var(--red);
   border-color: var(--red);
+}
+
+/* Delete. Quiet until hovered; the second click arms it red. */
+.trash {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  color: var(--text-muted);
+  background: var(--tile);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.trash:hover:not(.trashArmed) {
+  background: var(--tile-hover);
+  color: var(--red);
+}
+
+.trashIcon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Armed (second click deletes): keep the fill; no hover feedback at all. */
+.trashArmed {
+  color: #fff;
+  background: linear-gradient(var(--crimson-light), var(--crimson));
+  border-color: var(--red);
+  animation: trashPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes trashPulse {
+  0%,
+  100% {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 0 rgba(216, 67, 67, 0);
+  }
+  50% {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 10px rgba(216, 67, 67, 0.6);
+  }
+}
+
+/* Pagination: a quiet footer row only when the log spills past one page. */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: var(--font-small);
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.pagerBtn {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--tile);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+.pagerBtn:hover:not(:disabled) {
+  background: var(--tile-hover);
+  color: var(--gold-bright);
+}
+
+.pagerBtn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.pagerPage {
+  min-width: 52px;
+  text-align: center;
 }

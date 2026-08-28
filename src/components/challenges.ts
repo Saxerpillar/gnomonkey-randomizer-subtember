@@ -62,9 +62,9 @@ export const rollGauntletChallenge = (rng: Rng, bossName: string): Challenge => 
 
 /** Kill-timer allowance per difficulty — harder fights get longer. */
 export const TIME_LIMIT_SECONDS: Record<Difficulty, number> = {
-  easy: 5 * 60,
-  mid: 10 * 60,
-  hard: 20 * 60,
+  easy: 10 * 60,
+  mid: 15 * 60,
+  hard: 25 * 60,
 };
 
 /**
@@ -111,7 +111,8 @@ export const timedChallenge = (difficulty: Difficulty): Challenge => {
 /**
  * Roll an extra challenge for a boss of this difficulty, or null. The timed
  * challenge sits in the same pool as the rest; its allowance scales with
- * difficulty (5/10/20 minutes).
+ * difficulty (10/15/25 minutes). Raids (a team's multi-boss run) never draw it
+ * — `allowTimed` is false for them.
  *
  * `force`: 'any' skips the chance roll, 'timed' pins the countdown outright so
  * the clock can be tested without fishing for it.
@@ -120,12 +121,13 @@ export const rollChallenge = (
   rng: Rng,
   difficulty: Difficulty,
   force: ForceChallenge = 'off',
+  allowTimed = true,
 ): Challenge | null => {
   if (force === 'timed') return timedChallenge(difficulty);
   if (force === 'off' && rng() >= CHALLENGE_CHANCE[difficulty]) return null;
   const options: Challenge[] = [
     ...CHALLENGES.map((text) => ({ text })),
-    timedChallenge(difficulty),
+    ...(allowTimed ? [timedChallenge(difficulty)] : []),
   ];
   return pick(rng, options);
 };

@@ -16,12 +16,63 @@
   gap: 2px;
 }
 
-/* Corner-pinned so it is always the same place and never overlaps the centered
-   two rows. Solid like the app's other buttons, not a ghost link. */
-.reset {
+/* Corner-pinned controls, so they never sit on the centered two-row title. */
+.corner {
   position: absolute;
   top: 0;
   right: 0;
+  display: flex;
+  gap: 8px;
+}
+
+/* Back to free play: mirrors Reset nuzlocke, top-left instead of top-right. */
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  background: linear-gradient(var(--panel-raised), var(--tile));
+  border: 2px solid var(--gold);
+  outline: 1px solid var(--border-dark);
+  border-radius: 3px;
+  padding: 5px 14px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.back:hover {
+  filter: brightness(1.25);
+  color: var(--gold-bright);
+}
+
+.backIcon {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  display: block;
+}
+
+.cornerBtn {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--orange);
+  background: linear-gradient(var(--panel-raised), var(--tile));
+  border: 2px solid var(--orange);
+  outline: 1px solid var(--border-dark);
+  border-radius: 3px;
+  padding: 5px 12px;
+  cursor: pointer;
+  text-shadow: var(--text-outline);
+}
+
+.cornerBtn:hover {
+  filter: brightness(1.25);
+}
+
+/* Solid like the app's other buttons, not a ghost link. */
+.reset {
   font-family: var(--font-body);
   font-size: 16px;
   color: var(--red);
@@ -40,11 +91,12 @@
   color: #fff;
 }
 
-/* Nuzlocke tag + the pool counter, pinned above the board. */
-.header {
-  display: flex;
-  align-items: center;
-  gap: 18px;
+/* The run's name/paused state under the counter. */
+.runName {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text-muted);
+  text-shadow: var(--text-outline);
 }
 
 .tag {
@@ -87,13 +139,14 @@
   text-shadow: var(--text-outline);
 }
 
-/* Every available boss; fought ones grey out with a red cross. */
+/* Every available boss as a card, like the boss pool's icon view: the portrait
+   with the name under it. */
 .board {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
-  gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 6px;
   width: 100%;
-  max-width: 780px;
+  max-width: 880px;
 }
 
 .cellWrap {
@@ -102,7 +155,11 @@
 
 .cell {
   position: relative;
-  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 5px 2px;
   border: 1px solid var(--border-light);
   border-radius: 3px;
   background: var(--tile);
@@ -117,12 +174,21 @@
 }
 
 .cell img {
-  width: 100%;
-  height: 100%;
+  width: 46px;
+  height: 46px;
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.6));
   pointer-events: none;
+}
+
+.cellName {
+  font-family: var(--font-bold);
+  font-size: 14px;
+  line-height: 1.15;
+  color: var(--gold-bright);
+  text-shadow: var(--text-outline);
+  text-align: center;
 }
 
 /* Rolled: dimmed to a silhouette with a coloured wash for how it ended — green
@@ -179,59 +245,6 @@
   gap: 26px;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.sliderField {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sliderLabel {
-  font-family: var(--font-bold);
-  font-size: 20px;
-  color: var(--orange);
-  text-shadow: var(--text-outline);
-  white-space: nowrap;
-}
-
-.slider {
-  width: 220px;
-  height: 18px;
-  appearance: none;
-  -webkit-appearance: none;
-  background: linear-gradient(var(--tile), var(--tile)) content-box;
-  border: 1px solid var(--border-light);
-  border-radius: 3px;
-  padding: 6px 0;
-  cursor: pointer;
-}
-
-.slider::-webkit-slider-thumb {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 14px;
-  height: 18px;
-  margin-top: -6px;
-  background: var(--gold);
-  border: 1px solid var(--border-dark);
-  border-radius: 2px;
-}
-
-.slider::-moz-range-thumb {
-  width: 12px;
-  height: 16px;
-  background: var(--gold);
-  border: 1px solid var(--border-dark);
-  border-radius: 2px;
-}
-
-.sliderValue {
-  min-width: 48px;
-  text-align: right;
-  font-family: var(--font-body);
-  font-size: 18px;
-  color: var(--text-muted);
 }
 
 .fateWrap {

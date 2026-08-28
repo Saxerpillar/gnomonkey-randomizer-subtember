@@ -11,26 +11,22 @@ export const effectiveTier = (item: Item, override?: Tier): Tier => override ?? 
 /**
  * Top-down gear reveal order for the ceremony. Slots are revealed in
  * equipment-tab order with the weapon + shield landing together as the final
- * jackpot pair (a rolled 2h leaves the shield ghosted). Locked slots are
- * excluded — they're already "owned", never re-rolled.
+ * jackpot pair (a rolled 2h leaves the shield ghosted).
  */
-export const revealBeats = (locked: ReadonlySet<Slot>): Slot[][] => {
-  const sequence: Slot[][] = [
-    ['head'],
-    ['cape'],
-    ['neck'],
-    ['body'],
-    ['legs'],
-    ['hands'],
-    ['feet'],
-    ['ring'],
-    ['weapon', 'shield'],
-    // Ammo last: it only exists for a ranged weapon, so revealing it earlier
-    // would give the weapon away before the jackpot beat.
-    ['ammo'],
-  ];
-  return sequence.map((beat) => beat.filter((s) => !locked.has(s))).filter((beat) => beat.length > 0);
-};
+export const revealBeats = (): Slot[][] => [
+  ['head'],
+  ['cape'],
+  ['neck'],
+  ['body'],
+  ['legs'],
+  ['hands'],
+  ['feet'],
+  ['ring'],
+  ['weapon', 'shield'],
+  // Ammo last: it only exists for a ranged weapon, so revealing it earlier
+  // would give the weapon away before the jackpot beat.
+  ['ammo'],
+];
 
 /**
  * Builds the slot-machine tape for a slot's roll: `fillers` random same-slot

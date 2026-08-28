@@ -24,6 +24,16 @@ describe('rollChallenge forcing', () => {
       }
     }
   });
+
+  it('raids never draw the timed challenge', () => {
+    for (const s of seeds) {
+      for (const d of DIFFICULTIES) {
+        const c = rollChallenge(mulberry32(s), d, 'any', false);
+        expect(c).not.toBeNull();
+        expect(c?.timerSeconds).toBeUndefined();
+      }
+    }
+  });
 });
 
 describe('mergeSettings', () => {

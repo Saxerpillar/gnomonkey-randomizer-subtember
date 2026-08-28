@@ -24,7 +24,7 @@ export interface SquadLane {
 }
 
 export interface CeremonyView {
-  /** Slots that have already locked in (locked slots are present from t=0). */
+  /** Slots that have already landed. */
   settled: Partial<Record<Slot, Item>>;
   /** Slots whose tile is on screen and whose roll card is currently up. */
   pending: Slot[];
@@ -52,7 +52,6 @@ const FINAL_HOLD_MS = 1200;
 const buildQueue = (
   loadout: Loadout,
   boss: Boss,
-  locked: ReadonlySet<Slot>,
   gearless: boolean,
   squad: SquadLane[] | null,
 ): RevealStep[] => {
@@ -60,13 +59,13 @@ const buildQueue = (
   if (squad) {
     // Raids: every lane rolls the same slot on the same beat, so the three
     // skeletons assemble side by side instead of one after the other.
-    for (const slot of revealBeats(new Set()).flat()) {
+    for (const slot of revealBeats().flat()) {
       const items = squad.map((l) => l.loadout[slot]);
       if (items.some(Boolean)) steps.push({ kind: 'squad', slot, items });
     }
   } else if (!gearless) {
     // Gauntlet: no gear goes in, so there is nothing to roll — straight to the boss.
-    for (const slot of revealBeats(locked).flat()) {
+    for (const slot of revealBeats().flat()) {
       const item = loadout[slot];
       if (item) steps.push({ kind: 'slot', slot, item });
     }
@@ -190,7 +189,6 @@ export const useCeremony = (items: Item[]) => {
   const start = (
     loadout: Loadout,
     boss: Boss,
-    locks: Partial<Record<Slot, Item>>,
     onDone: () => void,
     tierOverrides?: Partial<Record<Slot, Tier>>,
     bossPool: Boss[] = [],
@@ -204,11 +202,11 @@ export const useCeremony = (items: Item[]) => {
     bossPoolRef.current = bossPool.length ? bossPool : [boss];
     hardModeRef.current = hardMode;
     squadRef.current = squad;
-    queueRef.current = buildQueue(loadout, boss, new Set(Object.keys(locks) as Slot[]), gearless, squad);
+    queueRef.current = buildQueue(loadout, boss, gearless, squad);
     indexRef.current = 0;
 
     setView({
-      settled: gearless || squad ? {} : { ...locks },
+      settled: {},
       pending: [],
       bossStage: gearless,
       boss: null,

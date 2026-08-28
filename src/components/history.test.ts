@@ -4,6 +4,7 @@ import {
   HISTORY_LIMIT,
   markOutcome,
   parseHistory,
+  removeRun,
   tally,
   type HistoryEntry,
 } from './history';
@@ -18,6 +19,7 @@ const entry = (over: Partial<HistoryEntry> = {}): HistoryEntry => ({
   value: 1_000_000,
   gear: [{ slot: 'head', name: 'Rune full helm', icon: '1163.png' }],
   outcome: null,
+  nuzlockeId: null,
   ...over,
 });
 
@@ -73,6 +75,22 @@ describe('tally', () => {
   });
 });
 
+describe('removeRun', () => {
+  const log = [entry({ id: 'a' }), entry({ id: 'b' }), entry({ id: 'c' })];
+
+  it('removes only the run asked for, keeping the rest in order', () => {
+    expect(removeRun(log, 'b').map((e) => e.id)).toEqual(['a', 'c']);
+  });
+
+  it('ignores an id that is not there', () => {
+    expect(removeRun(log, 'nope')).toEqual(log);
+  });
+
+  it('can empty the log entirely', () => {
+    expect(removeRun([entry({ id: 'a' })], 'a')).toEqual([]);
+  });
+});
+
 describe('parseHistory', () => {
   it('reads back what was written', () => {
     const log = [entry({ id: 'a', outcome: 'cleared' })];
@@ -88,6 +106,12 @@ describe('parseHistory', () => {
   it('drops malformed records but keeps the good ones', () => {
     const raw = JSON.stringify([entry({ id: 'good' }), { id: 'bad' }, null, 42]);
     expect(parseHistory(raw).map((e) => e.id)).toEqual(['good']);
+  });
+
+  it('treats a missing nuzlockeId as freeplay', () => {
+    const { nuzlockeId: _, ...legacy } = entry({ id: 'old' });
+    const parsed = parseHistory(JSON.stringify([legacy]));
+    expect(parsed[0].nuzlockeId).toBeNull();
   });
 
   it('rejects an unknown outcome value', () => {

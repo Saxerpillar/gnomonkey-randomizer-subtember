@@ -29,7 +29,6 @@ const pool = (): Item[] =>
 const settings = (over: Partial<RollSettings> = {}): RollSettings => ({
   budget: null,
   allowUntradeables: false,
-  locks: {},
   ...over,
 });
 

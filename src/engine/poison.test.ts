@@ -36,7 +36,6 @@ const dagger = () =>
 const settings = (over: Partial<RollSettings> = {}): RollSettings => ({
   budget: null,
   allowUntradeables: false,
-  locks: {},
   ...over,
 });
 
@@ -109,13 +108,5 @@ describe('poison does not disturb the weapon odds', () => {
       if (w?.name.startsWith('Rune dagger')) seen.add(w.name);
     }
     expect(seen.size).toBe(4);
-  });
-
-  it('leaves a locked weapon exactly as it was locked', () => {
-    const locked = dagger();
-    for (let seed = 1; seed <= 40; seed++) {
-      const out = roll(pool(), settings({ locks: { weapon: locked } }), mulberry32(seed));
-      expect(out.weapon).toBe(locked);
-    }
   });
 });

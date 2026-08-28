@@ -11,7 +11,7 @@
 
 .panel {
   width: 100%;
-  max-width: 520px;
+  max-width: 560px;
   /* 55 bosses will not fit any window, so this list scrolls — the same
      deliberate exception the Settings dialog makes. */
   max-height: calc(100dvh - 48px);
@@ -56,6 +56,120 @@
   border-radius: 5px;
 }
 
+/* View switch + every group-level toggle, pinned above the bosses. */
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: none;
+}
+
+.viewSwitch {
+  display: flex;
+  gap: 6px;
+}
+
+/* Solid like the app's other buttons, with the conventional list/grid icons. */
+.viewBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-muted);
+  background: linear-gradient(var(--panel-raised), var(--tile));
+  border: 1px solid var(--border-light);
+  outline: 1px solid var(--border-dark);
+  border-radius: 3px;
+  padding: 3px 12px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.viewBtn:hover {
+  color: var(--gold-bright);
+}
+
+.viewOn {
+  color: var(--gold-bright);
+  border-color: var(--gold);
+}
+
+.viewIcon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.groupToggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Filled chips: stone when off, green-filled when on. */
+.groupToggle {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-muted);
+  background: linear-gradient(var(--panel-raised), var(--tile));
+  border: 1px solid var(--border-light);
+  outline: 1px solid var(--border-dark);
+  border-radius: 3px;
+  padding: 3px 10px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.groupToggle:hover {
+  color: var(--gold-bright);
+}
+
+.groupOn {
+  color: var(--green);
+  border-color: var(--green);
+  background: linear-gradient(rgba(70, 194, 70, 0.28), rgba(70, 194, 70, 0.16));
+  text-shadow: var(--text-outline);
+}
+
+/* Hard-mode toggle in the list: a fixed-width slot so every row lines up and
+   the blocked reason never drifts. Filled = hard mode may roll; unfilled
+   reads "Normal" and locks it out. */
+.hmSlot {
+  flex: none;
+  width: 64px;
+}
+
+.hmWrap {
+  display: inline-flex;
+  flex: none;
+  width: 64px;
+  justify-content: center;
+}
+
+.hm {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-muted);
+  background: linear-gradient(var(--panel-raised), var(--tile));
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 1px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.hm:hover {
+  color: var(--gold-bright);
+}
+
+.hmOn {
+  color: #fff;
+  border-color: var(--red);
+  background: linear-gradient(#c0392b, #8a2017);
+  text-shadow: var(--text-outline);
+}
+
 .group {
   display: flex;
   flex-direction: column;
@@ -85,7 +199,7 @@
 
 .groupCount {
   font-family: var(--font-small);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text-muted);
 }
 
@@ -110,12 +224,27 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 1px 0 1px 4px;
+  padding: 2px 4px;
   font-family: var(--font-body);
   font-size: 18px;
   color: var(--text);
   cursor: pointer;
   user-select: none;
+  border-radius: 3px;
+}
+
+/* Subtle zebra so rows stay readable in a long list. */
+.group > label.boss:nth-of-type(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Ineligible under a group rule: the entry dims AND carries a red wash, while
+   the reason stays to say which rule is holding it out. The wash is an inset
+   shadow so it paints over the zebra stripe no matter how the selectors stack
+   up (a background here would lose the specificity fight on even rows). */
+.bossBlocked {
+  opacity: 0.6;
+  box-shadow: inset 0 0 0 1000px rgba(216, 67, 67, 0.18);
 }
 
 .boss input {
@@ -161,11 +290,106 @@
 }
 
 /* Ticked here but held out by a group toggle elsewhere. Says which one, so the
-   row explains itself rather than looking broken. */
+   row explains itself rather than looking broken. No black stroke: at this
+   size the outline eats the letterforms. */
 .blocked {
   flex: none;
   font-family: var(--font-small);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--red);
+}
+
+/* Icon view: a grid of boss tiles with their names beneath, like the Nuzlocke
+   board. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 10px;
+}
+
+.tileWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tile {
+  display: block;
+  width: 100%;
+}
+
+.tileBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  padding: 5px 2px;
+  background: var(--tile);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.tileBtn:hover {
+  border-color: var(--gold);
+}
+
+.tileBtn img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.6));
+}
+
+.tileName {
+  font-family: var(--font-bold);
+  font-size: 15px;
+  line-height: 1.15;
+  color: var(--gold-bright);
+  text-shadow: var(--text-outline);
+  text-align: center;
+}
+
+.tileOff img {
+  filter: grayscale(1) brightness(0.45);
+}
+
+.tileOff .tileName {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+/* Hard-mode chip overlaid on the tile corner, so tiles stay uniform and the
+   grid rows never gap. */
+.hmChipWrap {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  z-index: 1;
+}
+
+.hmChip {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-muted);
+  background: linear-gradient(var(--panel-raised), var(--tile));
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 1px 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.hmChip:hover {
+  color: var(--gold-bright);
+}
+
+.hmChipOn {
+  color: #fff;
+  border-color: var(--red);
+  background: linear-gradient(#c0392b, #8a2017);
   text-shadow: var(--text-outline);
 }

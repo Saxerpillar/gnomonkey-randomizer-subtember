@@ -1,7 +1,7 @@
 import type { Boss } from './DataProvider';
 import { CORE_SLOTS, TIERS, type Tier } from '../engine/types';
 
-export const POOL_TAGS = ['gwd', 'dt2', 'raid', 'minigame', 'delve', 'quest'] as const;
+export const POOL_TAGS = ['gwd', 'dt2', 'raid', 'minigame', 'quest'] as const;
 export type PoolTag = (typeof POOL_TAGS)[number];
 
 export const POOL_LABEL: Record<PoolTag, string> = {
@@ -9,7 +9,6 @@ export const POOL_LABEL: Record<PoolTag, string> = {
   dt2: 'DT2 bosses',
   raid: 'Include Raids',
   minigame: 'Wave-based encounters',
-  delve: 'Doom of Mokhaiotl',
   quest: 'Quest bosses',
 };
 
@@ -25,10 +24,13 @@ export interface Settings {
   slayerBosses: boolean;
   /** Sporadic bosses are not repeatable on demand, default OFF. */
   sporadicBosses: boolean;
-  /** Pool tags excluded from the boss pool (gwd/dt2/raid/minigame/delve). */
+  /** Pool tags excluded from the boss pool (gwd/dt2/raid/minigame/quest). */
   excludedPools: PoolTag[];
   /** Individual bosses switched off by name, from the boss pool manager. */
   excludedBosses: string[];
+  /** Bosses whose hard-mode variant is off (the pool button reads "Normal
+   *  mode"); an empty list means every hard-mode boss is eligible. */
+  normalOnlyBosses: string[];
   /** Drop the white screen blowout from every stinger. The art and the boom
    *  still play — this only removes the part that hurts to look at. */
   removeFlashbangs: boolean;
@@ -41,9 +43,9 @@ export interface Settings {
    */
   tierFloors: Partial<Record<Tier, number>>;
 
-  /** Nuzlocke: rolls avoid repeating a boss until the whole pool is fought. */
-  nuzlocke: boolean;
-  /** 0..1 chance a roll lands on an already-fought boss (0 = never repeat). */
+  /** Nuzlocke repeat chance: 0..1 odds a roll lands on an already-fought boss
+   *  (0 = never repeat). Nuzlocke mode itself is entered from the main screen,
+   *  not a settings toggle. */
   nuzlockeRepeat: number;
 
   // ---- debug (all inert by default; hidden unless debugMode is on) ----
@@ -131,10 +133,10 @@ export const DEFAULT_SETTINGS: Settings = {
   sporadicBosses: false,
   excludedPools: [],
   excludedBosses: [],
+  normalOnlyBosses: [],
   removeFlashbangs: false,
   volume: 1,
   tierFloors: {},
-  nuzlocke: false,
   nuzlockeRepeat: 0,
   debugMode: false,
   forceBoss: 'off',
@@ -199,7 +201,7 @@ export const blockedByGroupRule = (boss: Boss, settings: Settings): string | nul
   if (!settings.slayerBosses && boss.tags.includes('slayer')) return 'Slayer bosses off';
   if (!settings.sporadicBosses && boss.tags.includes('sporadic')) return 'Sporadic bosses off';
   for (const p of settings.excludedPools) {
-    if (boss.tags.includes(p)) return `${POOL_LABEL[p]} off`;
+    if (boss.tags.includes(p)) return `${POOL_LABEL[p] ?? p} off`;
   }
   return null;
 };

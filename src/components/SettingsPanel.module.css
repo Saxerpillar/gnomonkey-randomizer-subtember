@@ -182,6 +182,44 @@
   filter: brightness(1.2);
 }
 
+/* Locked-for-nuzlocke notice: the one gameplay control you cannot touch, with
+   the escape hatches that free it. */
+.locked {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  background: rgba(244, 208, 63, 0.08);
+}
+
+.lockedTitle {
+  font-family: var(--font-bold);
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: var(--gold-bright);
+  text-shadow: var(--text-outline);
+}
+
+.lockedText {
+  font-family: var(--font-small);
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.lockedActions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Disabled gameplay control while a nuzlocke is locked in. */
+.dim {
+  opacity: 0.45;
+}
+
 /* debug block: visually fenced off from the real settings */
 .debug {
   display: flex;
@@ -297,6 +335,15 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 0 12px rgba(244, 208, 63, 0.35);
 }
 
+/* Locked out while a nuzlocke is in progress. */
+.manage:disabled {
+  opacity: 0.45;
+  cursor: default;
+  filter: none;
+  color: var(--text-muted);
+  box-shadow: none;
+}
+
 .manageIcon {
   flex: none;
   width: 22px;
@@ -309,7 +356,7 @@
 .manageCount {
   margin-left: auto;
   font-family: var(--font-small);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--orange);
 }
 
@@ -402,7 +449,8 @@
 
 .floorCount {
   flex: none;
-  min-width: 22px;
+  /* Wide enough for "Random" too, so the row never shifts as it flips. */
+  min-width: 64px;
   text-align: center;
   font-family: var(--font-bold);
   font-size: 18px;
@@ -410,8 +458,23 @@
   text-shadow: var(--text-outline);
 }
 
+/* A floor of 0 reads as "Random": nothing forced, left to chance. */
+.floorRandom {
+  font-family: var(--font-small);
+  font-size: 15px;
+  color: var(--text-muted);
+  text-shadow: none;
+}
+
 .floorsFree {
   font-family: var(--font-small);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text-muted);
+}
+
+/* Breathing room between the floor summary and the untradeables toggle. */
+.floorsUntradeables {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
 }

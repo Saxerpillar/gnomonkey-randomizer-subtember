@@ -50,6 +50,16 @@
   margin-top: 28px;
 }
 
+/* The new-build prompt on the Nuzlocke screen, which is too tall to leave it
+   in the scaled column. Bottom-left, away from the watermark (bottom-right). */
+.updatePin {
+  position: fixed;
+  left: 18px;
+  bottom: 14px;
+  /* Above the reveal overlay (60), below the stingers (400). */
+  z-index: 60;
+}
+
 /* the result resolves in with a short payoff flash */
 .resultIn {
   animation: resultIn 300ms ease-out;

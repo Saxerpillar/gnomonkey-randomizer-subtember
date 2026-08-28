@@ -19,7 +19,7 @@ const item = (slot: Slot, name = `${slot}-${nextId}`, tier: Tier = 'common'): It
 
 describe('revealBeats', () => {
   it('reveals head first, then weapon+shield, with ammo as the coda', () => {
-    const beats = revealBeats(new Set());
+    const beats = revealBeats();
     expect(beats[0]).toEqual(['head']);
     // Ammo only exists for a ranged weapon, so it must not precede the weapon
     // beat — that would give the jackpot away early.
@@ -27,19 +27,6 @@ describe('revealBeats', () => {
     expect(beats[beats.length - 1]).toEqual(['ammo']);
     expect(beats.flat()).toHaveLength(SLOTS.length);
     expect(new Set(beats.flat())).toEqual(new Set(SLOTS));
-  });
-
-  it('excludes locked slots and collapses emptied beats', () => {
-    const beats = revealBeats(new Set<Slot>(['shield', 'ring']));
-    const flat = beats.flat();
-    expect(flat).not.toContain('shield');
-    expect(flat).not.toContain('ring');
-    expect(beats[beats.length - 2]).toEqual(['weapon']);
-    expect(beats[beats.length - 1]).toEqual(['ammo']);
-  });
-
-  it('returns no beats when everything is locked', () => {
-    expect(revealBeats(new Set(SLOTS))).toEqual([]);
   });
 });
 

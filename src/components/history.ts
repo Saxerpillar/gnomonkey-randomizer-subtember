@@ -29,6 +29,9 @@ export interface HistoryEntry {
   value: number;
   gear: HistoryGear[];
   outcome: Outcome | null;
+  /** The nuzlocke run this belonged to, or null for a freeplay roll. The name
+   *  is looked up separately so a rename reaches every run in the group. */
+  nuzlockeId: string | null;
 }
 
 export const HISTORY_KEY = 'gnome-subtember-history-v1';
@@ -52,6 +55,10 @@ export const markOutcome = (
     e.id === id ? { ...e, outcome: e.outcome === outcome ? null : outcome } : e,
   );
 
+/** Removes one run entirely. */
+export const removeRun = (history: readonly HistoryEntry[], id: string): HistoryEntry[] =>
+  history.filter((e) => e.id !== id);
+
 export interface HistoryTally {
   cleared: number;
   failed: number;
@@ -74,7 +81,9 @@ const isEntry = (v: unknown): v is HistoryEntry => {
     typeof e.at === 'number' &&
     typeof e.boss === 'string' &&
     Array.isArray(e.gear) &&
-    (e.outcome === null || e.outcome === 'cleared' || e.outcome === 'failed')
+    (e.outcome === null || e.outcome === 'cleared' || e.outcome === 'failed') &&
+    // Older entries predate nuzlocke grouping; treat them as freeplay.
+    (e.nuzlockeId === undefined || e.nuzlockeId === null || typeof e.nuzlockeId === 'string')
   );
 };
 
@@ -83,7 +92,10 @@ export const parseHistory = (raw: string | null): HistoryEntry[] => {
   try {
     const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
-    return parsed.filter(isEntry).slice(0, HISTORY_LIMIT);
+    return parsed
+      .filter(isEntry)
+      .map((e) => ({ ...e, nuzlockeId: e.nuzlockeId ?? null }))
+      .slice(0, HISTORY_LIMIT);
   } catch {
     // Corrupt storage loses the log, never the app.
     return [];

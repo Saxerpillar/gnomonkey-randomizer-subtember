@@ -4,11 +4,13 @@ import { RsButton } from '../theme/RsButton';
 import { RsTooltip } from '../theme/RsTooltip';
 import styles from './PreRollScreen.module.css';
 
-/** The pre-roll hero: one big dramatic CTA, with a small Settings link below. */
+/** The pre-roll hero: one big dramatic CTA, with a smaller Nuzlocke entry
+ *  button and the Settings link below. */
 export const PreRollScreen = ({
   decideReady,
   updateReady = false,
   onDecide,
+  onOpenNuzlocke,
   onOpenSettings,
   onOpenHistory,
 }: {
@@ -16,6 +18,7 @@ export const PreRollScreen = ({
   /** A newer build is deployed — offer a reload, under the CTA. */
   updateReady?: boolean;
   onDecide: () => void;
+  onOpenNuzlocke: () => void;
   onOpenSettings: () => void;
   onOpenHistory: () => void;
 }) => (
@@ -37,6 +40,9 @@ export const PreRollScreen = ({
         DECIDE YOUR FATE
       </RsButton>
     </RsTooltip>
+    <RsButton className={styles.nuzlocke} onClick={onOpenNuzlocke}>
+      Nuzlocke mode
+    </RsButton>
     {updateReady && <UpdatePrompt />}
     <div className={styles.links}>
       <button className={styles.settings} onClick={onOpenSettings}>

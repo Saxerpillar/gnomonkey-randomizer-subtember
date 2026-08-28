@@ -109,8 +109,6 @@ export interface RollSettings {
   budget: number | null;
   /** When false, untradeable items never roll. */
   allowUntradeables: boolean;
-  /** Slots the roller must not touch. Locked items cost 0 against the budget. */
-  locks: Partial<Record<Slot, Item>>;
   /**
    * Bad-RNG mitigation: the minimum number of CORE_SLOTS that must land on each
    * tier. Floors deliberately outrank the budget — a floor you asked for is

@@ -103,16 +103,12 @@ const poolBySlot = (pool: Item[], allowUntradeables: boolean): Map<Slot, Item[]>
 /**
  * Pure gear roller (design doc: docs/plans/2026-07-28-gnome-subtember-design.md).
  *
- * Order: weapon first (first claim on the budget), then the remaining unlocked
- * slots in random order, and finally ammo — which only rolls when the weapon
- * consumes it. Each slot picks uniformly among candidates costing no more than
- * the remaining budget (untradeables and locks cost 0); no affordable candidate
- * leaves the slot empty. A two-handed weapon empties the shield slot; a locked
- * shield excludes two-handed weapons; ammo must match the weapon's family and
- * sit within its tier ceiling.
- *
- * Locks are assumed non-contradictory (the UI resolves 2h-vs-shield conflicts
- * before rolling ever happens).
+ * Order: weapon first (first claim on the budget), then the remaining slots in
+ * random order, and finally ammo — which only rolls when the weapon consumes
+ * it. Each slot picks uniformly among candidates costing no more than the
+ * remaining budget (untradeables cost 0); no affordable candidate leaves the
+ * slot empty. A two-handed weapon empties the shield slot; ammo must match the
+ * weapon's family and sit within its tier ceiling.
  */
 /**
  * Decides which core slots owe which tier, before any rolling happens.
@@ -125,11 +121,10 @@ const poolBySlot = (pool: Item[], allowUntradeables: boolean): Map<Slot, Item[]>
 export const assignTierFloors = (
   floors: Partial<Record<Tier, number>>,
   bySlot: Map<Slot, Item[]>,
-  locks: Partial<Record<Slot, Item>>,
   rng: Rng,
 ): Map<Slot, Tier> => {
   const assigned = new Map<Slot, Tier>();
-  const free = CORE_SLOTS.filter((s) => !locks[s]);
+  const free = [...CORE_SLOTS];
   for (const tier of [...TIERS].reverse()) {
     let need = floors[tier] ?? 0;
     if (need <= 0) continue;
@@ -171,15 +166,11 @@ export const withPoison = (item: Item, rng: Rng): Item => {
 };
 
 export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout => {
-  const { budget, allowUntradeables, locks, tierFloors, tierBias } = settings;
+  const { budget, allowUntradeables, tierFloors, tierBias } = settings;
   const bySlot = poolBySlot(pool, allowUntradeables);
-  const floored = tierFloors ? assignTierFloors(tierFloors, bySlot, locks, rng) : new Map();
+  const floored = tierFloors ? assignTierFloors(tierFloors, bySlot, rng) : new Map();
 
   const loadout = emptyLoadout();
-  for (const slot of SLOTS) {
-    const locked = locks[slot];
-    if (locked) loadout[slot] = locked;
-  }
 
   let remaining = budget ?? Infinity;
 
@@ -208,32 +199,25 @@ export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout =>
   };
 
   // Weapon first.
-  if (!locks.weapon) {
-    let weapons = bySlot.get('weapon')!;
-    if (locks.shield) weapons = weapons.filter((w) => !w.twoHanded);
-    rollSlot('weapon', weapons);
-  }
+  rollSlot('weapon', bySlot.get('weapon')!);
 
-  // A 2h weapon (rolled or locked) claims the shield slot.
+  // A 2h weapon claims the shield slot.
   const twoHanded = loadout.weapon?.twoHanded ?? false;
-  if (twoHanded && !locks.shield) loadout.shield = null;
+  if (twoHanded) loadout.shield = null;
 
   const rest = SLOTS.filter(
-    (s) => s !== 'weapon' && s !== 'ammo' && !locks[s] && !(s === 'shield' && twoHanded),
+    (s) => s !== 'weapon' && s !== 'ammo' && !(s === 'shield' && twoHanded),
   );
 
   for (const slot of shuffled(rng, rest)) rollSlot(slot, bySlot.get(slot)!);
 
   // Ammo goes last and only exists at all when the rolled weapon needs it, so
   // it never competes with armour for the budget on a melee run.
-  if (!locks.ammo) {
-    const candidates = ammoCandidatesFor(loadout.weapon, bySlot.get('ammo')!);
-    if (candidates.length) rollSlot('ammo', candidates);
-  }
+  const candidates = ammoCandidatesFor(loadout.weapon, bySlot.get('ammo')!);
+  if (candidates.length) rollSlot('ammo', candidates);
 
-  // Poison last of all, once the weapon is settled. A locked weapon is left
-  // exactly as it was locked.
-  if (!locks.weapon && loadout.weapon) loadout.weapon = withPoison(loadout.weapon, rng);
+  // Poison last of all, once the weapon is settled.
+  if (loadout.weapon) loadout.weapon = withPoison(loadout.weapon, rng);
 
   return loadout;
 };
@@ -242,10 +226,10 @@ export const roll = (pool: Item[], settings: RollSettings, rng: Rng): Loadout =>
  * Reroll ONE slot in place, leaving every other slot alone.
  *
  * Budget: the other rolled items keep their claim, so this slot may spend
- * whatever is left (locked items cost 0, same rule as a full roll). Validity is
- * preserved as in a full roll — a new two-handed weapon clears the shield, and
- * ammo the new weapon cannot fire is dropped. Rerolling the shield while a
- * two-handed weapon is equipped is a no-op (the slot is genuinely unusable).
+ * whatever is left. Validity is preserved as in a full roll — a new two-handed
+ * weapon clears the shield, and ammo the new weapon cannot fire is dropped.
+ * Rerolling the shield while a two-handed weapon is equipped is a no-op (the
+ * slot is genuinely unusable).
  */
 export const rerollSlot = (
   pool: Item[],
@@ -254,22 +238,21 @@ export const rerollSlot = (
   settings: RollSettings,
   rng: Rng,
 ): Loadout => {
-  const { budget, allowUntradeables, locks } = settings;
+  const { budget, allowUntradeables } = settings;
   const bySlot = poolBySlot(pool, allowUntradeables);
 
   const twoHandedNow = loadout.weapon?.twoHanded ?? false;
   if (slot === 'shield' && twoHandedNow) return loadout;
 
-  // What the OTHER rolled (unlocked) slots already claimed.
+  // What the OTHER rolled slots already claimed.
   const spentElsewhere = SLOTS.reduce((sum, s) => {
     if (s === slot) return sum;
     const item = loadout[s];
-    return sum + (item && !locks[s] ? costOf(item) : 0);
+    return sum + (item ? costOf(item) : 0);
   }, 0);
   const remaining = budget == null ? Infinity : Math.max(0, budget - spentElsewhere);
 
   let candidates = bySlot.get(slot)!;
-  if (slot === 'weapon' && locks.shield) candidates = candidates.filter((w) => !w.twoHanded);
   if (slot === 'ammo') candidates = ammoCandidatesFor(loadout.weapon, candidates);
 
   const rolled = pickForSlot(slot, candidates, remaining, rng, settings.tierBias);
@@ -280,15 +263,15 @@ export const rerollSlot = (
 
   if (slot === 'weapon') {
     // A new 2h claims the shield slot; ammo the new weapon cannot fire is dropped.
-    if (item.twoHanded && !locks.shield) next.shield = null;
+    if (item.twoHanded) next.shield = null;
     const ammo = next.ammo;
-    if (ammo && !locks.ammo && !ammoCandidatesFor(item, [ammo]).length) next.ammo = null;
+    if (ammo && !ammoCandidatesFor(item, [ammo]).length) next.ammo = null;
   }
 
   return next;
 };
 
-/** GE value of everything equipped (locked included) — the informational readout. */
+/** GE value of everything equipped — the informational readout. */
 export const loadoutValue = (loadout: Loadout): number =>
   SLOTS.reduce((sum, s) => {
     const item = loadout[s];

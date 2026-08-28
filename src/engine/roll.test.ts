@@ -38,14 +38,13 @@ const basicPool = (): Item[] => [
 const settings = (over: Partial<RollSettings> = {}): RollSettings => ({
   budget: null,
   allowUntradeables: false,
-  locks: {},
   ...over,
 });
 
-const rolledCost = (loadout: Loadout, locks: RollSettings['locks']): number =>
+const rolledCost = (loadout: Loadout): number =>
   SLOTS.reduce((sum, s) => {
     const it = loadout[s];
-    return sum + (it && locks[s]?.id !== it.id ? costOf(it) : 0);
+    return sum + (it ? costOf(it) : 0);
   }, 0);
 
 const seeds = Array.from({ length: 200 }, (_, i) => i * 7919 + 1);
@@ -56,7 +55,7 @@ describe('budget', () => {
     for (const budget of [0, 500, 100_000, 10_000_000]) {
       for (const seed of seeds) {
         const out = roll(pool, settings({ budget }), mulberry32(seed));
-        expect(rolledCost(out, {})).toBeLessThanOrEqual(budget);
+        expect(rolledCost(out)).toBeLessThanOrEqual(budget);
       }
     }
   });
@@ -92,19 +91,7 @@ describe('untradeables', () => {
     const pool = [item('cape', { name: 'fire cape', tradeable: false, price: undefined })];
     const out = roll(pool, settings({ budget: 0, allowUntradeables: true }), mulberry32(1));
     expect(out.cape?.name).toBe('fire cape');
-    expect(rolledCost(out, {})).toBe(0);
-  });
-});
-
-describe('locks', () => {
-  it('locked items survive every roll and are budget-exempt', () => {
-    const expensive = item('body', { name: 'locked bis', price: 900_000_000 });
-    const locks = { body: expensive };
-    for (const seed of seeds.slice(0, 50)) {
-      const out = roll(basicPool(), settings({ budget: 1000, locks }), mulberry32(seed));
-      expect(out.body?.id).toBe(expensive.id);
-      expect(rolledCost(out, locks)).toBeLessThanOrEqual(1000);
-    }
+    expect(rolledCost(out)).toBe(0);
   });
 });
 
@@ -115,16 +102,6 @@ describe('2h vs shield', () => {
       const out = roll(pool, settings(), mulberry32(seed));
       expect(out.weapon?.twoHanded).toBe(true);
       expect(out.shield).toBeNull();
-    }
-  });
-
-  it('a locked shield excludes 2h weapons entirely', () => {
-    const shield = item('shield', { name: 'locked shield' });
-    const pool = [item('weapon', { name: 'only 2h', twoHanded: true }), shield];
-    for (const seed of seeds.slice(0, 50)) {
-      const out = roll(pool, settings({ locks: { shield } }), mulberry32(seed));
-      expect(out.weapon).toBeNull(); // only weapon available was 2h
-      expect(out.shield?.id).toBe(shield.id);
     }
   });
 });
@@ -336,9 +313,12 @@ describe('determinism', () => {
 });
 
 describe('loadoutValue', () => {
-  it('counts all equipped tradeables, locked included', () => {
-    const locked = item('body', { price: 5000 });
-    const out = roll([item('head', { price: 300 })], settings({ locks: { body: locked } }), mulberry32(1));
+  it('counts all equipped tradeables', () => {
+    const out = roll(
+      [item('head', { price: 300 }), item('body', { price: 5000 })],
+      settings({ budget: 1_000_000 }),
+      mulberry32(1),
+    );
     expect(loadoutValue(out)).toBe(5300);
   });
 });

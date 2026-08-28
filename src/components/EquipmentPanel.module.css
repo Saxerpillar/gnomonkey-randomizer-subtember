@@ -67,30 +67,9 @@
   transform: scale(1.85) translateY(-1px);
 }
 
-.locked {
-  /* lock reads as a green ring + badge; the BORDER belongs to the rarity tier.
-     Uses outline (not box-shadow) so it composes with the elite tier glow. */
-  outline: 2px solid var(--green);
-  outline-offset: 1px;
-}
-
-/* only filled slots are clickable (lock toggles) */
+/* slots are display + right-click surfaces, not click-to-toggle */
 .slot {
   cursor: default;
-}
-
-.lockable,
-.locked {
-  cursor: pointer;
-}
-
-.lockBadge {
-  position: absolute;
-  bottom: 1px;
-  right: 2px;
-  font-size: 11px;
-  pointer-events: none;
-  filter: drop-shadow(0 0 2px black);
 }
 
 /* slot whose title card is up: pulses to invite the incoming item */

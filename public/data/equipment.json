@@ -80,55 +80,6 @@
   }
  },
  {
-  "id": 27861,
-  "name": "Abyssal dagger (bh)",
-  "version": "Unpoisoned",
-  "slot": "weapon",
-  "icon": "27861.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Stab Sword",
-  "tier": "strong",
-  "speed": 4,
-  "poison": [
-   {
-    "id": 27863,
-    "name": "Abyssal dagger (bh) (p)",
-    "icon": "27863.png"
-   },
-   {
-    "id": 27865,
-    "name": "Abyssal dagger (bh) (p+)",
-    "icon": "27865.png"
-   },
-   {
-    "id": 27867,
-    "name": "Abyssal dagger (bh) (p++)",
-    "icon": "27867.png"
-   }
-  ],
-  "offensive": {
-   "stab": 85,
-   "slash": 40,
-   "crush": -4,
-   "magic": 1,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 1,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 75,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 12006,
   "name": "Abyssal tentacle",
   "slot": "weapon",
@@ -196,37 +147,6 @@
   "slot": "weapon",
   "icon": "4151.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Whip",
-  "tier": "strong",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 82,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 82,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 26482,
-  "name": "Abyssal whip (or)",
-  "slot": "weapon",
-  "icon": "26482.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Whip",
   "tier": "strong",
@@ -2036,151 +1956,6 @@
   }
  },
  {
-  "id": 22127,
-  "name": "Adamant kiteshield (Arrav)",
-  "slot": "shield",
-  "icon": "22127.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22129,
-  "name": "Adamant kiteshield (Asgarnia)",
-  "slot": "shield",
-  "icon": "22129.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22131,
-  "name": "Adamant kiteshield (Dorgeshuun)",
-  "slot": "shield",
-  "icon": "22131.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22133,
-  "name": "Adamant kiteshield (Dragon)",
-  "slot": "shield",
-  "icon": "22133.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22135,
-  "name": "Adamant kiteshield (Fairy)",
-  "slot": "shield",
-  "icon": "22135.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 2611,
   "name": "Adamant kiteshield (g)",
   "slot": "shield",
@@ -2210,267 +1985,6 @@
   }
  },
  {
-  "id": 22137,
-  "name": "Adamant kiteshield (Guthix)",
-  "slot": "shield",
-  "icon": "22137.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22139,
-  "name": "Adamant kiteshield (HAM)",
-  "slot": "shield",
-  "icon": "22139.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22141,
-  "name": "Adamant kiteshield (Horse)",
-  "slot": "shield",
-  "icon": "22141.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22143,
-  "name": "Adamant kiteshield (Jogre)",
-  "slot": "shield",
-  "icon": "22143.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22145,
-  "name": "Adamant kiteshield (Kandarin)",
-  "slot": "shield",
-  "icon": "22145.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22147,
-  "name": "Adamant kiteshield (Misthalin)",
-  "slot": "shield",
-  "icon": "22147.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22149,
-  "name": "Adamant kiteshield (Money)",
-  "slot": "shield",
-  "icon": "22149.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22151,
-  "name": "Adamant kiteshield (Saradomin)",
-  "slot": "shield",
-  "icon": "22151.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22153,
-  "name": "Adamant kiteshield (Skull)",
-  "slot": "shield",
-  "icon": "22153.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 2603,
   "name": "Adamant kiteshield (t)",
   "slot": "shield",
@@ -2484,64 +1998,6 @@
    "crush": 0,
    "magic": -8,
    "ranged": -2
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22155,
-  "name": "Adamant kiteshield (Varrock)",
-  "slot": "shield",
-  "icon": "22155.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 27,
-   "slash": 31,
-   "crush": 29,
-   "magic": -1,
-   "ranged": 29
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22157,
-  "name": "Adamant kiteshield (Zamorak)",
-  "slot": "shield",
-  "icon": "22157.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
   },
   "defensive": {
    "stab": 27,
@@ -4240,35 +3696,6 @@
   }
  },
  {
-  "id": 12436,
-  "name": "Amulet of fury (or)",
-  "slot": "neck",
-  "icon": "12436.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 10,
-   "slash": 10,
-   "crush": 10,
-   "magic": 10,
-   "ranged": 10
-  },
-  "defensive": {
-   "stab": 15,
-   "slash": 15,
-   "crush": 15,
-   "magic": 15,
-   "ranged": 15
-  },
-  "bonuses": {
-   "str": 8,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 5
-  }
- },
- {
   "id": 1706,
   "name": "Amulet of glory",
   "version": "1",
@@ -4474,35 +3901,6 @@
   }
  },
  {
-  "id": 29804,
-  "name": "Amulet of rancour (s)",
-  "slot": "neck",
-  "icon": "29804.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 25,
-   "slash": 25,
-   "crush": 25,
-   "magic": -6,
-   "ranged": -8
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 12,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 2
-  }
- },
- {
   "id": 1725,
   "name": "Amulet of strength",
   "slot": "neck",
@@ -4567,35 +3965,6 @@
   "slot": "neck",
   "icon": "19553.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 15,
-   "slash": 15,
-   "crush": 15,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 10,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 2
-  }
- },
- {
-  "id": 20366,
-  "name": "Amulet of torture (or)",
-  "slot": "neck",
-  "icon": "20366.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "elite",
   "offensive": {
@@ -5747,35 +5116,6 @@
   }
  },
  {
-  "id": 11710,
-  "name": "Anti-dragon shield (nz)",
-  "slot": "shield",
-  "icon": "11710.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 7,
-   "slash": 9,
-   "crush": 8,
-   "magic": 2,
-   "ranged": 8
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 31081,
   "name": "Antler guard",
   "slot": "shield",
@@ -6061,35 +5401,6 @@
    "crush": 0,
    "magic": 0,
    "ranged": 4
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 11771,
-  "name": "Archers ring (i)",
-  "slot": "ring",
-  "icon": "11771.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 8
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 8
   },
   "bonuses": {
    "str": 0,
@@ -6779,37 +6090,6 @@
   }
  },
  {
-  "id": 20368,
-  "name": "Armadyl godsword (or)",
-  "slot": "weapon",
-  "icon": "20368.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "2h Sword",
-  "tier": "elite",
-  "speed": 6,
-  "offensive": {
-   "stab": 0,
-   "slash": 132,
-   "crush": 80,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 132,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 8
-  }
- },
- {
   "id": 24192,
   "name": "Armadyl halo",
   "version": "Normal",
@@ -7308,209 +6588,6 @@
   }
  },
  {
-  "id": 31093,
-  "name": "Avernic treads (et)",
-  "slot": "feet",
-  "icon": "31093.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 5,
-   "slash": 5,
-   "crush": 5,
-   "magic": 11,
-   "ranged": 15
-  },
-  "defensive": {
-   "stab": 21,
-   "slash": 25,
-   "crush": 25,
-   "magic": 10,
-   "ranged": 10
-  },
-  "bonuses": {
-   "str": 4,
-   "ranged_str": 2,
-   "magic_str": 20,
-   "prayer": 0
-  }
- },
- {
-  "id": 31097,
-  "name": "Avernic treads (max)",
-  "slot": "feet",
-  "icon": "31097.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 5,
-   "slash": 5,
-   "crush": 5,
-   "magic": 11,
-   "ranged": 15
-  },
-  "defensive": {
-   "stab": 21,
-   "slash": 25,
-   "crush": 25,
-   "magic": 10,
-   "ranged": 10
-  },
-  "bonuses": {
-   "str": 6,
-   "ranged_str": 3,
-   "magic_str": 20,
-   "prayer": 0
-  }
- },
- {
-  "id": 31092,
-  "name": "Avernic treads (pe)",
-  "slot": "feet",
-  "icon": "31092.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 5,
-   "slash": 5,
-   "crush": 5,
-   "magic": 11,
-   "ranged": 15
-  },
-  "defensive": {
-   "stab": 21,
-   "slash": 25,
-   "crush": 25,
-   "magic": 10,
-   "ranged": 10
-  },
-  "bonuses": {
-   "str": 4,
-   "ranged_str": 3,
-   "magic_str": 10,
-   "prayer": 0
-  }
- },
- {
-  "id": 31096,
-  "name": "Avernic treads (pe)(et)",
-  "slot": "feet",
-  "icon": "31096.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 5,
-   "slash": 5,
-   "crush": 5,
-   "magic": 11,
-   "ranged": 15
-  },
-  "defensive": {
-   "stab": 21,
-   "slash": 25,
-   "crush": 25,
-   "magic": 10,
-   "ranged": 10
-  },
-  "bonuses": {
-   "str": 4,
-   "ranged_str": 3,
-   "magic_str": 20,
-   "prayer": 0
-  }
- },
- {
-  "id": 31091,
-  "name": "Avernic treads (pr)",
-  "slot": "feet",
-  "icon": "31091.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 5,
-   "slash": 5,
-   "crush": 5,
-   "magic": 11,
-   "ranged": 15
-  },
-  "defensive": {
-   "stab": 21,
-   "slash": 25,
-   "crush": 25,
-   "magic": 10,
-   "ranged": 10
-  },
-  "bonuses": {
-   "str": 6,
-   "ranged_str": 2,
-   "magic_str": 10,
-   "prayer": 0
-  }
- },
- {
-  "id": 31095,
-  "name": "Avernic treads (pr)(et)",
-  "slot": "feet",
-  "icon": "31095.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 5,
-   "slash": 5,
-   "crush": 5,
-   "magic": 11,
-   "ranged": 15
-  },
-  "defensive": {
-   "stab": 21,
-   "slash": 25,
-   "crush": 25,
-   "magic": 10,
-   "ranged": 10
-  },
-  "bonuses": {
-   "str": 6,
-   "ranged_str": 2,
-   "magic_str": 20,
-   "prayer": 0
-  }
- },
- {
-  "id": 31094,
-  "name": "Avernic treads (pr)(pe)",
-  "slot": "feet",
-  "icon": "31094.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 5,
-   "slash": 5,
-   "crush": 5,
-   "magic": 11,
-   "ranged": 15
-  },
-  "defensive": {
-   "stab": 21,
-   "slash": 25,
-   "crush": 25,
-   "magic": 10,
-   "ranged": 10
-  },
-  "bonuses": {
-   "str": 6,
-   "ranged_str": 3,
-   "magic_str": 10,
-   "prayer": 0
-  }
- },
- {
   "id": 25502,
   "name": "Banana cape",
   "slot": "cape",
@@ -7545,35 +6622,6 @@
   "slot": "feet",
   "icon": "11836.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -5,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 17,
-   "slash": 18,
-   "crush": 19,
-   "magic": 0,
-   "ranged": 15
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 1
-  }
- },
- {
-  "id": 26720,
-  "name": "Bandos boots (or)",
-  "slot": "feet",
-  "icon": "26720.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "decent",
   "offensive": {
@@ -7921,37 +6969,6 @@
   }
  },
  {
-  "id": 20370,
-  "name": "Bandos godsword (or)",
-  "slot": "weapon",
-  "icon": "20370.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "2h Sword",
-  "tier": "elite",
-  "speed": 6,
-  "offensive": {
-   "stab": 0,
-   "slash": 132,
-   "crush": 80,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 132,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 8
-  }
- },
- {
   "id": 24195,
   "name": "Bandos halo",
   "version": "Normal",
@@ -8221,35 +7238,6 @@
   "tradeable": true,
   "twoHanded": false,
   "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -21,
-   "ranged": -7
-  },
-  "defensive": {
-   "stab": 71,
-   "slash": 63,
-   "crush": 66,
-   "magic": -4,
-   "ranged": 93
-  },
-  "bonuses": {
-   "str": 2,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 1
-  }
- },
- {
-  "id": 26719,
-  "name": "Bandos tassets (or)",
-  "slot": "legs",
-  "icon": "26719.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
   "offensive": {
    "stab": 0,
    "slash": 0,
@@ -8818,35 +7806,6 @@
   }
  },
  {
-  "id": 23240,
-  "name": "Berserker necklace (or)",
-  "slot": "neck",
-  "icon": "23240.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": -10,
-   "slash": -10,
-   "crush": -10,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": -20,
-   "slash": -20,
-   "crush": -20,
-   "magic": -20,
-   "ranged": -20
-  },
-  "bonuses": {
-   "str": 7,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 3
-  }
- },
- {
   "id": 6737,
   "name": "Berserker ring",
   "slot": "ring",
@@ -8870,35 +7829,6 @@
   },
   "bonuses": {
    "str": 4,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 11773,
-  "name": "Berserker ring (i)",
-  "slot": "ring",
-  "icon": "11773.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 8,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 8,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -21258,37 +20188,6 @@
   }
  },
  {
-  "id": 28051,
-  "name": "Dragon 2h sword (cr)",
-  "slot": "weapon",
-  "icon": "28051.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "2h Sword",
-  "tier": "elite",
-  "speed": 7,
-  "offensive": {
-   "stab": -4,
-   "slash": 92,
-   "crush": 80,
-   "magic": -4,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": -1
-  },
-  "bonuses": {
-   "str": 93,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 11212,
   "name": "Dragon arrow",
   "version": "Unpoisoned",
@@ -21448,74 +20347,11 @@
   }
  },
  {
-  "id": 30352,
-  "name": "Dragon axe (or)",
-  "version": "Trailblazer Reloaded",
-  "slot": "weapon",
-  "icon": "30352.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Axe",
-  "tier": "decent",
-  "speed": 5,
-  "offensive": {
-   "stab": -2,
-   "slash": 38,
-   "crush": 32,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 42,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 1377,
   "name": "Dragon battleaxe",
   "slot": "weapon",
   "icon": "1377.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Axe",
-  "tier": "strong",
-  "speed": 6,
-  "offensive": {
-   "stab": -2,
-   "slash": 70,
-   "crush": 65,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": -1
-  },
-  "bonuses": {
-   "str": 85,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28037,
-  "name": "Dragon battleaxe (cr)",
-  "slot": "weapon",
-  "icon": "28037.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Axe",
   "tier": "strong",
@@ -21699,64 +20535,6 @@
   }
  },
  {
-  "id": 28055,
-  "name": "Dragon boots (cr)",
-  "slot": "feet",
-  "icon": "28055.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -3,
-   "ranged": -1
-  },
-  "defensive": {
-   "stab": 16,
-   "slash": 17,
-   "crush": 18,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 4,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22234,
-  "name": "Dragon boots (g)",
-  "slot": "feet",
-  "icon": "22234.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -3,
-   "ranged": -1
-  },
-  "defensive": {
-   "stab": 16,
-   "slash": 17,
-   "crush": 18,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 4,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 12373,
   "name": "Dragon cane",
   "slot": "weapon",
@@ -21817,64 +20595,6 @@
   }
  },
  {
-  "id": 28065,
-  "name": "Dragon chainbody (cr)",
-  "slot": "body",
-  "icon": "28065.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -15,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 81,
-   "slash": 93,
-   "crush": 98,
-   "magic": -3,
-   "ranged": 82
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 12414,
-  "name": "Dragon chainbody (g)",
-  "slot": "body",
-  "icon": "12414.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -15,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 81,
-   "slash": 93,
-   "crush": 98,
-   "magic": -3,
-   "ranged": 82
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 13652,
   "name": "Dragon claws",
   "slot": "weapon",
@@ -21883,68 +20603,6 @@
   "twoHanded": true,
   "category": "Claw",
   "tier": "elite",
-  "speed": 4,
-  "offensive": {
-   "stab": 41,
-   "slash": 57,
-   "crush": -4,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 26,
-   "crush": 7,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 56,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28039,
-  "name": "Dragon claws (cr)",
-  "slot": "weapon",
-  "icon": "28039.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Claw",
-  "tier": "strong",
-  "speed": 4,
-  "offensive": {
-   "stab": 41,
-   "slash": 57,
-   "crush": -4,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 26,
-   "crush": 7,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 56,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 26708,
-  "name": "Dragon claws (or)",
-  "slot": "weapon",
-  "icon": "26708.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Claw",
-  "tier": "strong",
   "speed": 4,
   "offensive": {
    "stab": 41,
@@ -22001,39 +20659,6 @@
   }
  },
  {
-  "id": 28053,
-  "name": "Dragon crossbow (cr)",
-  "slot": "weapon",
-  "icon": "28053.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Crossbow",
-  "requiredAmmo": "bolt",
-  "ammoMaxTier": 8,
-  "tier": "common",
-  "speed": 6,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 94
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 1215,
   "name": "Dragon dagger",
   "version": "Unpoisoned",
@@ -22059,55 +20684,6 @@
     "id": 5698,
     "name": "Dragon dagger (p++)",
     "icon": "5698.png"
-   }
-  ],
-  "offensive": {
-   "stab": 40,
-   "slash": 25,
-   "crush": -4,
-   "magic": 1,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 1,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 40,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28019,
-  "name": "Dragon dagger (cr)",
-  "version": "Unpoisoned",
-  "slot": "weapon",
-  "icon": "28019.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Stab Sword",
-  "tier": "decent",
-  "speed": 4,
-  "poison": [
-   {
-    "id": 28021,
-    "name": "Dragon dagger (cr) (p)",
-    "icon": "28021.png"
-   },
-   {
-    "id": 28023,
-    "name": "Dragon dagger (cr) (p+)",
-    "icon": "28023.png"
-   },
-   {
-    "id": 28025,
-    "name": "Dragon dagger (cr) (p++)",
-    "icon": "28025.png"
    }
   ],
   "offensive": {
@@ -22302,35 +20878,6 @@
   }
  },
  {
-  "id": 12417,
-  "name": "Dragon full helm (g)",
-  "slot": "head",
-  "icon": "12417.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -6,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 45,
-   "slash": 48,
-   "crush": 41,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 7461,
   "name": "Dragon gloves",
   "slot": "hands",
@@ -22391,74 +20938,11 @@
   }
  },
  {
-  "id": 28049,
-  "name": "Dragon halberd (cr)",
-  "slot": "weapon",
-  "icon": "28049.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Polearm",
-  "tier": "elite",
-  "speed": 7,
-  "offensive": {
-   "stab": 70,
-   "slash": 95,
-   "crush": 0,
-   "magic": -4,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": -1,
-   "slash": 4,
-   "crush": 5,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 89,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 21028,
   "name": "Dragon harpoon",
   "slot": "weapon",
   "icon": "21028.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Stab Sword",
-  "tier": "decent",
-  "speed": 5,
-  "offensive": {
-   "stab": 38,
-   "slash": 32,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 42,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 30349,
-  "name": "Dragon harpoon (or)",
-  "version": "Trailblazer Reloaded",
-  "slot": "weapon",
-  "icon": "30349.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "decent",
@@ -22539,72 +21023,6 @@
   "slot": "weapon",
   "icon": "21012.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Crossbow",
-  "requiredAmmo": "bolt",
-  "ammoMaxTier": 8,
-  "tier": "common",
-  "speed": 6,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 95
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 25918,
-  "name": "Dragon hunter crossbow (b)",
-  "slot": "weapon",
-  "icon": "25918.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Crossbow",
-  "requiredAmmo": "bolt",
-  "ammoMaxTier": 8,
-  "tier": "common",
-  "speed": 6,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 95
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 25916,
-  "name": "Dragon hunter crossbow (t)",
-  "slot": "weapon",
-  "icon": "25916.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Crossbow",
   "requiredAmmo": "bolt",
@@ -22856,35 +21274,6 @@
   }
  },
  {
-  "id": 22244,
-  "name": "Dragon kiteshield (g)",
-  "slot": "shield",
-  "icon": "22244.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -2
-  },
-  "defensive": {
-   "stab": 56,
-   "slash": 60,
-   "crush": 58,
-   "magic": -1,
-   "ranged": 58
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 22804,
   "name": "Dragon knife",
   "version": "Unpoisoned",
@@ -22965,135 +21354,11 @@
   }
  },
  {
-  "id": 27859,
-  "name": "Dragon longsword (bh)",
-  "slot": "weapon",
-  "icon": "27859.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Slash Sword",
-  "tier": "strong",
-  "speed": 5,
-  "offensive": {
-   "stab": 62,
-   "slash": 75,
-   "crush": -2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 3,
-   "crush": 2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 71,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28033,
-  "name": "Dragon longsword (cr)",
-  "slot": "weapon",
-  "icon": "28033.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Slash Sword",
-  "tier": "strong",
-  "speed": 5,
-  "offensive": {
-   "stab": 58,
-   "slash": 69,
-   "crush": -2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 3,
-   "crush": 2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 71,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 1434,
   "name": "Dragon mace",
   "slot": "weapon",
   "icon": "1434.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Spiked",
-  "tier": "strong",
-  "speed": 4,
-  "offensive": {
-   "stab": 40,
-   "slash": -2,
-   "crush": 60,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 55,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 5
-  }
- },
- {
-  "id": 27857,
-  "name": "Dragon mace (bh)",
-  "slot": "weapon",
-  "icon": "27857.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Spiked",
-  "tier": "strong",
-  "speed": 4,
-  "offensive": {
-   "stab": 44,
-   "slash": -2,
-   "crush": 64,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 55,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 5
-  }
- },
- {
-  "id": 28027,
-  "name": "Dragon mace (cr)",
-  "slot": "weapon",
-  "icon": "28027.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Spiked",
   "tier": "strong",
@@ -23149,134 +21414,11 @@
   }
  },
  {
-  "id": 28057,
-  "name": "Dragon med helm (cr)",
-  "slot": "head",
-  "icon": "28057.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -3,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 33,
-   "slash": 35,
-   "crush": 32,
-   "magic": -1,
-   "ranged": 34
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 11920,
   "name": "Dragon pickaxe",
   "slot": "weapon",
   "icon": "11920.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Pickaxe",
-  "tier": "decent",
-  "speed": 5,
-  "offensive": {
-   "stab": 38,
-   "slash": -2,
-   "crush": 32,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 42,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 23677,
-  "name": "Dragon pickaxe (or)",
-  "slot": "weapon",
-  "icon": "23677.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Pickaxe",
-  "tier": "decent",
-  "speed": 5,
-  "offensive": {
-   "stab": 38,
-   "slash": -2,
-   "crush": 32,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 42,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 30351,
-  "name": "Dragon pickaxe (or) (Trailblazer)",
-  "version": "Trailblazer Reloaded",
-  "slot": "weapon",
-  "icon": "30351.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Pickaxe",
-  "tier": "decent",
-  "speed": 5,
-  "offensive": {
-   "stab": 38,
-   "slash": -2,
-   "crush": 32,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 42,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 12797,
-  "name": "Dragon pickaxe (upgraded)",
-  "slot": "weapon",
-  "icon": "12797.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Pickaxe",
   "tier": "decent",
@@ -23332,98 +21474,11 @@
   }
  },
  {
-  "id": 22242,
-  "name": "Dragon platebody (g)",
-  "slot": "body",
-  "icon": "22242.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -30,
-   "ranged": -15
-  },
-  "defensive": {
-   "stab": 109,
-   "slash": 107,
-   "crush": 97,
-   "magic": -6,
-   "ranged": 106
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 4087,
   "name": "Dragon platelegs",
   "slot": "legs",
   "icon": "4087.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -21,
-   "ranged": -11
-  },
-  "defensive": {
-   "stab": 68,
-   "slash": 66,
-   "crush": 63,
-   "magic": -4,
-   "ranged": 65
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28061,
-  "name": "Dragon platelegs (cr)",
-  "slot": "legs",
-  "icon": "28061.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -21,
-   "ranged": -11
-  },
-  "defensive": {
-   "stab": 68,
-   "slash": 66,
-   "crush": 63,
-   "magic": -4,
-   "ranged": 65
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 12415,
-  "name": "Dragon platelegs (g)",
-  "slot": "legs",
-  "icon": "12415.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "decent",
   "offensive": {
@@ -23477,131 +21532,11 @@
   }
  },
  {
-  "id": 28063,
-  "name": "Dragon plateskirt (cr)",
-  "slot": "legs",
-  "icon": "28063.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -21,
-   "ranged": -11
-  },
-  "defensive": {
-   "stab": 68,
-   "slash": 66,
-   "crush": 63,
-   "magic": -4,
-   "ranged": 65
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 12416,
-  "name": "Dragon plateskirt (g)",
-  "slot": "legs",
-  "icon": "12416.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -21,
-   "ranged": -11
-  },
-  "defensive": {
-   "stab": 68,
-   "slash": 66,
-   "crush": 63,
-   "magic": -4,
-   "ranged": 65
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 4587,
   "name": "Dragon scimitar",
   "slot": "weapon",
   "icon": "4587.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Slash Sword",
-  "tier": "strong",
-  "speed": 4,
-  "offensive": {
-   "stab": 8,
-   "slash": 67,
-   "crush": -2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 66,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28031,
-  "name": "Dragon scimitar (cr)",
-  "slot": "weapon",
-  "icon": "28031.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Slash Sword",
-  "tier": "strong",
-  "speed": 4,
-  "offensive": {
-   "stab": 8,
-   "slash": 67,
-   "crush": -2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 66,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 20000,
-  "name": "Dragon scimitar (or)",
-  "slot": "weapon",
-  "icon": "20000.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Slash Sword",
   "tier": "strong",
@@ -23677,55 +21612,6 @@
   }
  },
  {
-  "id": 28041,
-  "name": "Dragon spear (cr)",
-  "version": "Unpoisoned",
-  "slot": "weapon",
-  "icon": "28041.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Spear",
-  "tier": "strong",
-  "speed": 4,
-  "poison": [
-   {
-    "id": 28043,
-    "name": "Dragon spear (cr) (p)",
-    "icon": "28043.png"
-   },
-   {
-    "id": 28045,
-    "name": "Dragon spear (cr) (p+)",
-    "icon": "28045.png"
-   },
-   {
-    "id": 28047,
-    "name": "Dragon spear (cr) (p++)",
-    "icon": "28047.png"
-   }
-  ],
-  "offensive": {
-   "stab": 55,
-   "slash": 55,
-   "crush": 55,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 5,
-   "slash": 5,
-   "crush": 5,
-   "magic": 5,
-   "ranged": 5
-  },
-  "bonuses": {
-   "str": 60,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 1187,
   "name": "Dragon sq shield",
   "slot": "shield",
@@ -23755,100 +21641,11 @@
   }
  },
  {
-  "id": 28059,
-  "name": "Dragon sq shield (cr)",
-  "slot": "shield",
-  "icon": "28059.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -6,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 50,
-   "slash": 52,
-   "crush": 48,
-   "magic": 0,
-   "ranged": 50
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 12418,
-  "name": "Dragon sq shield (g)",
-  "slot": "shield",
-  "icon": "12418.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -6,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 50,
-   "slash": 52,
-   "crush": 48,
-   "magic": 0,
-   "ranged": 50
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 21009,
   "name": "Dragon sword",
   "slot": "weapon",
   "icon": "21009.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Stab Sword",
-  "tier": "strong",
-  "speed": 4,
-  "offensive": {
-   "stab": 65,
-   "slash": 55,
-   "crush": -2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 2,
-   "crush": 1,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 63,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28029,
-  "name": "Dragon sword (cr)",
-  "slot": "weapon",
-  "icon": "28029.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "strong",
@@ -23914,37 +21711,6 @@
   "twoHanded": false,
   "category": "Blunt",
   "tier": "elite",
-  "speed": 6,
-  "offensive": {
-   "stab": -4,
-   "slash": -4,
-   "crush": 95,
-   "magic": -4,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 85,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 28035,
-  "name": "Dragon warhammer (cr)",
-  "slot": "weapon",
-  "icon": "28035.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Blunt",
-  "tier": "strong",
   "speed": 6,
   "offensive": {
    "stab": -4,
@@ -25085,69 +22851,11 @@
   }
  },
  {
-  "id": 27119,
-  "name": "Elder chaos hood (or)",
-  "slot": "head",
-  "icon": "27119.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 5,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 4,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 10,
-   "prayer": 0
-  }
- },
- {
   "id": 20520,
   "name": "Elder chaos robe",
   "slot": "legs",
   "icon": "20520.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 6,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 6,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 10,
-   "prayer": 0
-  }
- },
- {
-  "id": 27117,
-  "name": "Elder chaos robe (or)",
-  "slot": "legs",
-  "icon": "27117.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "common",
   "offensive": {
@@ -25201,71 +22909,11 @@
   }
  },
  {
-  "id": 27115,
-  "name": "Elder chaos top (or)",
-  "slot": "body",
-  "icon": "27115.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 10,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 8,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 10,
-   "prayer": 0
-  }
- },
- {
   "id": 21003,
   "name": "Elder maul",
   "slot": "weapon",
   "icon": "21003.png",
   "tradeable": true,
-  "twoHanded": true,
-  "category": "Blunt",
-  "tier": "elite",
-  "speed": 6,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 135,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 147,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 27100,
-  "name": "Elder maul (or)",
-  "slot": "weapon",
-  "icon": "27100.png",
-  "tradeable": false,
   "twoHanded": true,
   "category": "Blunt",
   "tier": "elite",
@@ -25407,64 +23055,6 @@
    "ranged_str": 0,
    "magic_str": 30,
    "prayer": 1
-  }
- },
- {
-  "id": 27251,
-  "name": "Elidinis' ward (f)",
-  "slot": "shield",
-  "icon": "27251.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 25,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 53,
-   "slash": 55,
-   "crush": 73,
-   "magic": 2,
-   "ranged": 52
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 50,
-   "prayer": 4
-  }
- },
- {
-  "id": 27253,
-  "name": "Elidinis' ward (or)",
-  "slot": "shield",
-  "icon": "27253.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 25,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 53,
-   "slash": 55,
-   "crush": 73,
-   "magic": 2,
-   "ranged": 52
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 50,
-   "prayer": 4
   }
  },
  {
@@ -29527,38 +27117,6 @@
   }
  },
  {
-  "id": 24225,
-  "name": "Granite maul (ornate handle)",
-  "version": "Normal",
-  "slot": "weapon",
-  "icon": "24225.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Blunt",
-  "tier": "strong",
-  "speed": 7,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 81,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 79,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 21739,
   "name": "Granite ring",
   "slot": "ring",
@@ -29579,35 +27137,6 @@
    "crush": 2,
    "magic": -2,
    "ranged": 12
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 21752,
-  "name": "Granite ring (i)",
-  "slot": "ring",
-  "icon": "21752.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 4,
-   "slash": 4,
-   "crush": 4,
-   "magic": -4,
-   "ranged": 24
   },
   "bonuses": {
    "str": 0,
@@ -32001,39 +29530,6 @@
   }
  },
  {
-  "id": 26712,
-  "name": "Heavy ballista (or)",
-  "slot": "weapon",
-  "icon": "26712.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Crossbow",
-  "requiredAmmo": "javelin",
-  "ammoMaxTier": 8,
-  "tier": "decent",
-  "speed": 7,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 125
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 15,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 19941,
   "name": "Heavy casket",
   "slot": "weapon",
@@ -32070,35 +29566,6 @@
   "slot": "head",
   "icon": "10828.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 31,
-   "slash": 29,
-   "crush": 34,
-   "magic": 3,
-   "ranged": 30
-  },
-  "bonuses": {
-   "str": 3,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 3
-  }
- },
- {
-  "id": 28070,
-  "name": "Helm of Neitiznot (or)",
-  "slot": "head",
-  "icon": "28070.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "elite",
   "offensive": {
@@ -35457,37 +32924,6 @@
   }
  },
  {
-  "id": 11721,
-  "name": "Iron pickaxe (nz)",
-  "slot": "weapon",
-  "icon": "11721.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Pickaxe",
-  "tier": "junk",
-  "speed": 5,
-  "offensive": {
-   "stab": 5,
-   "slash": -2,
-   "crush": 3,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 7,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 1115,
   "name": "Iron platebody",
   "slot": "body",
@@ -37502,37 +34938,6 @@
   }
  },
  {
-  "id": 21198,
-  "name": "Lava battlestaff (or)",
-  "slot": "weapon",
-  "icon": "21198.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Staff",
-  "tier": "decent",
-  "speed": 5,
-  "offensive": {
-   "stab": 7,
-   "slash": -1,
-   "crush": 28,
-   "magic": 12,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 2,
-   "slash": 3,
-   "crush": 1,
-   "magic": 12,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 35,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 20727,
   "name": "Leaf-bladed battleaxe",
   "slot": "weapon",
@@ -38773,39 +36178,6 @@
   }
  },
  {
-  "id": 12788,
-  "name": "Magic shortbow (i)",
-  "slot": "weapon",
-  "icon": "12788.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "Bow",
-  "requiredAmmo": "arrow",
-  "ammoMaxTier": 7,
-  "tier": "common",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 75
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 1389,
   "name": "Magic staff",
   "slot": "weapon",
@@ -38901,35 +36273,6 @@
   "slot": "shield",
   "icon": "11924.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": -8,
-   "slash": -8,
-   "crush": -8,
-   "magic": 12,
-   "ranged": -12
-  },
-  "defensive": {
-   "stab": 50,
-   "slash": 52,
-   "crush": 48,
-   "magic": 15,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 20,
-   "prayer": 0
-  }
- },
- {
-  "id": 12806,
-  "name": "Malediction ward (or)",
-  "slot": "shield",
-  "icon": "12806.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "elite",
   "offensive": {
@@ -41076,37 +38419,6 @@
   }
  },
  {
-  "id": 11720,
-  "name": "Mithril pickaxe (nz)",
-  "slot": "weapon",
-  "icon": "11720.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Pickaxe",
-  "tier": "common",
-  "speed": 5,
-  "offensive": {
-   "stab": 12,
-   "slash": -2,
-   "crush": 10,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 13,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 1121,
   "name": "Mithril platebody",
   "slot": "body",
@@ -42689,35 +40001,6 @@
   }
  },
  {
-  "id": 26539,
-  "name": "Mystic boots (or)",
-  "slot": "feet",
-  "icon": "26539.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 3,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 3,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 20739,
   "name": "Mystic dust staff",
   "slot": "weapon",
@@ -42927,35 +40210,6 @@
   }
  },
  {
-  "id": 26537,
-  "name": "Mystic gloves (or)",
-  "slot": "hands",
-  "icon": "26537.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 3,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 3,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 4089,
   "name": "Mystic hat",
   "slot": "head",
@@ -43072,71 +40326,11 @@
   }
  },
  {
-  "id": 26531,
-  "name": "Mystic hat (or)",
-  "slot": "head",
-  "icon": "26531.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 4,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 4,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 3054,
   "name": "Mystic lava staff",
   "slot": "weapon",
   "icon": "3054.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Staff",
-  "tier": "decent",
-  "speed": 5,
-  "offensive": {
-   "stab": 10,
-   "slash": -1,
-   "crush": 40,
-   "magic": 14,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 2,
-   "slash": 3,
-   "crush": 1,
-   "magic": 14,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 50,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 21200,
-  "name": "Mystic lava staff (or)",
-  "slot": "weapon",
-  "icon": "21200.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
   "tier": "decent",
@@ -43341,35 +40535,6 @@
   }
  },
  {
-  "id": 26535,
-  "name": "Mystic robe bottom (or)",
-  "slot": "legs",
-  "icon": "26535.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 15,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 15,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 4091,
   "name": "Mystic robe top",
   "slot": "body",
@@ -43486,35 +40651,6 @@
   }
  },
  {
-  "id": 26533,
-  "name": "Mystic robe top (or)",
-  "slot": "body",
-  "icon": "26533.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 20,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 20,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 12000,
   "name": "Mystic smoke staff",
   "slot": "weapon",
@@ -43557,37 +40693,6 @@
   "speed": 5,
   "offensive": {
    "stab": 10,
-   "slash": -1,
-   "crush": 40,
-   "magic": 14,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 2,
-   "slash": 3,
-   "crush": 1,
-   "magic": 14,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 50,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 12796,
-  "name": "Mystic steam staff (or)",
-  "slot": "weapon",
-  "icon": "12796.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Staff",
-  "tier": "decent",
-  "speed": 5,
-  "offensive": {
-   "stab": 7,
    "slash": -1,
    "crush": 40,
    "magic": 14,
@@ -43735,35 +40840,6 @@
   "slot": "neck",
   "icon": "19547.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 15
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 5,
-   "magic_str": 0,
-   "prayer": 2
-  }
- },
- {
-  "id": 22249,
-  "name": "Necklace of anguish (or)",
-  "slot": "neck",
-  "icon": "22249.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "elite",
   "offensive": {
@@ -43962,37 +41038,6 @@
   },
   "bonuses": {
    "str": 14,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 4599,
-  "name": "Oak blackjack",
-  "slot": "weapon",
-  "icon": "4599.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Blunt",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 2,
    "ranged_str": 0,
    "magic_str": 0,
    "prayer": 0
@@ -44475,35 +41520,6 @@
   }
  },
  {
-  "id": 19720,
-  "name": "Occult necklace (or)",
-  "slot": "neck",
-  "icon": "19720.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 12,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 50,
-   "prayer": 2
-  }
- },
- {
   "id": 3331,
   "name": "Ochre snelm",
   "slot": "head",
@@ -44538,35 +41554,6 @@
   "slot": "shield",
   "icon": "11926.png",
   "tradeable": true,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": -12,
-   "slash": -12,
-   "crush": -12,
-   "magic": -8,
-   "ranged": 12
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 24,
-   "ranged": 52
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 4,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 12807,
-  "name": "Odium ward (or)",
-  "slot": "shield",
-  "icon": "12807.png",
-  "tradeable": false,
   "twoHanded": false,
   "tier": "elite",
   "offensive": {
@@ -45176,37 +42163,6 @@
   "slot": "weapon",
   "icon": "26219.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Stab Sword",
-  "tier": "elite",
-  "speed": 5,
-  "offensive": {
-   "stab": 105,
-   "slash": 75,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 103,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 27246,
-  "name": "Osmumten's fang (or)",
-  "slot": "weapon",
-  "icon": "27246.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Stab Sword",
   "tier": "elite",
@@ -47724,35 +44680,6 @@
   }
  },
  {
-  "id": 13202,
-  "name": "Ring of the gods (i)",
-  "slot": "ring",
-  "icon": "13202.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 1,
-   "slash": 1,
-   "crush": 1,
-   "magic": 1,
-   "ranged": 1
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 8
-  }
- },
- {
   "id": 20137,
   "name": "Robe bottom of darkness",
   "slot": "legs",
@@ -48758,39 +45685,6 @@
   "slot": "weapon",
   "icon": "9185.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Crossbow",
-  "requiredAmmo": "bolt",
-  "ammoMaxTier": 7,
-  "tier": "common",
-  "speed": 6,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 90
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 26486,
-  "name": "Rune crossbow (or)",
-  "slot": "weapon",
-  "icon": "26486.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Crossbow",
   "requiredAmmo": "bolt",
@@ -50004,151 +46898,6 @@
   }
  },
  {
-  "id": 8714,
-  "name": "Rune kiteshield (Arrav)",
-  "slot": "shield",
-  "icon": "8714.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8716,
-  "name": "Rune kiteshield (Asgarnia)",
-  "slot": "shield",
-  "icon": "8716.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8718,
-  "name": "Rune kiteshield (Dorgeshuun)",
-  "slot": "shield",
-  "icon": "8718.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8720,
-  "name": "Rune kiteshield (Dragon)",
-  "slot": "shield",
-  "icon": "8720.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8722,
-  "name": "Rune kiteshield (Fairy)",
-  "slot": "shield",
-  "icon": "8722.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 2621,
   "name": "Rune kiteshield (g)",
   "slot": "shield",
@@ -50178,267 +46927,6 @@
   }
  },
  {
-  "id": 8724,
-  "name": "Rune kiteshield (Guthix)",
-  "slot": "shield",
-  "icon": "8724.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8726,
-  "name": "Rune kiteshield (HAM)",
-  "slot": "shield",
-  "icon": "8726.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8728,
-  "name": "Rune kiteshield (Horse)",
-  "slot": "shield",
-  "icon": "8728.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8730,
-  "name": "Rune kiteshield (Jogre)",
-  "slot": "shield",
-  "icon": "8730.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8732,
-  "name": "Rune kiteshield (Kandarin)",
-  "slot": "shield",
-  "icon": "8732.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8734,
-  "name": "Rune kiteshield (Misthalin)",
-  "slot": "shield",
-  "icon": "8734.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8736,
-  "name": "Rune kiteshield (Money)",
-  "slot": "shield",
-  "icon": "8736.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8738,
-  "name": "Rune kiteshield (Saradomin)",
-  "slot": "shield",
-  "icon": "8738.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8740,
-  "name": "Rune kiteshield (Skull)",
-  "slot": "shield",
-  "icon": "8740.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 2629,
   "name": "Rune kiteshield (t)",
   "slot": "shield",
@@ -50452,64 +46940,6 @@
    "crush": 0,
    "magic": -8,
    "ranged": -2
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8742,
-  "name": "Rune kiteshield (Varrock)",
-  "slot": "shield",
-  "icon": "8742.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 44,
-   "slash": 48,
-   "crush": 46,
-   "magic": -1,
-   "ranged": 46
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8744,
-  "name": "Rune kiteshield (Zamorak)",
-  "slot": "shield",
-  "icon": "8744.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "strong",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
   },
   "defensive": {
    "stab": 44,
@@ -50671,37 +47101,6 @@
   "slot": "weapon",
   "icon": "1275.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Pickaxe",
-  "tier": "common",
-  "speed": 5,
-  "offensive": {
-   "stab": 26,
-   "slash": -2,
-   "crush": 24,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 29,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 11719,
-  "name": "Rune pickaxe (nz)",
-  "slot": "weapon",
-  "icon": "11719.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Pickaxe",
   "tier": "common",
@@ -51139,99 +47538,6 @@
   "slot": "weapon",
   "icon": "1333.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Slash Sword",
-  "tier": "decent",
-  "speed": 4,
-  "offensive": {
-   "stab": 7,
-   "slash": 45,
-   "crush": -2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 44,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 23330,
-  "name": "Rune scimitar (guthix)",
-  "slot": "weapon",
-  "icon": "23330.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Slash Sword",
-  "tier": "decent",
-  "speed": 4,
-  "offensive": {
-   "stab": 7,
-   "slash": 45,
-   "crush": -2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 44,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 23332,
-  "name": "Rune scimitar (saradomin)",
-  "slot": "weapon",
-  "icon": "23332.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Slash Sword",
-  "tier": "decent",
-  "speed": 4,
-  "offensive": {
-   "stab": 7,
-   "slash": 45,
-   "crush": -2,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 44,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 23334,
-  "name": "Rune scimitar (zamorak)",
-  "slot": "weapon",
-  "icon": "23334.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Slash Sword",
   "tier": "decent",
@@ -52801,37 +49107,6 @@
   }
  },
  {
-  "id": 20372,
-  "name": "Saradomin godsword (or)",
-  "slot": "weapon",
-  "icon": "20372.png",
-  "tradeable": false,
-  "twoHanded": true,
-  "category": "2h Sword",
-  "tier": "elite",
-  "speed": 6,
-  "offensive": {
-   "stab": 0,
-   "slash": 132,
-   "crush": 80,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 132,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 8
-  }
- },
- {
   "id": 12637,
   "name": "Saradomin halo",
   "version": "Normal",
@@ -53681,35 +49956,6 @@
    "str": 0,
    "ranged_str": 0,
    "magic_str": 2,
-   "prayer": 0
-  }
- },
- {
-  "id": 11770,
-  "name": "Seers ring (i)",
-  "slot": "ring",
-  "icon": "11770.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 12,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 12,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 5,
    "prayer": 0
   }
  },
@@ -54907,37 +51153,6 @@
   }
  },
  {
-  "id": 2963,
-  "name": "Silver sickle (b)",
-  "slot": "weapon",
-  "icon": "2963.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Slash Sword",
-  "tier": "junk",
-  "speed": 5,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 1,
-   "crush": 1,
-   "magic": 1,
-   "ranged": 1
-  },
-  "bonuses": {
-   "str": 1,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 5
-  }
- },
- {
   "id": 2402,
   "name": "Silverlight",
   "version": "Normal",
@@ -55421,37 +51636,6 @@
   }
  },
  {
-  "id": 21255,
-  "name": "Slayer's staff (e)",
-  "slot": "weapon",
-  "icon": "21255.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Staff",
-  "tier": "decent",
-  "speed": 4,
-  "offensive": {
-   "stab": 7,
-   "slash": -1,
-   "crush": 25,
-   "magic": 12,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 2,
-   "slash": 3,
-   "crush": 1,
-   "magic": 10,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 35,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 9796,
   "name": "Smithing cape",
   "version": "Trimmed",
@@ -55785,37 +51969,6 @@
   "slot": "weapon",
   "icon": "28338.png",
   "tradeable": true,
-  "twoHanded": true,
-  "category": "Axe",
-  "tier": "elite",
-  "speed": 5,
-  "offensive": {
-   "stab": 28,
-   "slash": 134,
-   "crush": 66,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 125,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 33335,
-  "name": "Soulreaper axe (o)",
-  "slot": "weapon",
-  "icon": "33335.png",
-  "tradeable": false,
   "twoHanded": true,
   "category": "Axe",
   "tier": "elite",
@@ -56927,37 +53080,6 @@
   "slot": "weapon",
   "icon": "11787.png",
   "tradeable": true,
-  "twoHanded": false,
-  "category": "Staff",
-  "tier": "decent",
-  "speed": 5,
-  "offensive": {
-   "stab": 7,
-   "slash": -1,
-   "crush": 28,
-   "magic": 12,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 2,
-   "slash": 3,
-   "crush": 1,
-   "magic": 12,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 35,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 12795,
-  "name": "Steam battlestaff (or)",
-  "slot": "weapon",
-  "icon": "12795.png",
-  "tradeable": false,
   "twoHanded": false,
   "category": "Staff",
   "tier": "decent",
@@ -58497,151 +54619,6 @@
   }
  },
  {
-  "id": 8746,
-  "name": "Steel kiteshield (Arrav)",
-  "slot": "shield",
-  "icon": "8746.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8748,
-  "name": "Steel kiteshield (Asgarnia)",
-  "slot": "shield",
-  "icon": "8748.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8750,
-  "name": "Steel kiteshield (Dorgeshuun)",
-  "slot": "shield",
-  "icon": "8750.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8752,
-  "name": "Steel kiteshield (Dragon)",
-  "slot": "shield",
-  "icon": "8752.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8754,
-  "name": "Steel kiteshield (Fairy)",
-  "slot": "shield",
-  "icon": "8754.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 20181,
   "name": "Steel kiteshield (g)",
   "slot": "shield",
@@ -58671,267 +54648,6 @@
   }
  },
  {
-  "id": 8756,
-  "name": "Steel kiteshield (Guthix)",
-  "slot": "shield",
-  "icon": "8756.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8758,
-  "name": "Steel kiteshield (HAM)",
-  "slot": "shield",
-  "icon": "8758.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "junk",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8760,
-  "name": "Steel kiteshield (Horse)",
-  "slot": "shield",
-  "icon": "8760.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8762,
-  "name": "Steel kiteshield (Jogre)",
-  "slot": "shield",
-  "icon": "8762.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8764,
-  "name": "Steel kiteshield (Kandarin)",
-  "slot": "shield",
-  "icon": "8764.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8766,
-  "name": "Steel kiteshield (Misthalin)",
-  "slot": "shield",
-  "icon": "8766.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8768,
-  "name": "Steel kiteshield (Money)",
-  "slot": "shield",
-  "icon": "8768.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8770,
-  "name": "Steel kiteshield (Saradomin)",
-  "slot": "shield",
-  "icon": "8770.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8772,
-  "name": "Steel kiteshield (Skull)",
-  "slot": "shield",
-  "icon": "8772.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 20196,
   "name": "Steel kiteshield (t)",
   "slot": "shield",
@@ -58945,64 +54661,6 @@
    "crush": 0,
    "magic": -8,
    "ranged": -2
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8774,
-  "name": "Steel kiteshield (Varrock)",
-  "slot": "shield",
-  "icon": "8774.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
-  },
-  "defensive": {
-   "stab": 13,
-   "slash": 15,
-   "crush": 14,
-   "magic": -1,
-   "ranged": 14
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 8776,
-  "name": "Steel kiteshield (Zamorak)",
-  "slot": "shield",
-  "icon": "8776.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "common",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": -8,
-   "ranged": -3
   },
   "defensive": {
    "stab": 13,
@@ -62786,35 +58444,6 @@
   }
  },
  {
-  "id": 23444,
-  "name": "Tormented bracelet (or)",
-  "slot": "hands",
-  "icon": "23444.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 10,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 50,
-   "prayer": 2
-  }
- },
- {
   "id": 31398,
   "name": "Tortugan shield",
   "slot": "cape",
@@ -63151,35 +58780,6 @@
   }
  },
  {
-  "id": 12692,
-  "name": "Treasonous ring (i)",
-  "slot": "ring",
-  "icon": "12692.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 8,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 8,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 11905,
   "name": "Trident of the Seas",
   "version": "Charged",
@@ -63189,102 +58789,6 @@
   "twoHanded": false,
   "category": "Powered Staff",
   "tier": "decent",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 15,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 2,
-   "slash": 3,
-   "crush": 1,
-   "magic": 15,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 22288,
-  "name": "Trident of the Seas (e)",
-  "version": "Charged",
-  "slot": "weapon",
-  "icon": "22288.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Powered Staff",
-  "tier": "decent",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 15,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 2,
-   "slash": 3,
-   "crush": 1,
-   "magic": 15,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 33326,
-  "name": "Trident of the Seas (e) (o)",
-  "version": "Charged",
-  "slot": "weapon",
-  "icon": "33326.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Powered Staff",
-  "tier": "junk",
-  "speed": 4,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 15,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 2,
-   "slash": 3,
-   "crush": 1,
-   "magic": 15,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 33323,
-  "name": "Trident of the Seas (o)",
-  "version": "Fully charged",
-  "slot": "weapon",
-  "icon": "33323.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "category": "Powered Staff",
-  "tier": "junk",
   "speed": 4,
   "offensive": {
    "stab": 0,
@@ -63938,35 +59442,6 @@
   }
  },
  {
-  "id": 12691,
-  "name": "Tyrannical ring (i)",
-  "slot": "ring",
-  "icon": "12691.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "elite",
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 8,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 8,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
   "id": 9629,
   "name": "Tyras helm",
   "slot": "head",
@@ -64032,37 +59507,6 @@
   "slot": "weapon",
   "icon": "6528.png",
   "tradeable": true,
-  "twoHanded": true,
-  "category": "Blunt",
-  "tier": "strong",
-  "speed": 7,
-  "offensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 80,
-   "magic": -4,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 85,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 23235,
-  "name": "Tzhaar-ket-om (t)",
-  "slot": "weapon",
-  "icon": "23235.png",
-  "tradeable": false,
   "twoHanded": true,
   "category": "Blunt",
   "tier": "strong",
@@ -65905,35 +61349,6 @@
   "defensive": {
    "stab": 0,
    "slash": 4,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 0,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 0
-  }
- },
- {
-  "id": 11772,
-  "name": "Warrior ring (i)",
-  "slot": "ring",
-  "icon": "11772.png",
-  "tradeable": false,
-  "twoHanded": false,
-  "tier": "decent",
-  "offensive": {
-   "stab": 0,
-   "slash": 8,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 8,
    "crush": 0,
    "magic": 0,
    "ranged": 0
@@ -68318,37 +63733,6 @@
   "slot": "weapon",
   "icon": "11808.png",
   "tradeable": true,
-  "twoHanded": true,
-  "category": "2h Sword",
-  "tier": "elite",
-  "speed": 6,
-  "offensive": {
-   "stab": 0,
-   "slash": 132,
-   "crush": 80,
-   "magic": 0,
-   "ranged": 0
-  },
-  "defensive": {
-   "stab": 0,
-   "slash": 0,
-   "crush": 0,
-   "magic": 0,
-   "ranged": 0
-  },
-  "bonuses": {
-   "str": 132,
-   "ranged_str": 0,
-   "magic_str": 0,
-   "prayer": 8
-  }
- },
- {
-  "id": 20374,
-  "name": "Zamorak godsword (or)",
-  "slot": "weapon",
-  "icon": "20374.png",
-  "tradeable": false,
   "twoHanded": true,
   "category": "2h Sword",
   "tier": "elite",

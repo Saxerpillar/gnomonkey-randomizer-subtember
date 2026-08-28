@@ -32,6 +32,22 @@ describe('generated equipment.json', () => {
     expect(new Set(items.map((i) => i.name)).size).toBe(items.length);
   });
 
+  it('no untradeable item duplicates a tradeable variant', () => {
+    // Ornament kits, imbues and charged cosmetics are dropped by the refresh
+    // script: their tradeable twin rolls for its GE price, the untradeable
+    // version would roll for 0.
+    const variantBase = (name: string) =>
+      name.replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+    const tradeableBases = new Set(
+      items.filter((i) => i.tradeable).map((i) => variantBase(i.name as string)),
+    );
+    for (const i of items) {
+      if (!i.tradeable) {
+        expect(tradeableBases.has(variantBase(i.name as string)), i.name as string).toBe(false);
+      }
+    }
+  });
+
   it('every ammo item is classified; launchers require a real class', () => {
     const classes = new Set(['arrow', 'bolt', 'javelin', 'tar', 'atlatl', 'kebbit', 'antler', 'boltrack', 'bone', 'ogre', 'any']);
     for (const i of items) {

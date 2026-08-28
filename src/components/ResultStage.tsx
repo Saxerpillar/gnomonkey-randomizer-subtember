@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { asset } from '../asset';
 import { loadoutValue } from '../engine/roll';
-import type { Item, Loadout, Slot } from '../engine/types';
+import type { Loadout, Slot } from '../engine/types';
 import { GpValue } from '../theme/GpValue';
 import { GnomePeek } from '../theme/GnomePeek';
 import { RsPanel } from '../theme/RsPanel';
@@ -28,19 +28,16 @@ import { bossObjective } from './objectives';
  */
 export const ResultStage = ({
   loadout,
-  locks,
   boss,
   hardMode = false,
   revealing = false,
   challenge = null,
   showChallenge = true,
   deactivated = false,
-  onToggleLock,
   onSlotContextMenu,
   style,
 }: {
   loadout: Loadout;
-  locks: Partial<Record<Slot, Item>>;
   boss: Boss | null;
   hardMode?: boolean;
   /** Draw the boss stage's "?" placeholder — the reveal has not landed yet. */
@@ -50,7 +47,6 @@ export const ResultStage = ({
   showChallenge?: boolean;
   /** Gauntlet runs take no gear in, so the skeleton stays powered down. */
   deactivated?: boolean;
-  onToggleLock?: (slot: Slot) => void;
   onSlotContextMenu?: (slot: Slot, e: React.MouseEvent) => void;
   style?: CSSProperties;
 }) => {
@@ -58,7 +54,7 @@ export const ResultStage = ({
   return (
     <main className="columns" style={style}>
       <RsPanel
-        title="Your gear"
+        title="Your Gear"
         icon={asset('img/ui/multicombat.png')}
         decoration={<GnomePeek at="panelTopLeft" />}
       >
@@ -66,8 +62,6 @@ export const ResultStage = ({
           <div className="gearRow">
             <EquipmentPanel
               loadout={loadout}
-              locks={locks}
-              onToggleLock={onToggleLock ?? (() => {})}
               onSlotContextMenu={onSlotContextMenu ?? (() => {})}
               deactivated={deactivated}
             />
